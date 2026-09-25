@@ -752,6 +752,12 @@ function refsOf(brand){ return REFS.filter(function(r){return r.brand===brand;})
 
 /* ---------- calibres ---------- */
 var CAL_EXTRA={
+  VD38:{source:"Operation checked against the Time Module operation manual (VD37B/38B, Version-01)",
+    rows:[["Local time","Hour, minute and seconds (centre)"],
+          ["Second time zone","Dual-time 24-hour, 12-hour and 60-minute regulator hands"],
+          ["Date","None (date is VD37 only)"],
+          ["Crown","Two positions: pushed in (running) and first click (time; dual time with A/B)"],
+          ["Buttons","A: −1 hour / push · B: +1 hour / push"]]},
   VD51:{source:"Checked against the Time Module operation manual (Cal. VD51C, Version-01) and Time Module’s VD5 product page",
     rows:[["Time","Hour, minute and running seconds (centre)"],
           ["Stopwatch","1/1 second and 60 minutes, up to 12 hours; start/stop, accumulated and split time"],
@@ -1124,14 +1130,14 @@ MANUALS.VD34 = {
   date:false,
   layoutNote:"Sub-dials as in the Time Module diagram and on the Police Gifford and Roman models: dual-time 12-hour at 9, 24-hour at 3, dual-time 60-minute at 6. VD34 has no date window.",
   parts:[
-    {id:"hm",   name:"Hour and minute hands", text:"Local time. Set by turning the crown at the first click. With the crown pushed in, buttons A and B move the hour hand one hour at a time (time-zone change)."},
+    {id:"hm",   name:"Hour and minute hands", text:"Local time. Set by turning the crown at the first click. Buttons A and B do not move these hands."},
     {id:"sec",  name:"Second hand", text:"Local seconds. Stops when the crown is pulled out, so you can start it again exactly on a time signal."},
     {id:"h24",  name:"24-hour hand (3 o’clock)", text:"Local time on a 24-hour basis. Moves with the hour hand — use it to check AM/PM."},
     {id:"d12",  name:"Dual-time 12-hour hand (9 o’clock)", text:"Hours of the second time zone. Linked to the dual-time 60-minute hand."},
     {id:"d60",  name:"Dual-time 60-minute hand (6 o’clock)", text:"Minutes of the second time zone. The manual notes it moves in quarter-hour steps: one movement every 15 minutes. This is normal."},
     {id:"crown",name:"Crown (3 o’clock)", text:"Two positions. Pushed in: normal running. First click: turn it to set local time; press A or B to set the dual time."},
-    {id:"btnA", name:"Button A (2 o’clock)", text:"Crown pushed in: local time −1 hour per push. Crown at first click: dual-time hands move counter-clockwise. Hold to fast-forward."},
-    {id:"btnB", name:"Button B (4 o’clock)", text:"Crown pushed in: local time +1 hour per push. Crown at first click: dual-time hands move clockwise. Hold to fast-forward."}
+    {id:"btnA", name:"Button A (2 o’clock)", text:"−1 hour / push. Crown pushed in: the dual-time hands move back one hour (time difference correction). Crown at first click: dual-time hands move counter-clockwise. Hold to fast-forward."},
+    {id:"btnB", name:"Button B (4 o’clock)", text:"+1 hour / push. Crown pushed in: the dual-time hands move forward one hour (time difference correction). Crown at first click: dual-time hands move clockwise. Hold to fast-forward."}
   ],
   procs:[
     {id:"time", name:"Set the local time", start:{localOff:-(2*3600+17*60),dualOff:0,mis:0},
@@ -1152,7 +1158,7 @@ MANUALS.VD34 = {
      intro:"When moving to a country or area which is in a different timezone, the current time in the local time can be corrected.",
      steps:[
       {text:"Crown at the <b>normal position</b> (pushed in).", run:["hl:crown"]},
-      {text:"Adjust the time by pressing <b>button A</b> or <b>button B</b>. By pressing button A the hands move counter-clockwise: <b>−1 hour / push</b>. By pressing button B the hands move clockwise: <b>+1 hour / push</b>.", run:["B1","B1","A1"]}
+      {text:"Adjust the time by pressing <b>button A</b> or <b>button B</b>. By pressing button A the hands move counter-clockwise: <b>−1 hour / push</b>. By pressing button B the hands move clockwise: <b>+1 hour / push</b>. On the watch these are the <b>dual-time hands</b> — the 60-minute hand turns one full revolution per push; the main hour and minute hands keep running.", run:["B1","B1","A1"]}
      ]},
     {id:"zero", name:"Zero-position reset", start:{localOff:0,dualOff:0,mis:23},
      intro:"Do this after inserting or changing the battery, or if the dual-time hands are out of line. Here the dual-time hands are 23 minutes off.",
@@ -1175,10 +1181,69 @@ MANUALS.VD34 = {
   ]
 };
 
+/* ---------------- VD38 · dual time with 24-hour, 12-hour and 60-minute regulators ----------------
+   Source: Time Module operation manual, Cal. VD3 series (VD37B/38B), Version-01, pages 8–9 (page 10 date = VD37 only). */
+MANUALS.VD38 = {
+  code:"VD38", maker:"Time Module", title:"Dual time · 24-hour, 12-hour and 60-minute regulators",
+  source:"Time Module operation manual · Cal. VD3 series (VD37B/38B) · Version-01",
+  date:false, dual24:true,
+  layoutNote:"Sub-dials as in the Time Module diagram and on the Police Guardian and Daintree models: dual-time 24-hour at 12, dual-time 12-hour at 9, dual-time 60-minute at 6. VD38 has no date window.",
+  parts:[
+    {id:"hm",   name:"Hour and minute hands", text:"Local time. Set by turning the crown at the first click. Buttons A and B do not move these hands."},
+    {id:"sec",  name:"Second hand", text:"Local seconds. Stops when the crown is pulled out, so you can restart it on a time signal."},
+    {id:"d24",  name:"Dual-time 24-hour regulator hand (12 o’clock)", text:"Second time zone on a 24-hour basis — shows day or night at home. Moves together with the dual-time 12-hour and 60-minute hands."},
+    {id:"d12",  name:"Dual-time 12-hour regulator hand (9 o’clock)", text:"Hours of the second time zone. Moves together with the dual-time 24-hour and 60-minute hands."},
+    {id:"d60",  name:"Dual-time 60-minute regulator hand (6 o’clock)", text:"Minutes of the second time zone. Per the manual it rotates one revolution every 15 minutes — this is normal."},
+    {id:"crown",name:"Crown (3 o’clock)", text:"Two positions on VD38. Pushed in: normal running. First click: turn to set the time; press A or B to set the dual time."},
+    {id:"btnA", name:"Button A (2 o’clock)", text:"−1 hour / push. Crown pushed in: dual-time 24-hour and 12-hour hands move back one hour. Crown at first click: all three dual-time hands move counter-clockwise. In zero reset: moves the 24-hour hand clockwise, +1 step / push."},
+    {id:"btnB", name:"Button B (4 o’clock)", text:"+1 hour / push. Crown pushed in: dual-time 24-hour and 12-hour hands move forward one hour. Crown at first click: all three dual-time hands move clockwise. In zero reset: moves the 12-hour and 60-minute hands clockwise, +1 step / push."}
+  ],
+  procs:[
+    {id:"time", name:"Set the local time", start:{localOff:-(2*3600+17*60),dualOff:0,mis:0,mis24:0},
+     intro:"The watch below starts at the wrong time. Follow the steps to set it to the time on this phone.",
+     steps:[
+      {text:"Pull out the crown to the <b>first click</b> when the second hand is at the 12 o’clock position. The second hand stops.", run:["pull"]},
+      {text:"Turn the crown to set the hour and minute hands. Check that <b>AM/PM</b> is set correctly.", run:["turnSync"]},
+      {text:"Push the crown back to the normal position in accordance with a time signal.", run:["pushSync"]}
+     ]},
+    {id:"dual", name:"Set the dual time (second time zone)", start:{localOff:0,dualOff:-180,mis:0,mis24:0},
+     intro:"The three dual-time hands (24-hour at 12, 12-hour at 9, 60-minute at 6) show a second time zone. Here they start three hours behind local time.",
+     steps:[
+      {text:"Pull out the crown to the <b>first click</b> when the second hand is at the 12 o’clock position.", run:["pull"]},
+      {text:"Press <b>button B</b>: the dual-time 24-hour, 12-hour and 60-minute hands move clockwise. <b>Button A</b> moves them counter-clockwise. Press and hold to fast-forward. Every 15 minutes, the 60-minute hand is one rotation / push.", run:["dualTo:0"]},
+      {text:"Push the crown back in to the normal position.", run:["push"]}
+     ]},
+    {id:"zone", name:"Using the time difference correction", start:{localOff:0,dualOff:0,mis:0,mis24:0},
+     intro:"When moving to a country or area which is in a different timezone, the current time in the local time can be corrected.",
+     steps:[
+      {text:"Crown at the <b>normal position</b> (pushed in).", run:["hl:crown"]},
+      {text:"Adjust the time by pressing <b>button A</b> or <b>button B</b>. By pressing button A the hands move counter-clockwise: <b>−1 hour / push</b>. By pressing button B the hands move clockwise: <b>+1 hour / push</b>. On the watch these are the <b>dual-time hands</b> — the 24-hour and 12-hour hands step one hour and the 60-minute hand turns one full revolution; the main hour and minute hands keep running.", run:["B1","B1","A1"]}
+     ]},
+    {id:"zero", name:"Zero-position reset", start:{localOff:0,dualOff:0,mis:-23,mis24:-60},
+     intro:"Before setting the time, the dual-time 24-hour, 12-hour and 60-minute hands should be at 0 (12 o’clock). Do this after the battery is inserted or changed. Here the dual-time hands are out of line.",
+     steps:[
+      {text:"Pull out the crown to the <b>first click</b> (VD38: time setting position).", run:["pull"]},
+      {text:"Keep buttons <b>A and B</b> pressed at the same time for more than 2 seconds, then release. The dual-time 24-hour and 60-minute hands move, then return to where they were.", run:["AB"]},
+      {text:"Press <b>button A</b>: the dual-time <b>24-hour</b> hand moves clockwise, +1 step / push, until it points to 0.", run:["zero24"]},
+      {text:"Press <b>button B</b>: the dual-time <b>12-hour and 60-minute</b> hands move clockwise, +1 step / push, until both point to 0. The 12-hour hand is linked to the 60-minute hand. Press and hold to fast-forward.", run:["zeroB"]},
+      {text:"Push the crown back to the normal position.", run:["push"]}
+     ],
+     tip:"The manual says to repeat all four steps if the 60-minute hand moves like this: one step per push from 1 to 14 minutes, then one full rotation per push at 15 minutes."}
+  ],
+  notes:[
+    "Before setting the time, check that the dual-time 24-hour, 12-hour and 60-minute hands are at 0 (12 o’clock). If not, do the zero-position reset.",
+    "Do the zero-position reset at battery setting and after every battery change.",
+    "The dual-time 60-minute hand rotates one revolution every 15 minutes. The manual confirms this is typical.",
+    "Pull the crown out when the second hand is at 12, and push it back in on a time signal.",
+    "VD38 has no date. The date-setting page in the manual applies to VD37 only.",
+    "VD38 is used in the Police Guardian (PEWGK0082007) and Daintree (PEWGQ2203606, PEWGQ2203608)."
+  ]
+};
+
 var M = null;
 function manualModel(man){
   var cx=140, cy=150;
-  var st={crown:0, localOff:0, dualOff:0, mis:0, frozen:null, zero:false, zeroPos:0, hl:null, msg:""};
+  var st={crown:0, localOff:0, dualOff:0, mis:0, mis24:0, frozen:null, zero:false, zeroPos:0, zero24:0, hl:null, msg:""};
   var base=(function(){ var d=new Date(); d.setHours(0,0,0,0); return d.getTime(); })();
   function nowT(){ return (Date.now()-base)/1000; }                 // system seconds since today’s midnight
   function localT(){ return st.frozen!=null ? st.frozen : nowT()+st.localOff; }
@@ -1206,9 +1271,9 @@ function manualModel(man){
       '<g class="hint"><path d="M260 124 l6 -7 l6 7 Z"/><path d="M260 176 l6 7 l6 -7 Z"/></g>'+
       '<g class="phint"><path d="M280 146 l7 4 l-7 4 Z"/></g></g></g>';
   for(var i=0;i<60;i++){ var a=i*Math.PI/30, big=i%5===0; svg+='<line x1="'+(cx+(big?92:97)*Math.sin(a)).toFixed(1)+'" y1="'+(cy-(big?92:97)*Math.cos(a)).toFixed(1)+'" x2="'+(cx+101*Math.sin(a)).toFixed(1)+'" y2="'+(cy-101*Math.cos(a)).toFixed(1)+'" class="'+(big?'tkb':'tk')+'"/>'; }
-  svg+='<text x="'+cx+'" y="'+(cy-62)+'" class="brandtxt">'+man.code+'</text>';
+  svg+= man.dual24 ? '<text x="'+(cx+58)+'" y="'+(cy+3)+'" class="brandtxt">'+man.code+'</text>' : '<text x="'+cx+'" y="'+(cy-62)+'" class="brandtxt">'+man.code+'</text>';
   svg+=sub(cx-50,cy,26,12,{0:"12",3:"3",9:"9"},"DUAL H","d12");
-  svg+=sub(cx+50,cy,26,24,{0:"24",6:"6",18:"18"},"24 H","h24");
+  svg+= man.dual24 ? sub(cx,cy-50,26,24,{0:"24",6:"6",18:"18"},"DUAL 24","d24") : sub(cx+50,cy,26,24,{0:"24",6:"6",18:"18"},"24 H","h24");
   svg+=sub(cx,cy+50,26,12,{0:"0",3:"15",9:"45"},"DUAL M","d60");
   if(man.date) svg+='<g data-part="date"><rect x="'+(cx+60)+'" y="'+(cy+52)+'" width="20" height="14" class="datewin"/><text id="m-date" x="'+(cx+70)+'" y="'+(cy+62.5)+'" class="datetxt"></text></g>';
   svg+='<g class="hand" data-part="hm" id="mh-hour" style="transform-origin:'+cx+'px '+cy+'px"><path d="M'+(cx-4)+' '+(cy+10)+' L'+cx+' '+(cy-56)+' L'+(cx+4)+' '+(cy+10)+' Z" class="hmain"/></g>'+
@@ -1226,12 +1291,13 @@ function manualModel(man){
     set("mh-hour",+(L/120).toFixed(2),hDur); set("mh-min",+(L/10).toFixed(2),hDur); set("mh-sec",Math.floor(L)*6,sDur); set("mh-h24",+(L/240).toFixed(2),hDur);
     var dm = st.zero ? st.zeroPos : dualMin()+st.mis;              // dual minutes shown by the hands
     set("mh-d60",dm*6,hDur); set("mh-d12",dm*0.5,hDur);
+    if(man.dual24){ var d24=st.zero?st.zero24:dualMin()+st.mis24; set("mh-d24",d24*0.25,hDur); }
     if(man.date){ var dd=new Date(base+L*1000); var de=document.getElementById("m-date"); if(de) de.textContent=dd.getDate(); }
     var cr=document.getElementById("m-crown"); if(cr) cr.style.transform=st.crown?"translateX(12px)":"none";
     var cw=document.getElementById("m-crownwrap"); if(cw) cw.classList.toggle("out",!!st.crown);
     var lab=function(sel,t){ var e=document.querySelector(sel); if(e && e.dataset.lab!==t){ e.dataset.lab=t; e.innerHTML=t; } };
-    lab('[data-m="A"]','Button A<small>'+(st.crown?(st.zero?"step back":"dual −15 min"):"local −1 hour")+'</small>');
-    lab('[data-m="B"]','Button B<small>'+(st.crown?(st.zero?"step forward":"dual +15 min"):"local +1 hour")+'</small>');
+    lab('[data-m="A"]','Button A<small>'+(st.crown?(st.zero?(man.dual24?"24 h hand +1 step":"step back"):"dual −15 min"):"dual −1 hour")+'</small>');
+    lab('[data-m="B"]','Button B<small>'+(st.crown?(st.zero?(man.dual24?"12 h / 60 min +1 step":"step forward"):"dual +15 min"):"dual +1 hour")+'</small>');
     document.querySelectorAll('[data-m="turn+"],[data-m="turn-"]').forEach(function(e){ e.classList.toggle("dim",!st.crown); });
     var ab=document.querySelector('[data-m="AB"]'); if(ab) ab.classList.toggle("dim",!st.crown);
     document.querySelectorAll(".mwatch [data-part]").forEach(function(e){ e.classList.toggle("hl",st.hl===e.getAttribute("data-part")); });
@@ -1247,23 +1313,23 @@ function manualModel(man){
   function spinKnurl(dir){ kn+=dir*2; var k=document.getElementById("m-knurl"); if(k){ k.style.transition="transform .1s linear"; k.style.transform="translateY("+(((kn%8)+8)%8-4)+"px)"; } }
   var api={
     svg:svg, st:st, render:render, nowT:nowT, localT:localT,
-    reset:function(s){ st.crown=0; st.frozen=null; st.localOff=s.localOff||0; st.dualOff=s.dualOff||0; st.mis=s.mis||0; st.zero=false; st.hl=null; st.msg=""; last={}; render(0.7); },
+    reset:function(s){ st.crown=0; st.frozen=null; st.localOff=s.localOff||0; st.dualOff=s.dualOff||0; st.mis=s.mis||0; st.mis24=s.mis24||0; st.zero=false; st.hl=null; st.msg=""; last={}; render(0.7); },
     pull:function(){ flash("m-crownwrap",'[data-m="pull"]'); if(st.crown) return; st.crown=1; st.turned=false; st.prevOff=st.localOff; st.frozen=Math.floor(localT()); st.msg="Crown at first click. The second hand has stopped."; render(0.3); },
     push:function(){ flash("m-crownwrap",'[data-m="pull"]'); if(!st.crown) return;
-      if(st.zero){ st.mis=api.zeroOff(); st.zero=false; st.msg=st.mis===0?"Zero position saved. Dual-time hands return to the dual time.":"Reset ended — hands still off by "+st.mis+" min."; }
+      if(st.zero){ st.mis=api.zeroOff(); if(man.dual24) st.mis24=api.zeroOff24(); st.zero=false; st.msg=(st.mis===0&&st.mis24===0)?"Zero position saved. Dual-time hands return to the dual time.":"Reset ended — the dual-time hands are not all at 0. Repeat the reset."; }
       else st.msg="Crown pushed in. The watch is running.";
       st.localOff=st.turned?(st.frozen-nowT()):st.prevOff; st.frozen=null; st.crown=0; render(0.6); },
     toggleCrown:function(){ st.crown?api.push():api.pull(); },
     turn:function(min){ flash("m-crownwrap",'[data-m="turn'+(min>0?'+':'-')+'"]'); if(!st.crown){ st.msg="Pull the crown out to the first click to set the time."; render(); return false; } st.frozen+=min*60; st.turned=true; spinKnurl(min>0?1:-1); st.msg="Turning the crown "+(min>0?"clockwise":"counter-clockwise")+": hour and minute hands move."; render(0.15); return true; },
-    A:function(){ press("A"); if(st.crown){ if(st.zero){ st.zeroPos-=1; st.msg="Reset mode: one small step counter-clockwise."; } else { st.dualOff-=15; st.msg="Dual time −15 minutes."; } render(0.3); }
-      else { st.localOff-=3600; st.msg="Local time −1 hour."; render(0.6); } },
-    B:function(){ press("B"); if(st.crown){ if(st.zero){ st.zeroPos+=1; st.msg="Reset mode: one small step clockwise."; } else { st.dualOff+=15; st.msg="Dual time +15 minutes."; } render(0.3); }
-      else { st.localOff+=3600; st.msg="Local time +1 hour."; render(0.6); } },
+    A:function(){ press("A"); if(st.crown){ if(st.zero){ if(man.dual24){ st.zero24+=15; st.msg="Reset mode: dual 24-hour hand +1 step (clockwise)."; } else { st.zeroPos-=1; st.msg="Reset mode: one small step counter-clockwise."; } } else { st.dualOff-=15; st.msg="Dual time −15 minutes."; } render(0.3); }
+      else { st.dualOff-=60; st.msg="Time difference −1 hour: the dual-time hands move back one hour (60-minute hand turns a full revolution)."; render(0.9); } },
+    B:function(){ press("B"); if(st.crown){ if(st.zero){ st.zeroPos+=1; st.msg=man.dual24?"Reset mode: dual 12-hour and 60-minute hands +1 step (clockwise).":"Reset mode: one small step clockwise."; } else { st.dualOff+=15; st.msg="Dual time +15 minutes."; } render(0.3); }
+      else { st.dualOff+=60; st.msg="Time difference +1 hour: the dual-time hands move forward one hour (60-minute hand turns a full revolution)."; render(0.9); } },
     AB:function(done){
       if(!st.crown){ st.msg="Pull the crown out to the first click first."; render(); done&&done(); return; }
       press("A"); press("B"); flash("m-btnA",'[data-m="AB"]',1600); flash("m-btnB",null,1600); st.msg="Holding A and B together…"; render();
-      var d0=dualMin()+st.mis; st.zero=true; st.zeroPos=d0+10; render(0.8);
-      setTimeout(function(){ st.zeroPos=d0; st.msg="Released. The 60-minute hand has returned. Now bring both dual-time hands to 0."; render(0.8); done&&done(); },1500);
+      var d0=dualMin()+st.mis, e0=dualMin()+st.mis24; st.zero=true; st.zeroPos=d0+10; st.zero24=e0+(man.dual24?120:0); render(0.8);
+      setTimeout(function(){ st.zeroPos=d0; st.zero24=e0; st.msg="Released. The 60-minute hand has returned. Now bring both dual-time hands to 0."; render(0.8); done&&done(); },1500);
       // the hands now show their own physical position; 0 means exactly 12 o’clock on both dual dials
       st.zeroBase=d0;
     },
@@ -1271,6 +1337,7 @@ function manualModel(man){
     tick:function(){ render(); }
   };
   // In reset mode, the hand position is relative to 12 o’clock: aligned when it is a multiple of 720 minutes (12 h)
+  api.zeroOff24=function(){ var q=((st.zero24%1440)+1440)%1440; return q>720?q-1440:q; };
   api.zeroOff=function(){ var p=((st.zeroPos%720)+720)%720; return p>360?p-720:p; };
   return api;
 }
@@ -1293,6 +1360,7 @@ function runActions(list,cb){
     else if(a==="AB"){ M.AB(function(){ mRun=setTimeout(next,500); }); }
     else if(a==="zeroFix"){ (function step(){ var off=M.zeroOff(); if(off!==0){ var n=Math.min(Math.abs(off),Math.abs(off)>40?8:1); for(var k=0;k<n;k++) off>0?M.A():M.B(); mRun=setTimeout(step,Math.abs(off)>40?60:120); } else { M.st.msg="Both dual-time hands point to 0."; M.render(); mRun=setTimeout(next,400); } })(); }
     else if(a.indexOf("hl:")===0){ M.hl(a.slice(3)); mRun=setTimeout(next,700); }
+    else if(a==="zero24"||a==="zeroB"){ var f=a==="zero24"?M.zeroOff24:M.zeroOff, b=a==="zero24"?"A":"B"; (function step(){ var o=f(); if(o!==0){ var need=(o>0?(a==="zero24"?1440:720)-o:-o); var unit=a==="zero24"?15:1, left=Math.round(need/unit), n=Math.min(left,left>12?6:1); for(var k=0;k<n;k++) M[b](); mRun=setTimeout(step,left>12?60:130); } else { M.st.msg=(a==="zero24"?"Dual 24-hour hand":"Dual 12-hour and 60-minute hands")+" at 0."; M.render(); mRun=setTimeout(next,500); } })(); }
     else if((m=a.match(/^wait:(\d+)$/))){ mRun=setTimeout(next,+m[1]); }
     else if((m=a.match(/^dateTo:(-?\d+)$/))){ var dg=+m[1]; (function step(){ if(M.st.dateOff<dg){ M.turn(1); mRun=setTimeout(step,450); } else { M.st.msg="Previous day’s date showing."; M.render(); mRun=setTimeout(next,500); } })(); }
     else if(a==="zeroS"||a==="zeroM"){ var key=a==="zeroS"?"misS":"misM", btn=a==="zeroS"?"A":"B"; (function step(){ var r=((M.st[key]%60)+60)%60; if(r!==0){ M[btn](); mRun=setTimeout(step,r>50?140:70); } else { M.st.msg=(a==="zeroS"?"1/1-second hand":"Minute hand")+" at 0."; M.render(); mRun=setTimeout(next,500); } })(); }
