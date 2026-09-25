@@ -64,7 +64,7 @@ img{max-width:100%;display:block;-webkit-user-drag:none;user-select:none;-webkit
 .linkbtn{background:none;border:0;padding:0;color:var(--gold);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- home ---------- */
-.masthead{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 18px;border-bottom:1px solid var(--line)}
+.masthead{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;justify-content:space-between;padding:16px 22px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
 .masthead .house{font-size:17px;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:var(--ink)}
 .hero{padding:44px 22px 40px}
 .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(60px,17vw,92px);line-height:.92;letter-spacing:-.012em;margin:0;color:var(--ink);font-feature-settings:"liga","dlig"}
