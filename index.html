@@ -794,13 +794,17 @@ body.noscroll{overflow:hidden}
 .tile{aspect-ratio:1/0.42;padding:8px}
 .tile .logo img.lg-cerruti{height:14px}.tile .logo img.lg-ducati{height:44px}.tile .logo img.lg-kc{height:28px}.tile .logo img.lg-police{height:15px}.tile .logo .wm{font-size:17px}
 .tile .corner{right:7px;bottom:5px;width:14px;height:14px}
-.labgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 22px 0}
-.labgrid .labtile{position:relative;width:auto;margin:0;padding:10px 12px;display:block;min-height:0}
-.labgrid .labtile .li{position:absolute;right:10px;top:10px;width:28px;height:28px;border:0}.labgrid .labtile .li svg{width:20px;height:20px}
-.labgrid .labtile .lt{display:block;font-size:11.5px;letter-spacing:.14em;line-height:1.35;padding-right:30px}
-.labgrid .labtile .ls{font-size:12px;line-height:1.3;margin-top:5px;letter-spacing:0;padding-right:0}
-.labgrid .labtile .arr{display:none}
-.colophon{padding:10px 22px 8px}
+.labgrid{display:flex;flex-direction:column;gap:8px;margin:10px 22px 0}
+.labgrid .labtile{width:auto;margin:0;padding:11px 14px;gap:14px}
+.labgrid .labtile .li{width:38px;height:38px}.labgrid .labtile .li svg{width:19px;height:19px}
+.labgrid .labtile .lt{font-size:13px;letter-spacing:.2em}
+.labgrid .labtile .ls{font-size:12.5px;margin-top:3px}
+.labgrid .labtile .arr{width:20px;height:20px}
+/* MDR maker's mark: pushed to the very bottom of the home screen */
+#s-home.active{display:flex;flex-direction:column;min-height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+#s-home .colophon{margin-top:auto;padding:16px 22px 14px}
+#s-home{padding-bottom:0!important}
+.colophon,.sitefoot{font-family:var(--serif);font-size:15px;letter-spacing:.42em;color:var(--mute)}
 .sitefoot{padding:18px 22px 24px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);text-align:center}
 #s-home.active ~ .sitefoot, body.vmon .sitefoot{display:none}
 </style>
@@ -838,7 +842,7 @@ body.noscroll{overflow:hidden}
     <button class="labtile" data-go="#/deck"><span class="li"><svg><use href="#i-deck"/></svg></span><span class="lt">PRESENTATION DECK<span class="ls">Create Presentation</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/dict"><span class="li"><svg><use href="#i-dict"/></svg></span><span class="lt">HOROLOGY DICTIONARY<span class="ls">Search horology terms &amp; calibres</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     </div>
-    <div class="colophon">ILG Academy · MDR</div>
+    <div class="colophon">MDR</div>
   </div>
 
   <!-- HOROLOGY DICTIONARY -->
@@ -958,7 +962,7 @@ body.noscroll{overflow:hidden}
     <div class="countrow" id="g-count"></div>
     <div id="g-hits"></div>
   </div>
-  <footer class="sitefoot">ILG Academy · MDR</footer>
+  <footer class="sitefoot">MDR</footer>
 </div>
 
 <div class="cbar" id="cbar">
