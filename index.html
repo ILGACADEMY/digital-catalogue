@@ -824,6 +824,17 @@ body.noscroll{overflow:hidden}
 #s-cx .cxwrap{flex:1;min-height:0;background:#181613}
 #s-cx iframe{display:block;width:100%;height:100%;border:0}
 body.cxon .sitefoot,body.cxon .cbar,body.cxon .totop{display:none!important}
+
+/* home: five feature cards still on one screen */
+a.labtile{text-decoration:none;color:inherit;box-sizing:border-box}
+.labgrid{gap:6px}
+.labgrid .labtile{padding:7px 14px}
+#s-home .colophon{padding:8px 22px 8px}
+.labgrid{margin-top:8px}
+.labgrid .labtile .li{width:34px;height:34px}.labgrid .labtile .li svg{width:18px;height:18px}
+.labgrid .labtile .ls{margin-top:2px}
+.tile{aspect-ratio:1/0.40}
+.hero h1{font-size:clamp(38px,11vw,66px)}
 </style>
 </head>
 <body>
@@ -835,6 +846,7 @@ body.cxon .sitefoot,body.cxon .cbar,body.cxon .totop{display:none!important}
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-deck" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 16.5v3.5M8.5 20h7" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="10.5" r="3.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 8.9v1.6l1.1.8" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></symbol>
+  <symbol id="i-atlas" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="3.6" ry="8.5" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M3.8 9h16.4M3.8 15h16.4" fill="none" stroke="currentColor" stroke-width="1.1"/></symbol>
   <symbol id="i-dict" viewBox="0 0 24 24"><path d="M5 4.5h10.5a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5 17a3 3 0 0 1 3-3h10.5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="9" r="2.6" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M12 7.6v1.4l1 .7" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></symbol>
   <symbol id="i-vm" viewBox="0 0 24 24"><path d="M4 20.5h16M6.5 20.5v-4h11v4M8.5 16.5v-4h7v4M10.5 12.5V9h3v3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="12" cy="5.6" r="1.9" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M6 6l2.1 2.1M15.9 15.9 18 18M18 6l-2.1 2.1M8.1 15.9 6 18" stroke="currentColor" stroke-width="1.3"/></symbol>
@@ -858,6 +870,7 @@ body.cxon .sitefoot,body.cxon .cbar,body.cxon .totop{display:none!important}
     <button class="labtile" data-go="#/vm"><span class="li"><svg><use href="#i-vm"/></svg></span><span class="lt">BRAND 360<span class="ls">Visual merchandising</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/deck"><span class="li"><svg><use href="#i-deck"/></svg></span><span class="lt">PRESENTATION DECK<span class="ls">Create Presentation</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/dict"><span class="li"><svg><use href="#i-dict"/></svg></span><span class="lt">HOROLOGY DICTIONARY<span class="ls">Search horology terms &amp; calibres</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
+    <a class="labtile" href="https://claude.ai/public/artifacts/2718f746-abd6-4e88-958b-5c79965ad912" target="_blank" rel="noopener"><span class="li"><svg><use href="#i-atlas"/></svg></span><span class="lt">HOROLOGY ATLAS<span class="ls">Explore watch movements</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></a>
     </div>
     <div class="colophon"><span class="mdrmark" role="img" aria-label="MDR"></span></div>
   </div>
