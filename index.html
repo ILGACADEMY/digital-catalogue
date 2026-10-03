@@ -38,6 +38,64 @@ img{max-width:100%;display:block;-webkit-user-drag:none;user-select:none;-webkit
 .screen{display:none;padding-bottom:120px}
 .screen.active{display:block}
 #s-vm{padding-bottom:0}
+/* ---------- Horology Dictionary ---------- */
+#s-dict .dxpad{padding:18px 22px 40px}
+#s-dict .eyebrow{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0}
+#s-dict .dxh1{font-family:var(--serif);font-weight:500;font-size:36px;line-height:1.05;margin:6px 0 4px}
+#s-dict .dxlead{color:var(--mute);margin:0 0 16px}
+#s-dict .dxsearch{display:flex;align-items:center;gap:10px;border:1px solid var(--ink);background:var(--surface);padding:0 14px;min-height:58px}
+#s-dict .dxsearch svg{flex:none;color:var(--mute)}
+#s-dict .dxsearch input{flex:1;border:0;background:none;font:inherit;font-size:17px;min-height:56px;color:var(--ink);outline:none}
+#s-dict .dxsmall{font-size:13px;color:var(--mute);margin:14px 0 6px}
+#s-dict .dxex{display:flex;flex-wrap:wrap;gap:8px}
+#s-dict .dxchip{min-height:38px;padding:0 13px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;cursor:pointer;color:var(--ink)}
+#s-dict .dxchip:hover{border-color:var(--gold)}
+#s-dict .dxchip.off{display:inline-flex;align-items:center;color:var(--mute);cursor:default;border-style:dashed}
+#s-dict .dxaz{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin:22px 0 8px}
+#s-dict .dxaz button,#s-dict .dxaz span{min-height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);font-family:var(--serif);font-size:19px;cursor:pointer;color:var(--ink)}
+#s-dict .dxaz span{color:var(--line);cursor:default}
+#s-dict .dxaz.small{grid-template-columns:repeat(13,1fr);margin-top:0}#s-dict .dxaz.small button{min-height:34px;font-size:15px}
+#s-dict .dxaz button.on{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+#s-dict .dxlinks{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+#s-dict .dxlinks button,#s-dict .dxghost{min-height:46px;border:1px solid var(--line);background:transparent;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--ink);padding:0 14px;text-align:left;margin-top:10px}
+#s-dict .dxgrp{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:18px 0 6px}
+#s-dict .dxrow{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:12px 2px;cursor:pointer;color:var(--ink)}
+#s-dict .dxrow b{display:block;font-family:var(--serif);font-size:21px;font-weight:600}
+#s-dict .dxrow span{font-size:13.5px;color:var(--mute)}
+#s-dict .dxnone{border:1px solid var(--line);background:var(--surface);padding:16px;margin-top:14px}#s-dict .dxnone p{margin:6px 0 0;color:var(--mute);font-size:14px}
+#s-dict .dxtop{display:flex;justify-content:space-between;align-items:center}
+#s-dict .dxcat{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+#s-dict .dxsave{min-height:38px;border:1px solid var(--line);background:var(--surface);padding:0 12px;font-size:13px;cursor:pointer;color:var(--ink)}#s-dict .dxsave.on{border-color:var(--gold);color:var(--gold)}
+#s-dict .dxterm{font-family:var(--serif);font-weight:600;font-size:42px;line-height:1;margin:8px 0 8px}
+#s-dict .dxst{display:inline-block;font-size:11px;letter-spacing:.14em;padding:3px 8px;border:1px solid var(--line);color:var(--mute)}
+#s-dict .dxst.g{border-color:#9cc3a8;color:#2F6B45}#s-dict .dxst.b{border-color:#c9a961;color:#8A6B32}#s-dict .dxst.y{border-color:#e3c27a;color:#8a6a17;background:#fff8e6}
+#s-dict .dxsec{border-top:1px solid var(--line);padding:14px 0 4px;margin-top:14px}
+#s-dict .dxsec.def{border-top:2px solid var(--ink)}
+#s-dict .dxlab{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;font-weight:600}
+#s-dict .dxdef{font-family:var(--serif);font-size:23px;line-height:1.3;margin:0}
+#s-dict .dxsec p{margin:0 0 8px;line-height:1.55}
+#s-dict blockquote{margin:0;padding:10px 14px;border-left:3px solid var(--gold);background:var(--surface);font-family:var(--serif);font-size:19px;font-style:italic}
+#s-dict .dxfig{margin:16px 0 4px;background:#fff;border:1px solid var(--line);padding:12px}
+#s-dict .dxsvg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}#s-dict .dxsvg.wide{max-width:640px}
+#s-dict .dxfig figcaption{font-size:12.5px;color:var(--mute);margin-top:8px}
+#s-dict .dialmap{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}#s-dict .dialmap svg{width:170px;height:170px;flex:none}#s-dict .dm-t{font-size:14.5px;line-height:1.7;min-width:160px}#s-dict .dm-t b{display:block;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+#s-dict .dxtab{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}#s-dict .dxtab th{text-align:left;font-weight:400;color:var(--mute);padding:8px 10px 8px 0;border-bottom:1px solid var(--line);width:42%;vertical-align:top}#s-dict .dxtab td{padding:8px 0;border-bottom:1px solid var(--line)}
+#s-dict .dxtest{border:1px solid var(--ink);padding:16px;margin-top:22px;background:var(--surface)}
+#s-dict .dxrowb{display:flex;gap:10px;flex-wrap:wrap}#s-dict .dxrowb>*{flex:1}
+#s-dict .dxbtn{min-height:48px;border:1px solid var(--ink);background:var(--ink);color:var(--on-ink);font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0 14px;margin-top:10px}
+#s-dict .dxbtn.sm{min-height:36px;margin:0 0 0 8px}
+#s-dict .dxq{font-family:var(--serif);font-size:22px;line-height:1.25;margin:4px 0 12px}
+#s-dict .dxopt{display:block;width:100%;text-align:left;min-height:50px;margin:0 0 8px;padding:10px 14px;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer;color:var(--ink)}
+#s-dict .dxopt.ok{border-color:#2F6B45;background:#eef6f0}#s-dict .dxopt.no{border-color:#A3352B;background:#fbefed}
+#s-dict .dxfb{font-size:14px;margin:6px 0 0}
+#s-dict .dxscore{font-family:var(--serif);font-size:52px;margin:0;line-height:1}
+#s-dict .dxres{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:4px 0 10px}#s-dict .dxres.g{color:#2F6B45}
+#s-dict .dxsrc{font-size:12px;color:var(--mute);margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+#s-dict .dxstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}#s-dict .dxstats div{border:1px solid var(--line);background:var(--surface);padding:12px}#s-dict .dxstats b{display:block;font-family:var(--serif);font-size:28px;font-weight:600}#s-dict .dxstats span{font-size:11.5px;color:var(--mute);letter-spacing:.06em}
+#s-dict .dxbar{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;align-items:center;margin:8px 0;font-size:13.5px}#s-dict .dxbar i{position:relative;height:8px;background:var(--surface);border:1px solid var(--line)}#s-dict .dxbar em{position:absolute;left:0;top:0;bottom:0;background:#e6dcc6}#s-dict .dxbar em.m{background:var(--gold)}#s-dict .dxbar small{grid-column:2;color:var(--mute);font-size:11.5px}
+#s-dict .dxbadges{display:grid;grid-template-columns:1fr 1fr;gap:8px}#s-dict .dxbadges span{border:1px solid var(--line);padding:10px;font-size:11.5px;letter-spacing:.14em;color:var(--mute)}#s-dict .dxbadges span.on{border-color:var(--gold);color:var(--ink)}#s-dict .dxbadges small{display:block;letter-spacing:0;font-size:11.5px;margin-top:2px}
+#s-dict .dxlang{white-space:nowrap}
+
 /* ---------- Presentation Deck ---------- */
 #s-deck .dkpad{padding:18px 22px 24px}
 #s-deck .dkh{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.15;margin:6px 0 10px}
@@ -661,6 +719,7 @@ body.noscroll{overflow:hidden}
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-deck" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 16.5v3.5M8.5 20h7" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="10.5" r="3.1" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 8.9v1.6l1.1.8" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></symbol>
+  <symbol id="i-dict" viewBox="0 0 24 24"><path d="M5 4.5h10.5a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M5 17a3 3 0 0 1 3-3h10.5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="9" r="2.6" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M12 7.6v1.4l1 .7" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></symbol>
   <symbol id="i-vm" viewBox="0 0 24 24"><path d="M4 20.5h16M6.5 20.5v-4h11v4M8.5 16.5v-4h7v4M10.5 12.5V9h3v3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="12" cy="5.6" r="1.9" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M6 6l2.1 2.1M15.9 15.9 18 18M18 6l-2.1 2.1M8.1 15.9 6 18" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-cmp" viewBox="0 0 24 24"><rect x="3.5" y="5" width="7" height="14" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="13.5" y="5" width="7" height="14" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
@@ -681,7 +740,14 @@ body.noscroll{overflow:hidden}
     <button class="labtile" data-go="#/cal"><span class="li"><svg><use href="#i-cal"/></svg></span><span class="lt">HOROLOGY LAB<span class="ls">Calibres &amp; interactive manuals</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/vm"><span class="li"><svg><use href="#i-vm"/></svg></span><span class="lt">BRAND 360<span class="ls">Visual merchandising</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/deck"><span class="li"><svg><use href="#i-deck"/></svg></span><span class="lt">PRESENTATION DECK<span class="ls">Create Presentation</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
+    <button class="labtile" data-go="#/dict"><span class="li"><svg><use href="#i-dict"/></svg></span><span class="lt">HOROLOGY DICTIONARY<span class="ls">Search horology terms &amp; calibres</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <div class="colophon">ILG Academy · FW26</div>
+  </div>
+
+  <!-- HOROLOGY DICTIONARY -->
+  <div class="screen" id="s-dict">
+    <div class="subhead"><button class="iconbtn" data-back aria-label="Back"><svg><use href="#i-back"/></svg></button><span class="crumb" id="dx-crumb">Horology Dictionary</span></div>
+    <div id="dx-body"></div>
   </div>
 
   <!-- PRESENTATION DECK -->
@@ -1131,6 +1197,7 @@ function route(){
   else if(h[0]==="cal"){ current={name:"cal"}; renderCalList(); show("s-cal"); window.scrollTo(0,0); }
   else if(h[0]==="manual" && MANUALS[h[1]]){ current={name:"manual",code:h[1]}; show("s-manual"); renderManual(h[1]); window.scrollTo(0,0); }
   else if(h[0]==="story" && BRAND_STORY[h[1]]){ current={name:"story",brand:h[1]}; renderStory(); show("s-story"); window.scrollTo(0,0); }
+  else if(h[0]==="dict"){ current={name:"dict",sub:h[1]||"",arg:decodeURIComponent(h[2]||"")}; show("s-dict"); renderDict(); window.scrollTo(0,0); }
   else if(h[0]==="deck"){ current={name:"deck",step:h[1]||"type"}; show("s-deck"); renderDeck(); window.scrollTo(0,0); }
   else if(h[0]==="vm"){ current={name:"vm"}; show("s-vm"); openVM(); window.scrollTo(0,0);
     var api=vmWin();
@@ -2128,6 +2195,753 @@ function onScroll(){
 window.addEventListener("scroll",onScroll,{passive:true});
 totop.addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
 window.addEventListener("hashchange",function(){ setTimeout(onScroll,60); });
+/* ---------- HOROLOGY DICTIONARY ---------- */
+/* ACADEMY DICTIONARY · CORE ENTRIES (full). Original Academy text. Technical facts are general horological principles; calibre-specific facts live only in calibre entries with a recorded source. */
+var DICT_CORE=[
+{t:"Chronograph",c:"Complications",syn:["stopwatch","chrono","stop watch","timer function"],vis:"chrono",
+ def:"A watch function that measures elapsed time independently of the time display, started, stopped and reset with pushers.",
+ simple:"A chronograph is a stopwatch built into the watch. One pusher starts and stops it, the other sets it back to zero, and the normal time keeps running the whole time.",
+ tech:"The chronograph is driven by the same energy source as the timekeeping. In a mechanical chronograph, a coupling (horizontal or vertical) connects the running gear train to the chronograph seconds wheel, and a control system (column wheel or cam) sequences start, stop and reset. Counters on sub-dials record elapsed minutes and often hours. In quartz chronographs, separate motors drive the chronograph hands.",
+ why:"Chronographs are among the most requested complications. Being able to operate one confidently, and explain which sub-dial does what, builds immediate trust with the customer.",
+ cust:"“This watch has a built-in stopwatch. Press the top button to start and stop, the bottom one to reset — and your normal time keeps running.”",
+ tip:"Always demonstrate start, stop and reset on the actual watch. Then ask the learner to identify each sub-dial on a second model with a different layout.",
+ mis:"A watch with three sub-dials is not automatically a chronograph — multifunction watches also use sub-dials for day, date or 24-hour time. Check for start/stop pushers.",
+ rel:["Chronograph Pusher","Sub-Dial","Tachymeter","Column Wheel","Cam Switching","Vertical Clutch","Horizontal Coupling","Flyback Chronograph","Split-Seconds Chronograph","Chronograph Seconds","Chronograph Minutes","Running Seconds"],
+ q:[{q:"What does a chronograph measure?",o:["Elapsed time","Time in a second time zone","Water depth","The phase of the moon"],a:0},
+    {q:"A customer presses the lower pusher on a stopped chronograph. What usually happens?",o:["The chronograph hands reset to zero","The date advances","The crown unlocks","The bezel rotates"],a:0},
+    {q:"True or false: every watch with three sub-dials is a chronograph.",o:["True","False"],a:1},
+    {q:"While the chronograph is running, the normal time display…",o:["keeps running normally","stops until the chronograph is reset","switches to 24-hour mode","shows elapsed time instead"],a:0}]},
+{t:"GMT",c:"Complications",syn:["24 hour hand","24-hour hand","second time zone","travel watch","greenwich mean time","home time"],vis:"gmt",
+ def:"A complication that displays a second time zone with an additional hand making one rotation every 24 hours, read against a 24-hour scale.",
+ simple:"A GMT watch shows two times at once. The normal hands show where you are; an extra hand, which goes round once a day, shows the time back home on a 24-hour scale.",
+ tech:"The GMT hand is geared to rotate once per 24 hours. It is read against a 24-hour scale on the dial, flange or bezel. Depending on the movement, either the local hour hand or the GMT hand can be set independently in one-hour steps. A rotating 24-hour bezel can add a third time zone.",
+ why:"Travellers and people working across time zones value this function. Explaining it clearly is a strong reason to recommend a GMT over a simpler watch.",
+ cust:"“You can keep the normal hands on Dubai time and set this extra hand to London — one glance tells you both, and whether it's day or night there.”",
+ tip:"Set a demo watch to two real time zones before the session and let learners read both. The 24-hour scale (day or night) is the part people forget.",
+ mis:"A GMT hand is not the same as a world timer: a GMT shows one additional time zone, a world timer shows all major time zones at once.",
+ rel:["Dual Time","World Timer","Bezel","Hour Hand","24-Hour Display"],
+ q:[{q:"How often does a GMT hand rotate?",o:["Once every 24 hours","Once every 12 hours","Once every hour","Once a month"],a:0},
+    {q:"A customer travels often between Dubai and London. Which function helps most?",o:["GMT","Moon phase","Tachymeter","Retrograde date"],a:0},
+    {q:"What scale is the GMT hand read against?",o:["A 24-hour scale","A 60-minute scale","A tachymeter scale","A 31-day scale"],a:0},
+    {q:"True or false: a GMT watch shows all world time zones at once.",o:["True","False"],a:1}]},
+{t:"Power Reserve",c:"Timekeeping",syn:["running time","autonomy","reserve","how long it runs"],vis:"power",
+ def:"The length of time a fully wound mechanical movement runs before it stops.",
+ simple:"Power reserve is how long the watch keeps going on a full wind when you stop wearing or winding it — for example, about 42 hours means it runs from Friday evening to Sunday morning.",
+ tech:"Energy is stored in the tensioned mainspring inside the barrel and released through the gear train to the escapement. The reserve depends on mainspring length and strength, the number of barrels and the oscillator's energy consumption; higher frequencies generally use energy faster. A power reserve indicator shows the remaining energy on the dial.",
+ why:"Customers who own several watches or wear a watch only at weekends need to know whether it will still be running when they pick it up.",
+ cust:"“When it's fully wound it runs for about two days off the wrist — so if you take it off Friday night, it's still running on Sunday.” (Use the calibre's verified figure.)",
+ tip:"Use the chain Mainspring → stored energy → power reserve → watch stops. Then contrast with quartz, where battery life is measured in years.",
+ mis:"Power reserve is not battery life. Quartz watches have battery life; mechanical watches have power reserve.",
+ rel:["Mainspring","Barrel","Power Reserve Indicator","Automatic Movement","Manual-Winding Movement"],
+ q:[{q:"Where is a mechanical watch's energy stored?",o:["In the mainspring","In the crystal","In the rotor","In the crown"],a:0},
+    {q:"A watch has a 42-hour power reserve. Taken off fully wound on Friday at 20:00, about when does it stop?",o:["Sunday around 14:00","Saturday at 08:00","Monday at 20:00","Friday at 22:00"],a:0},
+    {q:"True or false: “power reserve” and “battery life” mean the same thing.",o:["True","False"],a:1},
+    {q:"Which display shows the remaining energy on the dial?",o:["Power reserve indicator","Tachymeter","GMT hand","Moon phase"],a:0}]},
+{t:"Automatic Movement",c:"Movements",syn:["self-winding","self winding","automatic","auto"],vis:"auto",
+ def:"A mechanical movement that winds its mainspring from the motion of the wearer's wrist through an oscillating weight called a rotor.",
+ simple:"An automatic watch winds itself while you wear it. A weight inside spins as your arm moves and tightens the spring that powers the watch — no battery needed.",
+ tech:"The rotor pivots on the movement and, through a reverser and reduction wheels, winds the mainspring in one or both directions of rotation. A slipping bridle prevents over-winding. Most automatic movements can also be wound by the crown.",
+ why:"Many customers want a mechanical watch without daily winding. Explaining how it winds itself — and what happens if it is not worn — avoids disappointment.",
+ cust:"“It's powered by your movement — the more you wear it, the more it winds. If you leave it off for a couple of days it will stop; just wind it a little and set the time.”",
+ tip:"Show a display case back if available: let learners watch the rotor turn when the watch is moved.",
+ mis:"Automatic does not mean quartz or battery-powered. An automatic watch stops if it is not worn or wound long enough.",
+ rel:["Rotor","Micro-Rotor","Mainspring","Mechanical Movement","Power Reserve","Manual-Winding Movement"],
+ q:[{q:"What winds an automatic movement while it is worn?",o:["The rotor","The battery","The crystal","The bezel"],a:0},
+    {q:"A customer asks if an automatic needs a battery. Correct answer?",o:["No — it is wound by wrist movement","Yes — every 2 years","Yes — but only for the date","Only if it has a chronograph"],a:0},
+    {q:"What happens if an automatic watch is left unworn beyond its power reserve?",o:["It stops","It switches to battery power","It loses only the date","Nothing — it never stops"],a:0},
+    {q:"True or false: most automatic watches can also be wound with the crown.",o:["True","False"],a:0}]},
+{t:"Mechanical Movement",c:"Movements",syn:["mechanical","mecanique","spring driven"],vis:"auto",
+ def:"A movement powered by a mainspring and regulated by a mechanical oscillator — the balance wheel and balance spring — without a battery.",
+ simple:"A mechanical watch runs on a wound-up spring. Its energy is released in tiny, regular steps by the balance, which you can see swinging back and forth.",
+ tech:"Energy flows from the mainspring in the barrel through the gear train to the escapement, which releases it in equal impulses to the balance. The balance's oscillation frequency sets the rate. Winding is manual (by the crown) or automatic (by a rotor).",
+ why:"Mechanical watches carry craftsmanship and heritage value; customers paying for this want to hear what makes it different from quartz.",
+ cust:"“There's no battery — it's powered by a spring and regulated by a tiny wheel that swings several times every second.”",
+ tip:"Teach the five stages in order: energy (mainspring), transmission (gear train), distribution (escapement), regulation (balance), display (hands).",
+ mis:"Mechanical watches are not designed to be as accurate as quartz; their value lies in the mechanism and craftsmanship.",
+ rel:["Automatic Movement","Manual-Winding Movement","Mainspring","Gear Train","Escapement","Balance Wheel","Quartz Movement"],
+ q:[{q:"What powers a mechanical movement?",o:["A mainspring","A battery","A solar cell","A capacitor"],a:0},
+    {q:"Which part regulates a mechanical watch's rate?",o:["Balance wheel and balance spring","Crown","Rotor","Bezel"],a:0},
+    {q:"Put in order: mainspring → ? → escapement → balance",o:["Gear train","Crystal","Dial","Buckle"],a:0},
+    {q:"True or false: a mechanical watch is generally more accurate than a quartz watch.",o:["True","False"],a:1}]},
+{t:"Quartz Movement",c:"Movements",syn:["quartz","battery watch","electronic quartz"],vis:null,
+ def:"A movement regulated by a quartz crystal oscillator, usually vibrating at 32,768 Hz, with energy typically supplied by a battery.",
+ simple:"A quartz watch uses a battery and a tiny vibrating quartz crystal to keep very accurate time. It needs a new battery every few years and very little else.",
+ tech:"An electronic circuit divides the quartz crystal's oscillations (commonly 32,768 per second) down to one pulse per second, which drives a stepper motor that moves the hands through a gear train. Accuracy is typically expressed in seconds per month.",
+ why:"Quartz offers accuracy, low maintenance and often a lower price — the right recommendation for many everyday customers.",
+ cust:"“It's quartz, so it's very accurate and low-maintenance — just a battery change every few years.”",
+ tip:"Contrast accuracy units: quartz is quoted per month, mechanical per day.",
+ mis:"The ticking second hand is typical of quartz, but some quartz watches sweep and some mechanical watches have deadbeat seconds — check the specification, not just the hand.",
+ rel:["Solar Quartz","Mechanical Movement","Accuracy","Frequency","Battery Life"],
+ q:[{q:"At what frequency does a typical watch quartz crystal vibrate?",o:["32,768 Hz","4 Hz","28,800 Hz","1 Hz"],a:0},
+    {q:"How is quartz accuracy usually expressed?",o:["Seconds per month","Seconds per day","Hours per week","Minutes per year"],a:0},
+    {q:"A customer wants a low-maintenance, very accurate watch. Best movement type?",o:["Quartz","Manual-winding mechanical","Tourbillon","Minute repeater"],a:0},
+    {q:"What does the quartz circuit drive to move the hands?",o:["A stepper motor","A rotor","A mainspring","A balance wheel"],a:0}]},
+{t:"Manual-Winding Movement",c:"Movements",syn:["hand-wound","hand wound","manual wind","manual winding"],vis:null,
+ def:"A mechanical movement whose mainspring is wound by turning the crown.",
+ simple:"A hand-wound watch has no rotor — you wind it yourself by turning the crown, usually once a day.",
+ tech:"Turning the crown drives the winding stem, crown wheel and ratchet wheel to tension the mainspring; a click prevents it unwinding. Without a rotor, the movement can be thinner and its finishing is fully visible through a display back.",
+ why:"Enthusiasts often prefer the ritual of winding and the slimmer cases it allows.",
+ cust:"“You wind it by the crown, ideally at the same time each day — it becomes a small ritual, and it keeps the watch slim.”",
+ tip:"Teach correct winding: crown in the winding position, wind until resistance is felt, never force beyond it.",
+ mis:"Manual winding is not a fault or an old-fashioned limitation; it is a deliberate design choice.",
+ rel:["Mechanical Movement","Automatic Movement","Crown","Mainspring","Power Reserve"],
+ q:[{q:"How is a manual-winding movement wound?",o:["By turning the crown","By wrist movement","By light","By a battery"],a:0},
+    {q:"Which part does a manual-winding movement NOT have?",o:["Rotor","Mainspring","Balance wheel","Escapement"],a:0},
+    {q:"A customer wants the slimmest mechanical dress watch. Which movement type often allows it?",o:["Manual-winding","Automatic with central rotor","Quartz chronograph","Solar"],a:0}]},
+{t:"Escapement",c:"Movements",syn:["lever escapement","swiss lever","echappement"],vis:"escape",
+ def:"The mechanism that releases the mainspring's energy in equal steps and gives impulses to the balance to keep it oscillating.",
+ simple:"The escapement is the watch's heartbeat. It lets the gears move forward one tiny step at a time and gives the balance a small push each time, which creates the tick.",
+ tech:"In the Swiss lever escapement, the escape wheel is locked and unlocked by the pallet fork, whose movement is controlled by the balance's impulse pin. Each unlocking advances the gear train and transmits an impulse to the balance through the pallet stones, sustaining its oscillation.",
+ why:"Understanding the escapement explains why mechanical watches tick, why they need servicing, and what innovations like silicon parts improve.",
+ cust:"“This part releases the energy in tiny, precise steps — it's what you hear when the watch ticks.”",
+ tip:"Use the analogy of a revolving door that lets one person through per push.",
+ mis:"The escapement does not set the rate on its own — the balance and balance spring do; the escapement distributes energy.",
+ rel:["Escape Wheel","Pallet Fork","Balance Wheel","Gear Train","Jewels","Silicon"],
+ q:[{q:"What is the escapement's main job?",o:["Release energy in equal steps and impulse the balance","Wind the mainspring","Display the date","Protect against water"],a:0},
+    {q:"Which component locks and unlocks the escape wheel?",o:["Pallet fork","Rotor","Crown","Bezel"],a:0},
+    {q:"The ticking sound of a mechanical watch comes mainly from…",o:["the escapement","the strap","the crystal","the battery"],a:0}]},
+{t:"Balance Wheel",c:"Movements",syn:["balance","oscillator wheel"],vis:"balance",
+ def:"The oscillating wheel that, with the balance spring, forms the regulating organ of a mechanical watch.",
+ simple:"The balance wheel swings back and forth at a steady rhythm. Each swing measures out a fixed slice of time, like a pendulum in a clock.",
+ tech:"The balance and balance spring form a harmonic oscillator; its frequency depends on the balance's moment of inertia and the spring's stiffness. Common frequencies are 2.5 to 5 Hz (18,000–36,000 vibrations per hour). The escapement keeps it oscillating; regulation adjusts its rate.",
+ why:"It is the most visible sign of a mechanical movement through an open dial or case back.",
+ cust:"“That little wheel swinging back and forth is the heart of the watch — it divides time into precise beats.”",
+ tip:"Pair with Frequency: show a 4 Hz balance and count 8 vibrations per second.",
+ mis:"The rotor is not the balance — the rotor winds, the balance regulates.",
+ rel:["Balance Spring","Escapement","Frequency","Regulator","Shock Protection","Oscillator"],
+ q:[{q:"Which part works with the balance wheel to regulate time?",o:["Balance spring","Rotor","Crown","Gasket"],a:0},
+    {q:"True or false: the rotor and the balance wheel are the same part.",o:["True","False"],a:1},
+    {q:"A pendulum clock is a good analogy for which watch part?",o:["Balance wheel","Bezel","Bracelet","Crystal"],a:0}]},
+{t:"Balance Spring",c:"Movements",syn:["hairspring","spiral","balance-spring"],vis:"balance",
+ def:"The fine coiled spring attached to the balance wheel that returns it to its rest position and determines, with the balance, the oscillation period.",
+ simple:"The hairspring is a very thin spiral spring that makes the balance swing back and forth evenly.",
+ tech:"Its elasticity and stability against temperature, magnetism and gravity strongly affect accuracy. Alloys and silicon are used to improve these properties. Its effective length can be adjusted by a regulator to change the rate.",
+ why:"Many modern innovations (silicon, anti-magnetic alloys) are about the balance spring — a key talking point for higher-end watches.",
+ cust:"“This tiny spring is thinner than a hair, and it decides how evenly the watch keeps time.”",
+ tip:"Show how magnetism makes coils stick together and the watch run fast.",
+ mis:"The hairspring is not the mainspring: the mainspring stores energy, the hairspring regulates.",
+ rel:["Balance Wheel","Regulator","Isochronism","Silicon","Magnetic Resistance"],
+ q:[{q:"Another name for the balance spring is…",o:["Hairspring","Mainspring","Spring bar","Click spring"],a:0},
+    {q:"Which spring stores the watch's energy?",o:["Mainspring","Balance spring","Spring bar","Crown spring"],a:0},
+    {q:"Strong magnetism can make the balance spring's coils stick, causing the watch to…",o:["run fast","stop the date","lose water resistance","change colour"],a:0}]},
+{t:"Mainspring",c:"Movements",syn:["main spring","barrel spring"],vis:"power",
+ def:"The coiled spring inside the barrel that stores the energy powering a mechanical watch.",
+ simple:"The mainspring is the watch's fuel tank: winding tightens it, and as it slowly unwinds it drives the watch.",
+ tech:"Housed in the barrel, it is wound by the crown or rotor and releases torque through the gear train. Modern alloys resist fatigue and breakage. Torque decreases as it unwinds, which affects amplitude and therefore rate stability.",
+ why:"Explaining the mainspring makes power reserve and winding instantly understandable.",
+ cust:"“Winding tightens this spring; it then releases its energy slowly over the next day or two.”",
+ tip:"Always connect: mainspring → barrel → power reserve.",
+ mis:"Over-winding cannot break a modern automatic: a slipping bridle protects it.",
+ rel:["Barrel","Power Reserve","Manual-Winding Movement","Automatic Movement","Rotor"],
+ q:[{q:"Where is the mainspring housed?",o:["In the barrel","In the crown","In the bezel","In the case back"],a:0},
+    {q:"The mainspring is best compared to…",o:["a fuel tank","a clock face","a seat belt","a window"],a:0},
+    {q:"True or false: the mainspring regulates the watch's rate.",o:["True","False"],a:1}]},
+{t:"Rotor",c:"Movements",syn:["oscillating weight","winding rotor","rotor weight"],vis:"auto",
+ def:"The pivoting oscillating weight of an automatic movement that winds the mainspring as the wrist moves.",
+ simple:"The rotor is the half-moon weight that spins inside an automatic watch when you move your arm — that spinning winds the watch.",
+ tech:"Mounted on a central bearing (or as a micro-rotor set into the movement), it winds via reversing wheels in one or both directions. Rotor mass and material (sometimes heavy metals) affect winding efficiency.",
+ why:"Seeing the rotor move is the easiest way to show a customer what “automatic” means.",
+ cust:"“Turn it over — that weight spins as you move and winds the watch for you.”",
+ tip:"Rotors can be decorated or engraved — a nice storytelling detail on display backs.",
+ mis:"A spinning rotor does not mean the watch is running fast; it only winds.",
+ rel:["Automatic Movement","Micro-Rotor","Mainspring"],
+ q:[{q:"What does the rotor do?",o:["Winds the mainspring","Regulates the rate","Shows the date","Seals the case"],a:0},
+    {q:"A rotor is found in which type of movement?",o:["Automatic","Quartz","Manual-winding","Solar quartz"],a:0},
+    {q:"Where can a customer usually see the rotor?",o:["Through a display case back","On the bezel","Under the strap","In the crown"],a:0}]},
+{t:"Jewels",c:"Movements",syn:["rubies","jewel bearings","jewel count"],vis:null,
+ def:"Synthetic ruby or sapphire bearings and functional stones used in a movement to reduce friction and wear at pivots and in the escapement.",
+ simple:"Jewels are tiny synthetic rubies used as bearings so the moving parts last longer and run smoothly. They are functional, not decorative.",
+ tech:"Jewels serve as pivot bearings (hole and cap jewels), pallet stones and the impulse jewel. Modern stones are synthetic corundum. A higher jewel count often reflects more complications or more bearings, not automatically higher quality.",
+ why:"Customers often see “21 jewels” on a dial and ask what it means — or whether it adds value.",
+ cust:"“These are synthetic rubies used as bearings — they reduce friction so the movement runs smoothly for years.”",
+ tip:"Correct the myth that jewels are precious gems added for value.",
+ mis:"Jewels are not precious decoration, and more jewels does not automatically mean a better watch.",
+ rel:["Escapement","Mechanical Movement","Calibre","Shock Protection"],
+ q:[{q:"What is the main purpose of jewels in a movement?",o:["Reduce friction and wear","Add resale value","Make the dial sparkle","Store energy"],a:0},
+    {q:"Modern watch jewels are typically…",o:["synthetic ruby or sapphire","natural diamonds","glass","steel"],a:0},
+    {q:"True or false: more jewels always means a better watch.",o:["True","False"],a:1}]},
+{t:"Frequency",c:"Timekeeping",syn:["beat rate","vph","vibrations per hour","hertz","bph","a/h"],vis:"balance",
+ def:"The number of oscillations of the regulating organ per second (Hz), often also expressed as vibrations per hour (vph).",
+ simple:"Frequency is how fast the balance beats. 4 Hz means 8 ticks every second, or 28,800 per hour.",
+ tech:"One oscillation (Hz) equals two vibrations (two swings). Hence 4 Hz = 8 vibrations per second = 28,800 vph; 3 Hz = 21,600 vph. Higher frequencies can improve stability against disturbances but consume more energy. Quartz oscillators run far higher, commonly 32,768 Hz.",
+ why:"Frequency comes up in specification sheets and when comparing movements; converting units confidently impresses enthusiasts.",
+ cust:"“The balance beats eight times a second — that's 28,800 times an hour, which keeps the seconds hand smooth.” (Use the calibre's verified frequency.)",
+ tip:"Teach the conversion: Hz × 2 × 3,600 = vph.",
+ mis:"Hz counts full oscillations, vph counts single swings — 4 Hz is 28,800 vph, not 14,400.",
+ rel:["Balance Wheel","Beat Rate","Oscillator","Accuracy","Quartz Movement"],
+ q:[{q:"4 Hz equals how many vibrations per hour?",o:["28,800","14,400","21,600","36,000"],a:0},
+    {q:"3 Hz equals…",o:["21,600 vph","18,000 vph","28,800 vph","43,200 vph"],a:0},
+    {q:"How many vibrations make one oscillation?",o:["Two","One","Four","Sixty"],a:0}]},
+{t:"Calibre",c:"Movements",syn:["caliber","movement reference","cal"],vis:null,
+ def:"The reference designation of a specific movement design; by extension, the movement itself.",
+ simple:"A calibre is the name or number of a watch movement, like a model number for an engine — for example Miyota 6S20 or ETA 2824-2.",
+ tech:"A calibre reference identifies the movement's design, layout and specifications. Variants (suffixes) can differ in jewels, finishing, functions or date position. The term historically related to the movement's size and layout.",
+ why:"Calibre knowledge lets staff answer “what's inside?” precisely and compare models across brands.",
+ cust:"“Inside is the [calibre] — the movement reference tells you exactly which engine powers the watch.”",
+ tip:"Use the Dictionary's calibre search to show how one calibre can appear in several brands.",
+ mis:"The same calibre name does not guarantee identical finishing or adjustment across brands or variants.",
+ rel:["Mechanical Movement","Quartz Movement","Manufacture","Mainplate","Bridge"],
+ q:[{q:"A calibre is best described as…",o:["a movement's reference designation","a type of strap","a crystal material","a water-resistance rating"],a:0},
+    {q:"“Miyota 6S20” is an example of…",o:["a calibre","a bezel type","a finishing technique","a strap material"],a:0},
+    {q:"True or false: two watches with the same calibre can differ in finishing.",o:["True","False"],a:0}]},
+{t:"Water Resistance",c:"Water & Protection",syn:["waterproof","water resistant","atm","bar","wr","water proof"],vis:null,
+ def:"A watch's ability to resist water ingress, expressed as a test pressure in bar, ATM or metres.",
+ simple:"Water resistance tells you how well a watch keeps water out. The rating is a test pressure, not a safe diving depth.",
+ tech:"Ratings are given as pressure (1 ATM ≈ 1 bar ≈ 10 m of static water). Gaskets at the crown, case back, crystal and pushers create the seal. Seals age, so water resistance should be re-tested periodically. Diver's watches are specified by their own standard (ISO 6425).",
+ why:"Misunderstanding the rating is one of the most common causes of after-sales claims — accurate advice protects the customer and the brand.",
+ cust:"“The rating is a pressure test, not a depth you can dive to. Keep the crown pushed in, and have the seals checked at service.”",
+ tip:"Teach: rating = pressure test in the lab, not real-world depth; movement in water adds dynamic pressure.",
+ mis:"No watch is “waterproof”. 30 m does not mean you can dive to 30 m.",
+ rel:["Water-Resistant","Gasket","O-Ring","Crown Seal","Pressure Resistance","Screw-Down Crown"],
+ q:[{q:"1 ATM corresponds to approximately…",o:["10 m of static water pressure","1 m","100 m","1 km"],a:0},
+    {q:"True or false: a 30 m rating means safe diving to 30 m.",o:["True","False"],a:1},
+    {q:"Which parts create the water seal?",o:["Gaskets","Jewels","Hands","Lugs"],a:0},
+    {q:"What should a customer do periodically to keep water resistance?",o:["Have the seals tested at service","Wind the crown daily","Polish the case","Change the strap"],a:0}]},
+{t:"Sapphire Crystal",c:"Components",syn:["sapphire glass","sapphire"],vis:"anatomy:crystal",
+ def:"A watch crystal made of synthetic sapphire (crystalline aluminium oxide), valued for its high scratch resistance.",
+ simple:"Sapphire is a very hard, clear material used for the watch glass. It is extremely hard to scratch in daily wear.",
+ tech:"Synthetic sapphire is rated 9 on the Mohs scale; only harder materials such as diamond scratch it. It can shatter under a strong impact. Anti-reflective coatings improve legibility.",
+ why:"Scratch resistance is a key everyday benefit customers understand immediately.",
+ cust:"“The glass is sapphire — extremely scratch-resistant, so it stays clear for years.”",
+ tip:"Contrast sapphire, mineral and acrylic crystals by hardness, impact behaviour and cost.",
+ mis:"“Sapphire-coated” mineral glass is not a sapphire crystal; only the surface layer is coated.",
+ rel:["Mineral Crystal","Acrylic Crystal","Crystal","Sapphire"],
+ q:[{q:"Sapphire crystal's main advantage is…",o:["high scratch resistance","flexibility","lowest cost","magnetic resistance"],a:0},
+    {q:"Is “sapphire-coated mineral glass” the same as a sapphire crystal?",o:["No","Yes"],a:0},
+    {q:"On the Mohs scale, synthetic sapphire is rated…",o:["9","5","2","7"],a:0}]},
+{t:"Mineral Crystal",c:"Components",syn:["mineral glass","hardened glass"],vis:"anatomy:crystal",
+ def:"A watch crystal made of toughened glass, more scratch-resistant than acrylic and less than sapphire.",
+ simple:"Mineral glass is strong, clear and affordable. It resists everyday knocks well but can scratch more easily than sapphire.",
+ tech:"Typically heat- or chemically-toughened silicate glass. Some versions carry a sapphire coating on the surface to improve scratch resistance.",
+ why:"Explaining crystal types helps set the right expectations at each price point.",
+ cust:"“It's toughened mineral glass — clear and durable for everyday wear.”",
+ tip:"Always read the specification carefully: “Mineral Crystal + Sapphire Coating” ≠ “Sapphire Crystal”.",
+ mis:"Mineral glass is not plastic; acrylic is the plastic option.",
+ rel:["Sapphire Crystal","Acrylic Crystal","Crystal"],
+ q:[{q:"Compared with sapphire, mineral crystal is…",o:["less scratch-resistant","more scratch-resistant","plastic","flexible"],a:0},
+    {q:"Which crystal type is plastic?",o:["Acrylic","Mineral","Sapphire","Sapphire-coated mineral"],a:0},
+    {q:"A spec says “Mineral Crystal + Sapphire Coating”. Is it a sapphire crystal?",o:["No","Yes"],a:0}]},
+{t:"Tachymeter",c:"Complications",syn:["tachometer","tachy","speed scale"],vis:"chrono",
+ def:"A scale, usually on the bezel or dial edge, used with a chronograph to calculate speed over a known distance.",
+ simple:"A tachymeter scale turns your stopwatch into a speed calculator: time one kilometre, read the scale, and you have your speed in km/h.",
+ tech:"The scale is calibrated as 3600 ÷ seconds. Start the chronograph at a marker, stop after a known distance (typically 1 km); the chronograph seconds hand then points to the average speed in units per hour. It works for events lasting under 60 seconds, and for any rate per hour.",
+ why:"A frequent customer question on sporty chronographs — explaining it shows real product knowledge.",
+ cust:"“Time one kilometre with the stopwatch — when you stop it, the hand points to your speed on this scale.”",
+ tip:"Practise with a 30-second example: the hand points to 120.",
+ mis:"The tachymeter does not measure speed by itself; it needs the chronograph and a known distance.",
+ rel:["Chronograph","Bezel","Telemeter","Pulsometer","Chronograph Seconds"],
+ q:[{q:"A car covers 1 km in 30 seconds. What does the tachymeter show?",o:["120","30","60","90"],a:0},
+    {q:"The tachymeter must be used with…",o:["a chronograph","a GMT hand","a moon phase","a rotor"],a:0},
+    {q:"What formula is a tachymeter scale based on?",o:["3600 ÷ seconds","60 × seconds","seconds ÷ 3600","24 ÷ hours"],a:0}]},
+{t:"Sub-Dial",c:"Components",syn:["subdial","sub dial","counter","register","totaliser"],vis:"anatomy:subdial",
+ def:"A small auxiliary dial within the main dial that displays an additional indication such as running seconds, chronograph counters, 24-hour time or date.",
+ simple:"Sub-dials are the small dials inside the main dial. Each one shows something extra — like seconds, stopwatch minutes or the day.",
+ tech:"Positions are referenced by clock positions (e.g. 3H, 6H, 9H) and vary by calibre. The same layout can carry different functions in different calibres, so the calibre specification is the reference.",
+ why:"Customers often ask “what do these small dials do?” — answering by position is fast and confident.",
+ cust:"“The one at 9 counts stopwatch minutes, the one at 6 is the running seconds…” (always use the verified calibre layout).",
+ tip:"Use the Dictionary's calibre pages to read sub-dial positions visually before a training session.",
+ mis:"Sub-dials do not always mean chronograph; multifunction movements also use them.",
+ rel:["Chronograph","Running Seconds","Chronograph Minutes","Day-Date","Dial"],
+ q:[{q:"Sub-dial positions are usually referenced by…",o:["clock positions (3H, 6H, 9H)","colours","jewel numbers","strap size"],a:0},
+    {q:"True or false: sub-dials always indicate a chronograph.",o:["True","False"],a:1},
+    {q:"Where should you check what each sub-dial shows?",o:["The calibre specification","The strap label","The box","The price tag"],a:0}]},
+{t:"Chronograph Pusher",c:"Components",syn:["pusher","push button","push-piece","start stop button"],vis:"anatomy:pusher",
+ def:"A button on the case side used to operate the chronograph's start, stop and reset functions.",
+ simple:"Pushers are the buttons next to the crown. Usually the top one starts and stops the stopwatch and the bottom one resets it.",
+ tech:"Pushers act on the chronograph control (column wheel or cam). Some are screw-down for water resistance and must be unscrewed before use. Layout varies; some chronographs use a single pusher (monopusher).",
+ why:"Correct operation in front of the customer avoids damage and shows competence.",
+ cust:"“Top button starts and stops, bottom resets — try it.”",
+ tip:"Check whether pushers are screw-down before demonstrating.",
+ mis:"Do not operate chronograph pushers under water unless the specification explicitly allows it.",
+ rel:["Chronograph","Crown","Column Wheel","Pusher"],
+ q:[{q:"On most two-pusher chronographs, the lower pusher…",o:["resets","starts","changes the date","unlocks the bezel"],a:0},
+    {q:"Before using screw-down pushers you must…",o:["unscrew them","wind the crown","remove the strap","open the case back"],a:0},
+    {q:"Pushers act on which system?",o:["The chronograph control","The rotor","The crystal","The gasket only"],a:0}]},
+{t:"Crown",c:"Components",syn:["winding crown","winder","button crown"],vis:"anatomy:crown",
+ def:"The knurled knob on the case used to wind the movement and to set the time and other functions.",
+ simple:"The crown is the little knob on the side. Turn it to wind; pull it out to set the time or date.",
+ tech:"It connects to the winding stem. Crown positions typically include winding (0), quick date/second function (1) and time setting (2). Screw-down crowns improve water resistance and must be screwed back after setting.",
+ why:"Most everyday customer questions — winding, setting, water — involve the crown.",
+ cust:"“Pull it out to the first click for the date, second click for the time — and always push it back in.”",
+ tip:"Teach a universal rule: crown always fully in (and screwed down if applicable) before contact with water.",
+ mis:"A screw-down crown is not damaged by unscrewing — it is designed for it.",
+ rel:["Crown Guard","Screw-Down Crown","Crown Seal","Water Resistance","Manual-Winding Movement"],
+ q:[{q:"What is the crown used for?",o:["Winding and setting","Measuring speed","Showing GMT","Securing the strap"],a:0},
+    {q:"Before swimming, the crown should be…",o:["fully pushed in or screwed down","pulled out","removed","half-way out"],a:0},
+    {q:"The crown connects to the movement via the…",o:["winding stem","spring bar","bezel","rotor"],a:0}]},
+{t:"Bezel",c:"Components",syn:["ring","rotating bezel","fixed bezel"],vis:"anatomy:bezel",
+ def:"The ring surrounding the crystal, either fixed or rotating, often carrying a scale.",
+ simple:"The bezel is the ring around the glass. Some turn, and their markings help you time things or read another time zone.",
+ tech:"Rotating bezels may be uni- or bi-directional with click mechanisms. Scales include elapsed-time (diving), 24-hour (GMT), tachymeter and compass. Materials range from steel to ceramic and aluminium inserts.",
+ why:"Bezels define the look and often a function — a quick demonstration adds value.",
+ cust:"“This bezel turns one way only — set it to your start time and you can always see how long has passed.”",
+ tip:"Explain why diving bezels are unidirectional: a knock can only shorten the remaining time, never extend it.",
+ mis:"Not every bezel rotates; many are fixed and purely decorative or carry a static scale.",
+ rel:["Tachymeter","GMT","Crystal","Ceramic","Case"],
+ q:[{q:"Why are diving bezels unidirectional?",o:["A knock can only show less remaining time, not more","They are cheaper","They wind the watch","They improve accuracy"],a:0},
+    {q:"Which scale on a bezel helps read a second time zone?",o:["24-hour scale","Tachymeter","Pulsometer","Moon phase"],a:0},
+    {q:"True or false: every bezel rotates.",o:["True","False"],a:1}]},
+{t:"Chronometer",c:"Timekeeping",syn:["certified chronometer","chronometre"],vis:null,
+ def:"A precision watch whose movement has passed an official accuracy test, such as the COSC certification in Switzerland.",
+ simple:"“Chronometer” is a title a watch earns by passing a strict official accuracy test — it is not just a fancy word for a watch.",
+ tech:"In Switzerland, COSC tests uncased mechanical movements over 15 days in five positions and three temperatures; criteria include an average daily rate of −4/+6 seconds. Quartz chronometers are tested to separate criteria.",
+ why:"The word appears on many dials; customers deserve an accurate explanation of what was tested.",
+ cust:"“This movement was officially tested for accuracy over 15 days in different positions and temperatures before it could be called a chronometer.”",
+ tip:"Separate “chronometer” (certified accuracy) from “chronograph” (stopwatch function).",
+ mis:"Chronometer and chronograph are different things; a watch can be one, both or neither.",
+ rel:["COSC","Accuracy","Rate","Regulation","Chronograph"],
+ q:[{q:"A chronometer is…",o:["a watch with officially certified accuracy","a stopwatch function","a moon phase display","a strap type"],a:0},
+    {q:"COSC's average daily rate criterion for mechanical movements is…",o:["−4/+6 seconds per day","±1 minute per day","±20 seconds per month","−10/+20 seconds per day"],a:0},
+    {q:"True or false: chronometer and chronograph mean the same thing.",o:["True","False"],a:1}]},
+{t:"COSC",c:"Timekeeping",syn:["contrôle officiel suisse des chronomètres","cosc certified","chronometer test"],vis:null,
+ def:"The Contrôle Officiel Suisse des Chronomètres, the independent Swiss institute that tests and certifies chronometer movements.",
+ simple:"COSC is the official Swiss testing institute. Movements that pass its accuracy tests can be called chronometers.",
+ tech:"Mechanical movements are tested uncased for 15 days in five positions and at three temperatures (8, 23 and 38 °C) against seven criteria, including an average daily rate of −4/+6 s. Each certified movement receives an individual certificate number.",
+ why:"COSC certification is a concrete, verifiable quality claim customers can trust.",
+ cust:"“The movement was individually tested by COSC, the independent Swiss institute, and received its own certificate.”",
+ tip:"Mention that testing is on the movement before casing.",
+ mis:"COSC certification is about accuracy, not water resistance or materials.",
+ rel:["Chronometer","Accuracy","Rate","Regulation"],
+ q:[{q:"What does COSC certify?",o:["Movement accuracy","Water resistance","Gold purity","Strap quality"],a:0},
+    {q:"For how many days are mechanical movements tested?",o:["15","3","30","1"],a:0},
+    {q:"True or false: COSC tests movements individually.",o:["True","False"],a:0}]},
+{t:"Tourbillon",c:"Complications",syn:["tourbilion","turbillon"],vis:null,
+ def:"A rotating cage carrying the escapement and balance, designed to average out positional rate errors caused by gravity.",
+ simple:"A tourbillon puts the watch's heart in a little spinning cage. It was invented to improve accuracy and is now a showcase of fine watchmaking.",
+ tech:"Patented by Abraham-Louis Breguet in 1801. The cage typically rotates once per minute, so positional errors in vertical positions are averaged. In a wristwatch, which changes position constantly, its main value is technical virtuosity and visual appeal.",
+ why:"A prestige complication — accurate storytelling matters more than exaggerated accuracy claims.",
+ cust:"“The whole escapement turns inside this cage, usually once a minute — a 19th-century invention that's still a symbol of high watchmaking.”",
+ tip:"Avoid claiming a tourbillon makes a wristwatch dramatically more accurate.",
+ mis:"A visible balance through a dial opening (“open heart”) is not a tourbillon.",
+ rel:["Escapement","Balance Wheel","Complication","Regulation"],
+ q:[{q:"What does a tourbillon cage carry?",o:["The escapement and balance","The rotor","The date wheel","The battery"],a:0},
+    {q:"Who patented the tourbillon (1801)?",o:["Abraham-Louis Breguet","Hans Wilsdorf","Louis Cartier","Georges Favre-Jacot"],a:0},
+    {q:"True or false: an “open heart” dial showing the balance is a tourbillon.",o:["True","False"],a:1}]},
+{t:"Moon Phase",c:"Complications",syn:["moonphase","moon-phase","lunar phase"],vis:null,
+ def:"A complication displaying the current phase of the moon through an aperture on the dial.",
+ simple:"A moon-phase display shows a little moon that grows and shrinks just like the real moon over the month.",
+ tech:"A disc with two moons is advanced once a day by a 59-tooth wheel, approximating the synodic month (about 29.53 days); a standard display drifts by about one day every two and a half to three years and needs correction. More precise mechanisms reduce this error.",
+ why:"A poetic, visual complication with strong gift appeal.",
+ cust:"“It shows the real phase of the moon — it moves a little every day.”",
+ tip:"Show how to correct the moon phase (often via a corrector or crown position) — and when not to.",
+ mis:"Moon-phase watches are not astronomically perfect; standard displays need occasional correction.",
+ rel:["Complication","Annual Calendar","Perpetual Calendar","Day-Date"],
+ q:[{q:"A lunar (synodic) month is about…",o:["29.5 days","30 days exactly","28 days","31 days"],a:0},
+    {q:"True or false: a standard moon-phase display never needs correction.",o:["True","False"],a:1},
+    {q:"A moon-phase disc usually carries…",o:["two moons","twelve moons","one sun","a GMT scale"],a:0}]},
+{t:"Day-Date",c:"Complications",syn:["day date","day and date","day-date display"],vis:null,
+ def:"A display showing both the day of the week and the date of the month.",
+ simple:"Day-date means the watch shows both the weekday and the date.",
+ tech:"Day and date may be shown in windows or on sub-dials; positions depend on the calibre. Most simple calendars need manual correction at the end of months shorter than 31 days.",
+ why:"Practical everyday information; position on the dial varies by calibre — check before describing.",
+ cust:"“It shows the day and the date — just adjust the date at the end of shorter months.”",
+ tip:"Teach the safe-setting rule: avoid changing the date when the watch shows roughly 21:00–03:00 unless the manual says otherwise.",
+ mis:"A day-date watch is not a perpetual calendar; it does not know month lengths.",
+ rel:["Annual Calendar","Perpetual Calendar","Sub-Dial","Calibre"],
+ q:[{q:"A day-date watch shows…",o:["weekday and date","time in two zones","moon phase","elapsed time"],a:0},
+    {q:"At the end of a 30-day month, a simple day-date watch usually needs…",o:["manual date correction","nothing","a battery change","servicing"],a:0},
+    {q:"True or false: a day-date watch is a perpetual calendar.",o:["True","False"],a:1}]},
+{t:"Dual Time",c:"Complications",syn:["dual time zone","two time zones","second time"],vis:"gmt",
+ def:"A watch displaying two time zones, via an extra hand, a sub-dial or a second movement.",
+ simple:"Dual time lets you see two places' times on one watch.",
+ tech:"Dual time is the broad category; GMT is one implementation using a 24-hour hand. Other designs use a separate sub-dial with its own hands or two independent movements.",
+ why:"Lets you match travellers with the right design.",
+ cust:"“You can see home time and local time together.”",
+ tip:"Show one GMT and one sub-dial dual time side by side.",
+ mis:"Not every dual-time watch has a 24-hour indicator.",
+ rel:["GMT","World Timer","24-Hour Display","Sub-Dial"],
+ q:[{q:"Dual time shows…",o:["two time zones","two dates","two stopwatches","two moon phases"],a:0},
+    {q:"True or false: GMT is one type of dual-time display.",o:["True","False"],a:0},
+    {q:"Dual time can be shown by…",o:["an extra hand or sub-dial","a tachymeter","a gasket","a buckle"],a:0}]},
+{t:"316L Stainless Steel",c:"Materials",syn:["316l","stainless steel","steel","surgical steel"],vis:null,
+ def:"A low-carbon austenitic stainless steel widely used for watch cases and bracelets for its corrosion resistance and finish.",
+ simple:"316L is the standard high-quality steel for watches: strong, resistant to rust and comfortable on the skin for most people.",
+ tech:"Contains chromium, nickel and molybdenum; the “L” denotes low carbon, improving corrosion resistance after welding. It polishes and brushes well. Some brands use 904L, which has higher alloy content.",
+ why:"The most common case material — knowing why it is used answers many quality questions.",
+ cust:"“The case is 316L steel — very resistant to corrosion and easy to keep looking good.”",
+ tip:"Compare with titanium (lighter) and ceramic (harder, scratch-resistant).",
+ mis:"Stainless does not mean scratch-proof.",
+ rel:["904L Stainless Steel","Titanium","Ceramic","Brushing","Polishing"],
+ q:[{q:"What does the “L” in 316L stand for?",o:["Low carbon","Light","Luxury","Laminated"],a:0},
+    {q:"316L's key benefit is…",o:["corrosion resistance","magnetism","transparency","flexibility"],a:0},
+    {q:"True or false: stainless steel cannot be scratched.",o:["True","False"],a:1}]}
+];
+
+/* ACADEMY DICTIONARY · REFERENCE ENTRIES (definition + simple explanation). Format: [term, category, definition, simple, related[], synonyms[]] */
+var DICT_REF=[
+["Solar Quartz","Movements","A quartz movement whose rechargeable cell is charged by light through a photovoltaic dial.","A solar watch charges itself from any light, so you rarely or never change a battery.",["Quartz Movement","Battery Life"],["solar","light powered","eco-drive"]],
+["Spring Drive","Movements","A movement combining a mainspring power source with an electronically regulated glide wheel controlled by a quartz reference.","A hybrid: powered by a spring like a mechanical watch, but regulated electronically, with a perfectly smooth seconds hand.",["Mechanical Movement","Quartz Movement","Electromechanical Movement"],[]],
+["Electronic Movement","Movements","A movement in which timekeeping is controlled electronically, such as quartz.","Any watch movement whose timekeeping is controlled by electronics rather than a balance wheel.",["Quartz Movement","Solar Quartz"],[]],
+["Electromechanical Movement","Movements","A movement combining mechanical and electronic elements in its energy or regulation system.","Part mechanical, part electronic — for example a spring-powered movement with electronic regulation.",["Spring Drive","Quartz Movement"],[]],
+["Mainplate","Movements","The base plate of a movement onto which bridges and components are mounted.","The foundation of the movement — everything else is built on it.",["Bridge","Calibre"],["main plate","platine"]],
+["Bridge","Movements","A plate or bar fixed to the mainplate that holds the pivots of wheels and other components.","Bridges hold the moving parts in place from above, like supports on a building.",["Mainplate","Jewels"],["cock"]],
+["Gear Train","Movements","The series of wheels and pinions transmitting energy from the barrel to the escapement.","The gears that carry energy from the spring to the escapement and turn the hands.",["Barrel","Escapement","Mainspring"],["going train","wheel train"]],
+["Barrel","Movements","The drum-shaped component housing the mainspring and driving the gear train.","A small drum that holds the mainspring.",["Mainspring","Power Reserve","Gear Train"],[]],
+["Micro-Rotor","Movements","A small winding rotor integrated into the level of the movement rather than mounted over it.","A small rotor set inside the movement — it keeps the watch thinner.",["Rotor","Automatic Movement"],["microrotor","micro rotor"]],
+["Regulator","Movements","A device that adjusts the effective length of the balance spring or otherwise fine-tunes the rate.","A small adjuster the watchmaker uses to make the watch run faster or slower.",["Balance Spring","Regulation","Rate"],["index"]],
+["Shock Protection","Movements","A spring-mounted jewel setting that protects the fragile balance pivots from impacts.","A tiny shock absorber that protects the balance when the watch is knocked.",["Balance Wheel","Jewels","Shock Resistance"],["incabloc","shock absorber"]],
+["Oscillator","Movements","The time base of a watch — the balance and balance spring in a mechanical movement, the quartz crystal in a quartz movement.","The part that beats regularly to measure time.",["Balance Wheel","Quartz Movement","Frequency"],[]],
+["Manufacture","Movements","A watch company that designs and produces its own movements (and often other components) in-house.","A brand that makes its own movements.",["Calibre","Mechanical Movement"],["in-house","manufacture movement"]],
+["Escape Wheel","Movements","The last wheel of the gear train, whose teeth are released step by step by the pallet fork.","The wheel inside the escapement that moves forward one tooth at a time.",["Escapement","Pallet Fork"],[]],
+["Pallet Fork","Movements","The lever of the escapement that locks and unlocks the escape wheel and transmits impulses to the balance.","The small lever that rocks back and forth with every tick.",["Escapement","Escape Wheel","Balance Wheel"],["lever","anchor"]],
+["Accuracy","Timekeeping","How closely a watch's displayed time matches reference time, expressed as a rate deviation over a period.","How close the watch stays to the correct time.",["Rate","Precision","Chronometer","COSC"],[]],
+["Amplitude","Timekeeping","The angle of rotation of the balance from its rest position, measured in degrees.","How far the balance swings — a healthy swing is a sign of a healthy movement.",["Balance Wheel","Beat Error","Power Reserve"],[]],
+["Beat Error","Timekeeping","The asymmetry between the balance's swings in each direction, measured in milliseconds.","Whether the tick and the tock are evenly spaced.",["Amplitude","Regulation"],[]],
+["Beat Rate","Timekeeping","The number of vibrations of the balance per hour (vph).","How many ticks per hour — for example 28,800.",["Frequency","Balance Wheel"],["bph"]],
+["Isochronism","Timekeeping","The property of an oscillator to keep the same period regardless of amplitude.","Keeping the same rhythm whether the spring is fully wound or nearly empty.",["Balance Spring","Amplitude"],[]],
+["Regulation","Timekeeping","The adjustment of a movement so that its rate stays within desired limits.","Fine-tuning a watch so it keeps good time.",["Regulator","Rate","Accuracy"],["adjustment","timing"]],
+["Rate","Timekeeping","The daily gain or loss of a watch, in seconds per day.","How many seconds a day the watch gains or loses.",["Accuracy","Regulation","COSC"],["daily rate"]],
+["Precision","Timekeeping","The consistency of a watch's rate over time and conditions.","How consistently the watch behaves day after day.",["Accuracy","Rate"],[]],
+["Battery Life","Timekeeping","The expected running time of a quartz watch before its battery needs replacement.","How long a quartz battery lasts — usually years.",["Quartz Movement","Power Reserve"],["battery"]],
+["Flyback Chronograph","Complications","A chronograph that can be reset and restarted with a single press of the reset pusher while running.","Press once to reset and restart instantly — no need to stop first.",["Chronograph","Chronograph Pusher"],["flyback","retour en vol"]],
+["Split-Seconds Chronograph","Complications","A chronograph with two superimposed seconds hands that can be separated to time intermediate intervals.","Two stopwatch hands that can split apart to time two events at once.",["Chronograph","Flyback Chronograph"],["rattrapante","split seconds"]],
+["World Timer","Complications","A complication displaying the time in all major time zones simultaneously, using a city ring and a 24-hour ring.","Shows the time in cities around the world at a glance.",["GMT","Dual Time"],["world time","worldtimer"]],
+["Annual Calendar","Complications","A calendar that automatically accounts for 30- and 31-day months, needing correction only once a year at the end of February.","Knows the length of every month except February.",["Perpetual Calendar","Day-Date","Moon Phase"],[]],
+["Perpetual Calendar","Complications","A calendar that automatically accounts for month lengths and leap years.","Knows every month and leap year — no correction for many decades.",["Annual Calendar","Moon Phase","Day-Date"],["quantième perpétuel","perpetual"]],
+["Power Reserve Indicator","Complications","A display showing how much energy remains in the mainspring.","A small gauge that shows how much running time is left.",["Power Reserve","Mainspring"],["power reserve display"]],
+["Alarm","Complications","A complication that sounds at a pre-set time.","A built-in wake-up or reminder signal.",["Complication","Minute Repeater"],[]],
+["Minute Repeater","Complications","A chiming complication that sounds the hours, quarters and minutes on demand.","A watch that tells the time with sound when you press a slide.",["Complication","Alarm"],["repeater"]],
+["Equation of Time","Complications","A display showing the difference between solar time and mean civil time, which varies through the year.","Shows how far “sun time” differs from clock time today.",["Complication","Perpetual Calendar"],[]],
+["Retrograde Display","Complications","A hand that moves along an arc and jumps back to its starting point at the end of its scale.","A hand that sweeps across a scale and then snaps back to start.",["Day-Date","Complication"],["retrograde"]],
+["Complication","Complications","Any function of a watch beyond the display of hours, minutes and seconds.","Any extra function, like a date, chronograph or moon phase.",["Chronograph","GMT","Moon Phase","Tourbillon"],[]],
+["Function","Complications","An indication or capability of a watch, such as hours, minutes, date or chronograph.","Something the watch shows or does.",["Complication","Calibre"],[]],
+["24-Hour Display","Complications","An indication showing the time on a 24-hour scale, often used to show day or night.","Tells you whether it's day or night on a 24-hour scale.",["GMT","Sub-Dial"],["24h indicator","24-hr"]],
+["Column Wheel","Complications","A castellated wheel that controls the sequence of start, stop and reset in a mechanical chronograph.","A small turret-shaped wheel that coordinates the stopwatch functions.",["Chronograph","Cam Switching"],[]],
+["Cam Switching","Complications","A chronograph control system using cams and levers instead of a column wheel.","A simpler way of controlling the stopwatch functions using cams.",["Column Wheel","Chronograph"],["cam"]],
+["Vertical Clutch","Complications","A chronograph coupling using friction discs stacked vertically to engage the chronograph smoothly.","A coupling that starts the stopwatch hand without any jump.",["Horizontal Coupling","Chronograph"],["vertical coupling"]],
+["Horizontal Coupling","Complications","A chronograph coupling using a wheel that moves sideways to mesh with the chronograph seconds wheel.","The traditional coupling: a wheel slides over to start the stopwatch.",["Vertical Clutch","Chronograph"],["lateral clutch"]],
+["Flyback","Complications","The function of resetting and restarting a running chronograph with one press.","See Flyback Chronograph.",["Flyback Chronograph","Chronograph"],[]],
+["Telemeter","Complications","A chronograph scale used to measure distance from the time between seeing and hearing an event, based on the speed of sound.","Measures how far away lightning is from the time to hear the thunder.",["Chronograph","Tachymeter"],[]],
+["Pulsometer","Complications","A chronograph scale used to calculate a heart rate from a set number of beats.","Helps measure a pulse quickly with the stopwatch.",["Chronograph","Tachymeter"],[]],
+["Running Seconds","Complications","The continuously running seconds display of the normal time, often on a sub-dial in chronographs.","The seconds of the normal time, separate from the stopwatch.",["Chronograph Seconds","Sub-Dial"],["small seconds","normal seconds","normal second hand"]],
+["Chronograph Seconds","Complications","The chronograph's elapsed-seconds hand, usually central.","The stopwatch seconds hand.",["Chronograph","Running Seconds"],[]],
+["Chronograph Minutes","Complications","The counter recording elapsed chronograph minutes, usually on a sub-dial.","Counts the stopwatch minutes.",["Chronograph","Sub-Dial"],["minute counter"]],
+["Case","Components","The housing protecting the movement, comprising the middle case, bezel, case back and other parts.","The watch's outer body that protects the movement.",["Case Back","Bezel","Lug","Crown"],[]],
+["Case Back","Components","The rear cover of the case, which may be solid, screw-down, snap-on or transparent (display back).","The back of the watch — sometimes see-through.",["Case","Water Resistance"],["caseback","display back"]],
+["Crown Guard","Components","Protective shoulders on the case beside the crown.","Raised edges that protect the crown from knocks.",["Crown","Case"],["crown protector"]],
+["Screw-Down Crown","Components","A crown that screws onto a threaded tube to improve water resistance.","A crown you screw shut to keep water out.",["Crown","Water Resistance","Crown Seal"],["screw down crown","screw-in crown"]],
+["Crystal","Components","The transparent cover protecting the dial.","The watch glass.",["Sapphire Crystal","Mineral Crystal","Acrylic Crystal"],["glass"]],
+["Acrylic Crystal","Components","A plastic watch crystal that is light and impact-resistant but scratches easily; minor scratches can be polished out.","A plastic watch glass — light, tough, but easy to scratch.",["Crystal","Mineral Crystal","Sapphire Crystal"],["plexiglass","hesalite"]],
+["Dial","Components","The face of the watch displaying the indications.","The watch's face.",["Hands","Sub-Dial"],["face"]],
+["Hands","Components","The pointers indicating time and other information.","The pointers that show the time.",["Hour Hand","Minute Hand","Seconds Hand"],[]],
+["Hour Hand","Components","The shortest main hand, indicating the hour.","The short hand.",["Hands","Minute Hand"],[]],
+["Minute Hand","Components","The long main hand, indicating the minutes.","The long hand.",["Hands","Hour Hand"],[]],
+["Seconds Hand","Components","The hand indicating seconds, central or on a sub-dial.","The thin hand that shows seconds.",["Hands","Running Seconds"],["second hand"]],
+["Pusher","Components","A button on the case operating a function such as the chronograph or a quick-set correction.","A button on the side of the case.",["Chronograph Pusher","Crown"],["push piece"]],
+["Lug","Components","The projections of the case to which the strap or bracelet is attached.","The case “horns” that hold the strap.",["Spring Bar","Strap","Bracelet"],["horns"]],
+["Spring Bar","Components","A spring-loaded pin fixing the strap or bracelet between the lugs.","The small pin that holds the strap on.",["Lug","Strap"],[]],
+["Bracelet","Components","A metal or ceramic band made of links.","A metal watch band made of links.",["Strap","Clasp"],[]],
+["Strap","Components","A band made of leather, rubber, textile or similar material.","A non-metal watch band.",["Bracelet","Buckle","Leather","FKM"],["band"]],
+["Buckle","Components","The fastening of a strap, typically a pin (tang) buckle.","The fastener on a strap.",["Strap","Clasp"],["tang buckle","pin buckle"]],
+["Clasp","Components","The fastening system of a bracelet or strap, such as a folding or deployant clasp.","The fastener on a bracelet.",["Bracelet","Deployant Clasp"],[]],
+["Deployant Clasp","Components","A folding clasp that opens and closes without removing the band from the buckle.","A folding clasp that makes the watch easy to put on.",["Clasp","Buckle"],["deployment clasp","butterfly clasp","butterfly deployant","butterfly buckle"]],
+["904L Stainless Steel","Materials","A highly alloyed stainless steel with higher nickel, chromium and molybdenum content than 316L, offering increased corrosion resistance.","A premium steel that is even more resistant to corrosion.",["316L Stainless Steel"],["904l"]],
+["Titanium","Materials","A light, strong and corrosion-resistant metal, about 40% lighter than steel for the same volume.","Very light and strong — and comfortable for sensitive skin.",["316L Stainless Steel","Ceramic"],["grade 5","grade 2"]],
+["Ceramic","Materials","A very hard, scratch-resistant, non-metallic material used for cases and bezels.","Extremely scratch-resistant, keeps its colour — but can break if dropped hard.",["Bezel","Sapphire"],["zirconium oxide","zirconia"]],
+["Sapphire","Materials","Synthetic crystalline aluminium oxide used for crystals, case backs and jewels.","A very hard, clear man-made crystal.",["Sapphire Crystal","Jewels"],[]],
+["Silicon","Materials","A material used for escapement parts and balance springs because it is light, anti-magnetic and needs no lubrication.","A modern material that makes movements resistant to magnetism.",["Escapement","Balance Spring","Magnetic Resistance"],["silicium"]],
+["Gold","Materials","A precious metal used in alloys such as 18-carat (750/1000) yellow, rose or white gold.","Precious metal; 18 carat means 75% pure gold.",["Platinum"],["18k","18 carat"]],
+["Platinum","Materials","A dense, rare precious metal, commonly used as 950/1000 alloy.","A heavy, rare precious metal.",["Gold"],[]],
+["Carbon","Materials","Composite materials such as forged carbon used for their lightness and distinctive appearance.","Very light material with a unique marbled look.",["Titanium","Ceramic"],["forged carbon","carbon fibre"]],
+["FKM","Materials","Fluoroelastomer rubber used for straps, resistant to heat, chemicals and wear.","A high-quality rubber for straps.",["Strap"],["fluoroelastomer","rubber strap"]],
+["Leather","Materials","Treated animal hide used for straps; can be affected by water and sweat.","Classic strap material — keep it away from water.",["Strap"],["calfskin","alligator"]],
+["Meteorite","Materials","Iron meteorite material used for dials, showing a natural Widmanstätten crystal pattern.","Dial material cut from a meteorite — each one is unique.",["Dial"],[]],
+["Water-Resistant","Water & Protection","Describes a watch tested to resist water ingress up to a stated pressure.","Built to keep water out up to its rating.",["Water Resistance"],[]],
+["Gasket","Water & Protection","A seal, usually rubber or synthetic, preventing water and dust from entering the case.","A rubber seal that keeps water out.",["O-Ring","Water Resistance","Crown Seal"],["seal"]],
+["O-Ring","Water & Protection","A circular gasket sealing the case back, crown or pushers.","A round rubber seal.",["Gasket","Water Resistance"],["o ring"]],
+["Crown Seal","Water & Protection","The gasket system sealing the crown and winding stem passage.","The seal inside the crown.",["Crown","Gasket","Screw-Down Crown"],[]],
+["Pressure Resistance","Water & Protection","The pressure a case is tested to withstand, expressed in bar, ATM or metres.","How much water pressure the watch was tested for.",["Water Resistance"],[]],
+["Magnetic Resistance","Water & Protection","A watch's ability to keep running accurately when exposed to magnetic fields.","Protection against magnets from phones, bags or speakers.",["Silicon","Balance Spring"],["anti-magnetic","antimagnetic","gauss"]],
+["Shock Resistance","Water & Protection","A watch's ability to withstand impacts without damage or significant rate change.","How well the watch survives knocks.",["Shock Protection"],["shockproof"]],
+["Brushing","Finishing","A satin finish created with fine parallel lines.","A matte finish with fine lines.",["Polishing","Circular Graining"],["satin finish","satin-brushed"]],
+["Polishing","Finishing","A finish creating a smooth, reflective, mirror-like surface.","A shiny, mirror finish.",["Brushing","Black Polishing"],[]],
+["Anglage","Finishing","Hand-bevelling and polishing of the edges of movement parts.","Polished bevelled edges on movement parts.",["Chamfering","Black Polishing"],["bevelling","beveling"]],
+["Geneva Stripes","Finishing","Decorative parallel waves applied to movement bridges.","Wave-like stripes on the movement.",["Côtes de Genève","Perlage"],["geneva waves"]],
+["Côtes de Genève","Finishing","The French name for Geneva stripes.","Same as Geneva stripes.",["Geneva Stripes"],["cotes de geneve"]],
+["Perlage","Finishing","Overlapping circular graining applied to plates and bridges.","Small overlapping circles decorating the movement.",["Circular Graining","Geneva Stripes"],["pearling"]],
+["Black Polishing","Finishing","A flawless mirror polish that appears black at certain angles.","A perfect mirror finish that looks black from some angles.",["Polishing","Anglage"],["mirror polishing"]],
+["Circular Graining","Finishing","A finish of fine concentric or circular patterns.","Circular patterns on metal parts.",["Perlage","Brushing"],["circular satin"]],
+["Guilloché","Finishing","An engraved decorative pattern of intersecting lines, made by hand or machine on a rose engine.","A finely engraved repeating pattern, often on dials.",["Dial"],["guilloche"]],
+["Skeletonisation","Finishing","Removing material from movement parts to reveal the mechanism, often with decoration.","Cutting away parts of the movement so you can see through it.",["Mainplate","Bridge"],["skeleton","skeletonization","openworked"]],
+["Chamfering","Finishing","Cutting and finishing a bevelled edge on a part.","Making neat bevelled edges.",["Anglage"],[]]
+];
+
+/* ===================== HOROLOGY DICTIONARY ===================== */
+var DX={idx:null,q:""};
+function dxSlug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function dxNorm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"");}
+var DX_CATS=["Movements","Complications","Components","Materials","Timekeeping","Water & Protection","Finishing","Calibres"];
+/* extra verified calibre not in the catalogue (manufacturer source recorded) */
+var DX_EXTRA_CALS=[{code:"2824-2",maker:"ETA",type:"Automatic",functions:"Hours, minutes, central seconds, date (window, semi-instantaneous, quick correction), stop-seconds",
+  fields:[["Diameter","25.60 mm (11½‴)"],["Thickness","4.60 mm"],["Jewels","25"],["Frequency","28,800 vph (4 Hz)"],["Power reserve","42 hours (typical)"],["Winding","Self-winding, bidirectional"]],
+  source:"ETA SA, manufacturer technical page (portal.eta.ch, calibre 2824-2)",verified:"2026-10-02",syn:["eta 2824","2824","eta 2824-2"]}];
+function dxCalibres(){
+  var out=[];
+  (typeof CAL_LIST!=="undefined"?CAL_LIST:[]).forEach(function(c){
+    var brands=Object.keys(c.brands).map(function(k){return MAISON[k].name;});
+    out.push({code:c.code,maker:(c.maker||"").replace(/\s*\(.*\)$/,""),makerFull:c.maker,type:c.type,functions:c.functions,power:c.power,brands:brands,brandKeys:Object.keys(c.brands),fams:Object.keys(c.fams),
+      source:"Brand FW26 training decks, as published in the ILG Academy catalogue",verified:"2026-10-02",fields:[]});
+  });
+  DX_EXTRA_CALS.forEach(function(c){ out.push({code:c.code,maker:c.maker,makerFull:c.maker,type:c.type,functions:c.functions,power:"",brands:[],brandKeys:[],fams:[],source:c.source,verified:c.verified,fields:c.fields,syn:c.syn}); });
+  return out;
+}
+function dxBuild(){
+  if(DX.idx) return DX.idx;
+  var terms=[];
+  DICT_CORE.forEach(function(e){ e.full=true; e.slug=dxSlug(e.t); terms.push(e); });
+  DICT_REF.forEach(function(r){ terms.push({t:r[0],c:r[1],def:r[2],simple:r[3],rel:r[4],syn:r[5],full:false,slug:dxSlug(r[0])}); });
+  var cals=dxCalibres(); cals.forEach(function(c){ c.slug=dxSlug(c.code); c.label=(c.maker?c.maker+" ":"")+c.code; });
+  var bySlug={}; terms.forEach(function(t){bySlug[t.slug]=t;});
+  DX.idx={terms:terms,cals:cals,bySlug:bySlug,calBySlug:cals.reduce(function(m,c){m[c.slug]=c;return m;},{})};
+  return DX.idx;
+}
+function dxLev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; var d=[];for(var i=0;i<=a.length;i++){d[i]=[i];}for(var j=0;j<=b.length;j++)d[0][j]=j;
+  for(i=1;i<=a.length;i++)for(j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[a.length][b.length]; }
+function dxSearch(q){
+  var I=dxBuild(), nq=dxNorm(q), words=String(q).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); if(nq.length<2) return null;
+  function scoreTerm(t){
+    var n=dxNorm(t.t),s=0; if(n===nq) s=100; else if(n.indexOf(nq)===0) s=75; else if(n.indexOf(nq)>=0) s=55;
+    (t.syn||[]).forEach(function(y){var ny=dxNorm(y); if(ny===nq) s=Math.max(s,92); else if(ny.indexOf(nq)>=0||(nq.length>=5&&nq.indexOf(ny)>=0&&ny.length>=6)) s=Math.max(s,60);});
+    if(!s&&nq.length>=5){ var lv=dxLev(nq,n); if(lv<=2) s=40-lv*5; (t.syn||[]).forEach(function(y){ if(dxLev(nq,dxNorm(y))<=2) s=Math.max(s,35); }); }
+    if(!s&&words.length>1&&words.every(function(w){return (t.t+" "+(t.syn||[]).join(" ")).toLowerCase().indexOf(w)>=0;})) s=45;
+    return s; }
+  function scoreCal(c){
+    var code=dxNorm(c.code), mk=dxNorm(c.maker), s=0;
+    if(code===nq||(mk+code)===nq) s=100; else if(code.indexOf(nq)===0&&nq.length>=3) s=85; else if(nq.length>=3&&code.indexOf(nq)>=0) s=60;
+    var codeWords=words.filter(function(w){return /\d/.test(w)&&w.length>=3;}), mkWords=words.filter(function(w){return !/\d/.test(w);});
+    if(codeWords.length&&codeWords.every(function(w){return code.indexOf(dxNorm(w))>=0;})) s=Math.max(s,mkWords.length&&mkWords.every(function(w){return mk.indexOf(w)>=0||(c.brands.join(" ").toLowerCase().indexOf(w)>=0);})?98:80);
+    (c.syn||[]).forEach(function(y){ if(dxNorm(y)===nq) s=Math.max(s,99); else if(dxNorm(y).indexOf(nq)>=0&&nq.length>=4) s=Math.max(s,70); });
+    if(!s&&mkWords.length&&!codeWords.length&&mkWords.every(function(w){return mk===w;})) s=30;
+    return s; }
+  var T=I.terms.map(function(t){return {e:t,s:scoreTerm(t)};}).filter(function(x){return x.s>0;}).sort(function(a,b){return b.s-a.s;});
+  var C=I.cals.map(function(c){return {e:c,s:scoreCal(c)};}).filter(function(x){return x.s>0;}).sort(function(a,b){return b.s-a.s;});
+  var top=T[0]&&T[0].e, relSet={};
+  if(top) (top.rel||[]).forEach(function(r){ relSet[dxSlug(r)]=1; });
+  var R=I.terms.filter(function(t){return relSet[t.slug]&&!T.some(function(x){return x.e===t;});}).slice(0,8);
+  return {terms:T.slice(0,12).map(function(x){return x.e;}),cals:C.slice(0,8).map(function(x){return x.e;}),related:R};
+}
+/* ---------- learner record (this device until sign-in is live) ---------- */
+var DXP_KEY="calibreDictProgress";
+function dxP(){ try{ var v=JSON.parse(localStorage.getItem(DXP_KEY)||"null"); if(v) return v; }catch(e){} return {terms:{},xp:0,days:[],saved:[],misses:{},lastQ:{}}; }
+function dxSave(p){ try{ localStorage.setItem(DXP_KEY,JSON.stringify(p)); }catch(e){} }
+function dxToday(){ return new Date().toISOString().slice(0,10); }
+function dxTouch(p){ var d=dxToday(); if(p.days[p.days.length-1]!==d) p.days.push(d); if(p.days.length>400) p.days=p.days.slice(-400); }
+function dxRec(p,key){ return p.terms[key]=p.terms[key]||{first:new Date().toISOString(),views:0,tests:0,ans:0,correct:0,best:-1,latest:-1,status:"NOT STARTED",xp:0}; }
+function dxView(key){ var p=dxP(), r=dxRec(p,key); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p); return r; }
+function dxStatus(r){ if(!r) return "NOT STARTED"; if(r.status==="MASTERED"&&r.lastTest&&(Date.now()-new Date(r.lastTest))>21*864e5) return "REVIEW DUE"; return r.status; }
+function dxStreak(p){ var n=0,d=new Date(); for(;;){ var s=d.toISOString().slice(0,10); if(p.days.indexOf(s)>=0){n++;d.setDate(d.getDate()-1);} else break; } return n; }
+var DX_BADGES=[["FIRST TERM","explored",1],["DICTIONARY EXPLORER","explored",10],["HOROLOGY LEARNER","tested",5],["CALIBRE EXPLORER","calibres",5],["KNOWLEDGE BUILDER","mastered",10],["HOROLOGY MASTER","mastered",25]]; /* thresholds are configuration */
+/* ---------- MDR educational illustrations (original; MDR is a fictional demonstration brand) ---------- */
+var DXI={ink:"#16140F",gold:"#8A6B32",mute:"#A59E91",line:"#D9D2C3",paper:"#FBF9F5"};
+function dxWatch(opts){ /* opts: hl (part to highlight), callouts [[part,label]], extra svg, sub (subdials) */
+  var hl=opts.hl||"", I=DXI, g=function(p){return p===hl?' stroke="'+I.gold+'" stroke-width="3.5"':' stroke="'+I.ink+'" stroke-width="1.6"';};
+  var s='<svg viewBox="0 0 410 380" role="img" aria-label="MDR educational watch illustration" class="dxsvg">';
+  s+='<rect x="128" y="0" width="104" height="70" rx="6" fill="#fff"'+g("strap")+'/><rect x="128" y="310" width="104" height="70" rx="6" fill="#fff"'+g("strap")+'/>';
+  s+='<rect x="158" y="352" width="44" height="22" rx="3" fill="none"'+g("buckle")+'/>';
+  s+='<path d="M122 78 L134 52 M238 78 L226 52 M122 302 L134 328 M238 302 L226 328" fill="none"'+g("lug")+'/>';
+  s+='<rect x="292" y="176" width="22" height="28" rx="5" fill="#fff"'+g("crown")+'/>';
+  s+='<path d="M286 166 q12 4 14 10 M286 214 q12 -4 14 -10" fill="none"'+g("crownguard")+'/>';
+  s+='<rect x="268" y="96" width="16" height="22" rx="4" transform="rotate(35 276 107)" fill="#fff"'+g("pusher")+'/><rect x="268" y="262" width="16" height="22" rx="4" transform="rotate(-35 276 273)" fill="#fff"'+g("pusher")+'/>';
+  s+='<circle cx="180" cy="190" r="118" fill="#fff"'+g("case")+'/>';
+  s+='<circle cx="180" cy="190" r="108" fill="none"'+g("bezel")+'/>';
+  for(var i=0;i<60;i+=5){var a=i*6*Math.PI/180; s+='<line x1="'+(180+100*Math.sin(a)).toFixed(1)+'" y1="'+(190-100*Math.cos(a)).toFixed(1)+'" x2="'+(180+104*Math.sin(a)).toFixed(1)+'" y2="'+(190-104*Math.cos(a)).toFixed(1)+'" stroke="'+I.mute+'" stroke-width="1"/>';}
+  s+='<circle cx="180" cy="190" r="96" fill="'+I.paper+'"'+g("dial")+'/>';
+  s+='<circle cx="180" cy="190" r="97" fill="none"'+(hl==="crystal"?' stroke="#7FA6C9" stroke-width="5" stroke-opacity=".8"':' stroke="none"')+'/>';
+  if(hl==="crystal") s+='<path d="M120 130 q30 -30 70 -32" stroke="#7FA6C9" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>';
+  for(i=0;i<12;i++){a=i*30*Math.PI/180; s+='<line x1="'+(180+80*Math.sin(a)).toFixed(1)+'" y1="'+(190-80*Math.cos(a)).toFixed(1)+'" x2="'+(180+90*Math.sin(a)).toFixed(1)+'" y2="'+(190-90*Math.cos(a)).toFixed(1)+'" stroke="'+I.ink+'" stroke-width="'+(i%3?2:3.5)+'"/>';}
+  s+='<text x="180" y="146" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="4" fill="'+I.ink+'">MDR</text>';
+  (opts.sub||[[130,190,"subdial"]]).forEach(function(sd){ s+='<circle cx="'+sd[0]+'" cy="'+sd[1]+'" r="22" fill="#fff"'+g(sd[2]||"subdial")+'/><line x1="'+sd[0]+'" y1="'+sd[1]+'" x2="'+sd[0]+'" y2="'+(sd[1]-15)+'" stroke="'+I.ink+'" stroke-width="1.4"/>'; });
+  s+='<line x1="180" y1="190" x2="230" y2="160" stroke-linecap="round"'+(hl==="hour"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="6"':' stroke="'+I.ink+'" stroke-width="5"')+'/>';
+  s+='<line x1="180" y1="190" x2="180" y2="108" stroke-linecap="round"'+(hl==="minute"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="4"':' stroke="'+I.ink+'" stroke-width="3"')+'/>';
+  if(!opts.noSec) s+='<line x1="180" y1="205" x2="232" y2="262" stroke-linecap="round"'+(hl==="seconds"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="2.5"':' stroke="#A3352B" stroke-width="1.3"')+'/>';
+  s+='<circle cx="180" cy="190" r="4" fill="'+I.ink+'"/>';
+  s+=(opts.extra||"");
+  (opts.callouts||[]).forEach(function(c){ s+='<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+c[2]+'" y2="'+c[3]+'" stroke="'+I.gold+'" stroke-width="1"/><circle cx="'+c[0]+'" cy="'+c[1]+'" r="3" fill="'+I.gold+'"/><text x="'+c[2]+'" y="'+(c[3]-4)+'" font-family="Arial,sans-serif" font-size="11.5" font-weight="700" fill="'+I.ink+'" text-anchor="'+(c[4]||"start")+'">'+c[5]+'</text>'; });
+  return s+'</svg>';
+}
+var DX_PART_LABEL={case:"Case",bezel:"Bezel",crown:"Crown",crownguard:"Crown guard",crystal:"Crystal",dial:"Dial",subdial:"Sub-dial",pusher:"Pusher",lug:"Lug",strap:"Strap",buckle:"Buckle",hour:"Hour hand",minute:"Minute hand",seconds:"Seconds hand",hands:"Hands"};
+var DX_TERM_PART={"case":"case","bezel":"bezel","crown":"crown","crown-guard":"crownguard","screw-down-crown":"crown","crystal":"crystal","sapphire-crystal":"crystal","mineral-crystal":"crystal","acrylic-crystal":"crystal","dial":"dial","sub-dial":"subdial","pusher":"pusher","chronograph-pusher":"pusher","lug":"lug","spring-bar":"lug","strap":"strap","buckle":"buckle","hands":"hands","hour-hand":"hour","minute-hand":"minute","seconds-hand":"seconds","running-seconds":"subdial"};
+function dxVisual(key,term){
+  var I=DXI,box=function(x,y,w,t,sub){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="54" rx="2" fill="#fff" stroke="'+I.ink+'" stroke-width="1.4"/><text x="'+(x+w/2)+'" y="'+(y+24)+'" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="'+I.ink+'">'+t+'</text>'+(sub?'<text x="'+(x+w/2)+'" y="'+(y+41)+'" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#6F6A60">'+sub+'</text>':'');},
+      arr=function(x1,y,x2){return '<line x1="'+x1+'" y1="'+y+'" x2="'+(x2-6)+'" y2="'+y+'" stroke="'+I.gold+'" stroke-width="2"/><path d="M'+(x2-8)+' '+(y-5)+' L'+x2+' '+y+' L'+(x2-8)+' '+(y+5)+'Z" fill="'+I.gold+'"/>';};
+  var part=key&&key.indexOf("anatomy")===0?(key.split(":")[1]||""):DX_TERM_PART[term.slug];
+  if(key==="chrono") return {svg:dxWatch({sub:[[130,190],[230,190],[180,248]],noSec:true,extra:'<line x1="180" y1="205" x2="180" y2="96" stroke="'+I.gold+'" stroke-width="2"/>',
+     callouts:[[282,104,300,60,"start",'Start / stop pusher'],[282,276,300,330,"start",'Reset pusher'],[180,100,40,40,"start",'Chronograph seconds'],[108,190,6,150,"start",'Running seconds'],[252,190,268,150,"start",'Chrono minutes'],[180,260,40,345,"start",'Chrono hours']]}),
+     cap:"MDR demonstration chronograph. Layouts vary by calibre — always check the calibre's verified sub-dial positions."};
+  if(key==="gmt"){ var ring=''; for(var h=0;h<24;h+=2){var a=h*15*Math.PI/180; ring+='<text x="'+(180+113*Math.sin(a)).toFixed(1)+'" y="'+(194-113*Math.cos(a)).toFixed(1)+'" text-anchor="middle" font-family="Arial" font-size="10" fill="'+I.ink+'">'+(h||24)+'</text>';}
+     return {svg:dxWatch({sub:[],noSec:true,extra:ring+'<line x1="180" y1="190" x2="244" y2="268" stroke="'+I.gold+'" stroke-width="2.5"/><path d="M244 268 l-12 -2 l7 -9z" fill="'+I.gold+'"/>',
+       callouts:[[230,160,282,120,"start",'Local hour hand'],[180,110,40,40,"start",'Minute hand'],[244,268,262,330,"start",'24-hour GMT hand'],[66,190,8,250,"start",'24-hour scale']]}),
+       cap:"MDR demonstration GMT: the extra hand turns once in 24 hours and is read on the 24-hour scale."}; }
+  if(key==="power") return {svg:'<svg viewBox="0 0 640 150" class="dxsvg wide" role="img" aria-label="Power reserve sequence">'+box(6,40,130,"Mainspring","wound tight")+arr(136,67,166)+box(166,40,140,"Stored energy","released slowly")+arr(306,67,336)+box(336,40,140,"Power reserve","hours of running")+arr(476,67,506)+box(506,40,128,"Watch stops","when spring is let down")+
+     '<rect x="166" y="114" width="310" height="10" fill="#fff" stroke="'+I.line+'"/><rect x="166" y="114" width="200" height="10" fill="'+I.gold+'"/><text x="166" y="142" font-family="Arial" font-size="10.5" fill="#6F6A60">Remaining energy, as a power reserve indicator would show it</text></svg>',cap:"Energy flows from the wound mainspring until it is let down; the power reserve is the running time in between."};
+  if(key==="auto") return {svg:'<svg viewBox="0 0 660 130" class="dxsvg wide" role="img" aria-label="Automatic winding chain">'+box(4,36,110,"Rotor","wrist motion")+arr(114,63,138)+box(138,36,120,"Winding system","reverser wheels")+arr(258,63,282)+box(282,36,112,"Mainspring","stores energy")+arr(394,63,418)+box(418,36,104,"Gear train","transmits")+arr(522,63,546)+box(546,36,110,"Escapement","releases in steps")+'</svg>',cap:"How an automatic movement turns wrist motion into timekeeping energy."};
+  if(key==="escape"){ var teeth=''; for(var k=0;k<15;k++){var b=k*24*Math.PI/180; teeth+='<path d="M'+(150+48*Math.sin(b)).toFixed(1)+' '+(110-48*Math.cos(b)).toFixed(1)+' L'+(150+62*Math.sin(b+0.18)).toFixed(1)+' '+(110-62*Math.cos(b+0.18)).toFixed(1)+' L'+(150+50*Math.sin(b+0.3)).toFixed(1)+' '+(110-50*Math.cos(b+0.3)).toFixed(1)+'" fill="none" stroke="'+I.ink+'" stroke-width="1.6"/>';}
+     return {svg:'<svg viewBox="0 0 560 230" class="dxsvg wide" role="img" aria-label="Lever escapement schematic"><circle cx="150" cy="110" r="48" fill="#fff" stroke="'+I.ink+'" stroke-width="1.6"/>'+teeth+
+       '<path d="M200 70 L300 110 L200 150" fill="none" stroke="'+I.ink+'" stroke-width="3"/><rect x="194" y="62" width="12" height="16" fill="#C9A961"/><rect x="194" y="142" width="12" height="16" fill="#C9A961"/><line x1="300" y1="110" x2="380" y2="110" stroke="'+I.ink+'" stroke-width="3"/>'+
+       '<circle cx="440" cy="110" r="62" fill="none" stroke="'+I.ink+'" stroke-width="3"/><circle cx="440" cy="110" r="6" fill="'+I.ink+'"/><circle cx="388" cy="110" r="5" fill="#C9A961"/>'+
+       '<path d="M420 30 a60 60 0 0 1 40 0" fill="none" stroke="'+I.gold+'" stroke-width="2"/><path d="M460 30 l-9 -5 l1 9z" fill="'+I.gold+'"/>'+
+       '<text x="150" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Escape wheel</text><text x="260" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Pallet fork</text><text x="440" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance</text>'+
+       '<text x="20" y="22" font-family="Arial" font-size="11" fill="#6F6A60">Energy from gear train →</text><text x="356" y="22" font-family="Arial" font-size="11" fill="#6F6A60">oscillation</text></svg>',
+       cap:"Schematic of a lever escapement: the escape wheel is locked and released by the pallet fork, which gives the balance a small impulse at each swing."}; }
+  if(key==="balance"){ var spir='M440 110'; for(var t2=0;t2<26;t2+=0.25){ var rr=4+t2*1.6; spir+=' L'+(440+rr*Math.cos(t2)).toFixed(1)+' '+(110+rr*Math.sin(t2)).toFixed(1);}
+     return {svg:'<svg viewBox="0 0 560 230" class="dxsvg wide" role="img" aria-label="Balance wheel and balance spring"><circle cx="200" cy="110" r="80" fill="none" stroke="'+I.ink+'" stroke-width="5"/><line x1="120" y1="110" x2="280" y2="110" stroke="'+I.ink+'" stroke-width="3"/><circle cx="200" cy="110" r="7" fill="'+I.ink+'"/>'+
+       '<path d="M140 20 a95 95 0 0 1 120 0" fill="none" stroke="'+I.gold+'" stroke-width="2"/><path d="M260 20 l-10 -4 l3 9z M140 20 l10 -4 l-3 9z" fill="'+I.gold+'"/>'+
+       '<path d="'+spir+'" fill="none" stroke="'+I.ink+'" stroke-width="1.1"/><text x="200" y="215" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance wheel — swings back and forth</text><text x="440" y="215" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance spring (hairspring)</text></svg>',
+       cap:"The balance and its spring form the oscillator: the spring returns the wheel, which swings at a fixed frequency."}; }
+  if(part) return {svg:dxWatch({hl:part,sub:part==="subdial"?[[130,190]]:[[130,190]]}),cap:"MDR demonstration watch — the "+(DX_PART_LABEL[part]||term.t).toLowerCase()+" is highlighted in gold."};
+  return null;
+}
+/* ---------- calibre questions from verified fields only ---------- */
+function dxCalQs(c){
+  var qs=[], makers=["Miyota","TMI (Time Module)","ETA","Sellita","Ronda"];
+  if(c.maker) qs.push({q:"Who makes calibre "+c.code+"?",o:[c.maker].concat(makers.filter(function(m){return dxNorm(m)!==dxNorm(c.maker);}).slice(0,3)),a:0});
+  if(c.type) qs.push({q:"What type of movement is calibre "+c.code+"?",o:[c.type].concat(["Quartz","Automatic","Manual-winding","Solar quartz"].filter(function(x){return x!==c.type;}).slice(0,3)),a:0});
+  var m=/([A-Za-z0-9\/\-\. ]+?)\s*\(~?(\d{1,2})(?::\d{2})?H\)/.exec(c.functions||"");
+  if(m){ var lbl=m[1].replace(/^[\s·,(]+/,"").trim(), h=m[2], opts=["3","6","9","12"].filter(function(x){return x!==h;}).slice(0,3); qs.push({q:"On calibre "+c.code+", where is the “"+lbl+"” indication?",o:[h+" o'clock"].concat(opts.map(function(x){return x+" o'clock";})),a:0}); }
+  else if(c.functions) qs.push({q:"Which functions does calibre "+c.code+" have?",o:[c.functions.split(" (")[0],"Chronograph with flyback","Perpetual calendar","Minute repeater"],a:0});
+  return qs;
+}
+/* ---------- rendering ---------- */
+function dxBody(h){ var b=document.getElementById("dx-body"); b.innerHTML=h; }
+function dxChip(t){ var I=dxBuild(), e=I.bySlug[dxSlug(t)]; return e?'<button class="dxchip" data-go="#/dict/t/'+e.slug+'">'+esc(e.t)+'</button>':'<span class="dxchip off" title="Entry in preparation">'+esc(t)+'</span>'; }
+function dxStatusTag(st){ var c={"MASTERED":"g","UNDERSTOOD":"b","EXPLORED":"m","REVIEW DUE":"y","NOT STARTED":"m"}[st]||"m"; return '<span class="dxst '+c+'">'+st+'</span>'; }
+function renderDict(){
+  var I=dxBuild(), sub=current.sub||"", arg=current.arg||"";
+  document.getElementById("dx-crumb").textContent={t:"Dictionary entry",c:"Calibre",l:"A–Z",me:"My progress",saved:"Saved terms"}[sub]||"Horology Dictionary";
+  if(sub==="t") return dxEntry(I.bySlug[arg]);
+  if(sub==="c") return dxCal(I.calBySlug[arg]);
+  if(sub==="l") return dxLetter(arg);
+  if(sub==="me") return dxProgress();
+  if(sub==="saved") return dxSaved();
+  var p=dxP(), due=Object.keys(p.terms).filter(function(k){return dxStatus(p.terms[k])==="REVIEW DUE";});
+  dxBody('<div class="dxpad"><p class="eyebrow">ILG Academy</p><h1 class="dxh1">Horology Dictionary</h1><p class="dxlead">Search horology terms &amp; calibres</p>'+
+   '<div class="dxsearch"><svg width="20" height="20"><use href="#i-search"/></svg><input id="dxq" type="search" autocomplete="off" placeholder="Search a term, calibre or watch function…" value="'+esc(DX.q)+'" aria-label="Search the dictionary"></div>'+
+   '<div id="dxres"></div>'+
+   '<div id="dxhome"><p class="dxsmall">Try</p><div class="dxex">'+["Balance Wheel","Chronograph","Escapement","Tourbillon","Power Reserve","GMT","Miyota 6S20","ETA 2824"].map(function(x){return '<button class="dxchip" data-dxq="'+esc(x)+'">'+esc(x)+'</button>';}).join("")+'</div>'+
+   '<div class="dxaz" aria-label="A to Z">'+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function(L){var has=I.terms.some(function(t){return t.t[0].toUpperCase()===L;})||I.cals.some(function(c){return c.label[0].toUpperCase()===L;});return has?'<button data-go="#/dict/l/'+L+'">'+L+'</button>':'<span>'+L+'</span>';}).join("")+'</div>'+
+   '<div class="dxlinks"><button data-go="#/dict/me">My horology progress</button><button data-go="#/dict/saved">My saved terms ('+p.saved.length+')</button>'+(due.length?'<button data-go="#/dict/t/'+due[0]+'">'+due.length+' term'+(due.length>1?'s':'')+' due for review</button>':'')+'</div>'+
+   '<p class="dxsmall">'+I.terms.length+' terms · '+I.cals.length+' calibres · <span class="dxlang">English · العربية coming soon</span></p></div></div>');
+  var q=document.getElementById("dxq"); q.oninput=function(){DX.q=q.value; dxShowResults();}; if(DX.q) dxShowResults();
+}
+function dxShowResults(){
+  var box=document.getElementById("dxres"), home=document.getElementById("dxhome"), q=DX.q.trim();
+  if(q.length<2){ box.innerHTML=""; home.style.display=""; return; }
+  home.style.display="none"; var r=dxSearch(q);
+  if(!r.terms.length&&!r.cals.length){ box.innerHTML='<div class="dxnone"><b>No verified Academy entry found.</b><p>“'+esc(q)+'” has been noted as a possible future entry.</p></div>';
+    clearTimeout(DX.missT); DX.missT=setTimeout(function(){ var p=dxP(), k=q.toLowerCase(); p.misses[k]=(p.misses[k]||0)+1; dxSave(p); },1200); return; }
+  var row=function(e){return '<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+' · '+esc(e.def.slice(0,90))+(e.def.length>90?'…':'')+'</span></button>';};
+  box.innerHTML=(r.terms.length?'<p class="dxgrp">Dictionary</p>'+r.terms.map(row).join(""):'')+
+   (r.cals.length?'<p class="dxgrp">Calibres</p>'+r.cals.map(function(c){return '<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+' · '+esc((c.functions||"").split(" (")[0])+'</span></button>';}).join(""):'')+
+   (r.related.length?'<p class="dxgrp">Related terms</p><div class="dxex">'+r.related.map(function(e){return dxChip(e.t);}).join("")+'</div>':'');
+}
+function dxLetter(L){
+  var I=dxBuild(), T=I.terms.filter(function(t){return t.t[0].toUpperCase()===L;}).sort(function(a,b){return a.t.localeCompare(b.t);}), C=I.cals.filter(function(c){return c.label[0].toUpperCase()===L;});
+  dxBody('<div class="dxpad"><div class="dxaz small">'+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function(x){return '<button class="'+(x===L?'on':'')+'" data-go="#/dict/l/'+x+'">'+x+'</button>';}).join("")+'</div><h1 class="dxh1">'+L+'</h1>'+
+   (T.length?T.map(function(e){return '<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+'</span></button>';}).join(""):'')+
+   (C.length?'<p class="dxgrp">Calibres</p>'+C.map(function(c){return '<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+'</span></button>';}).join(""):'')+
+   (!T.length&&!C.length?'<p class="dxsmall">No entries under '+L+' yet.</p>':'')+'</div>');
+}
+function dxSection(label,body,cls){ return body?'<section class="dxsec '+(cls||'')+'"><p class="dxlab">'+label+'</p>'+body+'</section>':''; }
+function dxEntry(e){
+  if(!e) return dxBody('<div class="dxpad"><div class="dxnone"><b>No verified Academy entry found.</b></div></div>');
+  var r=dxView(e.slug), p=dxP(), saved=p.saved.indexOf("t:"+e.slug)>=0, v=e.vis!==undefined?dxVisual(e.vis,e):dxVisual(null,e), I=dxBuild();
+  var relCals=[]; if(e.slug==="chronograph"||e.slug==="chronograph-pusher") relCals=I.cals.filter(function(c){return /chronograph/i.test(c.functions);});
+  if(e.slug==="automatic-movement"||e.slug==="rotor") relCals=I.cals.filter(function(c){return /automatic/i.test(c.type);});
+  if(e.slug==="day-date") relCals=I.cals.filter(function(c){return /day,? date/i.test(c.functions);});
+  if(e.slug==="quartz-movement") relCals=I.cals.filter(function(c){return /quartz/i.test(c.type);}).slice(0,8);
+  if(e.slug==="24-hour-display") relCals=I.cals.filter(function(c){return /24-hr/i.test(c.functions);});
+  var lab=e.c==="Movements"||e.c==="Complications";
+  dxBody('<div class="dxpad"><div class="dxtop"><span class="dxcat">'+esc(e.c)+'</span><button class="dxsave'+(saved?' on':'')+'" id="dxsv" aria-label="Save term">'+(saved?'★ Saved':'☆ Save')+'</button></div>'+
+   '<h1 class="dxterm">'+esc(e.t)+'</h1>'+dxStatusTag(dxStatus(r))+
+   dxSection('Academy Definition','<p class="dxdef">'+esc(e.def)+'</p>','def')+
+   (v?'<figure class="dxfig">'+v.svg+'<figcaption>'+esc(v.cap)+'</figcaption></figure>':'')+
+   dxSection('Simple explanation',e.simple?'<p>'+esc(e.simple)+'</p>':'')+
+   dxSection('Technical explanation',e.tech?'<p>'+esc(e.tech)+'</p>':'')+
+   dxSection('Why it matters',e.why?'<p>'+esc(e.why)+'</p>':'')+
+   dxSection('Customer explanation',e.cust?'<blockquote>'+esc(e.cust)+'</blockquote>':'')+
+   dxSection('Trainer tip',e.tip?'<p>'+esc(e.tip)+'</p>':'')+
+   dxSection('Common misconceptions',e.mis?'<p>'+esc(e.mis)+'</p>':'')+
+   dxSection('Related terms',(e.rel||[]).length?'<div class="dxex">'+e.rel.map(dxChip).join("")+'</div>':'')+
+   dxSection('Related calibres',relCals.length?'<div class="dxex">'+relCals.map(function(c){return '<button class="dxchip" data-go="#/dict/c/'+c.slug+'">'+esc(c.label)+'</button>';}).join("")+'</div>':'')+
+   (lab?'<button class="dxghost" data-go="#/cal">Explore in Horology Lab →</button>':'')+
+   (e.full&&e.q?'<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p><p>Three short questions on '+esc(e.t)+'. Optional.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div></section>':
+     '<p class="dxsmall">Full entry and test for this term are in preparation.</p>')+
+   '<p class="dxsrc">Academy content · original text · status: draft for trainer review</p></div>');
+  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),k="t:"+e.slug,i=p2.saved.indexOf(k); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(k); dxSave(p2); toast(i>=0?"Removed from saved":"Saved"); dxEntry(e); };
+  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest(e,e.q,"t:"+e.slug);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxsmall">Test skipped. You can come back any time.</p>';}; }
+}
+function dxCal(c){
+  if(!c) return dxBody('<div class="dxpad"><div class="dxnone"><b>No verified Academy entry found.</b></div></div>');
+  var p=dxP(), key="c:"+c.slug, r=dxRec(p,key); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p);
+  var saved=p.saved.indexOf(key)>=0, map=typeof dialMapSVG==="function"?dialMapSVG(c.functions):"";
+  var rows=[["Manufacturer",c.makerFull||c.maker],["Calibre",c.code],["Movement type",c.type],["Functions",(c.functions||"").split(" (")[0]],["Power reserve / battery",c.power]].concat(c.fields||[]).filter(function(x){return x[1];});
+  var qs=dxCalQs(c), rel=[]; if(/chronograph/i.test(c.functions)) rel.push("Chronograph","Sub-Dial"); if(/automatic/i.test(c.type)) rel.push("Automatic Movement","Rotor","Power Reserve"); if(/quartz/i.test(c.type)) rel.push("Quartz Movement","Battery Life"); if(/day/i.test(c.functions)) rel.push("Day-Date"); if(/24-hr/i.test(c.functions)) rel.push("24-Hour Display");
+  dxBody('<div class="dxpad"><div class="dxtop"><span class="dxcat">Calibre</span><button class="dxsave'+(saved?' on':'')+'" id="dxsv">'+(saved?'★ Saved':'☆ Save')+'</button></div>'+
+   '<h1 class="dxterm">'+esc(c.label)+'</h1>'+dxStatusTag(dxStatus(r))+
+   '<table class="dxtab">'+rows.map(function(x){return '<tr><th>'+esc(x[0])+'</th><td>'+esc(x[1])+'</td></tr>';}).join("")+'</table>'+
+   (map?'<figure class="dxfig dxmap">'+map+'<figcaption>Sub-dial layout from the verified calibre data.</figcaption></figure>':'')+
+   (c.brands.length?dxSection('Brands using this calibre (ILG FW26)','<div class="dxex">'+c.brandKeys.map(function(k){return '<button class="dxchip" data-go="#/b/'+k+'">'+esc(MAISON[k].name)+'</button>';}).join("")+'</div>'+(c.fams.length?'<p class="dxsmall">Families: '+esc(c.fams.join(", "))+'</p>':'')):'')+
+   dxSection('Related terms',rel.length?'<div class="dxex">'+rel.map(dxChip).join("")+'</div>':'')+
+   '<p class="dxsmall">Fields not listed are not available in the verified Academy database.</p>'+
+   '<button class="dxghost" data-go="#/cal">Explore in Horology Lab →</button>'+
+   (qs.length>=2?'<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p><p>Questions use only this calibre\'s verified data.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div></section>':'')+
+   '<p class="dxsrc">Source: '+esc(c.source)+' · Verification: verified · Last verified '+esc(c.verified)+'</p></div>');
+  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),i=p2.saved.indexOf(key); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(key); dxSave(p2); dxCal(c); };
+  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest({t:c.label,simple:"Calibre "+c.code+": "+rows.map(function(x){return x[0]+" "+x[1];}).join(" · ")},qs,key);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxsmall">Test skipped.</p>';}; }
+}
+/* ---------- test: 3 questions, varied, XP only for improvement ---------- */
+function dxShuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function dxTest(e,pool,key,avoid){
+  var p=dxP(), last=(p.lastQ[key]||[]).concat(avoid||[]), fresh=pool.filter(function(q){return last.indexOf(q.q)<0;});
+  var set=dxShuffle(fresh.length>=3?fresh:pool).slice(0,3); p.lastQ[key]=set.map(function(q){return q.q;}); dxSave(p);
+  var i=0,score=0,box=document.getElementById("dxtest");
+  function show(){
+    var q=set[i], order=dxShuffle(q.o.map(function(o,k){return k;}));
+    box.innerHTML='<p class="dxlab">Question '+(i+1)+' of '+set.length+'</p><p class="dxq">'+esc(q.q)+'</p>'+order.map(function(k){return '<button class="dxopt" data-k="'+k+'">'+esc(q.o[k])+'</button>';}).join("")+'<p id="dxfb" class="dxfb"></p>';
+    [].forEach.call(box.querySelectorAll(".dxopt"),function(b){ b.onclick=function(){
+      var k=+b.getAttribute("data-k"), ok=k===q.a; if(ok)score++;
+      [].forEach.call(box.querySelectorAll(".dxopt"),function(x){x.disabled=true; if(+x.getAttribute("data-k")===q.a)x.classList.add("ok"); else if(x===b)x.classList.add("no");});
+      document.getElementById("dxfb").innerHTML=(ok?'Correct.':'Not quite — the answer is “'+esc(q.o[q.a])+'”.')+' <button class="dxbtn sm" id="dxnext">'+(i<set.length-1?'Next':'See result')+'</button>';
+      document.getElementById("dxnext").onclick=function(){ i++; if(i<set.length) show(); else done(); };
+    };});
+    box.scrollIntoView({block:"start"});
+  }
+  function done(){
+    var p2=dxP(), r=dxRec(p2,key), lv=[0,10,20,30][score], gain=Math.max(0,lv-(r.xp||0));
+    r.tests++; r.ans+=set.length; r.correct+=score; r.latest=score; r.best=Math.max(r.best,score); r.lastTest=new Date().toISOString(); r.xp=(r.xp||0)+gain; p2.xp+=gain;
+    var st=score===3?"MASTERED":score===2?"UNDERSTOOD":"EXPLORED"; if(r.status!=="MASTERED"||score===3) r.status=st===("EXPLORED")&&r.status==="UNDERSTOOD"?"UNDERSTOOD":st;
+    dxTouch(p2); dxSave(p2);
+    var head=score===3?"MASTERED":score===2?"UNDERSTOOD":score===1?"KEEP LEARNING":"LET’S TRY AGAIN";
+    box.innerHTML='<p class="dxlab">Result</p><p class="dxscore">'+score+'/'+set.length+'</p><p class="dxres '+(score>=2?'g':'')+'">'+head+(gain?' · +'+gain+' XP':(lv?' · no new XP (already earned for this level)':''))+'</p>'+
+      (score<3&&e.simple?'<div class="dxsec"><p class="dxlab">Quick recap</p><p>'+esc(e.simple)+'</p></div>':'')+
+      '<div class="dxrowb"><button class="dxbtn" id="dxagain">'+(score<3?'Try different questions':'Test again')+'</button><button class="dxghost" data-go="#/dict">Back to search</button></div>';
+    document.getElementById("dxagain").onclick=function(){ dxTest(e,pool,key,set.map(function(q){return q.q;})); };
+  }
+  show();
+}
+function dxProgress(){
+  var I=dxBuild(), p=dxP(), keys=Object.keys(p.terms), st=function(k){return dxStatus(p.terms[k]);};
+  var explored=keys.filter(function(k){return st(k)!=="NOT STARTED";}).length, tested=keys.filter(function(k){return p.terms[k].tests>0;}).length, mastered=keys.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
+  var ans=keys.reduce(function(a,k){return a+p.terms[k].ans;},0), cor=keys.reduce(function(a,k){return a+p.terms[k].correct;},0), cals=keys.filter(function(k){return k.indexOf("c:")===0;}).length;
+  var counts={explored:explored,tested:tested,mastered:mastered,calibres:cals};
+  var catOf=function(k){ if(k.indexOf("c:")===0) return "Calibres"; var e=I.bySlug[k]; return e?e.c:""; };
+  var due=keys.filter(function(k){return st(k)==="REVIEW DUE";});
+  dxBody('<div class="dxpad"><p class="eyebrow">Your learning</p><h1 class="dxh1">My horology progress</h1>'+
+   '<div class="dxstats">'+[["Terms explored",explored],["Terms tested",tested],["Terms mastered",mastered],["Mastery rate",tested?Math.round(100*mastered/tested)+"%":"—"],["XP earned",p.xp],["Current streak",dxStreak(p)+" day"+(dxStreak(p)===1?"":"s")]].map(function(x){return '<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>';}).join("")+'</div>'+
+   '<p class="dxlab" style="margin-top:22px">By category</p>'+DX_CATS.map(function(c){ var total=c==="Calibres"?I.cals.length:I.terms.filter(function(t){return t.c===c;}).length, mine=keys.filter(function(k){return catOf(k)===c;}), m=mine.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
+     return '<div class="dxbar"><span>'+esc(c)+'</span><i><em style="width:'+(total?Math.round(100*mine.length/total):0)+'%"></em><em class="m" style="width:'+(total?Math.round(100*m/total):0)+'%"></em></i><small>'+mine.length+'/'+total+' · '+m+' mastered</small></div>';}).join("")+
+   (due.length?'<p class="dxlab" style="margin-top:22px">Review due</p><div class="dxex">'+due.map(function(k){var s=k.indexOf("c:")===0?k.slice(2):k;var e=I.bySlug[s];return e?'<button class="dxchip" data-go="#/dict/t/'+e.slug+'">'+esc(e.t)+'</button>':'';}).join("")+'</div>':'')+
+   '<p class="dxlab" style="margin-top:22px">Badges</p><div class="dxbadges">'+DX_BADGES.map(function(b){var got=counts[b[1]]>=b[2];return '<span class="'+(got?'on':'')+'">'+b[0]+'<small>'+(got?'Earned':b[2]+' '+b[1])+'</small></span>';}).join("")+'</div>'+
+   (ans?'<p class="dxsmall">Answers: '+cor+' correct of '+ans+'.</p>':'')+
+   '<p class="dxsmall">Your progress is saved on this device for now. When sign-in is live it moves to your account and follows you across devices.</p></div>');
+}
+function dxSaved(){
+  var I=dxBuild(), p=dxP();
+  dxBody('<div class="dxpad"><p class="eyebrow">Private to you</p><h1 class="dxh1">My saved terms</h1>'+(p.saved.length?p.saved.map(function(k){ if(k.indexOf("c:")===0){var c=I.calBySlug[k.slice(2)];return c?'<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>Calibre</span></button>':'';} var e=I.bySlug[k.slice(2)]; return e?'<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+'</span></button>':''; }).join(""):'<p class="dxsmall">Tap ☆ Save on any entry to keep it here.</p>')+'</div>');
+}
+document.addEventListener("click",function(ev){ var b=ev.target.closest("[data-dxq]"); if(!b) return; DX.q=b.getAttribute("data-dxq"); var q=document.getElementById("dxq"); if(q){q.value=DX.q; dxShowResults();} });
+window.__dict={search:dxSearch,build:dxBuild,visual:dxVisual};
+
 /* ---------- PRESENTATION DECK ---------- */
 /* =====================================================================
    PRESENTATION DECK BUILDER — catalogue → LUME V2 training decks (PPTX / PDF)
