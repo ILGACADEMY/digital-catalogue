@@ -787,6 +787,22 @@ body.noscroll{overflow:hidden}
 .mwatch .hl{animation:hlpulse 1.3s ease-in-out infinite}
 .mwatch .hand.hl .hmain{fill:#CBAE72}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* home v4: everything on one phone screen */
+#s-home .masthead{padding-top:12px;padding-bottom:10px}
+.hero{padding:12px 22px 10px} .hero .fw{font-size:12.5px;margin-bottom:2px} .hero h1{font-size:clamp(40px,11.5vw,68px);line-height:1}
+.tile{aspect-ratio:1/0.42;padding:8px}
+.tile .logo img.lg-cerruti{height:14px}.tile .logo img.lg-ducati{height:44px}.tile .logo img.lg-kc{height:28px}.tile .logo img.lg-police{height:15px}.tile .logo .wm{font-size:17px}
+.tile .corner{right:7px;bottom:5px;width:14px;height:14px}
+.labgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 22px 0}
+.labgrid .labtile{position:relative;width:auto;margin:0;padding:10px 12px;display:block;min-height:0}
+.labgrid .labtile .li{position:absolute;right:10px;top:10px;width:28px;height:28px;border:0}.labgrid .labtile .li svg{width:20px;height:20px}
+.labgrid .labtile .lt{display:block;font-size:11.5px;letter-spacing:.14em;line-height:1.35;padding-right:30px}
+.labgrid .labtile .ls{font-size:12px;line-height:1.3;margin-top:5px;letter-spacing:0;padding-right:0}
+.labgrid .labtile .arr{display:none}
+.colophon{padding:10px 22px 8px}
+.sitefoot{padding:18px 22px 24px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);text-align:center}
+#s-home.active ~ .sitefoot, body.vmon .sitefoot{display:none}
 </style>
 </head>
 <body>
@@ -816,11 +832,13 @@ body.noscroll{overflow:hidden}
     </div>
     <div class="hero fadein"><div class="eyebrow fw">Fall / Winter 2026</div><h1>The Catalogue</h1></div>
     <div class="tiles" id="maisons"></div>
+    <div class="labgrid">
     <button class="labtile" data-go="#/cal"><span class="li"><svg><use href="#i-cal"/></svg></span><span class="lt">HOROLOGY LAB<span class="ls">Calibres &amp; interactive manuals</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/vm"><span class="li"><svg><use href="#i-vm"/></svg></span><span class="lt">BRAND 360<span class="ls">Visual merchandising</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/deck"><span class="li"><svg><use href="#i-deck"/></svg></span><span class="lt">PRESENTATION DECK<span class="ls">Create Presentation</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
     <button class="labtile" data-go="#/dict"><span class="li"><svg><use href="#i-dict"/></svg></span><span class="lt">HOROLOGY DICTIONARY<span class="ls">Search horology terms &amp; calibres</span></span><svg class="arr" width="24" height="24"><use href="#i-arrow"/></svg></button>
-    <div class="colophon">ILG Academy · FW26</div>
+    </div>
+    <div class="colophon">ILG Academy · MDR</div>
   </div>
 
   <!-- HOROLOGY DICTIONARY -->
@@ -940,6 +958,7 @@ body.noscroll{overflow:hidden}
     <div class="countrow" id="g-count"></div>
     <div id="g-hits"></div>
   </div>
+  <footer class="sitefoot">ILG Academy · MDR</footer>
 </div>
 
 <div class="cbar" id="cbar">
