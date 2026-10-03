@@ -95,6 +95,85 @@ img{max-width:100%;display:block;-webkit-user-drag:none;user-select:none;-webkit
 #s-dict .dxbar{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;align-items:center;margin:8px 0;font-size:13.5px}#s-dict .dxbar i{position:relative;height:8px;background:var(--surface);border:1px solid var(--line)}#s-dict .dxbar em{position:absolute;left:0;top:0;bottom:0;background:#e6dcc6}#s-dict .dxbar em.m{background:var(--gold)}#s-dict .dxbar small{grid-column:2;color:var(--mute);font-size:11.5px}
 #s-dict .dxbadges{display:grid;grid-template-columns:1fr 1fr;gap:8px}#s-dict .dxbadges span{border:1px solid var(--line);padding:10px;font-size:11.5px;letter-spacing:.14em;color:var(--mute)}#s-dict .dxbadges span.on{border-color:var(--gold);color:var(--ink)}#s-dict .dxbadges small{display:block;letter-spacing:0;font-size:11.5px;margin-top:2px}
 #s-dict .dxlang{white-space:nowrap}
+#s-dict .dxmeta{display:flex;gap:10px;align-items:center}#s-dict .dxid{font-size:11px;color:var(--mute);letter-spacing:.08em}
+#s-dict .dxprep,#s-lab .dxprep{color:var(--mute);font-style:italic;font-size:14px;margin:0}
+.dxph{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;min-height:240px;padding:20px;border:1px dashed var(--line);background:repeating-linear-gradient(45deg,#fbf9f5,#fbf9f5 12px,#f6f2ea 12px,#f6f2ea 24px)}
+.dxph b{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}.dxph span{font-size:12.5px;color:var(--ink);word-break:break-word}.dxph small{font-size:12px;color:var(--mute);max-width:420px}
+.dxstage{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;margin:0 auto;overflow:hidden}.dxstage img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 50%;transition:transform .35s ease;pointer-events:none}.dxstage img.sub{height:auto;aspect-ratio:1/1}
+.dxone{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+#s-dict .dxpractice{display:block;width:100%;text-align:left;min-height:50px;margin-top:16px;padding:0 14px;border:1px solid var(--gold);background:#fff8ea;color:var(--ink);font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+#s-lab .labctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}#s-lab .labctl button{min-height:42px;padding:0 12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;color:var(--ink)}
+#s-lab .labLv{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:54px;margin:0 0 8px;padding:0 14px;border:1px solid var(--ink);background:#fff;cursor:pointer;color:var(--ink);text-align:left}#s-lab .labLv span{font-size:13px;color:var(--mute)}#s-lab .labLv.locked{border-color:var(--line);opacity:.55;cursor:default}
+#s-lab .labin{display:flex;align-items:center;gap:8px;margin:6px 0}#s-lab .labin input{width:96px;min-height:52px;border:1px solid var(--ink);font-size:20px;text-align:center;background:#fff}#s-lab .labin span{font-size:15px;color:var(--mute)}
+.labbanner{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 22px 14px;padding:14px 16px;border:1px solid var(--gold);background:#fff8ea;cursor:pointer;text-align:left;color:var(--ink);width:calc(100% - 44px)}.labbanner b{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}.labbanner span{font-size:13px;color:var(--mute);display:block;margin-top:2px}
+/* ---------- Horology Dictionary ---------- */
+#s-lab .dxpad{padding:18px 22px 40px}
+#s-lab .eyebrow{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0}
+#s-lab .dxh1{font-family:var(--serif);font-weight:500;font-size:36px;line-height:1.05;margin:6px 0 4px}
+#s-lab .dxlead{color:var(--mute);margin:0 0 16px}
+#s-lab .dxsearch{display:flex;align-items:center;gap:10px;border:1px solid var(--ink);background:var(--surface);padding:0 14px;min-height:58px}
+#s-lab .dxsearch svg{flex:none;color:var(--mute)}
+#s-lab .dxsearch input{flex:1;border:0;background:none;font:inherit;font-size:17px;min-height:56px;color:var(--ink);outline:none}
+#s-lab .dxsmall{font-size:13px;color:var(--mute);margin:14px 0 6px}
+#s-lab .dxex{display:flex;flex-wrap:wrap;gap:8px}
+#s-lab .dxchip{min-height:38px;padding:0 13px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;cursor:pointer;color:var(--ink)}
+#s-lab .dxchip:hover{border-color:var(--gold)}
+#s-lab .dxchip.off{display:inline-flex;align-items:center;color:var(--mute);cursor:default;border-style:dashed}
+#s-lab .dxaz{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin:22px 0 8px}
+#s-lab .dxaz button,#s-lab .dxaz span{min-height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);font-family:var(--serif);font-size:19px;cursor:pointer;color:var(--ink)}
+#s-lab .dxaz span{color:var(--line);cursor:default}
+#s-lab .dxaz.small{grid-template-columns:repeat(13,1fr);margin-top:0}#s-lab .dxaz.small button{min-height:34px;font-size:15px}
+#s-lab .dxaz button.on{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+#s-lab .dxlinks{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+#s-lab .dxlinks button,#s-lab .dxghost{min-height:46px;border:1px solid var(--line);background:transparent;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:var(--ink);padding:0 14px;text-align:left;margin-top:10px}
+#s-lab .dxgrp{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:18px 0 6px}
+#s-lab .dxrow{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:12px 2px;cursor:pointer;color:var(--ink)}
+#s-lab .dxrow b{display:block;font-family:var(--serif);font-size:21px;font-weight:600}
+#s-lab .dxrow span{font-size:13.5px;color:var(--mute)}
+#s-lab .dxnone{border:1px solid var(--line);background:var(--surface);padding:16px;margin-top:14px}#s-lab .dxnone p{margin:6px 0 0;color:var(--mute);font-size:14px}
+#s-lab .dxtop{display:flex;justify-content:space-between;align-items:center}
+#s-lab .dxcat{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+#s-lab .dxsave{min-height:38px;border:1px solid var(--line);background:var(--surface);padding:0 12px;font-size:13px;cursor:pointer;color:var(--ink)}#s-lab .dxsave.on{border-color:var(--gold);color:var(--gold)}
+#s-lab .dxterm{font-family:var(--serif);font-weight:600;font-size:42px;line-height:1;margin:8px 0 8px}
+#s-lab .dxst{display:inline-block;font-size:11px;letter-spacing:.14em;padding:3px 8px;border:1px solid var(--line);color:var(--mute)}
+#s-lab .dxst.g{border-color:#9cc3a8;color:#2F6B45}#s-lab .dxst.b{border-color:#c9a961;color:#8A6B32}#s-lab .dxst.y{border-color:#e3c27a;color:#8a6a17;background:#fff8e6}
+#s-lab .dxsec{border-top:1px solid var(--line);padding:14px 0 4px;margin-top:14px}
+#s-lab .dxsec.def{border-top:2px solid var(--ink)}
+#s-lab .dxlab{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;font-weight:600}
+#s-lab .dxdef{font-family:var(--serif);font-size:23px;line-height:1.3;margin:0}
+#s-lab .dxsec p{margin:0 0 8px;line-height:1.55}
+#s-lab blockquote{margin:0;padding:10px 14px;border-left:3px solid var(--gold);background:var(--surface);font-family:var(--serif);font-size:19px;font-style:italic}
+#s-lab .dxfig{margin:16px 0 4px;background:#fff;border:1px solid var(--line);padding:12px}
+#s-lab .dxsvg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}#s-lab .dxsvg.wide{max-width:640px}
+#s-lab .dxfig figcaption{font-size:12.5px;color:var(--mute);margin-top:8px}
+#s-lab .dialmap{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}#s-lab .dialmap svg{width:170px;height:170px;flex:none}#s-lab .dm-t{font-size:14.5px;line-height:1.7;min-width:160px}#s-lab .dm-t b{display:block;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+#s-lab .dxtab{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}#s-lab .dxtab th{text-align:left;font-weight:400;color:var(--mute);padding:8px 10px 8px 0;border-bottom:1px solid var(--line);width:42%;vertical-align:top}#s-lab .dxtab td{padding:8px 0;border-bottom:1px solid var(--line)}
+#s-lab .dxtest{border:1px solid var(--ink);padding:16px;margin-top:22px;background:var(--surface)}
+#s-lab .dxrowb{display:flex;gap:10px;flex-wrap:wrap}#s-lab .dxrowb>*{flex:1}
+#s-lab .dxbtn{min-height:48px;border:1px solid var(--ink);background:var(--ink);color:var(--on-ink);font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0 14px;margin-top:10px}
+#s-lab .dxbtn.sm{min-height:36px;margin:0 0 0 8px}
+#s-lab .dxq{font-family:var(--serif);font-size:22px;line-height:1.25;margin:4px 0 12px}
+#s-lab .dxopt{display:block;width:100%;text-align:left;min-height:50px;margin:0 0 8px;padding:10px 14px;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer;color:var(--ink)}
+#s-lab .dxopt.ok{border-color:#2F6B45;background:#eef6f0}#s-lab .dxopt.no{border-color:#A3352B;background:#fbefed}
+#s-lab .dxfb{font-size:14px;margin:6px 0 0}
+#s-lab .dxscore{font-family:var(--serif);font-size:52px;margin:0;line-height:1}
+#s-lab .dxres{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:4px 0 10px}#s-lab .dxres.g{color:#2F6B45}
+#s-lab .dxsrc{font-size:12px;color:var(--mute);margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+#s-lab .dxstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}#s-lab .dxstats div{border:1px solid var(--line);background:var(--surface);padding:12px}#s-lab .dxstats b{display:block;font-family:var(--serif);font-size:28px;font-weight:600}#s-lab .dxstats span{font-size:11.5px;color:var(--mute);letter-spacing:.06em}
+#s-lab .dxbar{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;align-items:center;margin:8px 0;font-size:13.5px}#s-lab .dxbar i{position:relative;height:8px;background:var(--surface);border:1px solid var(--line)}#s-lab .dxbar em{position:absolute;left:0;top:0;bottom:0;background:#e6dcc6}#s-lab .dxbar em.m{background:var(--gold)}#s-lab .dxbar small{grid-column:2;color:var(--mute);font-size:11.5px}
+#s-lab .dxbadges{display:grid;grid-template-columns:1fr 1fr;gap:8px}#s-lab .dxbadges span{border:1px solid var(--line);padding:10px;font-size:11.5px;letter-spacing:.14em;color:var(--mute)}#s-lab .dxbadges span.on{border-color:var(--gold);color:var(--ink)}#s-lab .dxbadges small{display:block;letter-spacing:0;font-size:11.5px;margin-top:2px}
+#s-lab .dxlang{white-space:nowrap}
+#s-lab .dxmeta{display:flex;gap:10px;align-items:center}#s-lab .dxid{font-size:11px;color:var(--mute);letter-spacing:.08em}
+#s-lab .dxprep,#s-lab .dxprep{color:var(--mute);font-style:italic;font-size:14px;margin:0}
+.dxph{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;min-height:240px;padding:20px;border:1px dashed var(--line);background:repeating-linear-gradient(45deg,#fbf9f5,#fbf9f5 12px,#f6f2ea 12px,#f6f2ea 24px)}
+.dxph b{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}.dxph span{font-size:12.5px;color:var(--ink);word-break:break-word}.dxph small{font-size:12px;color:var(--mute);max-width:420px}
+.dxstage{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;margin:0 auto;overflow:hidden}.dxstage img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 50%;transition:transform .35s ease;pointer-events:none}.dxstage img.sub{height:auto;aspect-ratio:1/1}
+.dxone{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+#s-lab .dxpractice{display:block;width:100%;text-align:left;min-height:50px;margin-top:16px;padding:0 14px;border:1px solid var(--gold);background:#fff8ea;color:var(--ink);font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+#s-lab .labctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}#s-lab .labctl button{min-height:42px;padding:0 12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;color:var(--ink)}
+#s-lab .labLv{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:54px;margin:0 0 8px;padding:0 14px;border:1px solid var(--ink);background:#fff;cursor:pointer;color:var(--ink);text-align:left}#s-lab .labLv span{font-size:13px;color:var(--mute)}#s-lab .labLv.locked{border-color:var(--line);opacity:.55;cursor:default}
+#s-lab .labin{display:flex;align-items:center;gap:8px;margin:6px 0}#s-lab .labin input{width:96px;min-height:52px;border:1px solid var(--ink);font-size:20px;text-align:center;background:#fff}#s-lab .labin span{font-size:15px;color:var(--mute)}
+.labbanner{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 22px 14px;padding:14px 16px;border:1px solid var(--gold);background:#fff8ea;cursor:pointer;text-align:left;color:var(--ink);width:calc(100% - 44px)}.labbanner b{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}.labbanner span{font-size:13px;color:var(--mute);display:block;margin-top:2px}
 
 /* ---------- Presentation Deck ---------- */
 #s-deck .dkpad{padding:18px 22px 24px}
@@ -750,6 +829,12 @@ body.noscroll{overflow:hidden}
     <div id="dx-body"></div>
   </div>
 
+  <!-- BEZEL & WATCH READING LAB -->
+  <div class="screen" id="s-lab">
+    <div class="subhead"><button class="iconbtn" data-back aria-label="Back"><svg><use href="#i-back"/></svg></button><span class="crumb" id="lab-crumb">Bezel &amp; Watch Reading Lab</span></div>
+    <div id="lab-body"></div>
+  </div>
+
   <!-- PRESENTATION DECK -->
   <div class="screen" id="s-deck">
     <div class="subhead"><button class="iconbtn" data-back aria-label="Back"><svg><use href="#i-back"/></svg></button><span class="crumb" id="d-crumb">Presentation Deck</span></div>
@@ -1197,7 +1282,8 @@ function route(){
   else if(h[0]==="cal"){ current={name:"cal"}; renderCalList(); show("s-cal"); window.scrollTo(0,0); }
   else if(h[0]==="manual" && MANUALS[h[1]]){ current={name:"manual",code:h[1]}; show("s-manual"); renderManual(h[1]); window.scrollTo(0,0); }
   else if(h[0]==="story" && BRAND_STORY[h[1]]){ current={name:"story",brand:h[1]}; renderStory(); show("s-story"); window.scrollTo(0,0); }
-  else if(h[0]==="dict"){ current={name:"dict",sub:h[1]||"",arg:decodeURIComponent(h[2]||"")}; show("s-dict"); renderDict(); window.scrollTo(0,0); }
+  else if(h[0]==="dict"){ current={name:"dict",sub:decodeURIComponent(h[1]||""),arg:decodeURIComponent(h[2]||"")}; show("s-dict"); renderDict(); window.scrollTo(0,0); }
+  else if(h[0]==="lab"){ current={name:"lab",mod:h[1]||""}; show("s-lab"); renderLab(); }
   else if(h[0]==="deck"){ current={name:"deck",step:h[1]||"type"}; show("s-deck"); renderDeck(); window.scrollTo(0,0); }
   else if(h[0]==="vm"){ current={name:"vm"}; show("s-vm"); openVM(); window.scrollTo(0,0);
     var api=vmWin();
@@ -1387,6 +1473,7 @@ function renderCalList(){
   var body=document.getElementById("cal-body");
   if(!body.dataset.ready){
     body.innerHTML='<div class="pagehead"><div class="eyebrow">Calibres</div><h1 class="caps">HOROLOGY LAB</h1><p>'+CAL_LIST.length+' movements power this season’s collection. Tap one to see its specifications, its interactive manual where available, and every watch that uses it.</p></div>'+
+      '<button class="labbanner" data-go="#/lab"><div><b>Bezel &amp; Watch Reading Lab</b><span>Read chronographs, tachymeters, GMT and bezels — interactive exercises</span></div><svg width="22" height="22"><use href="#i-arrow"/></svg></button>'+
       '<div class="stick" style="border-top:1px solid var(--line)"><div class="toolrow"><label class="searchbox"><svg><use href="#i-search"/></svg><input id="cal-q" type="search" placeholder="Calibre, maker or model" autocomplete="off"></label></div></div><div id="cal-list"></div>';
     body.dataset.ready="1";
     document.getElementById("cal-q").addEventListener("input",function(e){ calQ=e.target.value; renderCalRows(); });
@@ -2196,6 +2283,8 @@ window.addEventListener("scroll",onScroll,{passive:true});
 totop.addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
 window.addEventListener("hashchange",function(){ setTimeout(onScroll,60); });
 /* ---------- HOROLOGY DICTIONARY ---------- */
+var DX_IDS={"12-hour-bezel": "TERM-0001","24-hour-display": "TERM-0002","24-hour-scale": "TERM-0003","316l-stainless-steel": "TERM-0004","904l-stainless-steel": "TERM-0005","accuracy": "TERM-0006","acrylic-crystal": "TERM-0007","alarm": "TERM-0008","amplitude": "TERM-0009","anglage": "TERM-0010","annual-calendar": "TERM-0011","automatic-movement": "TERM-0012","balance-spring": "TERM-0013","balance-wheel": "TERM-0014","barrel": "TERM-0015","battery-life": "TERM-0016","beat-error": "TERM-0017","beat-rate": "TERM-0018","bezel": "TERM-0019","black-polishing": "TERM-0020","bracelet": "TERM-0021","bridge": "TERM-0022","brushing": "TERM-0023","buckle": "TERM-0024","calibre": "TERM-0025","cam-switching": "TERM-0026","carbon": "TERM-0027","case": "TERM-0028","case-back": "TERM-0029","ceramic": "TERM-0030","chamfering": "TERM-0031","chronograph": "TERM-0032","chronograph-minutes": "TERM-0033","chronograph-pusher": "TERM-0034","chronograph-seconds": "TERM-0035","chronometer": "TERM-0036","circular-graining": "TERM-0037","clasp": "TERM-0038","column-wheel": "TERM-0039","compass-bezel": "TERM-0040","complication": "TERM-0041","cosc": "TERM-0042","countdown-bezel": "TERM-0043","crown": "TERM-0044","crown-guard": "TERM-0045","crown-seal": "TERM-0046","crystal": "TERM-0047","cotes-de-geneve": "TERM-0048","day-date": "TERM-0049","deployant-clasp": "TERM-0050","dial": "TERM-0051","dive-bezel": "TERM-0052","dual-time": "TERM-0053","electromechanical-movement": "TERM-0054","electronic-movement": "TERM-0055","equation-of-time": "TERM-0056","escape-wheel": "TERM-0057","escapement": "TERM-0058","fkm": "TERM-0059","flyback": "TERM-0060","flyback-chronograph": "TERM-0061","frequency": "TERM-0062","function": "TERM-0063","gasket": "TERM-0064","gear-train": "TERM-0065","geneva-stripes": "TERM-0066","gmt": "TERM-0067","gmt-bezel": "TERM-0068","gold": "TERM-0069","guilloche": "TERM-0070","hands": "TERM-0071","horizontal-coupling": "TERM-0072","hour-hand": "TERM-0073","isochronism": "TERM-0074","jewels": "TERM-0075","leather": "TERM-0076","lug": "TERM-0077","magnetic-resistance": "TERM-0078","mainplate": "TERM-0079","mainspring": "TERM-0080","manual-winding-movement": "TERM-0081","manufacture": "TERM-0082","mechanical-movement": "TERM-0083","meteorite": "TERM-0084","micro-rotor": "TERM-0085","mineral-crystal": "TERM-0086","minute-hand": "TERM-0087","minute-repeater": "TERM-0088","moon-phase": "TERM-0089","o-ring": "TERM-0090","oscillator": "TERM-0091","pallet-fork": "TERM-0092","perlage": "TERM-0093","perpetual-calendar": "TERM-0094","platinum": "TERM-0095","polishing": "TERM-0096","power-reserve": "TERM-0097","power-reserve-indicator": "TERM-0098","precision": "TERM-0099","pressure-resistance": "TERM-0100","pulsometer": "TERM-0101","pusher": "TERM-0102","quartz-movement": "TERM-0103","rate": "TERM-0104","regulation": "TERM-0105","regulator": "TERM-0106","retrograde-display": "TERM-0107","rotating-bezel": "TERM-0108","rotor": "TERM-0109","running-seconds": "TERM-0110","sapphire": "TERM-0111","sapphire-crystal": "TERM-0112","screw-down-crown": "TERM-0113","seconds-hand": "TERM-0114","shock-protection": "TERM-0115","shock-resistance": "TERM-0116","silicon": "TERM-0117","skeletonisation": "TERM-0118","solar-quartz": "TERM-0119","split-seconds-chronograph": "TERM-0120","spring-bar": "TERM-0121","spring-drive": "TERM-0122","strap": "TERM-0123","sub-dial": "TERM-0124","tachymeter": "TERM-0125","telemeter": "TERM-0126","time-zone": "TERM-0127","titanium": "TERM-0128","tourbillon": "TERM-0129","vertical-clutch": "TERM-0130","water-resistance": "TERM-0131","water-resistant": "TERM-0132","world-timer": "TERM-0133"};
+var DX_ASSETS=[{"group": "Watch base", "id": "IMG-LAB-BASE-001", "concept": "Three-hand watch (base)", "terms": ["Case", "Crown", "Crown Guard", "Crystal", "Dial", "Lug", "Strap", "Buckle", "Dive/60-min/Countdown/12-h/Compass bezel modules"], "type": "Watch base layer", "file": "lab_base_threehand.png", "brief": "MDR three-hand watch, front view: case, crown at 3, crown guards, lugs, strap with tang buckle, dial with applied indices and MDR logo, date window optional (no date preferred). NO bezel, NO hands."}, {"group": "Watch base", "id": "IMG-LAB-BASE-002", "concept": "Chronograph (base)", "terms": ["Chronograph", "Chronograph Pusher", "Sub-Dial", "Running Seconds", "Chronograph Minutes", "Flyback", "Tachymeter", "Telemeter", "Pulsometer"], "type": "Watch base layer", "file": "lab_base_chronograph.png", "brief": "MDR chronograph, front view: case with start/stop pusher at 2 and reset pusher at 4, crown at 3; three sub-dials — running seconds at 9, chronograph minutes (30-min scale) at 3, chronograph hours (12-h scale) at 6; outer seconds track 0–60. NO bezel, NO hands."}, {"group": "Watch base", "id": "IMG-LAB-BASE-003", "concept": "GMT (base)", "terms": ["GMT", "Dual Time", "24-Hour Scale", "Time Zone", "GMT Bezel"], "type": "Watch base layer", "file": "lab_base_gmt.png", "brief": "MDR GMT, front view: case, crown, dial with 12-hour indices; inner 24-hour flange OPTIONAL (bezel ring supplies the 24-h scale). NO bezel, NO hands."}, {"group": "Watch base", "id": "IMG-LAB-BASE-004", "concept": "World timer (base)", "terms": ["World Timer", "Time Zone", "Home Time", "Local Time"], "type": "Watch base layer", "file": "lab_base_worldtimer.png", "brief": "MDR world timer, front view: case, crown(s), central dial area with 12-hour indices. NO city ring, NO 24-hour ring, NO hands (supplied as rotating layers)."}, {"group": "Fixed bezel", "id": "IMG-LAB-BEZ-000", "concept": "Fixed bezel (plain)", "terms": ["Bezel", "Case", "anatomy pages"], "type": "Bezel layer", "file": "lab_bezel_fixed.png", "brief": "Plain polished fixed bezel ring matching the bases, no scale."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-001", "concept": "Hour hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_hour.png", "brief": "MDR hour hand, pointing to 12."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-002", "concept": "Minute hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_minute.png", "brief": "MDR minute hand, pointing to 12."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-003", "concept": "Seconds hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_seconds.png", "brief": "Thin central seconds hand with counterweight, pointing to 12."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-004", "concept": "Chronograph seconds hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_chrono.png", "brief": "Central chronograph seconds hand in a contrasting colour, pointing to 12."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-005", "concept": "GMT 24-hour hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_gmt.png", "brief": "Arrow-tipped GMT hand in contrasting colour, pointing to 12."}, {"group": "Shared hands", "id": "IMG-LAB-HAND-006", "concept": "Sub-dial hand", "terms": ["All MDR watch bases"], "type": "Hand layer", "file": "lab_hand_subdial.png", "brief": "Small sub-dial hand, pointing to 12, pivot at its own canvas centre."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-001", "concept": "GMT 24-hour bezel", "terms": ["GMT", "Dual Time", "24-Hour Scale", "GMT Bezel"], "type": "Bezel / scale ring layer", "file": "lab_bezel_24h.png", "brief": "24-hour bezel 0–24 (even numerals, odd marks), day/night two-tone optional."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-002", "concept": "Dive bezel", "terms": ["Dive Bezel", "Bezel", "Water Resistance"], "type": "Bezel / scale ring layer", "file": "lab_bezel_dive.png", "brief": "Unidirectional dive bezel 0–60 minutes, first 15 minutes graduated by the minute, luminous zero triangle."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-003", "concept": "60-minute bezel", "terms": ["Bezel", "60-Minute Bezel"], "type": "Bezel / scale ring layer", "file": "lab_bezel_60min.png", "brief": "Elapsed-time bezel 0–60, every 5 minutes numbered, minute marks."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-004", "concept": "Countdown bezel", "terms": ["Countdown Bezel", "Bezel"], "type": "Bezel / scale ring layer", "file": "lab_bezel_countdown.png", "brief": "Countdown bezel with numerals descending clockwise (60, 55, 50 … 5, 0)."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-005", "concept": "12-hour bezel", "terms": ["12-Hour Bezel", "Time Zone"], "type": "Bezel / scale ring layer", "file": "lab_bezel_12h.png", "brief": "12-hour bezel numbered 1–12 (12 at the top)."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-006", "concept": "Compass bezel", "terms": ["Compass Bezel"], "type": "Bezel / scale ring layer", "file": "lab_bezel_compass.png", "brief": "Compass bezel with N, E, S, W and degree marks (every 15°/30°)."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-007", "concept": "Tachymeter scale", "terms": ["Tachymeter", "Driving & Racing"], "type": "Bezel / scale ring layer", "file": "lab_ring_tachymeter.png", "brief": "Tachymeter scale for 1 unit of distance: 60 at the top, graduated per 3600 ÷ seconds (e.g. 500, 400, 300, 240, 200, 180, 150, 120, 100, 90, 80, 75, 70, 65, 60)."}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-008", "concept": "Telemeter scale", "terms": ["Telemeter"], "type": "Bezel / scale ring layer", "file": "lab_ring_telemeter.png", "brief": "Telemeter scale in km on a 340 m/s basis; 1 km at ≈2.94 s, 2 km at ≈5.9 s, 3 km at ≈8.8 s …"}, {"group": "Bezel and scale rings", "id": "IMG-LAB-RING-009", "concept": "Pulsometer scale", "terms": ["Pulsometer"], "type": "Bezel / scale ring layer", "file": "lab_ring_pulsometer.png", "brief": "Pulsometer graduated for 15 beats: value = 900 ÷ seconds (e.g. 90 at 10 s, 75 at 12 s, 60 at 15 s, 45 at 20 s, 30 at 30 s)."}, {"group": "World-timer rings", "id": "IMG-LAB-WT-001", "concept": "World-timer city ring", "terms": ["World Timer", "Time Zone"], "type": "Ring layer", "file": "lab_wt_cityring.png", "brief": "City ring with 24 reference cities, one per standard-time offset (UTC−11 … UTC+12), e.g. London, Paris, Cairo, Moscow, Dubai, Karachi, Dhaka, Bangkok, Hong Kong, Tokyo, Sydney, Nouméa, Auckland, Midway, Honolulu, Anchorage, Los Angeles, Denver, Chicago, New York, Caracas, Rio, Fernando de Noronha, Azores."}, {"group": "World-timer rings", "id": "IMG-LAB-WT-002", "concept": "World-timer 24-hour ring", "terms": ["World Timer", "24-Hour Scale"], "type": "Ring layer", "file": "lab_wt_24hring.png", "brief": "24-hour day/night ring (light 6–18, dark 18–6), numerals 1–24."}, {"group": "Movements", "id": "IMG-DICT-MOV-001", "concept": "Mechanical movement (manual-wind)", "terms": ["Mechanical Movement", "Manual-Winding Movement", "Mainplate", "Bridge", "Gear Train", "Jewels", "Calibre", "Barrel"], "type": "Movement view", "file": "dict_movement_manual.png", "brief": "Back view of a generic manual-wind movement without automatic module: mainplate, bridges, barrel with ratchet wheel, visible gear train, escapement, balance with balance spring, jewels in red."}, {"group": "Movements", "id": "IMG-DICT-MOV-002", "concept": "Automatic movement (central rotor)", "terms": ["Automatic Movement", "Rotor", "Winding system"], "type": "Movement view", "file": "dict_movement_automatic.png", "brief": "Back view with central oscillating rotor partly over the movement, reverser wheels visible."}, {"group": "Movements", "id": "IMG-DICT-MOV-003", "concept": "Micro-rotor movement", "terms": ["Micro-Rotor"], "type": "Movement view", "file": "dict_movement_microrotor.png", "brief": "Back view with a small rotor integrated at the level of the movement."}, {"group": "Movements", "id": "IMG-DICT-MOV-004", "concept": "Quartz movement", "terms": ["Quartz Movement", "Solar Quartz", "Battery Life", "Electronic Movement", "Oscillator"], "type": "Movement view", "file": "dict_movement_quartz.png", "brief": "Open quartz movement: battery, circuit (IC), quartz tuning-fork crystal in its capsule, coil and stepper motor, gear train."}, {"group": "Movements", "id": "IMG-DICT-MOV-005", "concept": "Hybrid spring-driven, electronically regulated movement (schematic)", "terms": ["Spring Drive", "Electromechanical Movement"], "type": "Schematic", "file": "dict_movement_hybrid.png", "brief": "Schematic: mainspring → gear train → glide wheel (generator) ← IC + quartz reference regulating via electromagnetic brake."}, {"group": "Movements", "id": "IMG-DICT-MOV-006", "concept": "Escapement (Swiss lever)", "terms": ["Escapement", "Escape Wheel", "Pallet Fork", "Jewels"], "type": "Close-up / schematic", "file": "dict_escapement.png", "brief": "Close-up of escape wheel, pallet fork with two pallet stones, impulse pin on the balance roller; arrows optional."}, {"group": "Movements", "id": "IMG-DICT-MOV-007", "concept": "Balance wheel and balance spring", "terms": ["Balance Wheel", "Balance Spring", "Regulator", "Frequency", "Amplitude", "Beat Error", "Isochronism", "Oscillator"], "type": "Close-up", "file": "dict_balance.png", "brief": "Balance wheel with balance spring (Breguet or flat), stud and regulator index."}, {"group": "Movements", "id": "IMG-DICT-MOV-008", "concept": "Barrel and mainspring", "terms": ["Mainspring", "Barrel", "Power Reserve", "Power Reserve Indicator"], "type": "Cutaway / comparison", "file": "dict_barrel.png", "brief": "Barrel cutaway in two states side by side: fully wound (spring coiled around the arbor) and let down (spring against the barrel wall)."}, {"group": "External components", "id": "IMG-DICT-EXT-001", "concept": "Case profile", "terms": ["Case", "Crown", "Crown Guard", "Crystal", "Case Back", "Lug", "Spring Bar", "Pusher"], "type": "Side view", "file": "dict_case_profile.png", "brief": "Side profile of the MDR case: crystal height, bezel, case band, crown with tube, crown guard, case back, lug with spring-bar hole."}, {"group": "External components", "id": "IMG-DICT-EXT-002", "concept": "Case back (solid and display)", "terms": ["Case Back", "Water Resistance"], "type": "Split view", "file": "dict_caseback.png", "brief": "Split view: left half screw-down solid case back with engraving space, right half sapphire display back showing a movement."}, {"group": "External components", "id": "IMG-DICT-EXT-003", "concept": "Case sealing cutaway", "terms": ["Water Resistance", "Gasket", "O-Ring", "Crown Seal", "Screw-Down Crown", "Pressure Resistance", "Water-Resistant"], "type": "Cutaway", "file": "dict_sealing.png", "brief": "Cross-section of case: crystal gasket, case-back O-ring, crown tube with crown gaskets, screw-down threads."}, {"group": "External components", "id": "IMG-DICT-EXT-004", "concept": "Bracelet and deployant clasp", "terms": ["Bracelet", "Clasp", "Deployant Clasp", "Spring Bar"], "type": "Product view", "file": "dict_bracelet.png", "brief": "Steel bracelet with links and an open butterfly deployant clasp; one end link with spring bar visible."}, {"group": "External components", "id": "IMG-DICT-EXT-005", "concept": "Strap and buckle", "terms": ["Strap", "Buckle", "Leather", "FKM"], "type": "Product view", "file": "dict_strap.png", "brief": "Leather strap with tang buckle and keepers (optionally an FKM rubber strap beside it)."}, {"group": "External components", "id": "IMG-DICT-EXT-006", "concept": "Crystal types", "terms": ["Crystal", "Sapphire Crystal", "Mineral Crystal", "Acrylic Crystal"], "type": "Comparison", "file": "dict_crystals.png", "brief": "Three cross-sections side by side: flat sapphire, mineral, domed acrylic."}, {"group": "Complications", "id": "IMG-DICT-CMP-001", "concept": "Moon phase", "terms": ["Moon Phase"], "type": "Dial detail", "file": "dict_moonphase.png", "brief": "MDR dial detail with moon-phase aperture, two-moon disc partly visible."}, {"group": "Complications", "id": "IMG-DICT-CMP-002", "concept": "Annual calendar", "terms": ["Annual Calendar", "Day-Date"], "type": "Dial", "file": "dict_annual_calendar.png", "brief": "MDR annual-calendar dial: day, date, month — no leap-year indicator."}, {"group": "Complications", "id": "IMG-DICT-CMP-003", "concept": "Perpetual calendar", "terms": ["Perpetual Calendar", "Moon Phase"], "type": "Dial", "file": "dict_perpetual_calendar.png", "brief": "MDR perpetual-calendar dial: day, date, month, leap-year indicator, moon phase."}, {"group": "Complications", "id": "IMG-DICT-CMP-004", "concept": "Power reserve indicator", "terms": ["Power Reserve", "Power Reserve Indicator"], "type": "Dial", "file": "dict_power_reserve.png", "brief": "MDR dial with a power-reserve sector (full → empty) on the dial."}, {"group": "Complications", "id": "IMG-DICT-CMP-005", "concept": "Alarm", "terms": ["Alarm"], "type": "Dial / product view", "file": "dict_alarm.png", "brief": "MDR mechanical alarm watch: alarm-setting hand/disc and second crown."}, {"group": "Complications", "id": "IMG-DICT-CMP-006", "concept": "Tourbillon", "terms": ["Tourbillon"], "type": "Close-up", "file": "dict_tourbillon.png", "brief": "Tourbillon cage close-up through a dial aperture: cage, balance, escapement inside the cage, fourth-wheel pinion."}, {"group": "Complications", "id": "IMG-DICT-CMP-007", "concept": "Retrograde display", "terms": ["Retrograde Display", "Day-Date"], "type": "Dial", "file": "dict_retrograde.png", "brief": "MDR dial with a retrograde date hand on an arc 1–31."}, {"group": "Complications", "id": "IMG-DICT-CMP-008", "concept": "Minute repeater", "terms": ["Minute Repeater"], "type": "Movement / case view", "file": "dict_minute_repeater.png", "brief": "Case with repeater slide on the case band, plus inset of hammers and gongs around the movement."}, {"group": "Protection", "id": "IMG-DICT-PRT-001", "concept": "Magnetic resistance", "terms": ["Magnetic Resistance", "Silicon", "Balance Spring"], "type": "Cutaway", "file": "dict_antimagnetic.png", "brief": "Case cutaway with soft-iron inner cage around the movement; field lines deflected around it."}, {"group": "Protection", "id": "IMG-DICT-PRT-002", "concept": "Shock protection", "terms": ["Shock Protection", "Shock Resistance", "Jewels"], "type": "Close-up", "file": "dict_shock.png", "brief": "Balance staff pivot in a spring-mounted jewel setting (cap jewel, hole jewel, lyre spring)."}, {"group": "Finishing", "id": "IMG-DICT-FIN-001", "concept": "Brushing", "terms": ["Brushing", "316L Stainless Steel"], "type": "Macro swatch", "file": "dict_finish_brushing.png", "brief": "Macro close-up of brushing on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-002", "concept": "Polishing", "terms": ["Polishing"], "type": "Macro swatch", "file": "dict_finish_polishing.png", "brief": "Macro close-up of polishing on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-003", "concept": "Anglage", "terms": ["Anglage", "Chamfering"], "type": "Macro swatch", "file": "dict_finish_anglage.png", "brief": "Macro close-up of anglage on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-004", "concept": "Geneva stripes", "terms": ["Geneva Stripes", "Côtes de Genève"], "type": "Macro swatch", "file": "dict_finish_geneva_stripes.png", "brief": "Macro close-up of geneva stripes on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-005", "concept": "Perlage", "terms": ["Perlage"], "type": "Macro swatch", "file": "dict_finish_perlage.png", "brief": "Macro close-up of perlage on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-006", "concept": "Guilloché", "terms": ["Guilloché"], "type": "Macro swatch", "file": "dict_finish_guilloche.png", "brief": "Macro close-up of guilloché on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-007", "concept": "Black polishing", "terms": ["Black Polishing"], "type": "Macro swatch", "file": "dict_finish_black_polishing.png", "brief": "Macro close-up of black polishing on a movement part or case surface, lit to show the texture."}, {"group": "Finishing", "id": "IMG-DICT-FIN-008", "concept": "Circular graining", "terms": ["Circular Graining"], "type": "Macro swatch", "file": "dict_finish_circular_graining.png", "brief": "Macro close-up of circular graining on a movement part or case surface, lit to show the texture."}];
 /* ACADEMY DICTIONARY · CORE ENTRIES (full). Original Academy text. Technical facts are general horological principles; calibre-specific facts live only in calibre entries with a recorded source. */
 var DICT_CORE=[
 {t:"Chronograph",c:"Complications",syn:["stopwatch","chrono","stop watch","timer function"],vis:"chrono",
@@ -2212,14 +2301,14 @@ var DICT_CORE=[
     {q:"True or false: every watch with three sub-dials is a chronograph.",o:["True","False"],a:1},
     {q:"While the chronograph is running, the normal time display…",o:["keeps running normally","stops until the chronograph is reset","switches to 24-hour mode","shows elapsed time instead"],a:0}]},
 {t:"GMT",c:"Complications",syn:["24 hour hand","24-hour hand","second time zone","travel watch","greenwich mean time","home time"],vis:"gmt",
- def:"A complication that displays a second time zone with an additional hand making one rotation every 24 hours, read against a 24-hour scale.",
+ def:"A GMT function displays a second time zone, usually with a dedicated hand that turns once every 24 hours and is read against a 24-hour scale.",
  simple:"A GMT watch shows two times at once. The normal hands show where you are; an extra hand, which goes round once a day, shows the time back home on a 24-hour scale.",
  tech:"The GMT hand is geared to rotate once per 24 hours. It is read against a 24-hour scale on the dial, flange or bezel. Depending on the movement, either the local hour hand or the GMT hand can be set independently in one-hour steps. A rotating 24-hour bezel can add a third time zone.",
  why:"Travellers and people working across time zones value this function. Explaining it clearly is a strong reason to recommend a GMT over a simpler watch.",
  cust:"“You can keep the normal hands on Dubai time and set this extra hand to London — one glance tells you both, and whether it's day or night there.”",
- tip:"Set a demo watch to two real time zones before the session and let learners read both. The 24-hour scale (day or night) is the part people forget.",
+ tip:"Separate four ideas that learners mix up: the GMT hand (an independently set 24-hour hand), a 24-hour hand used only as a day/night indicator, the second time zone it shows, and a world timer (all zones at once). Set a demo watch to two real zones and let learners read both.",
  mis:"A GMT hand is not the same as a world timer: a GMT shows one additional time zone, a world timer shows all major time zones at once.",
- rel:["Dual Time","World Timer","Bezel","Hour Hand","24-Hour Display"],
+ rel:["24-Hour Scale","Dual Time","World Timer","Time Zone","Chronograph","Rotating Bezel"],
  q:[{q:"How often does a GMT hand rotate?",o:["Once every 24 hours","Once every 12 hours","Once every hour","Once a month"],a:0},
     {q:"A customer travels often between Dubai and London. Which function helps most?",o:["GMT","Moon phase","Tachymeter","Retrograde date"],a:0},
     {q:"What scale is the GMT hand read against?",o:["A 24-hour scale","A 60-minute scale","A tachymeter scale","A 31-day scale"],a:0},
@@ -2569,6 +2658,14 @@ var DICT_CORE=[
 
 /* ACADEMY DICTIONARY · REFERENCE ENTRIES (definition + simple explanation). Format: [term, category, definition, simple, related[], synonyms[]] */
 var DICT_REF=[
+["24-Hour Scale","Complications","A scale divided into 24 hours, on the dial, flange or bezel, used to read a 24-hour hand such as a GMT hand.","A 24-hour scale lets you tell day from night, and read a second time zone with a GMT hand.",["GMT","24-Hour Display","GMT Bezel"],["24 hour scale","24h scale"]],
+["Time Zone","Complications","A region that observes the same standard time, defined by its offset from Coordinated Universal Time (UTC).","Different parts of the world keep different clock times; each area is a time zone.",["GMT","World Timer","Dual Time"],["timezone","utc offset"]],
+["Rotating Bezel","Components","A bezel that can be turned to set a reference point on its scale, either in one direction (unidirectional) or both (bidirectional).","A turning ring around the glass that you set to time something or read another time zone.",["Bezel","Dive Bezel","GMT Bezel","Countdown Bezel","12-Hour Bezel"],["turning bezel","rotatable bezel"]],
+["GMT Bezel","Components","A bezel graduated in 24 hours, read against the GMT hand; rotating versions allow a further time zone to be read.","A 24-hour ring that works with the GMT hand to show another time zone.",["GMT","24-Hour Scale","Rotating Bezel"],["24 hour bezel","24-hour bezel"]],
+["Dive Bezel","Components","A unidirectional 60-minute bezel used to time elapsed minutes underwater; the first 15 minutes are often marked minute by minute.","A one-way turning ring divers set to see how long they have been underwater.",["Rotating Bezel","Water Resistance","Bezel"],["diving bezel","diver bezel"]],
+["Countdown Bezel","Components","A bezel whose numerals descend, used to count down a set number of minutes to an event.","A ring you set to see how many minutes are left before something happens.",["Rotating Bezel","Bezel"],["count down bezel","countdown"]],
+["12-Hour Bezel","Components","A bezel numbered 1 to 12, rotated by the time difference so the hour hand can read a second time zone.","A 12-hour ring you turn to read the time somewhere else with the normal hour hand.",["Rotating Bezel","Time Zone","Dual Time"],["12 hour bezel"]],
+["Compass Bezel","Components","A bezel marked with cardinal points and degrees, used with the hour hand and the sun to estimate direction.","A ring with N, E, S, W marks that helps you find direction using the sun and your watch.",["Rotating Bezel","Bezel"],["compass","navigation bezel"]],
 ["Solar Quartz","Movements","A quartz movement whose rechargeable cell is charged by light through a photovoltaic dial.","A solar watch charges itself from any light, so you rarely or never change a battery.",["Quartz Movement","Battery Life"],["solar","light powered","eco-drive"]],
 ["Spring Drive","Movements","A movement combining a mainspring power source with an electronically regulated glide wheel controlled by a quartz reference.","A hybrid: powered by a spring like a mechanical watch, but regulated electronically, with a perfectly smooth seconds hand.",["Mechanical Movement","Quartz Movement","Electromechanical Movement"],[]],
 ["Electronic Movement","Movements","A movement in which timekeeping is controlled electronically, such as quartz.","Any watch movement whose timekeeping is controlled by electronics rather than a balance wheel.",["Quartz Movement","Solar Quartz"],[]],
@@ -2666,20 +2763,22 @@ var DICT_REF=[
 ["Chamfering","Finishing","Cutting and finishing a bevelled edge on a part.","Making neat bevelled edges.",["Anglage"],[]]
 ];
 
-/* ===================== HOROLOGY DICTIONARY ===================== */
+/* ===================== HOROLOGY DICTIONARY (canonical model) =====================
+   One term = one permanent ID = one page. Every entry point opens #/dict/<ID>.        */
 var DX={idx:null,q:""};
-function dxSlug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
-function dxNorm(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"");}
+function dxSlug(s){ s=String(s||""); try{ s=s.normalize("NFD").replace(/[\u0300-\u036f]/g,""); }catch(e){} return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); }
+function dxNorm(s){ s=String(s||""); try{ s=s.normalize("NFD").replace(/[\u0300-\u036f]/g,""); }catch(e){} return s.toLowerCase().replace(/[^a-z0-9]+/g,""); }
 var DX_CATS=["Movements","Complications","Components","Materials","Timekeeping","Water & Protection","Finishing","Calibres"];
-/* extra verified calibre not in the catalogue (manufacturer source recorded) */
 var DX_EXTRA_CALS=[{code:"2824-2",maker:"ETA",type:"Automatic",functions:"Hours, minutes, central seconds, date (window, semi-instantaneous, quick correction), stop-seconds",
   fields:[["Diameter","25.60 mm (11½‴)"],["Thickness","4.60 mm"],["Jewels","25"],["Frequency","28,800 vph (4 Hz)"],["Power reserve","42 hours (typical)"],["Winding","Self-winding, bidirectional"]],
   source:"ETA SA, manufacturer technical page (portal.eta.ch, calibre 2824-2)",verified:"2026-10-02",syn:["eta 2824","2824","eta 2824-2"]}];
+/* Lab practice modules linked from terms */
+var DX_LAB={"chronograph":"chrono","chronograph-pusher":"chrono","sub-dial":"chrono","running-seconds":"chrono","chronograph-seconds":"chrono","chronograph-minutes":"chrono","flyback":"chrono","flyback-chronograph":"chrono",
+  "tachymeter":"tachy","gmt":"gmt","24-hour-scale":"gmt","dual-time":"gmt","time-zone":"gmt","gmt-bezel":"gmt"};
 function dxCalibres(){
   var out=[];
   (typeof CAL_LIST!=="undefined"?CAL_LIST:[]).forEach(function(c){
-    var brands=Object.keys(c.brands).map(function(k){return MAISON[k].name;});
-    out.push({code:c.code,maker:(c.maker||"").replace(/\s*\(.*\)$/,""),makerFull:c.maker,type:c.type,functions:c.functions,power:c.power,brands:brands,brandKeys:Object.keys(c.brands),fams:Object.keys(c.fams),
+    out.push({code:c.code,maker:(c.maker||"").replace(/\s*\(.*\)$/,""),makerFull:c.maker,type:c.type,functions:c.functions,power:c.power,brands:Object.keys(c.brands).map(function(k){return MAISON[k].name;}),brandKeys:Object.keys(c.brands),fams:Object.keys(c.fams),
       source:"Brand FW26 training decks, as published in the ILG Academy catalogue",verified:"2026-10-02",fields:[]});
   });
   DX_EXTRA_CALS.forEach(function(c){ out.push({code:c.code,maker:c.maker,makerFull:c.maker,type:c.type,functions:c.functions,power:"",brands:[],brandKeys:[],fams:[],source:c.source,verified:c.verified,fields:c.fields,syn:c.syn}); });
@@ -2688,13 +2787,17 @@ function dxCalibres(){
 function dxBuild(){
   if(DX.idx) return DX.idx;
   var terms=[];
-  DICT_CORE.forEach(function(e){ e.full=true; e.slug=dxSlug(e.t); terms.push(e); });
-  DICT_REF.forEach(function(r){ terms.push({t:r[0],c:r[1],def:r[2],simple:r[3],rel:r[4],syn:r[5],full:false,slug:dxSlug(r[0])}); });
-  var cals=dxCalibres(); cals.forEach(function(c){ c.slug=dxSlug(c.code); c.label=(c.maker?c.maker+" ":"")+c.code; });
-  var bySlug={}; terms.forEach(function(t){bySlug[t.slug]=t;});
-  DX.idx={terms:terms,cals:cals,bySlug:bySlug,calBySlug:cals.reduce(function(m,c){m[c.slug]=c;return m;},{})};
+  DICT_CORE.forEach(function(e){ e.full=true; terms.push(e); });
+  DICT_REF.forEach(function(r){ terms.push({t:r[0],c:r[1],def:r[2],simple:r[3],rel:r[4],syn:r[5],full:false}); });
+  terms.forEach(function(t){ t.slug=dxSlug(t.t); t.id=DX_IDS[t.slug]||("TERM-X-"+t.slug); });
+  var cals=dxCalibres(); cals.forEach(function(c){ c.slug=dxSlug(c.code); c.id="CAL-"+c.code.toUpperCase().replace(/[^A-Z0-9]+/g,""); c.label=(c.maker?c.maker+" ":"")+c.code; });
+  var byId={},bySlug={}; terms.forEach(function(t){byId[t.id]=t;bySlug[t.slug]=t;}); cals.forEach(function(c){byId[c.id]=c;});
+  DX.idx={terms:terms,cals:cals,byId:byId,bySlug:bySlug,calBySlug:cals.reduce(function(m,c){m[c.slug]=c;return m;},{})};
   return DX.idx;
 }
+function dxHref(e){ return "#/dict/"+e.id; }
+function dxFind(name){ var I=dxBuild(); return I.bySlug[dxSlug(name)]||null; }
+
 function dxLev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; var d=[];for(var i=0;i<=a.length;i++){d[i]=[i];}for(var j=0;j<=b.length;j++)d[0][j]=j;
   for(i=1;i<=a.length;i++)for(j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return d[a.length][b.length]; }
 function dxSearch(q){
@@ -2720,77 +2823,7 @@ function dxSearch(q){
   var R=I.terms.filter(function(t){return relSet[t.slug]&&!T.some(function(x){return x.e===t;});}).slice(0,8);
   return {terms:T.slice(0,12).map(function(x){return x.e;}),cals:C.slice(0,8).map(function(x){return x.e;}),related:R};
 }
-/* ---------- learner record (this device until sign-in is live) ---------- */
-var DXP_KEY="calibreDictProgress";
-function dxP(){ try{ var v=JSON.parse(localStorage.getItem(DXP_KEY)||"null"); if(v) return v; }catch(e){} return {terms:{},xp:0,days:[],saved:[],misses:{},lastQ:{}}; }
-function dxSave(p){ try{ localStorage.setItem(DXP_KEY,JSON.stringify(p)); }catch(e){} }
-function dxToday(){ return new Date().toISOString().slice(0,10); }
-function dxTouch(p){ var d=dxToday(); if(p.days[p.days.length-1]!==d) p.days.push(d); if(p.days.length>400) p.days=p.days.slice(-400); }
-function dxRec(p,key){ return p.terms[key]=p.terms[key]||{first:new Date().toISOString(),views:0,tests:0,ans:0,correct:0,best:-1,latest:-1,status:"NOT STARTED",xp:0}; }
-function dxView(key){ var p=dxP(), r=dxRec(p,key); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p); return r; }
-function dxStatus(r){ if(!r) return "NOT STARTED"; if(r.status==="MASTERED"&&r.lastTest&&(Date.now()-new Date(r.lastTest))>21*864e5) return "REVIEW DUE"; return r.status; }
-function dxStreak(p){ var n=0,d=new Date(); for(;;){ var s=d.toISOString().slice(0,10); if(p.days.indexOf(s)>=0){n++;d.setDate(d.getDate()-1);} else break; } return n; }
-var DX_BADGES=[["FIRST TERM","explored",1],["DICTIONARY EXPLORER","explored",10],["HOROLOGY LEARNER","tested",5],["CALIBRE EXPLORER","calibres",5],["KNOWLEDGE BUILDER","mastered",10],["HOROLOGY MASTER","mastered",25]]; /* thresholds are configuration */
-/* ---------- MDR educational illustrations (original; MDR is a fictional demonstration brand) ---------- */
-var DXI={ink:"#16140F",gold:"#8A6B32",mute:"#A59E91",line:"#D9D2C3",paper:"#FBF9F5"};
-function dxWatch(opts){ /* opts: hl (part to highlight), callouts [[part,label]], extra svg, sub (subdials) */
-  var hl=opts.hl||"", I=DXI, g=function(p){return p===hl?' stroke="'+I.gold+'" stroke-width="3.5"':' stroke="'+I.ink+'" stroke-width="1.6"';};
-  var s='<svg viewBox="0 0 410 380" role="img" aria-label="MDR educational watch illustration" class="dxsvg">';
-  s+='<rect x="128" y="0" width="104" height="70" rx="6" fill="#fff"'+g("strap")+'/><rect x="128" y="310" width="104" height="70" rx="6" fill="#fff"'+g("strap")+'/>';
-  s+='<rect x="158" y="352" width="44" height="22" rx="3" fill="none"'+g("buckle")+'/>';
-  s+='<path d="M122 78 L134 52 M238 78 L226 52 M122 302 L134 328 M238 302 L226 328" fill="none"'+g("lug")+'/>';
-  s+='<rect x="292" y="176" width="22" height="28" rx="5" fill="#fff"'+g("crown")+'/>';
-  s+='<path d="M286 166 q12 4 14 10 M286 214 q12 -4 14 -10" fill="none"'+g("crownguard")+'/>';
-  s+='<rect x="268" y="96" width="16" height="22" rx="4" transform="rotate(35 276 107)" fill="#fff"'+g("pusher")+'/><rect x="268" y="262" width="16" height="22" rx="4" transform="rotate(-35 276 273)" fill="#fff"'+g("pusher")+'/>';
-  s+='<circle cx="180" cy="190" r="118" fill="#fff"'+g("case")+'/>';
-  s+='<circle cx="180" cy="190" r="108" fill="none"'+g("bezel")+'/>';
-  for(var i=0;i<60;i+=5){var a=i*6*Math.PI/180; s+='<line x1="'+(180+100*Math.sin(a)).toFixed(1)+'" y1="'+(190-100*Math.cos(a)).toFixed(1)+'" x2="'+(180+104*Math.sin(a)).toFixed(1)+'" y2="'+(190-104*Math.cos(a)).toFixed(1)+'" stroke="'+I.mute+'" stroke-width="1"/>';}
-  s+='<circle cx="180" cy="190" r="96" fill="'+I.paper+'"'+g("dial")+'/>';
-  s+='<circle cx="180" cy="190" r="97" fill="none"'+(hl==="crystal"?' stroke="#7FA6C9" stroke-width="5" stroke-opacity=".8"':' stroke="none"')+'/>';
-  if(hl==="crystal") s+='<path d="M120 130 q30 -30 70 -32" stroke="#7FA6C9" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>';
-  for(i=0;i<12;i++){a=i*30*Math.PI/180; s+='<line x1="'+(180+80*Math.sin(a)).toFixed(1)+'" y1="'+(190-80*Math.cos(a)).toFixed(1)+'" x2="'+(180+90*Math.sin(a)).toFixed(1)+'" y2="'+(190-90*Math.cos(a)).toFixed(1)+'" stroke="'+I.ink+'" stroke-width="'+(i%3?2:3.5)+'"/>';}
-  s+='<text x="180" y="146" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="4" fill="'+I.ink+'">MDR</text>';
-  (opts.sub||[[130,190,"subdial"]]).forEach(function(sd){ s+='<circle cx="'+sd[0]+'" cy="'+sd[1]+'" r="22" fill="#fff"'+g(sd[2]||"subdial")+'/><line x1="'+sd[0]+'" y1="'+sd[1]+'" x2="'+sd[0]+'" y2="'+(sd[1]-15)+'" stroke="'+I.ink+'" stroke-width="1.4"/>'; });
-  s+='<line x1="180" y1="190" x2="230" y2="160" stroke-linecap="round"'+(hl==="hour"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="6"':' stroke="'+I.ink+'" stroke-width="5"')+'/>';
-  s+='<line x1="180" y1="190" x2="180" y2="108" stroke-linecap="round"'+(hl==="minute"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="4"':' stroke="'+I.ink+'" stroke-width="3"')+'/>';
-  if(!opts.noSec) s+='<line x1="180" y1="205" x2="232" y2="262" stroke-linecap="round"'+(hl==="seconds"||hl==="hands"?' stroke="'+I.gold+'" stroke-width="2.5"':' stroke="#A3352B" stroke-width="1.3"')+'/>';
-  s+='<circle cx="180" cy="190" r="4" fill="'+I.ink+'"/>';
-  s+=(opts.extra||"");
-  (opts.callouts||[]).forEach(function(c){ s+='<line x1="'+c[0]+'" y1="'+c[1]+'" x2="'+c[2]+'" y2="'+c[3]+'" stroke="'+I.gold+'" stroke-width="1"/><circle cx="'+c[0]+'" cy="'+c[1]+'" r="3" fill="'+I.gold+'"/><text x="'+c[2]+'" y="'+(c[3]-4)+'" font-family="Arial,sans-serif" font-size="11.5" font-weight="700" fill="'+I.ink+'" text-anchor="'+(c[4]||"start")+'">'+c[5]+'</text>'; });
-  return s+'</svg>';
-}
-var DX_PART_LABEL={case:"Case",bezel:"Bezel",crown:"Crown",crownguard:"Crown guard",crystal:"Crystal",dial:"Dial",subdial:"Sub-dial",pusher:"Pusher",lug:"Lug",strap:"Strap",buckle:"Buckle",hour:"Hour hand",minute:"Minute hand",seconds:"Seconds hand",hands:"Hands"};
-var DX_TERM_PART={"case":"case","bezel":"bezel","crown":"crown","crown-guard":"crownguard","screw-down-crown":"crown","crystal":"crystal","sapphire-crystal":"crystal","mineral-crystal":"crystal","acrylic-crystal":"crystal","dial":"dial","sub-dial":"subdial","pusher":"pusher","chronograph-pusher":"pusher","lug":"lug","spring-bar":"lug","strap":"strap","buckle":"buckle","hands":"hands","hour-hand":"hour","minute-hand":"minute","seconds-hand":"seconds","running-seconds":"subdial"};
-function dxVisual(key,term){
-  var I=DXI,box=function(x,y,w,t,sub){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="54" rx="2" fill="#fff" stroke="'+I.ink+'" stroke-width="1.4"/><text x="'+(x+w/2)+'" y="'+(y+24)+'" text-anchor="middle" font-family="Arial" font-size="12.5" font-weight="700" fill="'+I.ink+'">'+t+'</text>'+(sub?'<text x="'+(x+w/2)+'" y="'+(y+41)+'" text-anchor="middle" font-family="Arial" font-size="10.5" fill="#6F6A60">'+sub+'</text>':'');},
-      arr=function(x1,y,x2){return '<line x1="'+x1+'" y1="'+y+'" x2="'+(x2-6)+'" y2="'+y+'" stroke="'+I.gold+'" stroke-width="2"/><path d="M'+(x2-8)+' '+(y-5)+' L'+x2+' '+y+' L'+(x2-8)+' '+(y+5)+'Z" fill="'+I.gold+'"/>';};
-  var part=key&&key.indexOf("anatomy")===0?(key.split(":")[1]||""):DX_TERM_PART[term.slug];
-  if(key==="chrono") return {svg:dxWatch({sub:[[130,190],[230,190],[180,248]],noSec:true,extra:'<line x1="180" y1="205" x2="180" y2="96" stroke="'+I.gold+'" stroke-width="2"/>',
-     callouts:[[282,104,300,60,"start",'Start / stop pusher'],[282,276,300,330,"start",'Reset pusher'],[180,100,40,40,"start",'Chronograph seconds'],[108,190,6,150,"start",'Running seconds'],[252,190,268,150,"start",'Chrono minutes'],[180,260,40,345,"start",'Chrono hours']]}),
-     cap:"MDR demonstration chronograph. Layouts vary by calibre — always check the calibre's verified sub-dial positions."};
-  if(key==="gmt"){ var ring=''; for(var h=0;h<24;h+=2){var a=h*15*Math.PI/180; ring+='<text x="'+(180+113*Math.sin(a)).toFixed(1)+'" y="'+(194-113*Math.cos(a)).toFixed(1)+'" text-anchor="middle" font-family="Arial" font-size="10" fill="'+I.ink+'">'+(h||24)+'</text>';}
-     return {svg:dxWatch({sub:[],noSec:true,extra:ring+'<line x1="180" y1="190" x2="244" y2="268" stroke="'+I.gold+'" stroke-width="2.5"/><path d="M244 268 l-12 -2 l7 -9z" fill="'+I.gold+'"/>',
-       callouts:[[230,160,282,120,"start",'Local hour hand'],[180,110,40,40,"start",'Minute hand'],[244,268,262,330,"start",'24-hour GMT hand'],[66,190,8,250,"start",'24-hour scale']]}),
-       cap:"MDR demonstration GMT: the extra hand turns once in 24 hours and is read on the 24-hour scale."}; }
-  if(key==="power") return {svg:'<svg viewBox="0 0 640 150" class="dxsvg wide" role="img" aria-label="Power reserve sequence">'+box(6,40,130,"Mainspring","wound tight")+arr(136,67,166)+box(166,40,140,"Stored energy","released slowly")+arr(306,67,336)+box(336,40,140,"Power reserve","hours of running")+arr(476,67,506)+box(506,40,128,"Watch stops","when spring is let down")+
-     '<rect x="166" y="114" width="310" height="10" fill="#fff" stroke="'+I.line+'"/><rect x="166" y="114" width="200" height="10" fill="'+I.gold+'"/><text x="166" y="142" font-family="Arial" font-size="10.5" fill="#6F6A60">Remaining energy, as a power reserve indicator would show it</text></svg>',cap:"Energy flows from the wound mainspring until it is let down; the power reserve is the running time in between."};
-  if(key==="auto") return {svg:'<svg viewBox="0 0 660 130" class="dxsvg wide" role="img" aria-label="Automatic winding chain">'+box(4,36,110,"Rotor","wrist motion")+arr(114,63,138)+box(138,36,120,"Winding system","reverser wheels")+arr(258,63,282)+box(282,36,112,"Mainspring","stores energy")+arr(394,63,418)+box(418,36,104,"Gear train","transmits")+arr(522,63,546)+box(546,36,110,"Escapement","releases in steps")+'</svg>',cap:"How an automatic movement turns wrist motion into timekeeping energy."};
-  if(key==="escape"){ var teeth=''; for(var k=0;k<15;k++){var b=k*24*Math.PI/180; teeth+='<path d="M'+(150+48*Math.sin(b)).toFixed(1)+' '+(110-48*Math.cos(b)).toFixed(1)+' L'+(150+62*Math.sin(b+0.18)).toFixed(1)+' '+(110-62*Math.cos(b+0.18)).toFixed(1)+' L'+(150+50*Math.sin(b+0.3)).toFixed(1)+' '+(110-50*Math.cos(b+0.3)).toFixed(1)+'" fill="none" stroke="'+I.ink+'" stroke-width="1.6"/>';}
-     return {svg:'<svg viewBox="0 0 560 230" class="dxsvg wide" role="img" aria-label="Lever escapement schematic"><circle cx="150" cy="110" r="48" fill="#fff" stroke="'+I.ink+'" stroke-width="1.6"/>'+teeth+
-       '<path d="M200 70 L300 110 L200 150" fill="none" stroke="'+I.ink+'" stroke-width="3"/><rect x="194" y="62" width="12" height="16" fill="#C9A961"/><rect x="194" y="142" width="12" height="16" fill="#C9A961"/><line x1="300" y1="110" x2="380" y2="110" stroke="'+I.ink+'" stroke-width="3"/>'+
-       '<circle cx="440" cy="110" r="62" fill="none" stroke="'+I.ink+'" stroke-width="3"/><circle cx="440" cy="110" r="6" fill="'+I.ink+'"/><circle cx="388" cy="110" r="5" fill="#C9A961"/>'+
-       '<path d="M420 30 a60 60 0 0 1 40 0" fill="none" stroke="'+I.gold+'" stroke-width="2"/><path d="M460 30 l-9 -5 l1 9z" fill="'+I.gold+'"/>'+
-       '<text x="150" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Escape wheel</text><text x="260" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Pallet fork</text><text x="440" y="200" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance</text>'+
-       '<text x="20" y="22" font-family="Arial" font-size="11" fill="#6F6A60">Energy from gear train →</text><text x="356" y="22" font-family="Arial" font-size="11" fill="#6F6A60">oscillation</text></svg>',
-       cap:"Schematic of a lever escapement: the escape wheel is locked and released by the pallet fork, which gives the balance a small impulse at each swing."}; }
-  if(key==="balance"){ var spir='M440 110'; for(var t2=0;t2<26;t2+=0.25){ var rr=4+t2*1.6; spir+=' L'+(440+rr*Math.cos(t2)).toFixed(1)+' '+(110+rr*Math.sin(t2)).toFixed(1);}
-     return {svg:'<svg viewBox="0 0 560 230" class="dxsvg wide" role="img" aria-label="Balance wheel and balance spring"><circle cx="200" cy="110" r="80" fill="none" stroke="'+I.ink+'" stroke-width="5"/><line x1="120" y1="110" x2="280" y2="110" stroke="'+I.ink+'" stroke-width="3"/><circle cx="200" cy="110" r="7" fill="'+I.ink+'"/>'+
-       '<path d="M140 20 a95 95 0 0 1 120 0" fill="none" stroke="'+I.gold+'" stroke-width="2"/><path d="M260 20 l-10 -4 l3 9z M140 20 l10 -4 l-3 9z" fill="'+I.gold+'"/>'+
-       '<path d="'+spir+'" fill="none" stroke="'+I.ink+'" stroke-width="1.1"/><text x="200" y="215" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance wheel — swings back and forth</text><text x="440" y="215" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700">Balance spring (hairspring)</text></svg>',
-       cap:"The balance and its spring form the oscillator: the spring returns the wheel, which swings at a fixed frequency."}; }
-  if(part) return {svg:dxWatch({hl:part,sub:part==="subdial"?[[130,190]]:[[130,190]]}),cap:"MDR demonstration watch — the "+(DX_PART_LABEL[part]||term.t).toLowerCase()+" is highlighted in gold."};
-  return null;
-}
+
 /* ---------- calibre questions from verified fields only ---------- */
 function dxCalQs(c){
   var qs=[], makers=["Miyota","TMI (Time Module)","ETA","Sellita","Ronda"];
@@ -2801,25 +2834,98 @@ function dxCalQs(c){
   else if(c.functions) qs.push({q:"Which functions does calibre "+c.code+" have?",o:[c.functions.split(" (")[0],"Chronograph with flyback","Perpetual calendar","Minute repeater"],a:0});
   return qs;
 }
+
+/* ---------- learner record: keyed by Term ID / Calibre ID (device storage until sign-in is live) ---------- */
+var DXP_KEY="calibreDictProgress";
+function dxP(){
+  var v=null; try{ v=JSON.parse(localStorage.getItem(DXP_KEY)||"null"); }catch(e){}
+  v=v||{terms:{},xp:0,days:[],saved:[],misses:{},lastQ:{}};
+  if(!v.v2){ /* one-time migration of old slug keys to permanent IDs */
+    var I=dxBuild(), nt={}, map=function(k){ if(/^(TERM|CAL)-/.test(k)) return k; if(k.indexOf("c:")===0){var c=I.calBySlug[k.slice(2)];return c?c.id:null;} if(k.indexOf("t:")===0) k=k.slice(2); var t=I.bySlug[k]; return t?t.id:null; };
+    Object.keys(v.terms||{}).forEach(function(k){ var n=map(k); if(n) nt[n]=v.terms[k]; }); v.terms=nt;
+    v.saved=(v.saved||[]).map(map).filter(Boolean); var lq={}; Object.keys(v.lastQ||{}).forEach(function(k){var n=map(k); if(n) lq[n]=v.lastQ[k];}); v.lastQ=lq; v.v2=1;
+    try{ localStorage.setItem(DXP_KEY,JSON.stringify(v)); }catch(e){}
+  }
+  return v;
+}
+function dxSave(p){ try{ localStorage.setItem(DXP_KEY,JSON.stringify(p)); }catch(e){} }
+function dxToday(){ return new Date().toISOString().slice(0,10); }
+function dxTouch(p){ var d=dxToday(); if(p.days[p.days.length-1]!==d) p.days.push(d); if(p.days.length>400) p.days=p.days.slice(-400); }
+function dxRec(p,id){ return p.terms[id]=p.terms[id]||{first:new Date().toISOString(),views:0,tests:0,ans:0,correct:0,best:-1,latest:-1,status:"NOT STARTED",xp:0}; }
+function dxView(id){ var p=dxP(), r=dxRec(p,id); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p); return r; }
+function dxStatus(r){ if(!r) return "NOT STARTED"; if(r.status==="MASTERED"&&r.lastTest&&(Date.now()-new Date(r.lastTest))>21*864e5) return "REVIEW DUE"; return r.status; }
+function dxStreak(p){ var n=0,d=new Date(); for(;;){ var s=d.toISOString().slice(0,10); if(p.days.indexOf(s)>=0){n++;d.setDate(d.getDate()-1);} else break; } return n; }
+var DX_BADGES=[["FIRST TERM","explored",1],["DICTIONARY EXPLORER","explored",10],["HOROLOGY LEARNER","tested",5],["CALIBRE EXPLORER","calibres",5],["KNOWLEDGE BUILDER","mastered",10],["HOROLOGY MASTER","mastered",25]];
+
+/* ---------- image slots: your PNGs, or a placeholder naming the asset ---------- */
+var DX_ASSET_PATH="assets/";
+var DX_GEOM={chrono:{run:[32.5,50],min:[67.5,50],hr:[50,67.5],size:13}}; /* sub-dial centres (% of canvas) — adjust after rendering */
+var DX_HANDS={hour:"lab_hand_hour.png",minute:"lab_hand_minute.png",seconds:"lab_hand_seconds.png",chrono:"lab_hand_chrono.png",gmt:"lab_hand_gmt.png",sub:"lab_hand_subdial.png"};
+function dxTimeAngles(h,m,s){ return {hour:((h%12)+m/60)*30,minute:(m+(s||0)/60)*6,seconds:(s||0)*6}; }
+/* compositions built from the layered watch platform */
+var DX_COMP={
+  "IMG-LAB-BASE-001":function(){var a=dxTimeAngles(10,10,30);return {base:"lab_base_threehand.png",layers:[["lab_bezel_fixed.png",0]],hands:[["hour",a.hour],["minute",a.minute],["seconds",a.seconds]]};},
+  "IMG-LAB-BASE-002":function(){var a=dxTimeAngles(10,10,0);return {base:"lab_base_chronograph.png",layers:[],hands:[["hour",a.hour],["minute",a.minute],["chrono",0]],subs:[["run",180],["min",0],["hr",0]]};},
+  "IMG-LAB-BASE-003":function(){var a=dxTimeAngles(10,10,0);return {base:"lab_base_gmt.png",layers:[["lab_bezel_24h.png",0]],hands:[["hour",a.hour],["minute",a.minute],["gmt",14/24*360]]};},
+  "IMG-LAB-BASE-004":function(){var a=dxTimeAngles(10,10,0);return {base:"lab_base_worldtimer.png",layers:[["lab_wt_cityring.png",0],["lab_wt_24hring.png",0]],hands:[["hour",a.hour],["minute",a.minute]]};}
+};
+function dxRingComp(file,chrono){ var a=dxTimeAngles(10,10,0); return chrono?{base:"lab_base_chronograph.png",layers:[[file,0]],hands:[["hour",a.hour],["minute",a.minute],["chrono",180]],subs:[["run",180],["min",0],["hr",0]]}:{base:"lab_base_threehand.png",layers:[[file,0]],hands:[["hour",a.hour],["minute",a.minute],["seconds",180]]}; }
+var DX_ASSET_BY_ID={}; DX_ASSETS.forEach(function(a){DX_ASSET_BY_ID[a.id]=a;});
+function dxAssetFor(term){
+  var n=dxNorm(term.t), pick=function(pred){ return DX_ASSETS.filter(function(a){return pred(a)&&a.terms.some(function(x){return dxNorm(x)===n;});})[0]; };
+  var r=pick(function(a){return a.id.indexOf("IMG-DICT-")===0;})||pick(function(a){return /IMG-LAB-(RING|WT)/.test(a.id);})||pick(function(a){return /IMG-LAB-BASE/.test(a.id);})||null;
+  if(r&&r.file==="lab_bezel_24h.png") r=DX_ASSET_BY_ID["IMG-LAB-BASE-003"]; /* the 24-hour bezel is shown on the GMT watch */
+  if(r&&/IMG-LAB-WT/.test(r.id)) r=DX_ASSET_BY_ID["IMG-LAB-BASE-004"];
+  return r;
+}
+function dxCompFor(a){
+  if(!a) return null;
+  if(DX_COMP[a.id]) return DX_COMP[a.id]();
+  if(/IMG-LAB-RING/.test(a.id)) return dxRingComp(a.file,/tachymeter|telemeter|pulsometer/.test(a.file));
+  if(/IMG-LAB-WT/.test(a.id)) return DX_COMP["IMG-LAB-BASE-004"]();
+  return {single:a.file};
+}
+function dxFiles(c){ if(c.single) return [c.single]; var f=[c.base].concat(c.layers.map(function(l){return l[0];})).concat(c.hands.map(function(h){return DX_HANDS[h[0]];})); if(c.subs) f.push(DX_HANDS.sub); return f.filter(function(x,i){return f.indexOf(x)===i;}); }
+function dxStageHTML(c){ /* every layer shares the same square canvas and centre, so rotation is about the centre */
+  if(c.single) return '<img class="dxone" src="'+DX_ASSET_PATH+c.single+'" alt="">';
+  var g=DX_GEOM.chrono, h='<div class="dxstage"><img src="'+DX_ASSET_PATH+c.base+'" alt="">';
+  c.layers.forEach(function(l){ h+='<img data-layer="'+l[0]+'" src="'+DX_ASSET_PATH+l[0]+'" style="transform:rotate('+l[1]+'deg)" alt="">'; });
+  (c.subs||[]).forEach(function(s){ var p=g[s[0]]; h+='<img class="sub" data-sub="'+s[0]+'" src="'+DX_ASSET_PATH+DX_HANDS.sub+'" style="left:'+(p[0]-g.size/2)+'%;top:'+(p[1]-g.size/2)+'%;width:'+g.size+'%;transform:rotate('+s[1]+'deg)" alt="">'; });
+  c.hands.forEach(function(x){ h+='<img data-hand="'+x[0]+'" src="'+DX_ASSET_PATH+DX_HANDS[x[0]]+'" style="transform:rotate('+x[1]+'deg)" alt="">'; });
+  return h+'</div>';
+}
+function dxPlaceholder(a,c){
+  if(!a) return '<div class="dxph"><b>Visual pending</b><span>No visual assigned yet for this term.</span></div>';
+  return '<div class="dxph"><b>Visual pending</b><span>'+esc(a.id)+' · '+esc(dxFiles(c).join(" + "))+'</span><small>'+esc(a.brief)+'</small></div>';
+}
+/* render the slot: placeholder first; swapped for the real image(s) once the base PNG loads */
+function dxSlot(a,c,slotId){
+  setTimeout(function(){ var el=document.getElementById(slotId); if(!el||!c) return; var test=new Image(); test.onload=function(){ var e2=document.getElementById(slotId); if(e2) e2.innerHTML=dxStageHTML(c); }; test.src=DX_ASSET_PATH+(c.single||c.base); },0);
+  return '<figure class="dxfig" id="'+slotId+'">'+dxPlaceholder(a,c)+'</figure>';
+}
 /* ---------- rendering ---------- */
-function dxBody(h){ var b=document.getElementById("dx-body"); b.innerHTML=h; }
-function dxChip(t){ var I=dxBuild(), e=I.bySlug[dxSlug(t)]; return e?'<button class="dxchip" data-go="#/dict/t/'+e.slug+'">'+esc(e.t)+'</button>':'<span class="dxchip off" title="Entry in preparation">'+esc(t)+'</span>'; }
+function dxBody(h){ document.getElementById("dx-body").innerHTML=h; }
+function dxChip(name){ var e=dxFind(name); return e?'<button class="dxchip" data-go="'+dxHref(e)+'">'+esc(e.t)+'</button>':'<span class="dxchip off" title="Entry in preparation">'+esc(name)+'</span>'; }
 function dxStatusTag(st){ var c={"MASTERED":"g","UNDERSTOOD":"b","EXPLORED":"m","REVIEW DUE":"y","NOT STARTED":"m"}[st]||"m"; return '<span class="dxst '+c+'">'+st+'</span>'; }
 function renderDict(){
   var I=dxBuild(), sub=current.sub||"", arg=current.arg||"";
-  document.getElementById("dx-crumb").textContent={t:"Dictionary entry",c:"Calibre",l:"A–Z",me:"My progress",saved:"Saved terms"}[sub]||"Horology Dictionary";
-  if(sub==="t") return dxEntry(I.bySlug[arg]);
-  if(sub==="c") return dxCal(I.calBySlug[arg]);
+  /* permanent redirects from the old addresses */
+  if(sub==="t"||sub==="c"){ var old=sub==="t"?I.bySlug[arg]:I.calBySlug[arg]; if(old){ history.replaceState(null,"",dxHref(old)); sub=current.sub=old.id; } }
+  var e=I.byId[sub];
+  document.getElementById("dx-crumb").textContent=e?(e.code?"Calibre":"Dictionary"):({l:"A–Z",me:"My progress",saved:"Saved terms"}[sub]||"Horology Dictionary");
+  if(e) return e.code?dxCal(e):dxEntry(e);
+  if(/^(TERM|CAL)-/.test(sub)) return dxBody('<div class="dxpad"><div class="dxnone"><b>No verified Academy entry found.</b></div></div>');
   if(sub==="l") return dxLetter(arg);
   if(sub==="me") return dxProgress();
   if(sub==="saved") return dxSaved();
-  var p=dxP(), due=Object.keys(p.terms).filter(function(k){return dxStatus(p.terms[k])==="REVIEW DUE";});
+  var p=dxP(), due=Object.keys(p.terms).filter(function(k){return dxStatus(p.terms[k])==="REVIEW DUE"&&I.byId[k];});
+  var ex=["Balance Wheel","Chronograph","Escapement","Tourbillon","Power Reserve","GMT","Miyota 6S20","ETA 2824"].map(function(x){ var t=dxFind(x); if(!t){ var r=dxSearch(x); t=r&&(r.cals[0]||r.terms[0]); } return t?'<button class="dxchip" data-go="'+dxHref(t)+'">'+esc(x)+'</button>':''; }).join("");
   dxBody('<div class="dxpad"><p class="eyebrow">ILG Academy</p><h1 class="dxh1">Horology Dictionary</h1><p class="dxlead">Search horology terms &amp; calibres</p>'+
    '<div class="dxsearch"><svg width="20" height="20"><use href="#i-search"/></svg><input id="dxq" type="search" autocomplete="off" placeholder="Search a term, calibre or watch function…" value="'+esc(DX.q)+'" aria-label="Search the dictionary"></div>'+
    '<div id="dxres"></div>'+
-   '<div id="dxhome"><p class="dxsmall">Try</p><div class="dxex">'+["Balance Wheel","Chronograph","Escapement","Tourbillon","Power Reserve","GMT","Miyota 6S20","ETA 2824"].map(function(x){return '<button class="dxchip" data-dxq="'+esc(x)+'">'+esc(x)+'</button>';}).join("")+'</div>'+
+   '<div id="dxhome"><p class="dxsmall">Try</p><div class="dxex">'+ex+'</div>'+
    '<div class="dxaz" aria-label="A to Z">'+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function(L){var has=I.terms.some(function(t){return t.t[0].toUpperCase()===L;})||I.cals.some(function(c){return c.label[0].toUpperCase()===L;});return has?'<button data-go="#/dict/l/'+L+'">'+L+'</button>':'<span>'+L+'</span>';}).join("")+'</div>'+
-   '<div class="dxlinks"><button data-go="#/dict/me">My horology progress</button><button data-go="#/dict/saved">My saved terms ('+p.saved.length+')</button>'+(due.length?'<button data-go="#/dict/t/'+due[0]+'">'+due.length+' term'+(due.length>1?'s':'')+' due for review</button>':'')+'</div>'+
+   '<div class="dxlinks"><button data-go="#/dict/me">My horology progress</button><button data-go="#/dict/saved">My saved terms ('+p.saved.length+')</button>'+(due.length?'<button data-go="#/dict/'+due[0]+'">'+due.length+' term'+(due.length>1?'s':'')+' due for review</button>':'')+'<button data-go="#/lab">Bezel &amp; Watch Reading Lab →</button></div>'+
    '<p class="dxsmall">'+I.terms.length+' terms · '+I.cals.length+' calibres · <span class="dxlang">English · العربية coming soon</span></p></div></div>');
   var q=document.getElementById("dxq"); q.oninput=function(){DX.q=q.value; dxShowResults();}; if(DX.q) dxShowResults();
 }
@@ -2829,66 +2935,87 @@ function dxShowResults(){
   home.style.display="none"; var r=dxSearch(q);
   if(!r.terms.length&&!r.cals.length){ box.innerHTML='<div class="dxnone"><b>No verified Academy entry found.</b><p>“'+esc(q)+'” has been noted as a possible future entry.</p></div>';
     clearTimeout(DX.missT); DX.missT=setTimeout(function(){ var p=dxP(), k=q.toLowerCase(); p.misses[k]=(p.misses[k]||0)+1; dxSave(p); },1200); return; }
-  var row=function(e){return '<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+' · '+esc(e.def.slice(0,90))+(e.def.length>90?'…':'')+'</span></button>';};
+  var row=function(e){return '<button class="dxrow" data-go="'+dxHref(e)+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+' · Open entry →</span></button>';};
   box.innerHTML=(r.terms.length?'<p class="dxgrp">Dictionary</p>'+r.terms.map(row).join(""):'')+
-   (r.cals.length?'<p class="dxgrp">Calibres</p>'+r.cals.map(function(c){return '<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+' · '+esc((c.functions||"").split(" (")[0])+'</span></button>';}).join(""):'')+
+   (r.cals.length?'<p class="dxgrp">Calibres</p>'+r.cals.map(function(c){return '<button class="dxrow" data-go="'+dxHref(c)+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+' calibre · Open entry →</span></button>';}).join(""):'')+
    (r.related.length?'<p class="dxgrp">Related terms</p><div class="dxex">'+r.related.map(function(e){return dxChip(e.t);}).join("")+'</div>':'');
 }
 function dxLetter(L){
   var I=dxBuild(), T=I.terms.filter(function(t){return t.t[0].toUpperCase()===L;}).sort(function(a,b){return a.t.localeCompare(b.t);}), C=I.cals.filter(function(c){return c.label[0].toUpperCase()===L;});
   dxBody('<div class="dxpad"><div class="dxaz small">'+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function(x){return '<button class="'+(x===L?'on':'')+'" data-go="#/dict/l/'+x+'">'+x+'</button>';}).join("")+'</div><h1 class="dxh1">'+L+'</h1>'+
-   (T.length?T.map(function(e){return '<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+'</span></button>';}).join(""):'')+
-   (C.length?'<p class="dxgrp">Calibres</p>'+C.map(function(c){return '<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+'</span></button>';}).join(""):'')+
+   T.map(function(e){return '<button class="dxrow" data-go="'+dxHref(e)+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+' · Open entry →</span></button>';}).join("")+
+   (C.length?'<p class="dxgrp">Calibres</p>'+C.map(function(c){return '<button class="dxrow" data-go="'+dxHref(c)+'"><b>'+esc(c.label)+'</b><span>'+esc(c.type)+' calibre · Open entry →</span></button>';}).join(""):'')+
    (!T.length&&!C.length?'<p class="dxsmall">No entries under '+L+' yet.</p>':'')+'</div>');
 }
-function dxSection(label,body,cls){ return body?'<section class="dxsec '+(cls||'')+'"><p class="dxlab">'+label+'</p>'+body+'</section>':''; }
+function dxSec(label,body){ return '<section class="dxsec"><p class="dxlab">'+label+'</p>'+(body||'<p class="dxprep">In preparation</p>')+'</section>'; }
 function dxEntry(e){
-  if(!e) return dxBody('<div class="dxpad"><div class="dxnone"><b>No verified Academy entry found.</b></div></div>');
-  var r=dxView(e.slug), p=dxP(), saved=p.saved.indexOf("t:"+e.slug)>=0, v=e.vis!==undefined?dxVisual(e.vis,e):dxVisual(null,e), I=dxBuild();
-  var relCals=[]; if(e.slug==="chronograph"||e.slug==="chronograph-pusher") relCals=I.cals.filter(function(c){return /chronograph/i.test(c.functions);});
-  if(e.slug==="automatic-movement"||e.slug==="rotor") relCals=I.cals.filter(function(c){return /automatic/i.test(c.type);});
-  if(e.slug==="day-date") relCals=I.cals.filter(function(c){return /day,? date/i.test(c.functions);});
-  if(e.slug==="quartz-movement") relCals=I.cals.filter(function(c){return /quartz/i.test(c.type);}).slice(0,8);
-  if(e.slug==="24-hour-display") relCals=I.cals.filter(function(c){return /24-hr/i.test(c.functions);});
-  var lab=e.c==="Movements"||e.c==="Complications";
-  dxBody('<div class="dxpad"><div class="dxtop"><span class="dxcat">'+esc(e.c)+'</span><button class="dxsave'+(saved?' on':'')+'" id="dxsv" aria-label="Save term">'+(saved?'★ Saved':'☆ Save')+'</button></div>'+
-   '<h1 class="dxterm">'+esc(e.t)+'</h1>'+dxStatusTag(dxStatus(r))+
-   dxSection('Academy Definition','<p class="dxdef">'+esc(e.def)+'</p>','def')+
-   (v?'<figure class="dxfig">'+v.svg+'<figcaption>'+esc(v.cap)+'</figcaption></figure>':'')+
-   dxSection('Simple explanation',e.simple?'<p>'+esc(e.simple)+'</p>':'')+
-   dxSection('Technical explanation',e.tech?'<p>'+esc(e.tech)+'</p>':'')+
-   dxSection('Why it matters',e.why?'<p>'+esc(e.why)+'</p>':'')+
-   dxSection('Customer explanation',e.cust?'<blockquote>'+esc(e.cust)+'</blockquote>':'')+
-   dxSection('Trainer tip',e.tip?'<p>'+esc(e.tip)+'</p>':'')+
-   dxSection('Common misconceptions',e.mis?'<p>'+esc(e.mis)+'</p>':'')+
-   dxSection('Related terms',(e.rel||[]).length?'<div class="dxex">'+e.rel.map(dxChip).join("")+'</div>':'')+
-   dxSection('Related calibres',relCals.length?'<div class="dxex">'+relCals.map(function(c){return '<button class="dxchip" data-go="#/dict/c/'+c.slug+'">'+esc(c.label)+'</button>';}).join("")+'</div>':'')+
-   (lab?'<button class="dxghost" data-go="#/cal">Explore in Horology Lab →</button>':'')+
-   (e.full&&e.q?'<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p><p>Three short questions on '+esc(e.t)+'. Optional.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div></section>':
-     '<p class="dxsmall">Full entry and test for this term are in preparation.</p>')+
-   '<p class="dxsrc">Academy content · original text · status: draft for trainer review</p></div>');
-  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),k="t:"+e.slug,i=p2.saved.indexOf(k); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(k); dxSave(p2); toast(i>=0?"Removed from saved":"Saved"); dxEntry(e); };
-  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest(e,e.q,"t:"+e.slug);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxsmall">Test skipped. You can come back any time.</p>';}; }
+  DX.q="";
+  var r=dxView(e.id), p=dxP(), saved=p.saved.indexOf(e.id)>=0, I=dxBuild(), a=dxAssetFor(e), c=dxCompFor(a);
+  var relCals=[]; if(/^chronograph/.test(e.slug)) relCals=I.cals.filter(function(x){return /chronograph/i.test(x.functions);});
+  if(e.slug==="automatic-movement"||e.slug==="rotor") relCals=I.cals.filter(function(x){return /automatic/i.test(x.type);});
+  if(e.slug==="day-date") relCals=I.cals.filter(function(x){return /day,? date/i.test(x.functions);});
+  if(e.slug==="quartz-movement") relCals=I.cals.filter(function(x){return /quartz/i.test(x.type);}).slice(0,8);
+  if(e.slug==="24-hour-display"||e.slug==="24-hour-scale") relCals=I.cals.filter(function(x){return /24-hr/i.test(x.functions);});
+  var lab=DX_LAB[e.slug];
+  dxBody('<div class="dxpad"><div class="dxtop"><span class="dxcat">'+esc(e.c)+'</span><button class="dxsave'+(saved?' on':'')+'" id="dxsv" aria-label="Bookmark">'+(saved?'★ Saved':'☆ Save')+'</button></div>'+
+   '<h1 class="dxterm">'+esc(e.t)+'</h1><div class="dxmeta">'+dxStatusTag(dxStatus(r))+'<span class="dxid">'+esc(e.id)+'</span></div>'+
+   '<section class="dxsec def"><p class="dxlab">Academy Definition</p><p class="dxdef">'+esc(e.def)+'</p></section>'+
+   '<section class="dxsec"><p class="dxlab">Visual explanation</p>'+dxSlot(a,c,"dxslot")+'</section>'+
+   dxSec('Simple explanation',e.simple&&'<p>'+esc(e.simple)+'</p>')+
+   dxSec('Technical explanation',e.tech&&'<p>'+esc(e.tech)+'</p>')+
+   dxSec('Why it matters',e.why&&'<p>'+esc(e.why)+'</p>')+
+   dxSec('Customer explanation',e.cust&&'<blockquote>'+esc(e.cust)+'</blockquote>')+
+   dxSec('Trainer tip',e.tip&&'<p>'+esc(e.tip)+'</p>')+
+   (e.mis?dxSec('Common misconceptions','<p>'+esc(e.mis)+'</p>'):'')+
+   dxSec('Related terms',(e.rel||[]).length&&'<div class="dxex">'+e.rel.map(dxChip).join("")+'</div>')+
+   (relCals.length?dxSec('Related calibres','<div class="dxex">'+relCals.map(function(x){return '<button class="dxchip" data-go="'+dxHref(x)+'">'+esc(x.label)+'</button>';}).join("")+'</div>'):'')+
+   (lab?'<button class="dxpractice" data-go="#/lab/'+lab+'">Practise in Horology Lab · '+esc(LAB_MODS[lab].name)+' →</button>':'')+
+   '<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p>'+(e.full&&e.q&&e.q.length>=3?'<p>Three short questions on '+esc(e.t)+'. Optional.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div>':'<p class="dxprep">Test in preparation for this term.</p>')+'</section>'+
+   '<p class="dxsrc">'+esc(e.id)+' · Academy content · original text · status: draft for trainer review</p></div>');
+  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),i=p2.saved.indexOf(e.id); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(e.id); dxSave(p2); toast(i>=0?"Removed from saved":"Saved"); dxEntry(e); };
+  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest(e,e.q,e.id);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxlab">Test your understanding</p><p class="dxsmall">Test skipped. You can come back any time.</p>';}; }
 }
 function dxCal(c){
-  if(!c) return dxBody('<div class="dxpad"><div class="dxnone"><b>No verified Academy entry found.</b></div></div>');
-  var p=dxP(), key="c:"+c.slug, r=dxRec(p,key); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p);
-  var saved=p.saved.indexOf(key)>=0, map=typeof dialMapSVG==="function"?dialMapSVG(c.functions):"";
+  DX.q="";
+  var p=dxP(), r=dxRec(p,c.id); r.views++; r.last=new Date().toISOString(); if(r.status==="NOT STARTED") r.status="EXPLORED"; dxTouch(p); dxSave(p);
+  var saved=p.saved.indexOf(c.id)>=0, map=typeof dialMapSVG==="function"?dialMapSVG(c.functions):"";
   var rows=[["Manufacturer",c.makerFull||c.maker],["Calibre",c.code],["Movement type",c.type],["Functions",(c.functions||"").split(" (")[0]],["Power reserve / battery",c.power]].concat(c.fields||[]).filter(function(x){return x[1];});
-  var qs=dxCalQs(c), rel=[]; if(/chronograph/i.test(c.functions)) rel.push("Chronograph","Sub-Dial"); if(/automatic/i.test(c.type)) rel.push("Automatic Movement","Rotor","Power Reserve"); if(/quartz/i.test(c.type)) rel.push("Quartz Movement","Battery Life"); if(/day/i.test(c.functions)) rel.push("Day-Date"); if(/24-hr/i.test(c.functions)) rel.push("24-Hour Display");
+  var qs=dxCalQs(c), rel=[]; if(/chronograph/i.test(c.functions)) rel.push("Chronograph","Sub-Dial"); if(/automatic/i.test(c.type)) rel.push("Automatic Movement","Rotor","Power Reserve"); if(/quartz/i.test(c.type)) rel.push("Quartz Movement","Battery Life"); if(/day/i.test(c.functions)) rel.push("Day-Date"); if(/24-hr/i.test(c.functions)) rel.push("24-Hour Scale");
   dxBody('<div class="dxpad"><div class="dxtop"><span class="dxcat">Calibre</span><button class="dxsave'+(saved?' on':'')+'" id="dxsv">'+(saved?'★ Saved':'☆ Save')+'</button></div>'+
-   '<h1 class="dxterm">'+esc(c.label)+'</h1>'+dxStatusTag(dxStatus(r))+
+   '<h1 class="dxterm">'+esc(c.label)+'</h1><div class="dxmeta">'+dxStatusTag(dxStatus(r))+'<span class="dxid">'+esc(c.id)+'</span></div>'+
    '<table class="dxtab">'+rows.map(function(x){return '<tr><th>'+esc(x[0])+'</th><td>'+esc(x[1])+'</td></tr>';}).join("")+'</table>'+
-   (map?'<figure class="dxfig dxmap">'+map+'<figcaption>Sub-dial layout from the verified calibre data.</figcaption></figure>':'')+
-   (c.brands.length?dxSection('Brands using this calibre (ILG FW26)','<div class="dxex">'+c.brandKeys.map(function(k){return '<button class="dxchip" data-go="#/b/'+k+'">'+esc(MAISON[k].name)+'</button>';}).join("")+'</div>'+(c.fams.length?'<p class="dxsmall">Families: '+esc(c.fams.join(", "))+'</p>':'')):'')+
-   dxSection('Related terms',rel.length?'<div class="dxex">'+rel.map(dxChip).join("")+'</div>':'')+
+   (map?'<figure class="dxfig dxmap">'+map+'<figcaption>Sub-dial positions from the verified calibre data (schematic).</figcaption></figure>':'')+
+   (c.brands.length?dxSec('Brands using this calibre (ILG FW26)','<div class="dxex">'+c.brandKeys.map(function(k){return '<button class="dxchip" data-go="#/b/'+k+'">'+esc(MAISON[k].name)+'</button>';}).join("")+'</div>'+(c.fams.length?'<p class="dxsmall">Families: '+esc(c.fams.join(", "))+'</p>':'')):'')+
+   (rel.length?dxSec('Related terms','<div class="dxex">'+rel.map(dxChip).join("")+'</div>'):'')+
    '<p class="dxsmall">Fields not listed are not available in the verified Academy database.</p>'+
-   '<button class="dxghost" data-go="#/cal">Explore in Horology Lab →</button>'+
-   (qs.length>=2?'<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p><p>Questions use only this calibre\'s verified data.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div></section>':'')+
-   '<p class="dxsrc">Source: '+esc(c.source)+' · Verification: verified · Last verified '+esc(c.verified)+'</p></div>');
-  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),i=p2.saved.indexOf(key); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(key); dxSave(p2); dxCal(c); };
-  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest({t:c.label,simple:"Calibre "+c.code+": "+rows.map(function(x){return x[0]+" "+x[1];}).join(" · ")},qs,key);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxsmall">Test skipped.</p>';}; }
+   (typeof CALS!=="undefined"&&CALS[c.code]?'<button class="dxghost" data-go="#/cal/'+esc(c.code)+'">Open in Horology Lab →</button>':'')+
+   '<section class="dxtest" id="dxtest"><p class="dxlab">Test your understanding</p>'+(qs.length>=2?'<p>Questions use only this calibre\'s verified data.</p><div class="dxrowb"><button class="dxbtn" id="dxgo">Test your understanding</button><button class="dxghost" id="dxskip">Skip test</button></div>':'<p class="dxprep">Test in preparation.</p>')+'</section>'+
+   '<p class="dxsrc">'+esc(c.id)+' · Source: '+esc(c.source)+' · Verified · Last verified '+esc(c.verified)+'</p></div>');
+  document.getElementById("dxsv").onclick=function(){ var p2=dxP(),i=p2.saved.indexOf(c.id); if(i>=0)p2.saved.splice(i,1); else p2.saved.push(c.id); dxSave(p2); dxCal(c); };
+  var g=document.getElementById("dxgo"); if(g){ g.onclick=function(){dxTest({t:c.label,simple:rows.map(function(x){return x[0]+": "+x[1];}).join(" · ")},qs,c.id);}; document.getElementById("dxskip").onclick=function(){document.getElementById("dxtest").innerHTML='<p class="dxsmall">Test skipped.</p>';}; }
 }
+function dxProgress(){
+  var I=dxBuild(), p=dxP(), keys=Object.keys(p.terms).filter(function(k){return I.byId[k];}), st=function(k){return dxStatus(p.terms[k]);};
+  var explored=keys.filter(function(k){return st(k)!=="NOT STARTED";}).length, tested=keys.filter(function(k){return p.terms[k].tests>0;}).length, mastered=keys.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
+  var ans=keys.reduce(function(a,k){return a+p.terms[k].ans;},0), cor=keys.reduce(function(a,k){return a+p.terms[k].correct;},0), cals=keys.filter(function(k){return k.indexOf("CAL-")===0;}).length;
+  var counts={explored:explored,tested:tested,mastered:mastered,calibres:cals}, catOf=function(k){ var e=I.byId[k]; return e.code?"Calibres":e.c; };
+  var due=keys.filter(function(k){return st(k)==="REVIEW DUE";}), lp=labP(), labDone=Object.keys(lp.mods).filter(function(m){return lp.mods[m].level>=1;});
+  dxBody('<div class="dxpad"><p class="eyebrow">Your learning</p><h1 class="dxh1">My horology progress</h1>'+
+   '<div class="dxstats">'+[["Terms explored",explored],["Terms tested",tested],["Terms mastered",mastered],["Mastery rate",tested?Math.round(100*mastered/tested)+"%":"—"],["XP earned",p.xp+lp.xp],["Current streak",dxStreak(p)+" day"+(dxStreak(p)===1?"":"s")]].map(function(x){return '<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>';}).join("")+'</div>'+
+   '<p class="dxlab" style="margin-top:22px">By category</p>'+DX_CATS.map(function(c){ var total=c==="Calibres"?I.cals.length:I.terms.filter(function(t){return t.c===c;}).length, mine=keys.filter(function(k){return catOf(k)===c;}), m=mine.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
+     return '<div class="dxbar"><span>'+esc(c)+'</span><i><em style="width:'+(total?Math.round(100*mine.length/total):0)+'%"></em><em class="m" style="width:'+(total?Math.round(100*m/total):0)+'%"></em></i><small>'+mine.length+'/'+total+' · '+m+' mastered</small></div>';}).join("")+
+   '<p class="dxlab" style="margin-top:22px">Horology Lab</p><p class="dxsmall" style="margin-top:0">'+(labDone.length?labDone.map(function(m){return esc(LAB_MODS[m].name)+': level '+lp.mods[m].level+' of '+LAB_MODS[m].levels.length;}).join(" · "):'No Lab exercises yet.')+'</p>'+
+   (due.length?'<p class="dxlab" style="margin-top:22px">Review due</p><div class="dxex">'+due.map(function(k){var e=I.byId[k];return '<button class="dxchip" data-go="'+dxHref(e)+'">'+esc(e.t||e.label)+'</button>';}).join("")+'</div>':'')+
+   '<p class="dxlab" style="margin-top:22px">Badges</p><div class="dxbadges">'+DX_BADGES.map(function(b){var got=counts[b[1]]>=b[2];return '<span class="'+(got?'on':'')+'">'+b[0]+'<small>'+(got?'Earned':b[2]+' '+b[1])+'</small></span>';}).join("")+'</div>'+
+   (ans?'<p class="dxsmall">Answers: '+cor+' correct of '+ans+'.</p>':'')+
+   '<p class="dxsmall">Demo: progress is saved on this device. With sign-in it moves to your account and follows you across devices.</p></div>');
+}
+function dxSaved(){
+  var I=dxBuild(), p=dxP();
+  dxBody('<div class="dxpad"><p class="eyebrow">Private to you</p><h1 class="dxh1">My saved terms</h1>'+(p.saved.length?p.saved.map(function(k){ var e=I.byId[k]; return e?'<button class="dxrow" data-go="'+dxHref(e)+'"><b>'+esc(e.t||e.label)+'</b><span>'+(e.code?'Calibre':esc(e.c))+' · Open entry →</span></button>':''; }).join(""):'<p class="dxsmall">Tap ☆ Save on any entry to keep it here.</p>')+'</div>');
+}
+window.__dict={search:function(q){return dxSearch(q);},build:dxBuild};
+
 /* ---------- test: 3 questions, varied, XP only for improvement ---------- */
 function dxShuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a; }
 function dxTest(e,pool,key,avoid){
@@ -2919,28 +3046,139 @@ function dxTest(e,pool,key,avoid){
   }
   show();
 }
-function dxProgress(){
-  var I=dxBuild(), p=dxP(), keys=Object.keys(p.terms), st=function(k){return dxStatus(p.terms[k]);};
-  var explored=keys.filter(function(k){return st(k)!=="NOT STARTED";}).length, tested=keys.filter(function(k){return p.terms[k].tests>0;}).length, mastered=keys.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
-  var ans=keys.reduce(function(a,k){return a+p.terms[k].ans;},0), cor=keys.reduce(function(a,k){return a+p.terms[k].correct;},0), cals=keys.filter(function(k){return k.indexOf("c:")===0;}).length;
-  var counts={explored:explored,tested:tested,mastered:mastered,calibres:cals};
-  var catOf=function(k){ if(k.indexOf("c:")===0) return "Calibres"; var e=I.bySlug[k]; return e?e.c:""; };
-  var due=keys.filter(function(k){return st(k)==="REVIEW DUE";});
-  dxBody('<div class="dxpad"><p class="eyebrow">Your learning</p><h1 class="dxh1">My horology progress</h1>'+
-   '<div class="dxstats">'+[["Terms explored",explored],["Terms tested",tested],["Terms mastered",mastered],["Mastery rate",tested?Math.round(100*mastered/tested)+"%":"—"],["XP earned",p.xp],["Current streak",dxStreak(p)+" day"+(dxStreak(p)===1?"":"s")]].map(function(x){return '<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>';}).join("")+'</div>'+
-   '<p class="dxlab" style="margin-top:22px">By category</p>'+DX_CATS.map(function(c){ var total=c==="Calibres"?I.cals.length:I.terms.filter(function(t){return t.c===c;}).length, mine=keys.filter(function(k){return catOf(k)===c;}), m=mine.filter(function(k){return p.terms[k].status==="MASTERED";}).length;
-     return '<div class="dxbar"><span>'+esc(c)+'</span><i><em style="width:'+(total?Math.round(100*mine.length/total):0)+'%"></em><em class="m" style="width:'+(total?Math.round(100*m/total):0)+'%"></em></i><small>'+mine.length+'/'+total+' · '+m+' mastered</small></div>';}).join("")+
-   (due.length?'<p class="dxlab" style="margin-top:22px">Review due</p><div class="dxex">'+due.map(function(k){var s=k.indexOf("c:")===0?k.slice(2):k;var e=I.bySlug[s];return e?'<button class="dxchip" data-go="#/dict/t/'+e.slug+'">'+esc(e.t)+'</button>':'';}).join("")+'</div>':'')+
-   '<p class="dxlab" style="margin-top:22px">Badges</p><div class="dxbadges">'+DX_BADGES.map(function(b){var got=counts[b[1]]>=b[2];return '<span class="'+(got?'on':'')+'">'+b[0]+'<small>'+(got?'Earned':b[2]+' '+b[1])+'</small></span>';}).join("")+'</div>'+
-   (ans?'<p class="dxsmall">Answers: '+cor+' correct of '+ans+'.</p>':'')+
-   '<p class="dxsmall">Your progress is saved on this device for now. When sign-in is live it moves to your account and follows you across devices.</p></div>');
+
+/* ===================== BEZEL & WATCH READING LAB ===================== */
+function labChrono(m,s,h){ /* chronograph state → angles (30-minute counter, 12-hour counter) */
+  var a=dxTimeAngles(10,10,0); return {base:"lab_base_chronograph.png",layers:[],hands:[["hour",a.hour],["minute",a.minute],["chrono",(s||0)*6]],subs:[["run",180],["min",((m||0)+(s||0)/60)/30*360],["hr",(h||0)/12*360]]}; }
+function labTachy(sec){ var c=labChrono(0,sec); c.layers=[["lab_ring_tachymeter.png",0]]; c.subs[1][1]=sec/60/30*360; return c; }
+function labGmt(lh,lm,gh,gm,bez){ var a=dxTimeAngles(lh,lm,0); return {base:"lab_base_gmt.png",layers:[["lab_bezel_24h.png",bez||0]],hands:[["hour",a.hour],["minute",a.minute],["gmt",((gh+(gm||0)/60)/24)*360]]}; }
+var LAB_MODS={
+ chrono:{name:"Chronograph reading",term:"Chronograph",asset:"IMG-LAB-BASE-002",live:true,
+  teach:["A chronograph is a stopwatch: the pusher at 2 o'clock starts and stops it, the pusher at 4 o'clock resets it.","The long central chronograph hand counts seconds. The counter at 3 o'clock counts chronograph minutes (up to 30), the counter at 6 o'clock counts hours. The small dial at 9 o'clock is the running seconds of the normal time.","To read elapsed time: minutes from the 3 o'clock counter + seconds from the central hand."],
+  levels:[
+   {n:"Recognise",ex:[{q:"Which pusher starts and stops the chronograph?",type:"choice",o:["The pusher at 2 o'clock","The pusher at 4 o'clock","The crown"],a:0,st:function(){return labChrono(0,0);}},
+     {q:"Which small dial shows the running seconds of the normal time?",type:"choice",o:["The dial at 9 o'clock","The dial at 3 o'clock","The dial at 6 o'clock"],a:0,st:function(){return labChrono(0,0);}},
+     {q:"Which hand measures the elapsed seconds?",type:"choice",o:["The long central chronograph hand","The small hand at 9 o'clock","The hour hand"],a:0,st:function(){return labChrono(0,0);}}]},
+   {n:"Read",ex:[{q:"The chronograph has been stopped. How much time has elapsed?",type:"dur",a:[2,35],st:function(){return labChrono(2,35);}},
+     {q:"Read the elapsed time on the stopped chronograph.",type:"dur",a:[7,12],st:function(){return labChrono(7,12);}},
+     {q:"Read the elapsed time on the stopped chronograph.",type:"dur",a:[0,48],st:function(){return labChrono(0,48);}}]},
+   {n:"Calculate",ex:[{q:"The chronograph starts at 10:15:00 and stops at 10:17:35. How much time elapsed?",type:"dur",a:[2,35],st:function(){return labChrono(2,35);}},
+     {q:"Started at 09:58:40, stopped at 10:03:10. Elapsed time?",type:"dur",a:[4,30],st:function(){return labChrono(4,30);}},
+     {q:"Started at 14:20:15, stopped at 14:31:05. Elapsed time?",type:"dur",a:[10,50],st:function(){return labChrono(10,50);}}]}]},
+ tachy:{name:"Tachymeter",term:"Tachymeter",asset:"IMG-LAB-RING-007",live:true,
+  teach:["A tachymeter turns elapsed seconds into a speed (units per hour), using the formula 3600 ÷ seconds.","Start the chronograph at a marker, stop it after a known distance — usually 1 km. The chronograph hand then points to the average speed on the scale.","The scale works for events shorter than 60 seconds. For other distances, multiply the reading by the distance."],
+  levels:[
+   {n:"Recognise",ex:[{q:"Which scale turns elapsed seconds into speed?",type:"choice",o:["Tachymeter","Telemeter","Pulsometer"],a:0,st:function(){return labTachy(0);}},
+     {q:"The tachymeter is used together with…",type:"choice",o:["the chronograph","the GMT hand","the date"],a:0,st:function(){return labTachy(0);}},
+     {q:"What does the tachymeter read at exactly 60 seconds?",type:"choice",o:["60","120","100"],a:0,st:function(){return labTachy(60);}}]},
+   {n:"Read",ex:[{q:"A car covered 1 km. Read the speed on the tachymeter (km/h).",type:"num",unit:"km/h",a:120,tol:2,st:function(){return labTachy(30);}},
+     {q:"1 km covered. Read the average speed (km/h).",type:"num",unit:"km/h",a:80,tol:2,st:function(){return labTachy(45);}},
+     {q:"1 km covered. Read the average speed (km/h).",type:"num",unit:"km/h",a:180,tol:5,st:function(){return labTachy(20);}}]},
+   {n:"Calculate",ex:[{q:"A car covers 0.5 km in 20 seconds (the hand points to 180). What is its average speed?",type:"num",unit:"km/h",a:90,tol:3,st:function(){return labTachy(20);}},
+     {q:"A car covers 2 km in 48 seconds. What is its average speed?",type:"num",unit:"km/h",a:150,tol:5,st:function(){return labTachy(48);}},
+     {q:"A car covers 1 km in 36 seconds. What is its average speed?",type:"num",unit:"km/h",a:100,tol:2,st:function(){return labTachy(36);}}]}]},
+ gmt:{name:"GMT reading",term:"GMT",asset:"IMG-LAB-BASE-003",live:true,
+  teach:["The hour and minute hands show local time. The arrow-tipped GMT hand turns once in 24 hours and shows a second time zone on the 24-hour scale.","Read the GMT hand against the 24-hour bezel: the number under its tip is the hour in the second time zone; the minutes are the same as local time.","A rotating 24-hour bezel lets the same GMT hand show a third time zone: turn the bezel by the time difference."],
+  levels:[
+   {n:"Recognise",ex:[{q:"Which hand shows the second time zone?",type:"choice",o:["The arrow-tipped 24-hour hand","The minute hand","The hour hand"],a:0,st:function(){return labGmt(10,10,14,10);}},
+     {q:"How long does the GMT hand take for one full turn?",type:"choice",o:["24 hours","12 hours","60 minutes"],a:0,st:function(){return labGmt(10,10,14,10);}},
+     {q:"The GMT hand is read against…",type:"choice",o:["the 24-hour scale","the minute track","the 12-hour indices"],a:0,st:function(){return labGmt(10,10,14,10);}}]},
+   {n:"Read",ex:[{q:"Local time is 10:00. What time does the GMT hand show in the second time zone?",type:"time",a:[14,0],st:function(){return labGmt(10,0,14,0);}},
+     {q:"Local time is 08:30. What time is it in the second time zone?",type:"time",a:[22,30],st:function(){return labGmt(8,30,22,30);}},
+     {q:"Local time is 16:45. What time is it in the second time zone?",type:"time",a:[7,45],st:function(){return labGmt(16,45,7,45);}}]},
+   {n:"Calculate",ex:[{q:"The GMT hand points to 14 on the dial, but the bezel has been turned +3 hours. What time does the bezel now show for a third time zone?",type:"time",a:[17,0],st:function(){return labGmt(10,0,14,0,-45);}},
+     {q:"You are in Dubai (UTC+4) at 10:00. In winter, London is UTC+0. What time should the GMT hand show for London?",type:"time",a:[6,0],st:function(){return labGmt(10,0,6,0);}},
+     {q:"In Dubai (UTC+4) it is 10:00. Tokyo is UTC+9. What time should the GMT hand show for Tokyo?",type:"time",a:[15,0],st:function(){return labGmt(10,0,15,0);}}]}]},
+ driving:{name:"Driving & racing",term:"Tachymeter",asset:"IMG-LAB-RING-007",teach:["The applied version of the tachymeter: lap timing, speed checks between markers, and combined speed, distance and time reasoning."]},
+ tele:{name:"Telemeter",term:"Telemeter",asset:"IMG-LAB-RING-008",teach:["Start at the flash, stop at the thunder: the telemeter shows the distance from the speed of sound (MDR scale on a 340 m/s basis)."]},
+ pulso:{name:"Pulsometer",term:"Pulsometer",asset:"IMG-LAB-RING-009",teach:["Count 15 beats with the chronograph running; the pulsometer then shows the beats per minute."]},
+ wt:{name:"World timer",term:"World Timer",asset:"IMG-LAB-BASE-004",teach:["Read every city against the 24-hour ring: home city at the top, then the time in any other city."]},
+ dive:{name:"Dive bezel",term:"Dive Bezel",asset:"IMG-LAB-RING-002",teach:["Set the zero of the unidirectional bezel on the minute hand; read elapsed and remaining time."]},
+ countdown:{name:"Countdown bezel",term:"Countdown Bezel",asset:"IMG-LAB-RING-004",teach:["Set the countdown and read the minutes remaining before an event."]},
+ h12:{name:"12-hour bezel",term:"12-Hour Bezel",asset:"IMG-LAB-RING-005",teach:["Turn the bezel by the time difference and read a second time zone with the hour hand."]},
+ min60:{name:"60-minute bezel",term:"Bezel",asset:"IMG-LAB-RING-003",teach:["Align zero with the minute hand to time meetings or cooking."]},
+ compass:{name:"Compass bezel",term:"Compass Bezel",asset:"IMG-LAB-RING-006",teach:["Use the hour hand and the sun to find south (northern hemisphere) or north (southern hemisphere), with its limits."]},
+ combo:{name:"Combined challenges",term:"Chronograph",asset:"IMG-LAB-BASE-002",teach:["Level 5: chronograph + tachymeter, telemeter or pulsometer; GMT + rotating bezel; world timer + GMT; dive bezel + chronograph."]}
+};
+var LAB_ORDER=["chrono","tachy","gmt","driving","tele","pulso","wt","dive","countdown","h12","min60","compass","combo"];
+var LAB_KEY="calibreLabProgress";
+function labP(){ try{ var v=JSON.parse(localStorage.getItem(LAB_KEY)||"null"); if(v) return v; }catch(e){} return {mods:{},done:{},xp:0}; }
+function labSave(v){ try{ localStorage.setItem(LAB_KEY,JSON.stringify(v)); }catch(e){} }
+function labBody(h){ document.getElementById("lab-body").innerHTML=h; window.scrollTo(0,0); }
+function renderLab(){
+  var id=current.mod, lp=labP();
+  document.getElementById("lab-crumb").textContent=id&&LAB_MODS[id]?LAB_MODS[id].name:"Bezel & Watch Reading Lab";
+  if(id&&LAB_MODS[id]) return labModule(id);
+  labBody('<div class="dxpad"><p class="eyebrow">Horology Lab</p><h1 class="dxh1">Bezel &amp; Watch Reading Lab</h1><p class="dxlead">Learn to actually read a watch: look, turn, read, calculate, apply.</p>'+
+   '<p class="dxsmall">Levels: 1 Recognise · 2 Read · 3 Calculate · 4 Apply · 5 Master</p>'+
+   LAB_ORDER.map(function(k){ var m=LAB_MODS[k], st=lp.mods[k]; return '<button class="dxrow labrow" data-go="#/lab/'+k+'"><b>'+esc(m.name)+'</b><span>'+(m.live?(st&&st.level?'Level '+st.level+' of '+m.levels.length+' passed':'Ready · '+m.levels.length+' levels'):'In preparation')+'</span></button>'; }).join("")+
+   '<button class="dxghost" data-go="#/cal">Calibres &amp; interactive manuals →</button></div>');
 }
-function dxSaved(){
-  var I=dxBuild(), p=dxP();
-  dxBody('<div class="dxpad"><p class="eyebrow">Private to you</p><h1 class="dxh1">My saved terms</h1>'+(p.saved.length?p.saved.map(function(k){ if(k.indexOf("c:")===0){var c=I.calBySlug[k.slice(2)];return c?'<button class="dxrow" data-go="#/dict/c/'+c.slug+'"><b>'+esc(c.label)+'</b><span>Calibre</span></button>':'';} var e=I.bySlug[k.slice(2)]; return e?'<button class="dxrow" data-go="#/dict/t/'+e.slug+'"><b>'+esc(e.t)+'</b><span>'+esc(e.c)+'</span></button>':''; }).join(""):'<p class="dxsmall">Tap ☆ Save on any entry to keep it here.</p>')+'</div>');
+function labModule(id){
+  var m=LAB_MODS[id], lp=labP(), st=lp.mods[id]||{level:0}, a=DX_ASSET_BY_ID[m.asset], term=dxFind(m.term);
+  var stage=m.live?m.levels[0].ex[0].st():dxCompFor(a);
+  labBody('<div class="dxpad"><p class="eyebrow">Bezel &amp; Watch Reading Lab</p><h1 class="dxh1">'+esc(m.name)+'</h1>'+
+   dxSlot(a,stage,"labslot")+
+   (m.live?'<div class="labctl" id="labctl"></div>':'')+
+   '<section class="dxsec"><p class="dxlab">How to read it</p>'+m.teach.map(function(t){return '<p>'+esc(t)+'</p>';}).join("")+'</section>'+
+   (term?'<button class="dxghost" data-go="'+dxHref(term)+'">Learn '+esc(term.t)+' in the Dictionary →</button>':'')+
+   (m.live?'<section class="dxsec"><p class="dxlab">Exercises</p>'+m.levels.map(function(L,i){ var open=i<=st.level, passed=i<st.level; return '<button class="labLv'+(open?'':' locked')+'" data-lv="'+i+'"'+(open?'':' disabled')+'><b>Level '+(i+1)+' · '+L.n+'</b><span>'+(passed?'Passed ✓':open?L.ex.length+' exercises':'Pass level '+i+' to unlock')+'</span></button>'; }).join("")+
+     '<p class="dxsmall">Levels 4 Apply and 5 Master open when the watch renders are uploaded.</p></section>':'<div class="dxnone"><b>In preparation</b><p>This module opens once its MDR renders are uploaded and its exercises are approved.</p></div>')+'</div>');
+  if(m.live){ labControls(id); [].forEach.call(document.querySelectorAll("[data-lv]"),function(b){ b.onclick=function(){ labRun(id,+b.getAttribute("data-lv")); }; }); }
 }
-document.addEventListener("click",function(ev){ var b=ev.target.closest("[data-dxq]"); if(!b) return; DX.q=b.getAttribute("data-dxq"); var q=document.getElementById("dxq"); if(q){q.value=DX.q; dxShowResults();} });
-window.__dict={search:dxSearch,build:dxBuild,visual:dxVisual};
+/* explore controls — operate on the real layers once your PNGs are uploaded */
+function labControls(id){
+  var el=document.getElementById("labctl"); if(!el) return;
+  var hasBezel=id==="gmt"||id==="tachy";
+  el.innerHTML=(id==="gmt"?'<button data-c="bz-">◀ Turn bezel</button><button data-c="bz+">Turn bezel ▶</button><button data-c="gmt+">GMT +1 h</button>':'')+
+    (id!=="gmt"?'<button data-c="start">Start / stop</button><button data-c="reset">Reset</button>':'')+'<span class="dxsmall" id="labnote">Controls move the watch once its renders are uploaded.</span>';
+  var run=null, t0=0, sec=0, bz=0, gh=14;
+  function q(sel){ var s=document.querySelector("#labslot "+sel); return s; }
+  function rot(sel,deg){ var x=q(sel); if(x) x.style.transform="rotate("+deg+"deg)"; }
+  [].forEach.call(el.querySelectorAll("[data-c]"),function(b){ b.onclick=function(){
+    var c=b.getAttribute("data-c");
+    if(!q("img")){ document.getElementById("labnote").textContent="Visual pending — upload the renders to use the watch."; return; }
+    if(c==="bz-"||c==="bz+"){ bz+=c==="bz+"?15:-15; rot('[data-layer="lab_bezel_24h.png"]',bz); }
+    if(c==="gmt+"){ gh=(gh+1)%24; rot('[data-hand="gmt"]',gh/24*360); }
+    if(c==="start"){ if(run){clearInterval(run);run=null;} else { t0=Date.now()-sec*1000; run=setInterval(function(){ sec=(Date.now()-t0)/1000; rot('[data-hand="chrono"]',sec*6); rot('[data-sub="min"]',sec/60/30*360); },100); } }
+    if(c==="reset"&&!run){ sec=0; rot('[data-hand="chrono"]',0); rot('[data-sub="min"]',0); }
+  }; });
+}
+function labRun(id,lv){
+  var m=LAB_MODS[id], L=m.levels[lv], i=0, score=0;
+  function show(){
+    var ex=L.ex[i], a=DX_ASSET_BY_ID[m.asset];
+    var inp=ex.type==="choice"?ex.o.map(function(o,k){return '<button class="dxopt" data-k="'+k+'">'+esc(o)+'</button>';}).join(""):
+      ex.type==="num"?'<div class="labin"><input id="la1" inputmode="decimal" aria-label="Your answer"><span>'+esc(ex.unit)+'</span></div>':
+      ex.type==="dur"?'<div class="labin"><input id="la1" inputmode="numeric" aria-label="Minutes"><span>min</span><input id="la2" inputmode="numeric" aria-label="Seconds"><span>s</span></div>':
+      '<div class="labin"><input id="la1" inputmode="numeric" aria-label="Hours" placeholder="hh"><span>:</span><input id="la2" inputmode="numeric" aria-label="Minutes" placeholder="mm"></div>';
+    labBody('<div class="dxpad"><p class="eyebrow">'+esc(m.name)+' · Level '+(lv+1)+' '+esc(L.n)+'</p><p class="dxlab">Exercise '+(i+1)+' of '+L.ex.length+'</p>'+
+      dxSlot(a,ex.st(),"labslot")+'<p class="dxq">'+esc(ex.q)+'</p>'+inp+(ex.type!=="choice"?'<button class="dxbtn" id="lago">Check</button>':'')+'<p class="dxfb" id="lafb"></p></div>');
+    function done(ok,shown){
+      if(ok) score++;
+      var lp=labP(), key=id+"|"+lv+"|"+i, gain=ok&&!lp.done[key]?10+5*lv:0; if(ok) lp.done[key]=1; lp.xp+=gain; labSave(lp);
+      document.getElementById("lafb").innerHTML=(ok?'Correct'+(gain?' · +'+gain+' XP':''):'Not quite — the answer is '+esc(shown)+'.')+' <button class="dxbtn sm" id="lanext">'+(i<L.ex.length-1?'Next':'See result')+'</button>';
+      [].forEach.call(document.querySelectorAll(".dxopt,#lago,.labin input"),function(x){x.disabled=true;});
+      document.getElementById("lanext").onclick=function(){ i++; if(i<L.ex.length) show(); else result(); };
+    }
+    if(ex.type==="choice") [].forEach.call(document.querySelectorAll(".dxopt"),function(b){ b.onclick=function(){ var k=+b.getAttribute("data-k"); b.classList.add(k===ex.a?"ok":"no"); done(k===ex.a,"“"+ex.o[ex.a]+"”"); }; });
+    else document.getElementById("lago").onclick=function(){
+      var v1=parseFloat((document.getElementById("la1").value||"").replace(",",".")), v2=document.getElementById("la2")?parseInt(document.getElementById("la2").value||"0",10):0;
+      if(isNaN(v1)) return;
+      if(ex.type==="num") done(Math.abs(v1-ex.a)<=ex.tol,ex.a+" "+ex.unit);
+      if(ex.type==="dur") done(v1===ex.a[0]&&v2===ex.a[1],ex.a[0]+" min "+ex.a[1]+" s");
+      if(ex.type==="time") done((v1%24)===ex.a[0]&&v2===ex.a[1],("0"+ex.a[0]).slice(-2)+":"+("0"+ex.a[1]).slice(-2));
+    };
+  }
+  function result(){
+    var lp=labP(), st=lp.mods[id]=lp.mods[id]||{level:0}, pass=score>=L.ex.length-1;
+    if(pass&&st.level<lv+1) st.level=lv+1; st.best=st.best||{}; st.best[lv]=Math.max(st.best[lv]||0,score); st.last=new Date().toISOString(); labSave(lp);
+    labBody('<div class="dxpad"><p class="eyebrow">'+esc(m.name)+' · Level '+(lv+1)+'</p><p class="dxscore">'+score+'/'+L.ex.length+'</p><p class="dxres '+(pass?'g':'')+'">'+(pass?'Level passed':'Keep practising — '+(L.ex.length-1)+' of '+L.ex.length+' needed')+'</p>'+
+      '<div class="dxrowb"><button class="dxbtn" id="laagain">Try again</button><button class="dxghost" data-go="#/lab/'+id+'">Back to module</button></div></div>');
+    document.getElementById("laagain").onclick=function(){ labRun(id,lv); };
+  }
+  show();
+}
 
 /* ---------- PRESENTATION DECK ---------- */
 /* =====================================================================
