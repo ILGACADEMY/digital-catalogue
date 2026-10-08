@@ -976,6 +976,35 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
  .hl-assetnote{display:none}
  .hl-ctl .hl-seg{max-width:none}
 }
+
+/* ---------- Calibre Cards ---------- */
+.cc-feature{width:100%;margin-top:14px;border-color:var(--ink)!important}
+.cc-status{font-size:10px;letter-spacing:.12em;color:#8A6B32;border:1px dashed #C9B48A;padding:3px 8px;white-space:nowrap}
+.cc-sub{font-size:13px;color:var(--mute);margin:4px 0 0}
+.cc-card{position:relative;width:min(100%,360px);margin:8px auto 0;aspect-ratio:5/7.6;perspective:1200px;cursor:pointer;outline:none}
+.cc-face{position:absolute;inset:0;background:#FBFAF7;border:1px solid #D9D2C3;border-radius:16px;box-shadow:0 10px 24px -14px rgba(0,0,0,.35);padding:14px 16px;overflow:auto;transition:transform .55s cubic-bezier(.3,.7,.2,1);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cc-back{transform:rotateY(180deg)}.cc-card.flip .cc-front{transform:rotateY(-180deg)}.cc-card.flip .cc-back{transform:rotateY(0)}
+@media (prefers-reduced-motion:reduce){.cc-face{transition:none}}
+.cc-card:focus-visible .cc-face{outline:2px solid var(--ink)}
+.cc-top{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}.cc-lv{color:#8A6B32}
+.cc-svg{display:block;width:72%;margin:4px auto 0}
+.cc-front h3{font-family:var(--serif);font-weight:500;font-size:30px;margin:4px 0 2px;color:#1F3A6B}
+.cc-what{font-size:14.5px;line-height:1.45;margin:2px 0}.cc-what b{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8A6B32}
+.cc-turn{font-size:11.5px;color:var(--mute);text-align:center;margin:6px 0 0}
+.cc-back p{font-size:14px;line-height:1.45;margin:2px 0 8px}.cc-sec{font-size:10.5px!important;letter-spacing:.16em;text-transform:uppercase;color:#8A6B32;margin:8px 0 2px!important}
+.cc-say{font-family:var(--serif);font-size:17px!important;color:#1F3A6B}.cc-lablink{width:100%;margin-top:6px}
+.cc-hl{fill:none;stroke:#C08A2B;stroke-width:9;stroke-linecap:round;opacity:.9}.cc-band{stroke-width:68;opacity:.28}.cc-fill{fill:#C08A2B;fill-opacity:.12}.cc-glow{fill:#C08A2B;fill-opacity:.18;stroke-width:5}
+.cc-dash{stroke-dasharray:18 14;stroke-width:6}.cc-dim{stroke-width:7}.cc-glint{fill:none;stroke:#C08A2B;stroke-width:6;stroke-linecap:round;opacity:.7}
+.cc-lab{font:700 34px/1 Arial,sans-serif;letter-spacing:4px;fill:#C08A2B;text-anchor:middle}
+.cc-hands .ha-paper{fill:#F3E2BC!important;stroke:#C08A2B!important;stroke-width:4!important}.cc-hands .ha-fill{fill:#C08A2B}
+.cc-eng{font:600 26px/1 Arial,sans-serif;letter-spacing:4px;fill:#6B6458;text-anchor:middle}
+.cc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0}.cc-nav .dxghost{margin:0;min-width:56px;font-size:20px;text-align:center}
+.cc-full{width:100%}.cc-qtext{font-style:italic;color:var(--mute);font-size:15px}
+.hl-opt.cc-ok{border-color:#2F6B3A;background:#EAF3EA}.hl-opt.cc-no{border-color:#9B2F23;background:#F8E9E6}
+.cc-match{display:grid;grid-template-columns:2fr 3fr;gap:8px}.cc-match>div{display:flex;flex-direction:column;gap:6px}
+.cc-tile{min-height:52px;text-align:left;padding:8px 10px;border:1px solid var(--line);background:var(--surface);font-size:13px;line-height:1.35;color:var(--ink);cursor:pointer}
+.cc-name{font-weight:600}.cc-tile.sel{border-color:var(--ink);background:#EFE7D6}.cc-tile.done{opacity:.35;text-decoration:line-through;cursor:default}
+.cc-tile.shake{border-color:#9B2F23;animation:ccShake .35s}@keyframes ccShake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 </style>
 </head>
 <body>
@@ -3684,8 +3713,176 @@ var HL_PUSH={a:0,b:0};
 function hlPush(k){ HL_PUSH[k]=performance.now(); var s=HL.s; var id=k==="a"?(s.running?"hl-stopb":"hl-start"):"hl-reset"; var b=document.getElementById(id); if(b) b.click(); hlTickSound(); s._dirty=1; }
 function hlF1(left){ return '<svg class="hl-f1" viewBox="0 0 120 34" style="left:'+left+'%" aria-hidden="true"><g transform="translate(120,0) scale(-1,1)"><path d="M4,24 L4,19 L14,19 L18,16 L44,15 L52,9 L60,8 L66,13 L70,14 L98,15 L104,11 L116,11 L116,15 L110,16 L112,24 Z" class="f1b"/><rect x="104" y="5" width="13" height="4" class="f1b"/><rect x="1" y="23" width="19" height="3" class="f1b"/><path d="M50,12 Q58,3 67,12" class="f1halo"/><circle cx="26" cy="25" r="8" class="f1w"/><circle cx="96" cy="25" r="9" class="f1w"/><circle cx="26" cy="25" r="3" class="f1h"/><circle cx="96" cy="25" r="3.5" class="f1h"/></g></svg>'; }
 
+/* =====================================================================
+   CALIBRE CARDS — one idea per card · Browse · Daily five · Match
+   Drawn with the lab's MDR line-art watch; the part on each card is
+   highlighted in gold. Content status: DRAFT — for trainer review.
+   ===================================================================== */
+var CC_KEY="calibreCards";
+var CC_SET={id:"case",name:"Case & exterior",cards:[
+ {id:"crown",n:"Crown",lv:"Advisor",art:"crown",lab:null,
+  a:"The knob on the side of the case, used to set the watch and, on a mechanical watch, to wind it.",
+  tip:"Crown positions vary by movement. A common layout: pushed in to wind, one step out for the date, two steps out for the time.",
+  tech:"The crown turns the stem, which drives the keyless works. A screw-down crown adds a threaded tube and gasket to improve water resistance.",
+  sale:"Always screw the crown back down after setting — that is what keeps water out."},
+ {id:"bezel",n:"Bezel",lv:"Advisor",art:"bezel",lab:"dive-bezel",
+  a:"The ring around the crystal. It can be fixed or rotating.",
+  tip:"A dive bezel turns anticlockwise only, so a knock can only show more elapsed time — the diver surfaces early, never late.",
+  tech:"Rotating bezels carry scales for elapsed time, a 24-hour time zone or a compass; fixed bezels may carry a tachymeter scale.",
+  sale:"Turn the bezel to the minute hand and it times anything up to an hour — parking, cooking, a meeting."},
+ {id:"crystal",n:"Crystal",lv:"Advisor",art:"crystal",lab:null,
+  a:"The transparent cover that protects the dial.",
+  tip:"Acrylic scratches easily but can be polished. Mineral glass is harder. Sapphire is highly scratch-resistant but can chip on a hard knock.",
+  tech:"Synthetic sapphire is about 9 on the Mohs scale. Anti-reflective coating may be applied to the inside, the outside or both.",
+  sale:"Sapphire keeps the dial looking new for years — keys in a pocket will not mark it."},
+ {id:"dial",n:"Dial",lv:"Advisor",art:"dial",lab:null,
+  a:"The face of the watch, carrying the markers and the brand.",
+  tip:"Finishes change the character: matte, sunray (lines radiating from the centre) or guilloché (an engraved pattern).",
+  tech:"The dial is fixed to the movement by dial feet; its openings (date, sub-dials) must align with the movement beneath.",
+  sale:"Tilt a sunray dial in the light — the colour changes as it moves."},
+ {id:"hands",n:"Hands",lv:"Advisor",art:"hands",lab:null,
+  a:"The pointers that show the time: hour, minute and often seconds.",
+  tip:"Extra hands add functions: a GMT hand for a second time zone, chronograph hands for timing.",
+  tech:"Hands sit on concentric pipes: the hour wheel, the cannon pinion and, in a centre-seconds design, the seconds pinion.",
+  sale:"Lume-filled hands mean you can read the time in the dark."},
+ {id:"lume",n:"Indices & lume",lv:"Advisor",art:"lume",lab:null,
+  a:"The hour markers on the dial; lume is the material in them that glows in the dark.",
+  tip:"Most modern lume is charged by light and fades over several hours. More lume, and a stronger charge, means a brighter glow.",
+  tech:"Photoluminescent pigments (commonly strontium aluminate) absorb light and re-emit it slowly; they contain no radioactive material.",
+  sale:"Hold it under a lamp for a moment, then cup your hands around it — it glows."},
+ {id:"date",n:"Date window",lv:"Advisor",art:"date",lab:null,
+  a:"An opening in the dial that shows the date.",
+  tip:"Many movements advise against setting the date late in the evening or early morning, while the date change is in progress. Check the manual.",
+  tech:"A date ring is advanced once a day by the date mechanism; months shorter than 31 days need a manual correction on a simple calendar.",
+  sale:"Set the date at midday and it will never resist you."},
+ {id:"lugs",n:"Lugs & lug width",lv:"Advisor",art:"lugs",lab:null,
+  a:"The lugs are the arms that hold the strap. Lug width is the distance between them.",
+  tip:"Common lug widths are 18, 20, 22 and 24 mm. A new strap must match the lug width exactly.",
+  tech:"The strap is held between the lugs by spring bars; lug-to-lug length, not just case diameter, decides how a watch fits the wrist.",
+  sale:"Know your lug width and you can change the whole look with a new strap."},
+ {id:"case",n:"Case & material",lv:"Advisor",art:"case",lab:null,
+  a:"The body of the watch that holds and protects the movement.",
+  tip:"Stainless steel is durable; titanium is lighter; ceramic resists scratches but can break if dropped on a hard surface.",
+  tech:"316L is a common watch steel. Case size is usually given as the diameter in millimetres, crown excluded.",
+  sale:"Titanium feels almost weightless on the wrist — ideal for all-day wear."},
+ {id:"caseback",n:"Caseback",lv:"Specialist",art:"caseback",lab:null,
+  a:"The cover on the back of the case.",
+  tip:"It may be screwed down, snapped on or held by screws. An exhibition caseback has a crystal so you can see the movement.",
+  tech:"The caseback seals against a gasket; its markings often include the reference, material and water-resistance rating.",
+  sale:"Turn the watch over — through the exhibition back you can watch the movement work."},
+ {id:"pushers",n:"Pushers",lv:"Specialist",art:"pushers",lab:"chronograph",
+  a:"The buttons on the side of a chronograph that start, stop and reset it.",
+  tip:"A common layout: the pusher at 2 o’clock starts and stops, the one at 4 o’clock resets. Do not press them under water unless the watch is designed for it.",
+  tech:"Pushers act on the chronograph control mechanism (column wheel or cam); screw-down pushers must be locked to keep their water resistance.",
+  sale:"Press once to start, again to stop, the lower one to reset — try it."},
+ {id:"wr",n:"Water resistance",lv:"Specialist",art:"wr",lab:null,
+  a:"How well the watch keeps water out, shown in metres or bar.",
+  tip:"The figure is a test pressure, not a diving depth. 30 m suits splashes, 100 m swimming; diving needs a watch certified as a dive watch.",
+  tech:"General watches are tested to ISO 22810; dive watches to ISO 6425. Gaskets age, so water resistance should be checked periodically.",
+  sale:"For swimming, look for 100 m and a screw-down crown."}
+]};
+
+/* ---------- drawing: the MDR line-art watch with the card's part highlighted ---------- */
+function ccArt(k){
+  var hl='', o=[hlArtDefs()], chrono=k==="pushers";
+  if(k==="caseback"){
+    o.push('<g class="ha-case"><circle cx="500" cy="500" r="470"/><circle cx="500" cy="500" r="430"/>');
+    for(var i=0;i<6;i++){ var p=hlPolar(500,500,450,i*60+30); o.push('<rect x="'+(p[0]-14).toFixed(1)+'" y="'+(p[1]-7).toFixed(1)+'" width="28" height="14" transform="rotate('+(i*60+30)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')"/>'); }
+    o.push('<circle cx="500" cy="500" r="300"/></g>');
+    o.push('<image href="data:image/png;base64,'+HL_MDR+'" x="440" y="380" width="120" height="110" filter="url(#hl-ink)"/>');
+    ["STAINLESS STEEL","WATER RESISTANT 10 BAR","SAPPHIRE"].forEach(function(t,j){ o.push('<text x="500" y="'+(560+j*44)+'" class="cc-eng">'+t+'</text>'); });
+    o.push('<circle cx="500" cy="500" r="450" class="cc-hl"/>');
+    return '<svg viewBox="-40 -40 1080 1080" class="cc-svg" role="img" aria-label="Caseback">'+o.join("")+'</svg>';
+  }
+  o.push(hlCaseArt(chrono));
+  o.push(k==="bezel"?hlBezelArt("dive",0):hlBezelArt("plain",0));
+  o.push(hlDialArt(chrono));
+  o.push(hlHandArt("hour",305),hlHandArt("min",60),hlHandArt(chrono?"chrono":"sec",chrono?0:192),'<circle cx="500" cy="500" r="9" class="hl-cap"/>');
+  if(k==="crown") hl='<rect x="970" y="440" width="64" height="120" rx="14" class="cc-hl"/>';
+  if(k==="bezel") hl='<circle cx="500" cy="500" r="436" class="cc-hl cc-band"/>';
+  if(k==="crystal") hl='<circle cx="500" cy="500" r="404" class="cc-hl"/><path d="M300,200 Q500,120 700,200" class="cc-glint"/>';
+  if(k==="dial") hl='<circle cx="500" cy="500" r="384" class="cc-hl cc-fill"/>';
+  if(k==="hands") hl='<g class="cc-hands">'+hlHandArt("hour",305)+hlHandArt("min",60)+hlHandArt("sec",192)+'</g>';
+  if(k==="lume"){ for(var h=1;h<=12;h++){ var q=hlPolar(500,500,318,h*30); hl+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(h%3?30:46)+'" class="cc-hl cc-glow"/>'; } }
+  if(k==="date") hl='<rect x="742" y="464" width="90" height="72" rx="8" class="cc-hl"/>';
+  if(k==="lugs") hl='<path d="M384,-40 L616,-40 M384,-62 L384,-18 M616,-62 L616,-18" class="cc-hl cc-dim"/><text x="500" y="-54" class="cc-lab">LUG WIDTH</text>';
+  if(k==="case") hl='<circle cx="500" cy="500" r="482" class="cc-hl"/>';
+  if(k==="pushers") hl=[60,120].map(function(a){ var q=hlPolar(500,500,512,a); return '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="46" class="cc-hl"/>'; }).join("");
+  if(k==="wr") hl='<rect x="970" y="440" width="64" height="120" rx="14" class="cc-hl"/><circle cx="500" cy="500" r="476" class="cc-hl cc-dash"/><text x="500" y="1060" class="cc-lab">SEALS · CROWN · CASEBACK</text>';
+  o.push(hl);
+  return '<svg viewBox="-60 -110 1140 1200" class="cc-svg" role="img" aria-label="MDR watch with the '+k+' highlighted">'+o.join("")+'</svg>';
+}
+
+/* ---------- state + pages ---------- */
+var CC={mode:"browse",i:0,flip:false,daily:null,match:null};
+function ccP(){ try{ return JSON.parse(localStorage.getItem(CC_KEY)||"{}"); }catch(e){ return {}; } }
+function ccSave(p){ try{ localStorage.setItem(CC_KEY,JSON.stringify(p)); }catch(e){} }
+function ccShuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t; } return a; }
+function ccCard(c,flip){
+  return '<div class="cc-card '+(flip?"flip":"")+'" data-cc="flip" role="button" tabindex="0" aria-label="'+hlEsc(c.n)+' card, tap to turn over">'+
+    '<div class="cc-face cc-front"><div class="cc-top"><span>'+hlEsc(CC_SET.name)+'</span><span class="cc-lv">'+c.lv+'</span></div>'+ccArt(c.art)+
+      '<h3>'+hlEsc(c.n)+'</h3><p class="cc-what"><b>What is it?</b> '+hlEsc(c.a)+'</p><p class="cc-turn">Tap to turn over ↻</p></div>'+
+    '<div class="cc-face cc-back"><div class="cc-top"><span>'+hlEsc(c.n)+'</span><span class="cc-lv">'+c.lv+'</span></div>'+
+      '<p class="cc-sec">Pro tip</p><p>'+hlEsc(c.tip)+'</p><p class="cc-sec">Technical</p><p>'+hlEsc(c.tech)+'</p>'+
+      '<p class="cc-sec">Say it to a customer</p><p class="cc-say">“'+hlEsc(c.sale)+'”</p>'+
+      (c.lab?'<button class="dxghost cc-lablink" data-go="#/lab/'+c.lab+'">Try it in the Lab →</button>':'')+'</div></div>';
+}
+function ccPage(){
+  var b=document.getElementById("lab-body"), p=ccP(), seen=Object.keys(p.seen||{}).length, n=CC_SET.cards.length, body="";
+  if(CC.mode==="browse"){ var c=CC_SET.cards[CC.i];
+    body=ccCard(c,CC.flip)+'<div class="cc-nav"><button class="dxghost" data-cc="prev" aria-label="Previous card" '+(CC.i?'':'disabled')+'>‹</button><span>'+(CC.i+1)+' / '+n+'</span><button class="dxghost" data-cc="next" aria-label="Next card" '+(CC.i<n-1?'':'disabled')+'>›</button></div>';
+    p.seen=p.seen||{}; p.seen[c.id]=1; ccSave(p); }
+  if(CC.mode==="daily") body=ccDailyHTML();
+  if(CC.mode==="match") body=ccMatchHTML();
+  b.innerHTML='<div class="hl-mod cc-mod"><div class="hl-head"><div><p class="eyebrow">Interactive Lab · Cards</p><h1 class="hl-h1">Calibre Cards</h1></div><span class="cc-status">DRAFT · trainer review</span></div>'+
+    '<p class="cc-sub">'+hlEsc(CC_SET.name)+' · '+n+' cards · '+seen+' seen'+(p.dailyBest!=null?' · best daily five '+p.dailyBest+'/5':'')+(p.matchBest?' · best match '+p.matchBest+' s':'')+'</p>'+
+    '<div class="hl-modes" role="tablist">'+[["browse","Browse"],["daily","Daily five"],["match","Match"]].map(function(x){ return '<button role="tab" data-ccmode="'+x[0]+'" class="'+(CC.mode===x[0]?"on":"")+'">'+x[1]+'</button>'; }).join("")+'</div>'+body+'</div>';
+  ccWire();
+}
+/* Daily five: five cards, each turned over and then checked with one question */
+function ccDailyStart(){ var deck=ccShuffle(CC_SET.cards).slice(0,5); CC.daily={deck:deck,k:0,stage:"card",score:0,q:null,flip:false}; }
+function ccDailyQ(c){ var others=ccShuffle(CC_SET.cards.filter(function(x){ return x.id!==c.id; })).slice(0,2), opts=ccShuffle([c].concat(others));
+  return {opts:opts,ans:opts.indexOf(c),picked:null}; }
+function ccDailyHTML(){ if(!CC.daily) ccDailyStart(); var D=CC.daily;
+  if(D.k>=5){ var p=ccP(); p.dailyBest=Math.max(p.dailyBest||0,D.score); p.dailyLast=new Date().toISOString().slice(0,10); ccSave(p);
+    return '<p class="dxscore">'+D.score+'/5</p><p class="dxres '+(D.score>=4?"g":"")+'">'+(D.score>=4?"Well done":"Keep going — the cards come round again")+'</p><div class="dxrowb"><button class="dxbtn" data-cc="dailyagain">Another five</button><button class="dxghost" data-ccmode="match">Play Match →</button></div>'; }
+  var c=D.deck[D.k];
+  if(D.stage==="card") return '<p class="hl-step">Card '+(D.k+1)+' of 5 · read it, turn it over, then answer one question</p>'+ccCard(c,D.flip)+'<button class="dxbtn cc-full" data-cc="dailyq">I’ve read it — ask me →</button>';
+  if(!D.q) D.q=ccDailyQ(c); var Q=D.q;
+  return '<p class="hl-step">Card '+(D.k+1)+' of 5 · question</p><p class="hl-text">Which part is this?<br><i class="cc-qtext">“'+hlEsc(c.a)+'”</i></p>'+
+    '<div class="hl-opts">'+Q.opts.map(function(o,i){ var cls=Q.picked==null?"":(i===Q.ans?"cc-ok":(i===Q.picked?"cc-no":"")); return '<button class="hl-opt '+cls+'" data-cc="dailypick" data-v="'+i+'" '+(Q.picked!=null?"disabled":"")+'>'+hlEsc(o.n)+'</button>'; }).join("")+'</div>'+
+    (Q.picked!=null?'<p class="hl-fb '+(Q.picked===Q.ans?"ok":"no")+'">'+(Q.picked===Q.ans?"Correct.":"It is the "+hlEsc(c.n)+".")+'</p><button class="dxbtn cc-full" data-cc="dailynext">'+(D.k<4?"Next card →":"See my score →")+'</button>':'');
+}
+/* Match: pair each part with what it is, against the clock */
+function ccMatchStart(){ var pick=ccShuffle(CC_SET.cards).slice(0,5); CC.match={pick:pick,names:ccShuffle(pick),whats:ccShuffle(pick),sel:null,done:{},miss:0,t0:Date.now(),bad:null}; }
+function ccMatchHTML(){ if(!CC.match) ccMatchStart(); var M=CC.match, all=Object.keys(M.done).length===M.pick.length;
+  if(all){ var s=Math.round((Date.now()-M.t0)/1000), p=ccP(); if(!M.saved){ M.saved=1; M.secs=s; if(!M.miss&&(!p.matchBest||s<p.matchBest)){ p.matchBest=s; ccSave(p); } }
+    return '<p class="dxscore">'+M.secs+' s</p><p class="dxres g">All pairs matched'+(M.miss?' · '+M.miss+' wrong '+(M.miss>1?'tries':'try'):' · no mistakes')+'</p><div class="dxrowb"><button class="dxbtn" data-cc="matchagain">Play again</button><button class="dxghost" data-ccmode="browse">Browse the cards</button></div>'; }
+  return '<p class="hl-step">Tap a part, then tap what it is</p><div class="cc-match"><div>'+M.names.map(function(c){ return '<button class="cc-tile cc-name '+(M.done[c.id]?"done":"")+(M.sel===c.id?" sel":"")+'" data-cc="mname" data-v="'+c.id+'" '+(M.done[c.id]?"disabled":"")+'>'+hlEsc(c.n)+'</button>'; }).join("")+'</div>'+
+    '<div>'+M.whats.map(function(c){ return '<button class="cc-tile cc-what2 '+(M.done[c.id]?"done":"")+(M.bad===c.id?" shake":"")+'" data-cc="mwhat" data-v="'+c.id+'" '+(M.done[c.id]?"disabled":"")+'>'+hlEsc(c.a)+'</button>'; }).join("")+'</div></div>';
+}
+function ccWire(){
+  var b=document.getElementById("lab-body");
+  b.querySelectorAll("[data-ccmode]").forEach(function(x){ x.onclick=function(){ CC.mode=x.getAttribute("data-ccmode"); CC.flip=false; if(CC.mode==="daily") CC.daily=null; if(CC.mode==="match") CC.match=null; ccPage(); }; });
+  b.querySelectorAll("[data-cc]").forEach(function(x){ var a=x.getAttribute("data-cc"), v=x.getAttribute("data-v");
+    var go=function(e){ if(e&&e.target.closest&&e.target.closest("[data-go]")) return;
+      if(a==="flip"){ if(CC.mode==="daily") CC.daily.flip=!CC.daily.flip; else CC.flip=!CC.flip; ccPage(); return; }
+      if(a==="prev"){ CC.i=Math.max(0,CC.i-1); CC.flip=false; }
+      if(a==="next"){ CC.i=Math.min(CC_SET.cards.length-1,CC.i+1); CC.flip=false; }
+      if(a==="dailyq") CC.daily.stage="q";
+      if(a==="dailypick"){ var Q=CC.daily.q; Q.picked=+v; if(Q.picked===Q.ans) CC.daily.score++; }
+      if(a==="dailynext"){ var D=CC.daily; D.k++; D.stage="card"; D.q=null; D.flip=false; }
+      if(a==="dailyagain") CC.daily=null;
+      if(a==="matchagain") CC.match=null;
+      if(a==="mname"){ CC.match.sel=v; CC.match.bad=null; }
+      if(a==="mwhat"){ var M=CC.match; if(!M.sel){ return; } if(M.sel===v){ M.done[v]=1; M.sel=null; M.bad=null; } else { M.miss++; M.bad=v; setTimeout(function(){ if(CC.match) CC.match.bad=null; },400); } }
+      ccPage(); };
+    x.onclick=go; if(a==="flip") x.onkeydown=function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(e); } }; });
+}
+
 function renderLab(){
   var id=current.mod||"";
+  if(id==="cards"){ hlStop(); var cr=document.getElementById("lab-crumb"); if(cr) cr.textContent="Calibre Cards"; return ccPage(); }
   if(LAB_ALIAS[id]){ id=LAB_ALIAS[id]; history.replaceState(null,"","#/lab/"+id); current.mod=id; }
   hlStop();
   var crumb=document.getElementById("lab-crumb");
@@ -3698,7 +3895,7 @@ function hlHome(){
   var card=function(id){ var m=LAB_MODS[id], st=lp.mods[id]||{}; return '<button class="hl-card" data-go="#/lab/'+id+'"><span class="hl-cat">'+hlEsc(m.category)+'</span><b>'+hlEsc(m.name)+'</b><span class="hl-desc">'+hlEsc(m.description)+'</span><span class="hl-prog">'+(st.level?("Quiz passed: "+m.levels.slice(0,st.level).join(", ")):"Learn · Try it · Quiz")+'</span></button>'; };
   document.getElementById("lab-body").innerHTML='<div class="dxpad"><p class="eyebrow">Horology Lab</p><h1 class="dxh1">Interactive Horology Lab</h1>'+
     '<p class="dxlead">Operate the watch, solve the scenario, take the quiz. Every module has three modes: Learn (guided), Try it (free play) and Quiz.</p>'+
-    '<div class="hl-grid">'+LAB_ORDER.map(card).join("")+'</div>'+
+    '<button class="hl-card cc-feature" data-go="#/lab/cards"><span class="hl-cat">New · Learn with cards</span><b>Calibre Cards</b><span class="hl-desc">One idea per card. Browse, play Daily five and Match. First set: the case and exterior, 12 cards.</span></button>'+'<div class="hl-grid">'+LAB_ORDER.map(card).join("")+'</div>'+
     '<p class="dxlab" style="margin-top:22px">More complications</p><button class="hl-card" data-go="#/complications"><span class="hl-cat">Moving into this lab</span><b>Dual time · World timer · Spiral tachymeter · Chronograph types · Reading precision</b><span class="hl-desc">Open the earlier simulations while they are being rebuilt in this design.</span></button>'+
     '<p class="dxlab" style="margin-top:22px">Coming next</p><p class="hl-soon">'+LAB_SOON.map(hlEsc).join(" · ")+'</p>'+
     '<div class="hl-tr">'+(hlTrainer()?'<p><b>Trainer mode is on.</b> All quiz levels are open on this device.</p><button class="dxghost" id="hl-troff">Turn off trainer mode</button>':
