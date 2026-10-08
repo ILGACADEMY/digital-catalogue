@@ -1038,6 +1038,7 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
 .cc-bottom .dxghost{flex:1;text-align:center}
 .cc-index{border:1px solid var(--line);padding:8px 10px;margin:8px 0;background:var(--surface)}.cc-ixrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}.cc-ixrow button{min-height:36px;border:1px solid var(--line);background:none;padding:0 10px;font-size:13px;cursor:pointer}.cc-ixrow button.on{border-color:var(--ink);background:#EFE7D6}
 .cc-try{border:1px solid var(--ink);padding:10px 12px;margin:10px auto 0;max-width:360px;background:var(--surface)}.cc-crstate{font-size:14px;margin:2px 0 8px}
+.cc-crhit{fill:transparent!important;stroke:none!important;cursor:grab;touch-action:none;pointer-events:all}.cc-crhit:active{cursor:grabbing}.cc-crlab{font-size:30px}
 .cc-crbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.cc-crbtns .dxghost,.cc-crbtns .dxbtn{margin:0;min-height:42px;font-size:12px;text-align:center;padding:0 4px}.cc-crbtns .dxbtn{grid-column:span 1}
 .cc-try .ep-meter{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:12px;color:var(--mute)}.cc-try .ep-bar{flex:1;height:10px;border:1px solid var(--line)}.cc-try .ep-bar i{display:block;height:100%;background:#C08A2B}
 .cc-endpage{text-align:center;padding:20px 0}.cc-endpage h3{font-family:var(--serif);font-weight:500;font-size:26px;margin:4px 0}
@@ -3771,96 +3772,79 @@ function hlF1(left){ return '<svg class="hl-f1" viewBox="0 0 120 34" style="left
 var CC_KEY="anatomyCards";
 var CC_INT=[
  {id:"mv-manual",sec:"int",n:"Hand-wound",lv:"Advisor",art:"mv:manual",atlas:1,
-  a:"A mechanical movement you wind by turning the crown.",
-  tip:"It needs winding regularly — many people wind it at the same time each day. How long it runs depends on the calibre.",
-  tech:"Crown → keyless works → mainspring in the barrel → gear train → escapement → balance and hairspring → motion works → hands.",
-  sale:"Winding it each morning is a small daily ritual — it connects you to the watch."},
+  a:"A mechanical watch you wind by turning the crown.",
+  tip:"Wind it regularly, ideally at the same time each day.",
+  sale:"Winding it each morning becomes a small daily ritual."},
  {id:"mv-auto",sec:"int",n:"Automatic",lv:"Advisor",art:"mv:auto",atlas:1,
-  a:"A mechanical movement wound by the motion of your wrist.",
-  tip:"A swinging rotor winds the mainspring through a winding mechanism. Most can also be wound by the crown. Left unworn, it stops when its reserve runs out.",
-  tech:"Rotor → reversing and reduction wheels → mainspring. Winding direction (one way or both) depends on the calibre.",
-  sale:"Wear it and it powers itself — no battery to change."},
+  a:"A mechanical watch that winds itself as you move your wrist.",
+  tip:"Left off the wrist for a while, it stops — wear it or wind it to restart.",
+  sale:"Wear it and it powers itself — no battery needed."},
  {id:"mv-batt",sec:"int",n:"Battery quartz",lv:"Advisor",art:"mv:batt",atlas:1,
-  a:"A battery-powered movement kept accurate by a tiny quartz crystal.",
-  tip:"Very accurate and low maintenance. The battery typically lasts a few years and is then replaced.",
-  tech:"Battery → circuit → quartz oscillator (commonly 32,768 Hz) → divider → stepper motor → gear train → hands.",
-  sale:"Grab-and-go accuracy — it is always ready when you are."},
+  a:"A battery-powered watch kept very accurate by a tiny quartz crystal.",
+  tip:"The battery usually lasts a few years, then it is replaced.",
+  sale:"Accurate and always ready — just grab it and go."},
  {id:"mv-solar",sec:"int",n:"Solar quartz",lv:"Specialist",art:"mv:solar",atlas:1,
-  a:"A quartz movement charged by light.",
-  tip:"A solar cell under the dial turns light into electricity, stored in a rechargeable cell. It runs in the dark until that stored energy is used up.",
-  tech:"Light → photovoltaic cell → charging circuit → rechargeable cell (secondary battery) → quartz electronics → motor → hands.",
-  sale:"Daylight keeps it running — no routine battery changes."},
+  a:"A quartz watch charged by light through its dial.",
+  tip:"Light charges it, and it keeps running in the dark on the energy it has stored.",
+  sale:"Light keeps it running — no routine battery changes."},
  {id:"mv-kin",sec:"int",n:"Kinetic quartz",lv:"Specialist",art:"mv:kin",atlas:1,
-  a:"A quartz movement charged by the motion of your wrist.",
-  tip:"Unlike an automatic, nothing winds a spring: the rotor spins a small generator that makes electricity.",
-  tech:"Wrist motion → rotor → generator → rectified current → rechargeable cell → quartz electronics → motor → hands.",
+  a:"A quartz watch charged by the movement of your wrist.",
+  tip:"Your movement makes electricity — it does not wind a spring like an automatic.",
   sale:"Quartz accuracy, powered by the way you move."},
  {id:"mv-smart",sec:"int",n:"Smartwatch",lv:"Specialist",art:"mv:smart",atlas:1,
-  a:"A small, programmable computer you wear, charged on a charger.",
-  tip:"A timekeeping circuit keeps the time — often with a quartz crystal — and the phone corrects it. A screen replaces the hands.",
-  tech:"Charger → rechargeable battery → power management → processor → display, sensors and wireless. Time base: an RTC oscillator, often 32.768 kHz quartz.",
+  a:"A small wearable computer that shows the time on a screen.",
+  tip:"It is charged on its charger, often every day or every few days.",
   sale:"Notifications, health data and the time — on your wrist."},
  {id:"mv-sd",sec:"int",n:"Spring Drive",lv:"Expert",art:"mv:sd",atlas:1,
-  a:"A mainspring-powered movement regulated electronically, with a seconds hand that glides.",
-  tip:"There is no battery and no ticking escapement: a glide wheel turns continuously and is braked magnetically to the right speed.",
-  tech:"Mainspring → gear train → glide wheel (also a generator) → IC compares with a quartz reference → electromagnetic braking. Crown or rotor winding, depending on calibre.",
+  a:"A mainspring-powered watch with electronic regulation and a gliding seconds hand.",
+  tip:"It has no battery, and its seconds hand glides instead of ticking.",
   sale:"Watch the seconds hand — it glides, it never ticks."}
 ];
 var CC_EXT=[
  {id:"dial",sec:"ext",n:"Dial",lv:"Advisor",art:"dial",
-  a:"The face of the watch, carrying the markers, the brand and often the date.",
-  tip:"Finishes change the character: matte, sunray (lines radiating from the centre) or guilloché (an engraved pattern). Markers may be filled with lume to glow in the dark.",
-  tech:"The dial is fixed to the movement by dial feet; its openings (date, sub-dials) must align with the movement beneath.",
+  a:"The face of the watch, showing the markers, the brand and often the date.",
+  tip:"Its colour and finish give the watch most of its character.",
   sale:"Tilt a sunray dial in the light — the colour changes as it moves."},
  {id:"hands",sec:"ext",n:"Hands",lv:"Advisor",art:"hands",
-  a:"The pointers that show the time: hour, minute and often seconds.",
-  tip:"Extra hands add functions: a GMT hand for a second time zone, chronograph hands for timing.",
-  tech:"Hands sit on concentric pipes: the hour wheel, the cannon pinion and, in a centre-seconds design, the seconds pinion.",
-  sale:"Lume-filled hands mean you can read the time in the dark."},
+  a:"The pointers that show the hours, minutes and often seconds.",
+  tip:"Extra hands add extra functions, such as a second time zone or a stopwatch.",
+  sale:"Glowing hands mean you can read the time in the dark."},
  {id:"case",sec:"ext",n:"Case",lv:"Advisor",art:"case",
-  a:"The body of the watch that holds and protects the movement.",
-  tip:"Stainless steel is durable; titanium is lighter; ceramic resists scratches but can break if dropped on a hard surface.",
-  tech:"316L is a common watch steel. Case size is usually given as the diameter in millimetres, crown excluded.",
+  a:"The body of the watch that holds and protects everything inside.",
+  tip:"Steel is durable, titanium is lighter and ceramic resists scratches.",
   sale:"Titanium feels almost weightless — ideal for all-day wear."},
  {id:"caseback",sec:"ext",n:"Caseback",lv:"Specialist",art:"caseback",
-  a:"The cover on the back of the case: solid, or with a crystal to show the movement.",
-  types:[["Solid","Closed metal back; often engraved with reference and water resistance."],["Exhibition","A crystal window (often sapphire) to watch the movement work."],["Screw-down / snap-on / screwed","How it is held: threaded, pressed in, or fixed with screws."]],
-  tip:"An exhibition caseback shows off a mechanical movement; a solid back can make sealing and engraving simpler.",
-  tech:"The caseback seals against a gasket; markings often include the reference, material and water-resistance rating.",
-  sale:"Turn it over — through the exhibition back you can watch the movement work."},
+  a:"The cover on the back of the case.",
+  types:[["Solid","Closed metal, often engraved."],["Exhibition","A window to see the movement."]],
+  tip:"An exhibition caseback lets the customer see the movement working.",
+  sale:"Turn it over — you can watch the movement work."},
  {id:"lugs",sec:"ext",n:"Lugs",lv:"Advisor",art:"lugs",
-  a:"The arms that hold the strap. Lug width is the distance between them.",
-  tip:"Common lug widths are 18, 20, 22 and 24 mm. A new strap must match the lug width exactly.",
-  tech:"The strap is held between the lugs by spring bars; lug-to-lug length, not just diameter, decides how the watch fits the wrist.",
-  sale:"Know your lug width and you can change the whole look with a new strap."},
+  a:"The arms that hold the strap to the case.",
+  tip:"Lug width is the gap between them; a new strap must match it exactly.",
+  sale:"Know your lug width and you can change the look with a new strap."},
  {id:"crown",sec:"ext",n:"Crown",lv:"Advisor",art:"crown",interactive:"crown",
-  a:"The knob on the side, used to set the watch and, on a mechanical watch, to wind it.",
-  types:[["Push-pull","Pulled out to set, pushed back in. Common on everyday watches."],["Screw-down","Screwed onto a threaded tube. Unscrew before pulling out; screw back down to keep water out."]],
-  tip:"Positions vary by movement. A common layout: in = wind, first step = date, second step = time. Try it below the card.",
-  tech:"The crown turns the stem, which drives the keyless works; a screw-down crown adds a threaded tube and gasket.",
-  sale:"Always screw the crown back down after setting — that is what keeps water out."},
+  a:"The knob on the side used to set the time and date, and to wind a mechanical watch.",
+  types:[["Push-pull","Pull out to set, push back in."],["Screw-down","Unscrew first, screw back down after."]],
+  tip:"On many watches: pushed in winds, one step out sets the date, two steps out sets the time.",
+  sale:"Always push the crown back in — and screw it down — to keep water out."},
  {id:"wr",sec:"ext",n:"Water resistance",lv:"Specialist",art:"wr",
   a:"How well the watch keeps water out, shown in metres or bar.",
-  tip:"The figure is a test pressure, not a diving depth. 30 m suits splashes, 100 m swimming; diving needs a watch certified as a dive watch.",
-  tech:"General watches are tested to ISO 22810; dive watches to ISO 6425. Gaskets age, so water resistance should be checked periodically.",
-  sale:"For swimming, look for 100 m and a screw-down crown."},
+  tip:"The metres are a test pressure, not a diving depth: 30 m for splashes, 100 m for swimming.",
+  sale:"For swimming, choose 100 metres or more."},
  {id:"crystal",sec:"ext",n:"Crystal",lv:"Advisor",art:"crystal",
-  a:"The transparent cover that protects the dial.",
-  types:[["Acrylic","Light, warm look, often domed. Scratches easily but can be polished."],["Mineral glass","Harder than acrylic; scratches less easily."],["Sapphire","Highly scratch-resistant; can chip on a hard knock. Often anti-reflective coated."]],
-  tip:"Sapphire keeps the dial looking new for years; acrylic is easiest to refresh.",
-  tech:"Synthetic sapphire is about 9 on the Mohs scale. Anti-reflective coating may be on the inside, the outside or both.",
-  sale:"Keys in a pocket will not mark a sapphire crystal."},
+  a:"The clear cover that protects the dial.",
+  types:[["Acrylic","Light; scratches, but can be polished."],["Mineral","Harder glass; scratches less."],["Sapphire","Very scratch-resistant."]],
+  tip:"Sapphire is the most scratch-resistant of the three.",
+  sale:"Keys in a pocket won’t scratch a sapphire crystal."},
  {id:"bezel",sec:"ext",n:"Bezel",lv:"Advisor",art:"bezel",lab:"dive-bezel",
-  a:"The ring around the crystal. It can be fixed or rotating.",
-  types:[["Fixed","Decorative, or printed with a scale such as a tachymeter."],["Dive (one-way)","Turns anticlockwise only, to time a dive safely."],["24-hour (GMT)","Turned to show another time zone with the GMT hand."],["Compass","Used with the hour hand and the sun for a rough direction."]],
-  tip:"A dive bezel turns one way only, so a knock can only show more elapsed time — the diver surfaces early, never late.",
-  tech:"Rotating bezels are usually click-stepped (often 60 or 120 clicks); fixed bezels may carry tachymeter or other scales.",
-  sale:"Turn the bezel to the minute hand and it times anything up to an hour."},
+  a:"The ring around the crystal, fixed or rotating.",
+  types:[["Fixed","Decorative, or printed with a scale."],["Dive","Turns one way to time a dive."],["GMT","Shows a second time zone."],["Compass","Helps find a rough direction."]],
+  tip:"A dive bezel turns one way only, for safety.",
+  sale:"Turn the bezel to the minute hand to time anything up to an hour."},
  {id:"band",sec:"ext",n:"Band",lv:"Advisor",art:"band",
   a:"What holds the watch on the wrist: a strap or a bracelet.",
-  types:[["Strap","Leather, rubber, textile (such as a NATO strap). Fastened with a pin buckle or a folding clasp."],["Bracelet","Metal links; length adjusted by removing links. Fastened with a folding (deployant) clasp."]],
-  tip:"Leather is classic but dislikes water; rubber is best for swimming; a bracelet suits everyday wear.",
-  tech:"Spring bars attach the band between the lugs; quick-release spring bars allow tool-free changes.",
+  types:[["Strap","Leather, rubber or fabric."],["Bracelet","Metal links."]],
+  tip:"Rubber suits swimming; leather prefers to stay dry.",
   sale:"One watch, many looks — a strap change transforms it."}
 ];
 var CC_SET={name:"Watch anatomy",cards:CC_INT.concat(CC_EXT)};
@@ -3879,10 +3863,11 @@ function ccPartCase(){ var o='<g class="ha-case">';
     o+='<path d="M'+p[0]+','+p[1]+' L'+p[2]+','+p[3]+' Q'+((p[2]+p[4])/2)+','+(p[3]+(p[3]<0?-10:10))+' '+p[4]+','+p[5]+' L'+p[6]+','+p[7]+' Z"/>'; });
   o+='<path fill-rule="evenodd" d="M20,500 a480,480 0 1,0 960,0 a480,480 0 1,0 -960,0 Z M100,500 a400,400 0 1,0 800,0 a400,400 0 1,0 -800,0 Z"/><path d="M968,452 Q992,452 996,470 L996,530 Q992,548 968,548"/>';
   return o+'</g>'; }
-function ccPartCrown(pos,screwed){ var x=(pos||0)*30, o='<g class="ha-case">';
-  o+='<rect x="'+(984)+'" y="490" width="'+(18+x)+'" height="20" rx="3"/>';
-  o+='<rect x="'+(992+x)+'" y="462" width="30" height="76" rx="7"/>'; for(var k=0;k<8;k++) o+='<line x1="'+(996+x)+'" y1="'+(468+k*9)+'" x2="'+(1018+x)+'" y2="'+(468+k*9)+'"/>';
-  if(screwed===false) o+='<g class="cc-thread">'+[0,1,2,3].map(function(i){ return '<line x1="'+(984+i*5)+'" y1="488" x2="'+(989+i*5)+'" y2="512"/>'; }).join("")+'</g>';
+function ccPartCrown(pos,screwed,hit){ var x=(pos||0)*36, ph=(CR.spin||0)%3*4, o='<g class="ha-case cc-crownart">';
+  o+='<rect x="990" y="484" width="'+(16+x)+'" height="32" rx="4"/>';
+  o+='<rect x="'+(1004+x)+'" y="430" width="50" height="140" rx="12"/>'; for(var k=0;k<11;k++) o+='<line x1="'+(1010+x)+'" y1="'+(442+ph+k*12)+'" x2="'+(1048+x)+'" y2="'+(442+ph+k*12)+'"/>';
+  if(screwed===false) o+='<g class="cc-thread">'+[0,1,2].map(function(i){ return '<line x1="'+(988+i*6)+'" y1="482" x2="'+(994+i*6)+'" y2="518"/>'; }).join("")+'</g>';
+  if(hit) o+='<rect x="'+(940+x)+'" y="360" width="'+(200)+'" height="280" class="cc-crhit" data-crown="1"/>';
   return o+'</g>'; }
 function ccPartCrystal(){ return '<g><circle cx="500" cy="500" r="404" class="cc-glass"/><path d="M300,210 Q500,130 700,210" class="cc-glint"/><path d="M330,260 Q500,200 670,260" class="cc-glint2"/></g>'; }
 function ccPartGasket(){ return '<g><circle cx="500" cy="500" r="420" class="cc-gasket"/></g>'; }
@@ -3916,17 +3901,17 @@ var CC_PARTS=[ // card id · draw · slot when apart (x,y,scale) · label — li
  ["band","strap",[500,600,.34],"Band"],["caseback","caseback",[175,1010,.25],"Caseback"],["case","case",[500,600,.34],"Case & lugs"],
  ["mv-auto","move",[825,1010,.25],"Movement"],["wr","gasket",[825,770,.25],"Gasket"],["bezel","bezel",[825,250,.25],"Bezel"],
  ["dial","dial",[175,560,.25],"Dial"],["hands","hands",[175,250,.25],"Hands"],["crystal","crystal",[825,510,.25],"Crystal"],["crown","crown",[175,800,.5],"Crown"]];
-var CC_ASM=[500,600,.4];
+var CC_ASM=[500,600,.55];
 function ccPartSVG(k){
   if(k==="strap") return ccPartStrap("strap"); if(k==="case") return ccPartCase(); if(k==="caseback") return ccPartCaseback("solid");
-  if(k==="move") return ccMove("auto"); if(k==="dial") return hlDialArt(false); if(k==="hands") return '<g class="cc-livehands" data-sim="0">'+ccHands(false)+'</g>';
-  if(k==="gasket") return ccPartGasket(); if(k==="bezel") return hlBezelArt("plain",0); if(k==="crystal") return ccPartCrystal(); if(k==="crown") return ccPartCrown(0);
+  if(k==="move") return ccMove("auto"); if(k==="dial") return hlDialArt(false,{day:ccDay(true)}); if(k==="hands") return '<g class="cc-livehands" data-sim="1">'+ccHands(true)+'</g>';
+  if(k==="gasket") return ccPartGasket(); if(k==="bezel") return hlBezelArt("plain",0); if(k==="crystal") return ccPartCrystal(); if(k==="crown") return CC.apart?ccPartCrown(0):ccPartCrown(CR.pos,CR.screwed,true);
 }
 function ccWatchView(){ var apart=!!CC.apart, o=[hlArtDefs()];
-  CC_PARTS.forEach(function(p){ var t=apart?p[2]:CC_ASM, ox=p[1]==="crown"?1007:500, oy=500;
+  CC_PARTS.forEach(function(p){ var t=apart?p[2]:CC_ASM, ox=(apart&&p[1]==="crown")?1030:500, oy=500;
     o.push('<g class="cc-part '+(apart?"apart":"")+'" data-ccpart="'+p[0]+'" role="button" tabindex="'+(apart?0:-1)+'" aria-label="'+hlEsc(p[3])+'" style="transform:translate('+t[0]+'px,'+t[1]+'px) scale('+t[2]+') translate('+(-ox)+'px,'+(-oy)+'px)">'+ccPartSVG(p[1])+'</g>');
-    if(apart&&p[1]!=="strap") o.push('<text x="'+t[0]+'" y="'+(p[1]==="case"?t[1]+300:p[1]==="crown"?t[1]+60:t[1]+150)+'" class="cc-plab">'+hlEsc(p[3]).toUpperCase()+'</text>'); });
-  return '<svg viewBox="0 0 1000 1200" class="cc-explode" role="img" aria-label="MDR watch, '+(apart?"taken apart: tap a part":"assembled")+'">'+o.join("")+'</svg>';
+    if(apart&&p[1]!=="strap") o.push('<text x="'+t[0]+'" y="'+(p[1]==="case"?t[1]+300:p[1]==="crown"?t[1]+90:t[1]+150)+'" class="cc-plab">'+hlEsc(p[3]).toUpperCase()+'</text>'); });
+  return '<svg viewBox="0 0 1000 1200" class="cc-explode'+(apart?'':' cc-sim')+'" role="img" aria-label="MDR watch, '+(apart?"taken apart: tap a part":"assembled")+'">'+o.join("")+'</svg>';
 }
 
 /* ---------- card art ---------- */
@@ -3940,15 +3925,15 @@ function ccArt(k,sim){
     '<g transform="translate(500 560) scale(.12) translate(-500 -500)">'+ccPartCrystal()+'</g></svg>';
   var band=k==="band", bez=k==="bezel"?"dive":"plain";
   var wrap=function(inner,vb){ return '<svg viewBox="'+(vb||"-60 -110 1140 1200")+'" class="cc-svg" role="img" aria-label="MDR watch with the '+k+' highlighted">'+o.join("")+inner+'</svg>'; };
-  var watch=function(crPos,screwed){ return (band?ccPartStrap("strap"):"")+ccPartCase()+hlBezelArt(bez,0)+hlDialArt(chrono,{day:ccDay(sim)})+'<g class="cc-livehands" data-sim="'+(sim?1:0)+'">'+ccHands(sim)+'</g>'+ccPartCrown(crPos,screwed); };
-  if(k==="crown") return wrap(watch(CR.pos,CR.screwed)+'<rect x="'+(974+CR.pos*30)+'" y="440" width="64" height="120" rx="14" class="cc-hl"/>'+(sim?'<text x="'+(1005+CR.pos*30)+'" y="600" class="cc-lab">'+(["0 · WIND","1 · DATE","2 · TIME"][CR.pos])+'</text>':''), "-60 -110 1240 1200");
+  var watch=function(crPos,screwed,hit){ return (band?ccPartStrap("strap"):"")+ccPartCase()+hlBezelArt(bez,0)+hlDialArt(chrono,{day:ccDay(sim)})+'<g class="cc-livehands" data-sim="'+(sim?1:0)+'">'+ccHands(sim)+'</g>'+ccPartCrown(crPos,screwed,hit); };
+  if(k==="crown") return wrap(watch(CR.pos,CR.screwed,sim)+'<rect x="'+(994+CR.pos*36)+'" y="414" width="70" height="172" rx="16" class="cc-hl"/>'+(sim?'<text x="'+(1029+CR.pos*36)+'" y="640" class="cc-lab cc-crlab">'+(["0 · WIND","1 · DATE","2 · TIME"][CR.pos])+'</text>':''), "-60 -110 1260 1200").replace('class="cc-svg"','class="cc-svg cc-sim"');
   if(band) return '<svg viewBox="0 -620 1000 2240" class="cc-svg cc-tall" role="img" aria-label="Strap and bracelet">'+o.join("")+'<g transform="translate(250 500) scale(.62) translate(-500 -500)">'+ccPartStrap("strap")+ccPartCase()+hlBezelArt("plain",0)+hlDialArt(false)+'<g class="cc-livehands" data-sim="0">'+ccHands(false)+'</g></g><g transform="translate(750 500) scale(.62) translate(-500 -500)">'+ccPartStrap("bracelet")+ccPartCase()+hlBezelArt("plain",0)+hlDialArt(false)+'<g class="cc-livehands" data-sim="0">'+ccHands(false)+'</g></g><text x="250" y="1500" class="cc-lab">STRAP</text><text x="750" y="1500" class="cc-lab">BRACELET</text></svg>';
   if(k==="bezel") hl='<circle cx="500" cy="500" r="436" class="cc-hl cc-band"/>';
   if(k==="dial") hl='<circle cx="500" cy="500" r="384" class="cc-hl cc-fill"/>';
   if(k==="hands") hl='<g class="cc-hands cc-livehands" data-sim="0">'+ccHands(false)+'</g>';
   if(k==="lugs") hl='<path d="M384,-40 L616,-40 M384,-62 L384,-18 M616,-62 L616,-18" class="cc-hl cc-dim"/><text x="500" y="-54" class="cc-lab">LUG WIDTH</text>'+[[340,30],[660,30],[340,970],[660,970]].map(function(c){ return '<circle cx="'+c[0]+'" cy="'+c[1]+'" r="56" class="cc-hl"/>'; }).join("");
   if(k==="case") hl='<circle cx="500" cy="500" r="482" class="cc-hl"/>';
-  if(k==="wr") hl='<circle cx="500" cy="500" r="422" class="cc-hl cc-dash"/><rect x="970" y="440" width="64" height="120" rx="14" class="cc-hl"/><text x="500" y="1060" class="cc-lab">GASKETS SEAL CROWN, CRYSTAL &amp; CASEBACK</text>';
+  if(k==="wr") hl='<circle cx="500" cy="500" r="422" class="cc-hl cc-dash"/><rect x="994" y="414" width="70" height="172" rx="16" class="cc-hl"/><text x="500" y="1060" class="cc-lab">GASKETS SEAL CROWN, CRYSTAL &amp; CASEBACK</text>';
   return wrap(watch(0)+hl);
 }
 
@@ -3965,7 +3950,7 @@ function ccCard(c,flip,turn){
   var types=c.types?'<div class="cc-types">'+c.types.map(function(t){ return '<p><b>'+hlEsc(t[0])+'</b> '+hlEsc(t[1])+'</p>'; }).join("")+'</div>':'';
   return '<div class="cc-card '+(flip?"flip":"")+' '+(turn||"")+'" data-cc="flip" role="button" tabindex="0" aria-label="'+hlEsc(c.n)+' card, tap to turn the page">'+
     '<div class="cc-face cc-back"><div class="cc-top"><span>'+hlEsc(c.n)+'</span><span class="cc-lv">'+c.lv+'</span></div>'+types+
-      '<p class="cc-sec">Pro tip</p><p>'+hlEsc(c.tip)+'</p><p class="cc-sec">Technical</p><p>'+hlEsc(c.tech)+'</p>'+
+      '<p class="cc-sec">Good to know</p><p>'+hlEsc(c.tip)+'</p>'+
       '<p class="cc-sec">Say it to a customer</p><p class="cc-say">“'+hlEsc(c.sale)+'”</p>'+
       (c.lab?'<button class="dxghost cc-lablink" data-go="#/lab/'+c.lab+'">Try it in the Lab →</button>':'')+(c.atlas?'<button class="dxghost cc-lablink" data-go="#/atlas">Explore it in the Horology Atlas →</button>':'')+'<p class="cc-turn">Tap to turn the page back ↺</p></div>'+
     '<div class="cc-face cc-front"><div class="cc-top"><span>'+(c.sec==="int"?"Internal · movement":"External")+'</span><span class="cc-lv">'+c.lv+'</span></div>'+ccArt(c.art,c.interactive==="crown")+
@@ -3974,22 +3959,40 @@ function ccCard(c,flip,turn){
 /* ---------- the crown: positions, screw-down, setting date and time ---------- */
 function ccCrownPanel(){
   var lab=["0 · in — winds the mainspring","1 · first step — sets the date","2 · second step — sets the time (seconds hand stops in many movements)"][CR.pos];
-  return '<div class="cc-try"><p class="hl-step">Try the crown</p><p class="cc-crstate"><b>'+(CR.screwed?"Screwed down":"Unscrewed")+'</b> · position '+lab+'</p>'+
+  return '<div class="cc-try"><p class="hl-step">Practise with the crown</p><p class="cc-crstate"><b>'+(CR.screwed?"Screwed down":"Unscrewed")+'</b> · position '+lab+'</p>'+
     '<div class="cc-crbtns"><button class="dxghost" data-cc="cr-screw">'+(CR.screwed?"Unscrew":"Screw down")+'</button><button class="dxghost" data-cc="cr-out" '+(CR.pos>=2?"disabled":"")+'>Pull out</button><button class="dxghost" data-cc="cr-in" '+(CR.pos<=0?"disabled":"")+'>Push in</button>'+
     '<button class="dxbtn" data-cc="cr-turn" data-v="-1" aria-label="Turn the crown backwards">⟲ Turn</button><button class="dxbtn" data-cc="cr-turn" data-v="1" aria-label="Turn the crown forwards">Turn ⟳</button></div>'+
     (CR.pos===0?'<div class="ep-meter"><span>Mainspring</span><div class="ep-bar"><i style="width:'+Math.min(100,CR.wind)+'%"></i></div></div>':'')+
-    '<p class="hl-hint" role="status">'+hlEsc(CR.msg||"A common layout — positions vary by movement. Start by unscrewing the crown.")+'</p>'+
+    '<p class="hl-hint" role="status">'+hlEsc(CR.msg||"Tap the crown to unscrew it and pull it out. Drag it up or down to turn it. Positions vary by movement.")+'</p>'+
     '<button class="dxghost cc-full" data-cc="cr-reset">Back to the real time</button></div>';
 }
-function ccCrown(a,v){
+function ccCrown(a,v,fine){
   if(a==="cr-screw"){ if(CR.pos>0){ CR.msg="Push the crown in before screwing it down."; } else { CR.screwed=!CR.screwed; CR.msg=CR.screwed?"Screwed down: the gasket is pressed tight and water is kept out.":"Unscrewed. Now you can wind it, or pull it out to set the date or time."; } }
   if(a==="cr-out"){ if(CR.screwed){ CR.msg="It is screwed down — unscrew it first."; } else { CR.pos=Math.min(2,CR.pos+1); CR.msg=CR.pos===1?"First step: turning now changes the date.":"Second step: turning now moves the hands. In many movements the seconds hand stops, so you can set it precisely."; } }
   if(a==="cr-in"){ CR.pos=Math.max(0,CR.pos-1); CR.msg=CR.pos===0?"Pushed in. Remember to screw it down again.":"First step: turning changes the date."; }
   if(a==="cr-turn"){ var d=+v; if(CR.screwed){ CR.msg="A screwed-down crown cannot wind or set — unscrew it first."; }
     else if(CR.pos===0){ if(d>0){ CR.wind=Math.min(100,CR.wind+10); CR.msg="Winding: the mainspring is storing energy (on a mechanical watch)."; } else CR.msg="Turning backwards does not wind in most movements."; }
     else if(CR.pos===1){ CR.dayOff+=d; CR.msg="Date: "+ccDay(true)+". Many watches advise not setting the date late in the evening."; }
-    else { CR.off+=d*15; CR.msg="Time moves by 15 minutes per turn here."; } hlTickSound(); }
-  if(a==="cr-reset"){ CR.pos=0; CR.screwed=true; CR.off=0; CR.dayOff=0; CR.msg="Back to the real time and date."; }
+    else { CR.off+=d*(fine?5:15); CR.msg="Turning moves the hands. The seconds hand has stopped, so you can set the time exactly."; } CR.spin=(CR.spin||0)+(d>0?1:2); hlTickSound(); }
+  if(a==="cr-reset"){ CR.pos=0; CR.screwed=true; CR.off=0; CR.dayOff=0; CR.wind=0; CR.msg="Back to the real time and date."; }
+  if(a==="cr-tap"){ if(CR.screwed) ccCrown("cr-screw"); else if(CR.pos<2) ccCrown("cr-out"); else { CR.pos=0; CR.msg="Pushed all the way in. Turn the crown to screw it down — tap Screw down."; } }
+}
+
+function ccCrownRefresh(){ var b=document.getElementById("lab-body"); if(!b) return;
+  b.querySelectorAll(".cc-sim .cc-livehands").forEach(function(g){ g.innerHTML=ccHands(true); });
+  b.querySelectorAll(".cc-sim .ha-date").forEach(function(t){ t.textContent=ccDay(true); });
+  b.querySelectorAll(".cc-sim .cc-crownart").forEach(function(g){ var x=(CR.pos||0)*36, ph=(CR.spin||0)%3*4; g.querySelectorAll("line").forEach(function(l,k){ if(l.parentNode!==g) return; l.setAttribute("y1",442+ph+k*12); l.setAttribute("y2",442+ph+k*12); }); });
+  var h=b.querySelector(".cc-try .hl-hint"); if(h) h.textContent=CR.msg; var m=b.querySelector(".cc-try .ep-bar i"); if(m) m.style.width=Math.min(100,CR.wind)+"%"; }
+function ccCrownWire(b){
+  b.querySelectorAll("[data-crown]").forEach(function(el){ var y0=null, acc=0, moved=false, drag=false;
+    el.addEventListener("pointerdown",function(e){ e.stopPropagation(); y0=e.clientY; acc=0; moved=false; drag=false; try{ el.setPointerCapture(e.pointerId); }catch(_){} });
+    el.addEventListener("pointermove",function(e){ if(y0==null) return; e.stopPropagation(); var dy=y0-e.clientY; if(Math.abs(dy)>8) moved=true; if(!moved) return;
+      var steps=Math.trunc(dy/22); if(steps){ y0-=steps*22; for(var i=0;i<Math.abs(steps);i++) ccCrown("cr-turn",steps>0?1:-1,true); drag=true; ccCrownRefresh(); } });
+    el.addEventListener("pointerup",function(e){ e.stopPropagation(); y0=null; if(moved){ el._skip=true; setTimeout(function(){ el._skip=false; ccPage(); },0); } });
+    el.addEventListener("pointercancel",function(){ y0=null; });
+    el.addEventListener("touchmove",function(e){ e.preventDefault(); },{passive:false});
+    el.addEventListener("click",function(e){ e.stopPropagation(); if(el._skip){ el._skip=false; return; } ccCrown("cr-tap"); ccPage(); });
+  });
 }
 
 /* ---------- pages ---------- */
@@ -4002,12 +4005,12 @@ function ccPage(){
   b.innerHTML='<div class="hl-mod cc-mod"><div class="hl-head"><div><p class="eyebrow">Interactive Lab · Anatomy</p><h1 class="hl-h1">Anatomy Cards</h1></div><span class="cc-status">DRAFT · trainer review</span></div>'+
     '<p class="cc-sub">'+n+' cards · '+seen+' seen'+(p.dailyBest!=null?' · best daily five '+p.dailyBest+'/5':'')+(p.matchBest?' · best match '+p.matchBest+' s':'')+'</p>'+
     '<div class="hl-modes" role="tablist">'+[["watch","The watch"],["deck","Cards"],["daily","Daily five"],["match","Match"]].map(function(x){ return '<button role="tab" data-ccmode="'+x[0]+'" class="'+(CC.mode===x[0]?"on":"")+'">'+x[1]+'</button>'; }).join("")+'</div>'+body+'</div>';
-  ccWire();
+  ccWire(); ccCrownWire(b);
 }
 function ccWatchHTML(){
-  return '<p class="cc-lead">'+(CC.apart?'<b>Tap any part</b> to open its card. The movement opens the 7 movement types.':'This MDR watch shows your real time and date. <b>Tap it to take it apart.</b>')+'</p>'+
+  return '<p class="cc-lead">'+(CC.apart?'<b>Tap any part</b> to open its card. The movement opens the 7 movement types.':'This MDR watch shows your real time and date. <b>Tap the crown</b> to practise setting it, or <b>tap the watch</b> to take it apart.')+'</p>'+
     '<div class="cc-watchwrap"'+(CC.apart?'':' data-cc="apart" role="button" tabindex="0" aria-label="Take the watch apart"')+'>'+ccWatchView()+'</div>'+
-    '<div class="dxrowb"><button class="dxghost" data-cc="apart">'+(CC.apart?"Put it back together":"Take it apart")+'</button><button class="dxbtn" data-cc="start">Start with the cards →</button></div>';
+    '<div class="dxrowb"><button class="dxghost" data-cc="apart">'+(CC.apart?"Put it back together":"Take it apart")+'</button><button class="dxbtn" data-cc="start">Start with the cards →</button></div>'+(CC.apart?'':ccCrownPanel());
 }
 function ccDeckHTML(p){
   var D=ccDeck(), n=D.length;
