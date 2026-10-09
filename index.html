@@ -4089,17 +4089,247 @@ function ccPartCaseback(kind){ var o='<g class="ha-case"><circle cx="500" cy="50
 function ccGear(cx,cy,r,n){ var p=""; for(var i=0;i<n;i++){ var a1=i/n*Math.PI*2,a2=(i+.5)/n*Math.PI*2; p+=(i?"L":"M")+(cx+r*Math.cos(a1)).toFixed(1)+","+(cy+r*Math.sin(a1)).toFixed(1)+"L"+(cx+(r-12)*Math.cos(a2)).toFixed(1)+","+(cy+(r-12)*Math.sin(a2)).toFixed(1); } return '<path d="'+p+'Z"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(r*0.18).toFixed(0)+'"/>'; }
 function ccBalance(cx,cy){ var o='<circle cx="'+cx+'" cy="'+cy+'" r="92"/><circle cx="'+cx+'" cy="'+cy+'" r="78"/>'; [0,90,180,270].forEach(function(a){ var p=hlPolar(cx,cy,78,a); o+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'"/>'; });
   var s="M"+cx+","+cy; for(var t=0;t<14;t+=0.25){ var r=6+t*4.2; s+=" L"+(cx+r*Math.cos(t)).toFixed(1)+","+(cy+r*Math.sin(t)).toFixed(1); } return o+'<path d="'+s+'" class="cc-spring"/>'; }
-function ccMove(kind){ var o='<g class="ha-case cc-mv"><circle cx="500" cy="500" r="384"/>';
-  var mech=kind==="manual"||kind==="auto"||kind==="sd";
-  if(mech){ o+=ccGear(370,360,120,40)+'<circle cx="370" cy="360" r="60"/>'+ccGear(560,330,70,28)+ccGear(600,470,52,22)+ccGear(470,560,44,18); }
-  if(kind==="manual"||kind==="auto") o+=ccBalance(620,650)+'<path d="M560,560 L610,600 L560,640 Z"/>'+ccGear(470,650,38,15);
-  if(kind==="sd") o+=ccGear(620,650,80,60)+'<rect x="700" y="560" width="70" height="40" rx="6"/><rect x="560" y="740" width="90" height="34" rx="4"/><text x="605" y="764" class="cc-tiny">IC</text>';
-  if(kind==="batt"||kind==="solar"||kind==="kin"){ o+='<circle cx="600" cy="380" r="130"/><text x="600" y="395" class="cc-big">'+(kind==="batt"?"+":"⟳")+'</text><rect x="300" y="560" width="180" height="46" rx="6"/><text x="390" y="590" class="cc-tiny">COIL</text><rect x="520" y="600" width="90" height="70" rx="6"/><text x="565" y="642" class="cc-tiny">IC</text><rect x="640" y="620" width="70" height="26" rx="12"/>'+ccGear(400,700,46,18)+ccGear(470,420,40,16); }
-  if(kind==="kin") o+='<circle cx="330" cy="400" r="54"/><circle cx="330" cy="400" r="22"/><text x="330" y="480" class="cc-tiny">GENERATOR</text>';
-  if(kind==="solar") o+='</g><g class="cc-solar">'+[0,1,2,3].map(function(i){ return '<path d="M'+hlPolar(500,500,384,i*90+4).join(",")+' A384,384 0 0,1 '+hlPolar(500,500,384,i*90+86).join(",")+' L'+hlPolar(500,500,300,i*90+86).join(",")+' A300,300 0 0,0 '+hlPolar(500,500,300,i*90+4).join(",")+' Z"/>'; }).join("")+'</g><g class="ha-case">';
-  if(kind==="auto"||kind==="kin"||kind==="sd") o+='<path d="M140,500 A360,360 0 0,1 860,500 L760,500 A260,260 0 0,0 240,500 Z" class="cc-rotor"/><circle cx="500" cy="500" r="30"/>';
-  if(kind==="smart"){ o+='<circle cx="500" cy="500" r="330" class="cc-screen"/><text x="500" y="540" class="cc-digit">'+(function(){ var d=new Date(); return hlPad(d.getHours())+":"+hlPad(d.getMinutes()); })()+'</text><rect x="420" y="600" width="160" height="16" rx="8"/>'; }
-  return o+'</g>'; }
+/* ---------- movement line drawings (original artwork, DRAFT for watchmaker review) ---------- */
+/* Calibre · movement line art (original drawings, technical-engraving style).
+   mvArt(kind) returns SVG markup for viewBox "80 80 840 840", centre (500,500), plate radius 384.
+   kinds: manual, auto, batt, solar, kin, smart, sd. Pure string building, no randomness. */
+var MVART=(function(){
+"use strict";
+var INK="var(--ink,#16140F)",PAPER="var(--surface,#FBFAF7)",GOLD="var(--gold,#8A6B32)";
+function f(n){return (Math.round(n*100)/100).toString();}
+function P(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function circ(cx,cy,r,o){o=o||{};if(o.w)o.w=o.w*1.35;return '<circle cx="'+f(cx)+'" cy="'+f(cy)+'" r="'+f(r)+'" fill="'+(o.fill||"none")+'" stroke="'+(o.stroke||INK)+'" stroke-width="'+(o.w||1.2)+'"'+(o.dash?' stroke-dasharray="'+o.dash+'"':"")+'/>';}
+function path(d,o){o=o||{};if(o.w)o.w=o.w*1.35;return '<path d="'+d+'" fill="'+(o.fill||"none")+'" stroke="'+(o.stroke||INK)+'" stroke-width="'+(o.w||1.2)+'" stroke-linejoin="round" stroke-linecap="round"'+(o.dash?' stroke-dasharray="'+o.dash+'"':"")+'/>';}
+function line(x1,y1,x2,y2,w){w=(w||1.2)*1.35;return '<line x1="'+f(x1)+'" y1="'+f(y1)+'" x2="'+f(x2)+'" y2="'+f(y2)+'" stroke="'+INK+'" stroke-width="'+(w||1.2)+'" stroke-linecap="round"/>';}
+/* a part with the double contour of a bevelled (anglé) edge: thick ink outline, then paper inside it */
+function plate(d){return path(d,{fill:PAPER,w:4.2})+path(d,{stroke:PAPER,w:1.6});}
+/* polygon helper */
+function poly(pts,close){return "M"+pts.map(function(p){return f(p[0])+","+f(p[1]);}).join(" L")+(close===false?"":" Z");}
+/* rounded bridge from a centre line: a thick "arm" between points, ends rounded */
+function arm(pts,wd){var L=[],R=[];for(var i=0;i<pts.length;i++){var a=pts[Math.max(0,i-1)],b=pts[Math.min(pts.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,nx=-dy/l*wd/2,ny=dx/l*wd/2;L.push([pts[i][0]+nx,pts[i][1]+ny]);R.unshift([pts[i][0]-nx,pts[i][1]-ny]);}
+  var s=pts[0],e=pts[pts.length-1],r=wd/2;
+  return "M"+f(L[0][0])+","+f(L[0][1])+" L"+L.slice(1).map(function(p){return f(p[0])+","+f(p[1]);}).join(" L")+" A"+f(r)+","+f(r)+" 0 0,1 "+f(R[0][0])+","+f(R[0][1])+" L"+R.slice(1).map(function(p){return f(p[0])+","+f(p[1]);}).join(" L")+" A"+f(r)+","+f(r)+" 0 0,1 "+f(L[0][0])+","+f(L[0][1])+" Z";}
+/* screw: head, chamfer ring, slot */
+function screw(cx,cy,r,ang){ang=ang==null?20:ang;var a=ang*Math.PI/180,c=Math.cos(a),s=Math.sin(a),w=r*0.17;
+  var pts=[[-r*.86,-w],[r*.86,-w],[r*.86,w],[-r*.86,w]].map(function(p){return [cx+p[0]*c-p[1]*s,cy+p[0]*s+p[1]*c];});
+  return circ(cx,cy,r,{fill:PAPER,w:1.6})+circ(cx,cy,r*.82,{w:.7})+path(poly(pts),{fill:PAPER,w:1.1});}
+/* jewel in its chaton: 3 rings and the pivot hole */
+function jewel(cx,cy,r){return circ(cx,cy,r,{fill:PAPER,w:1.3})+circ(cx,cy,r*.72,{w:.8})+circ(cx,cy,r*.45,{w:.8})+circ(cx,cy,r*.16,{fill:INK,w:.6});}
+/* toothed wheel: involute-ish trapezoid teeth, rim, curved arms, hub */
+function wheel(cx,cy,r,n,o){o=o||{};var depth=o.depth||Math.max(2.4,r*0.07),pts=[];
+  for(var i=0;i<n;i++){var a0=i*360/n,t=360/n;pts.push(P(cx,cy,r-depth,a0),P(cx,cy,r,a0+t*0.18),P(cx,cy,r,a0+t*0.42),P(cx,cy,r-depth,a0+t*0.6));}
+  var g=path(poly(pts),{fill:PAPER,w:o.w||1.1});
+  if(o.solid)return g+circ(cx,cy,r*0.5,{w:.8})+(o.jewel===false?"":jewel(cx,cy,Math.max(4,r*.14)));
+  var rim=r-depth-Math.max(3,r*0.09),hub=Math.max(5,r*0.2),k=o.arms||5;
+  g+=circ(cx,cy,rim,{w:.9});
+  for(var j=0;j<k;j++){var b=j*360/k+(o.rot||0),bw=Math.max(2.2,r*0.05);  // a slightly curved arm, drawn as two edges
+    var p1=P(cx,cy,hub,b-6),p2=P(cx,cy,rim,b-3),p3=P(cx,cy,rim,b+5),p4=P(cx,cy,hub,b+8),m1=P(cx,cy,(hub+rim)/2,b+3),m2=P(cx,cy,(hub+rim)/2,b+9);
+    g+=path("M"+f(p1[0])+","+f(p1[1])+" Q"+f(m1[0])+","+f(m1[1])+" "+f(p2[0])+","+f(p2[1])+" L"+f(p3[0])+","+f(p3[1])+" Q"+f(m2[0])+","+f(m2[1])+" "+f(p4[0])+","+f(p4[1]),{fill:PAPER,w:.9});}
+  g+=circ(cx,cy,hub,{fill:PAPER,w:1})+(o.jewel===false?circ(cx,cy,hub*.4,{w:.8}):jewel(cx,cy,hub*.8));
+  return g;}
+/* ratchet wheel (barrel): fine saw teeth and three-screw centre, like a mainspring barrel arbor */
+function ratchet(cx,cy,r,n){var pts=[];for(var i=0;i<n;i++){var a=i*360/n;pts.push(P(cx,cy,r-6,a),P(cx,cy,r,a+360/n*0.85));}
+  var g=path(poly(pts),{fill:PAPER,w:1.1})+circ(cx,cy,r-12,{w:.9});
+  for(var k=0;k<14;k++){var a2=k*360/14,q=P(cx,cy,r*0.62,a2),q2=P(cx,cy,r-14,a2+6);g+=line(q[0],q[1],q2[0],q2[1],.5);}   // sunburst finish
+  g+=circ(cx,cy,r*0.32,{fill:PAPER,w:1.1})+screw(cx,cy,r*0.18,30);return g;}
+/* escape wheel: club teeth */
+function escape(cx,cy,r){var pts=[],n=15;for(var i=0;i<n;i++){var a=i*24;pts.push(P(cx,cy,r-7,a),P(cx,cy,r-1,a+7),P(cx,cy,r,a+11),P(cx,cy,r-3,a+12),P(cx,cy,r-7,a+16));}
+  return path(poly(pts),{fill:PAPER,w:1})+circ(cx,cy,r-12,{w:.8})+[0,72,144,216,288].map(function(a){var p=P(cx,cy,r-12,a),q=P(cx,cy,5,a);return line(p[0],p[1],q[0],q[1],1.4);}).join("")+jewel(cx,cy,5);}
+/* hairspring: archimedean spiral */
+function spiral(cx,cy,r0,r1,turns,ang){var d="",N=turns*48;for(var i=0;i<=N;i++){var t=i/N,a=(ang||0)+t*turns*360,r=r0+(r1-r0)*t,p=P(cx,cy,r,a);d+=(i?" L":"M")+f(p[0])+","+f(p[1]);}return path(d,{w:.55});}
+/* balance with screws on the rim, hairspring, cock with regulator and +/- scale */
+function balance(cx,cy,r,cockTo){var g=circ(cx,cy,r+3,{fill:PAPER,w:1.2})+circ(cx,cy,r,{w:1})+circ(cx,cy,r-7,{w:1});
+  for(var i=0;i<12;i++){var p=P(cx,cy,r+6,i*30);g+=circ(p[0],p[1],3.2,{fill:PAPER,w:.9});}
+  [0,120,240].forEach(function(a){var p=P(cx,cy,r-7,a),q=P(cx,cy,10,a);g+=path(arm([q,p],7),{fill:PAPER,w:.9});});
+  g+=spiral(cx,cy,9,r-14,10,30);
+  // the cock: a wide arm from the balance to its screw, with regulator index and scale
+  var c=cockTo,d=taper([cx,cy],34,c,22);g+=plate(d)+screw(c[0],c[1],13,60);
+  var a0=Math.atan2(c[1]-cy,c[0]-cx)*180/Math.PI+90;                          // the cock's direction, in drawing degrees
+  for(var k=-6;k<=6;k++){var s1=P(cx,cy,34,a0+k*3.6),s2=P(cx,cy,k%3===0?42:39,a0+k*3.6);g+=line(s1[0],s1[1],s2[0],s2[1],.8);}
+  var lp=P(cx,cy,48,a0-24),lm=P(cx,cy,48,a0+24);
+  g+='<text x="'+f(lp[0])+'" y="'+f(lp[1]+4)+'" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="'+INK+'">+</text><text x="'+f(lm[0])+'" y="'+f(lm[1]+4)+'" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="'+INK+'">−</text>';
+  var ip=P(cx,cy,30,a0+6);g+=path(arm([[cx,cy],ip],7),{fill:PAPER,w:.9});           // regulator index
+  g+=jewel(cx,cy,12);return g;}
+function taper(a,ra,b,rb){var dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy),th=Math.atan2(dy,dx),ph=Math.acos((ra-rb)/d);
+  var t1=[a[0]+ra*Math.cos(th+ph),a[1]+ra*Math.sin(th+ph)],t2=[b[0]+rb*Math.cos(th+ph),b[1]+rb*Math.sin(th+ph)],t3=[b[0]+rb*Math.cos(th-ph),b[1]+rb*Math.sin(th-ph)],t4=[a[0]+ra*Math.cos(th-ph),a[1]+ra*Math.sin(th-ph)];
+  return "M"+f(t1[0])+","+f(t1[1])+" L"+f(t2[0])+","+f(t2[1])+" A"+f(rb)+","+f(rb)+" 0 0,0 "+f(t3[0])+","+f(t3[1])+" L"+f(t4[0])+","+f(t4[1])+" A"+f(ra)+","+f(ra)+" 0 1,0 "+f(t1[0])+","+f(t1[1])+" Z";}
+function text(x,y,s,o){o=o||{};return '<text x="'+f(x)+'" y="'+f(y)+'" text-anchor="'+(o.anchor||"middle")+'" font-family="'+(o.serif?"Cormorant Garamond,Georgia,serif":"Inter,Arial,sans-serif")+'" font-size="'+(o.size||14)+'" font-weight="'+(o.weight||600)+'" letter-spacing="'+(o.ls||1.5)+'" fill="'+(o.fill||INK)+'"'+(o.rot?' transform="rotate('+o.rot+' '+f(x)+' '+f(y)+')"':"")+'>'+s+'</text>';}
+var UID=0;function arcText(id,cx,cy,r,a1,a2,s,size){id=id+"-"+(++UID);var b2=a2<a1?a2+360:a2,mid=((a1+b2)/2%360+360)%360,bottom=mid>90&&mid<270;
+  var p1=P(cx,cy,r,bottom?a2:a1),p2=P(cx,cy,r,bottom?a1:a2);
+  return '<defs><path id="'+id+'" d="M'+f(p1[0])+','+f(p1[1])+' A'+r+','+r+' 0 0,'+(bottom?0:1)+' '+f(p2[0])+','+f(p2[1])+'"/></defs><text font-family="Inter,Arial,sans-serif" font-size="'+(size||13)+'" font-weight="600" letter-spacing="3" fill="'+INK+'"><textPath href="#'+id+'" startOffset="50%" text-anchor="middle">'+s+'</textPath></text>';}
+/* the plate, case clamps with screws, the stem at 3 o'clock */
+function base(stem){var g=circ(500,500,384,{fill:PAPER,w:2.2})+circ(500,500,374,{w:.9});
+  // plate holes and pins seen between the bridges
+  [[300,470,7],[322,610,5],[640,250,6],[770,640,6],[440,820,5],[700,800,7],[210,520,5],[810,300,5],[560,180,5]].forEach(function(h){g+=circ(h[0],h[1],h[2],{fill:PAPER,w:1})+circ(h[0],h[1],h[2]*.45,{w:.6});});
+  // case clamps: tabs that hold the movement in its case, each with its screw
+  [35,145,215,325].forEach(function(a){var c=P(500,500,382,a),r=(a)*Math.PI/180,ux=Math.sin(r),uy=-Math.cos(r),vx=-uy,vy=ux,L=52,W=34;
+    var pts=[[c[0]-ux*L*.55-vx*W/2,c[1]-uy*L*.55-vy*W/2],[c[0]+ux*L*.45-vx*W/2,c[1]+uy*L*.45-vy*W/2],[c[0]+ux*L*.45+vx*W/2,c[1]+uy*L*.45+vy*W/2],[c[0]-ux*L*.55+vx*W/2,c[1]-uy*L*.55+vy*W/2]];
+    g+=plate(poly(pts));var sc=[c[0]-ux*22,c[1]-uy*22];g+=screw(sc[0],sc[1],11,a+90);});
+  if(stem!==false)g+=path("M884,493 L1000,493 L1000,507 L884,507 Z",{fill:PAPER,w:1.4})+line(892,500,1000,500,.6)+circ(884,500,10,{fill:PAPER,w:1.2});
+  return g;}
+function serial(x,y,s,rot){return text(x,y,s,{size:20,weight:500,ls:5,rot:rot,serif:false});}
+
+/* ----- mechanical going train under a train bridge (shared by manual, auto, sd) ----- */
+function mechTrain(){var g="";
+  g+=wheel(500,500,58,64,{arms:4,rot:12});           // centre wheel
+  g+=wheel(612,560,48,60,{arms:5,rot:30});           // third wheel
+  g+=wheel(600,668,42,56,{arms:5,rot:5});            // fourth wheel (seconds)
+  return g;}
+function windingWorks(){var g="";
+  g+=ratchet(380,330,120,72)+'';                    // barrel ratchet wheel
+  g+=wheel(560,268,44,40,{solid:true,jewel:false})+screw(560,268,10,-20);   // crown wheel
+  g+=path(arm([[470,250],[520,232],[540,236]],12),{fill:PAPER,w:1})+screw(470,250,7,10);   // click
+  return g;}
+
+function mech(opt){var g=base();opt=opt||{};
+  // wheels: their teeth show in the gaps between the bridges
+  g+=wheel(650,452,60,72,{arms:5,rot:30});                 // third wheel
+  g+=wheel(700,612,54,64,{arms:5,rot:8});                  // fourth wheel (seconds)
+  g+=wheel(505,505,76,80,{arms:4,rot:12});                 // centre wheel
+  g+=wheel(735,770,36,40,{arms:4,rot:20});                 // minute-work wheel seen through the plate
+  if(!opt.noEsc)g+=escape(588,712,42);                                    // escape wheel
+  // keyless works by the stem: winding pinion, yoke, setting lever and spring
+  g+=wheel(838,500,24,18,{solid:true,jewel:false});         // winding pinion on the stem
+  g+=plate(taper([840,452],17,[790,420],12))+screw(790,420,8,80);           // yoke
+  g+=plate(taper([838,548],19,[800,640],14))+screw(800,640,10,10);          // setting lever
+  g+=path("M842,575 C852,620 838,672 798,702",{w:2.2})+path("M842,575 C852,620 838,672 798,702",{w:.8,stroke:PAPER});  // yoke spring
+  // barrel bridge
+  g+=plate("M205,330 C200,215 290,140 410,138 C505,136 585,150 640,190 C665,208 672,232 662,256 L640,300 C628,322 604,333 578,333 L540,333 C522,380 480,428 420,446 C340,470 250,445 222,400 Z");
+  g+=ratchet(385,320,124,84);                              // barrel ratchet wheel
+  g+=wheel(578,255,46,42,{solid:true,jewel:false})+screw(578,255,11,-25);   // crown wheel
+  g+=path(arm([[488,215],[520,200],[548,204]],13),{fill:PAPER,w:1})+screw(488,215,7,10)+path("M470,175 C500,165 530,170 545,188",{w:1.6}); // click and its spring
+  // train bridge over the third and fourth wheels (their left halves stay in view)
+  g+=plate("M640,372 C698,346 766,356 790,402 C808,440 800,496 776,526 L758,598 C748,646 714,684 690,668 L672,630 C662,600 666,566 678,540 L652,500 C638,470 630,430 640,402 Z");
+  g+=jewel(650,452,13)+jewel(700,612,13)+circ(650,452,26,{w:.7})+circ(700,612,24,{w:.7});
+  // centre wheel cock
+  g+=plate(taper([505,505],34,[400,590],20))+jewel(505,505,15)+circ(505,505,26,{w:.7})+screw(402,588,12,25);
+  // minute-work bridge
+  g+=plate(taper([735,770],22,[812,712],14))+jewel(735,770,8)+screw(812,712,10,40);
+  // pallet fork bridge
+  if(!opt.noEsc)g+=plate(arm([[545,662],[586,650],[628,664]],28))+jewel(588,651,8)+screw(545,662,10,30)+screw(628,664,10,70);
+  // balance and its cock with regulator
+  if(!opt.noEsc)g+=balance(410,705,80,[245,812]);
+  // screws
+  [[245,280,17,20],[395,170,15,70],[640,282,15,40],[770,420,14,55],[740,600,14,80],[300,395,15,-30],[700,372,13,10]].forEach(function(x){g+=screw(x[0],x[1],x[2],x[3]);});
+  // engravings
+  g+=text(560,820,opt.jewels||"SEVENTEEN JEWELS",{size:15,weight:500,ls:4,rot:-14})+text(285,560,opt.cal||"MDR 01",{size:24,weight:500,ls:6});
+  return g;}
+var DRAW={
+manual:function(){return mech();},
+auto:function(){var g=mech({jewels:"TWENTY-ONE JEWELS",cal:"MDR 02"});
+  // reversing wheels and the oscillating weight over half the movement
+  g+=wheel(470,470,30,40,{arms:4})+wheel(530,440,26,36,{arms:4});
+  var rd="M"+P(500,500,370,250).map(f).join(",")+" A370,370 0 0,1 "+P(500,500,370,20).map(f).join(",")+" L"+P(500,500,70,20).map(f).join(",")+" A70,70 0 0,0 "+P(500,500,70,250).map(f).join(",")+" Z";
+  g+=path(rd,{fill:PAPER,w:4.2})+path(rd,{stroke:PAPER,w:1.6});
+  for(var k=1;k<9;k++){var rr=70+k*33;g+=path("M"+P(500,500,rr,255).map(f).join(",")+" A"+rr+","+rr+" 0 0,1 "+P(500,500,rr,15).map(f).join(","),{w:.5});}   // circular graining
+  g+=path("M"+P(500,500,350,250).map(f).join(",")+" A350,350 0 0,1 "+P(500,500,350,20).map(f).join(","),{w:7,stroke:INK})+path("M"+P(500,500,350,250).map(f).join(",")+" A350,350 0 0,1 "+P(500,500,350,20).map(f).join(","),{w:4,stroke:PAPER});   // heavy rim
+  g+=circ(500,500,44,{fill:PAPER,w:1.6})+circ(500,500,30,{w:.9})+[0,120,240].map(function(a){var p=P(500,500,37,a);return screw(p[0],p[1],6,a);}).join("")+jewel(500,500,10);
+  g+=arcText("mva1",500,500,210,265,5,"AUTOMATIC",22);
+  return g;},
+batt:function(){return quartz("batt");},
+solar:function(){return quartz("solar");},
+kin:function(){return quartz("kin");},
+smart:function(){var g=base(false);
+  // the back of a smart module: battery, main board, optical sensor and charging coil
+  g+=plate("M215,330 C215,252 262,212 340,212 L556,212 C634,212 680,252 680,330 L680,410 C680,462 642,492 590,492 L305,492 C250,492 215,462 215,410 Z");
+  g+=path("M236,334 C236,268 274,232 340,232 L556,232 C622,232 660,268 660,334 L660,406 C660,450 630,472 590,472 L305,472 C262,472 236,450 236,406 Z",{w:.8});
+  g+=text(448,345,"Li-ion",{size:22,weight:500,ls:2})+text(448,374,"RECHARGEABLE CELL",{size:11,ls:3});
+  g+=path("M660,300 L720,300 L720,330 L660,330 Z",{fill:PAPER,w:1.2})+path("M660,380 L720,380 L720,410 L660,410 Z",{fill:PAPER,w:1.2})+text(690,290,"TABS",{size:9,ls:1.5});   // battery tabs to the protection board
+  g+=path("M720,300 L760,300 L760,460 M720,410 L748,410 L748,460",{w:1});
+  // main board
+  g+=plate("M190,520 L800,520 C832,520 848,546 848,584 L848,684 C848,756 790,800 718,800 L292,800 C222,800 176,756 176,684 L176,556 C176,532 184,520 190,520 Z");
+  g+=path("M196,532 C330,514 670,514 828,548",{w:.7,dash:"7 4"})+text(512,540,"ANTENNA",{size:8.5,ls:1.6});
+  // optical heart-rate sensor in a ring of charging coil
+  for(var r=58;r<=96;r+=6)g+=circ(500,660,r,{w:.55});
+  g+=circ(500,660,52,{fill:PAPER,w:1.6})+circ(500,660,38,{w:.8});
+  [[-14,-14],[14,-14],[-14,14],[14,14]].forEach(function(d,k){g+=path("M"+(493+d[0])+","+(653+d[1])+" l14,0 l0,14 l-14,0 Z",{fill:k%2?INK:PAPER,w:.8});});
+  g+=text(500,778,"OPTICAL SENSOR · CHARGING COIL",{size:9,ls:1.4});
+  // chips and parts on the board
+  g+=path("M250,575 L350,575 L350,665 L250,665 Z",{fill:INK,w:1})+text(300,625,"SoC",{size:15,fill:"var(--surface,#FBFAF7)",ls:2});
+  for(var p2=0;p2<6;p2++){g+=line(258+p2*16,571,258+p2*16,563,1)+line(258+p2*16,669,258+p2*16,677,1);}
+  g+=path("M650,575 L720,575 L720,630 L650,630 Z",{fill:PAPER,w:1.2})+text(685,606,"PMIC",{size:10,ls:1.4});
+  g+=path("M370,690 L430,690 L430,740 L370,740 Z",{fill:PAPER,w:1.2})+text(400,719,"MEM",{size:10,ls:1.4});
+  g+=path("M610,690 C610,680 618,674 628,674 L668,674 C678,674 684,680 684,690 L684,700 C684,710 678,716 668,716 L628,716 C618,716 610,710 610,700 Z",{fill:PAPER,w:1.1})+text(647,699,"XTAL",{size:8.5,ls:1.2});
+  // connector with pins
+  g+=path("M720,650 L800,650 L800,690 L720,690 Z",{fill:PAPER,w:1.2});for(var c=0;c<8;c++)g+=path("M"+(726+c*9.5)+",656 l5,0 l0,28 l-5,0 Z",{fill:INK,w:.4});
+  // small passive parts
+  [[380,580],[400,580],[420,580],[380,600],[400,600],[440,600],[560,580],[580,580],[600,580],[560,600],[580,620],[360,640],[620,640],[640,650],[740,720],[760,720],[740,740],[230,690],[250,700],[270,720],[300,740]].forEach(function(q,k){g+=path("M"+q[0]+","+q[1]+" l"+(k%3?10:14)+",0 l0,7 l-"+(k%3?10:14)+",0 Z",{fill:k%4?PAPER:INK,w:.6});});
+  // traces
+  for(var k3=0;k3<7;k3++)g+=path("M350,"+(590+k3*10)+" L"+(380+k3*4)+","+(590+k3*10)+" L"+(420+k3*4)+",650",{w:.55});
+  g+=circ(780,758,26,{fill:PAPER,w:1.3})+circ(780,758,15,{w:.8})+text(780,800,"HAPTIC",{size:8.5,ls:1.4});
+  [[200,548],[822,560],[214,770],[805,712]].forEach(function(q,k){g+=screw(q[0],q[1],11,k*40);});
+  g+=arcText("mvs1",500,500,352,300,60,"SMART MODULE",13);
+  return g;},
+sd:function(){var g=mech({noEsc:true,jewels:" ",cal:"MDR SD"});
+  // in place of balance and escapement: the glide wheel (a rotor with magnets), its coil, the quartz crystal and the IC
+  g+=plate(taper([420,710],86,[250,812],22))+screw(250,812,13,60);
+  g+=circ(420,710,70,{fill:PAPER,w:1.8})+circ(420,710,58,{w:.8});
+  [0,45,90,135,180,225,270,315].forEach(function(a){var p=P(420,710,42,a);g+=circ(p[0],p[1],9,{fill:PAPER,w:1})+circ(p[0],p[1],4,{w:.6});});
+  g+=jewel(420,710,13)+text(420,640,"GLIDE WHEEL",{size:11,ls:2});
+  g+=path("M520,650 L620,650 L620,700 L520,700 Z",{fill:PAPER,w:1.4});
+  for(var k=0;k<18;k++)g+=line(526+k*5.2,654,526+k*5.2,696,.6);
+  g+=text(570,722,"COIL",{size:11,ls:2});
+  g+=path("M530,760 C530,750 538,745 548,745 L640,745 C650,745 656,752 656,760 L656,778 C656,786 650,792 640,792 L548,792 C538,792 530,786 530,778 Z",{fill:PAPER,w:1.3})+text(593,773,"QUARTZ",{size:10,ls:1.5});
+  g+=path("M640,690 L700,690 L700,730 L640,730 Z",{fill:INK,w:1})+text(670,715,"IC",{size:12,fill:"var(--surface,#FBFAF7)"});
+  // oscillating weight that winds it
+  var rd="M"+P(500,500,370,280).map(f).join(",")+" A370,370 0 0,1 "+P(500,500,370,40).map(f).join(",")+" L"+P(500,500,70,40).map(f).join(",")+" A70,70 0 0,0 "+P(500,500,70,280).map(f).join(",")+" Z";
+  g+=path(rd,{fill:PAPER,w:4.2})+path(rd,{stroke:PAPER,w:1.6});
+  for(var q=1;q<9;q++){var rr=70+q*33;g+=path("M"+P(500,500,rr,285).map(f).join(",")+" A"+rr+","+rr+" 0 0,1 "+P(500,500,rr,35).map(f).join(","),{w:.5});}
+  g+=circ(500,500,44,{fill:PAPER,w:1.6})+circ(500,500,30,{w:.9})+[0,120,240].map(function(a){var p=P(500,500,37,a);return screw(p[0],p[1],6,a);}).join("")+jewel(500,500,10);
+  g+=arcText("mvd1",500,500,215,295,25,"SPRING DRIVE",20);
+  return g;}
+};
+function quartz(kind){var g=base();
+  // wheel train (seen in the gaps) and its bridge
+  g+=wheel(640,470,44,60,{arms:5,rot:10})+wheel(560,540,34,48,{arms:4,rot:30})+wheel(700,560,30,40,{arms:4})+wheel(505,505,48,64,{arms:4,rot:20});
+  g+=plate("M600,420 C640,392 700,392 735,420 C760,440 765,480 752,510 L735,560 C722,596 690,610 662,598 L612,576 C590,566 580,540 590,515 L600,470 Z");
+  g+=jewel(640,470,11)+jewel(700,560,10)+screw(735,425,11,20)+screw(615,575,11,70);
+  g+=plate(taper([505,505],26,[440,450],14))+jewel(505,505,10)+screw(440,450,9,30);
+  // keyless works by the stem
+  g+=wheel(838,500,22,16,{solid:true,jewel:false});
+  g+=plate(taper([838,548],18,[792,630],13))+screw(792,630,10,10);
+  g+=plate(taper([840,452],15,[796,418],11))+screw(796,418,8,80);
+  g+=path("M842,575 C852,620 838,672 798,702",{w:2.2})+path("M842,575 C852,620 838,672 798,702",{w:.8,stroke:PAPER});
+  // stepping motor: stator around the rotor magnet, with its coil
+  g+=plate("M260,560 C262,520 300,500 340,500 L410,500 C440,500 455,520 455,545 L455,600 C455,640 430,660 400,660 L330,660 C290,660 258,630 260,600 Z");
+  g+=circ(372,580,34,{fill:PAPER,w:1.6})+circ(372,580,22,{w:.8})+path("M350,560 L394,600 M394,560 L350,600",{w:.6})+jewel(372,580,6);
+  g+=text(358,688,"STEP MOTOR",{size:10,ls:1.6});
+  // circuit block: a thin board with its traces, the IC under resin, the quartz crystal and the coil
+  g+=plate("M240,700 C300,690 360,700 420,720 L560,720 C620,720 700,700 760,690 C790,690 800,710 790,740 C760,800 650,860 500,866 C380,870 280,820 240,760 C225,735 225,710 240,700 Z");
+  for(var k=0;k<12;k++)g+=path("M"+(300+k*22)+",740 L"+(310+k*22)+",770 L"+(380+k*14)+",800",{w:.6});
+  g+=path("M470,736 L620,736 L620,800 L470,800 Z",{fill:PAPER,w:1.6});
+  for(var k2=0;k2<30;k2++)g+=line(475+k2*4.9,740,475+k2*4.9,796,.55);
+  g+=text(545,824,"COIL",{size:10,ls:2})+path("M470,768 L430,768 L410,740 M620,768 L660,768",{w:.8});
+  g+=path("M650,720 C650,712 656,706 664,706 L708,706 C716,706 722,712 722,720 L722,748 C722,756 716,762 708,762 L664,762 C656,762 650,756 650,748 Z",{fill:INK,w:1})+text(686,739,"IC",{size:12,fill:"var(--surface,#FBFAF7)"});
+  g+=path("M330,760 C330,752 336,747 344,747 L414,747 C422,747 428,752 428,760 L428,774 C428,782 422,787 414,787 L344,787 C336,787 330,782 330,774 Z",{fill:PAPER,w:1.3})+text(379,771,"QUARTZ",{size:9.5,ls:1.4})+line(330,767,300,767,.8)+line(300,767,290,752,.8);
+  g+=circ(300,736,5,{fill:PAPER,w:1})+circ(760,712,5,{fill:PAPER,w:1});
+  // the power source
+  if(kind==="batt"||kind==="solar"){var big=kind==="batt";
+    g+=circ(450,300,big?140:118,{fill:PAPER,w:2.4})+circ(450,300,(big?140:118)-14,{w:.8})+circ(450,300,(big?140:118)-26,{w:.5,dash:big?"":"3 4"});
+    g+=big?text(450,280,"+",{size:44,weight:500})+text(450,330,"SILVER-OXIDE CELL",{size:12,ls:3}):text(450,296,"RECHARGEABLE",{size:12,ls:3})+text(450,316,"CELL",{size:12,ls:3});
+    g+=plate(arm([[300,230],[370,186],[450,174],[530,186],[600,230]],22))+screw(300,230,11,20)+screw(600,230,11,70);   // battery clamp
+    g+=path("M610,330 C640,350 650,380 640,410",{w:2})+path("M610,330 C640,350 650,380 640,410",{w:.7,stroke:PAPER});   // minus contact spring
+    if(!big){g+=path("M640,250 L740,250 L740,300 L640,300 Z",{fill:PAPER,w:1.3})+text(690,280,"SOLAR",{size:10,ls:1.5})+path("M690,300 C690,340 670,360 640,370",{w:.8});
+      g+=text(690,236,"PANEL CONTACT",{size:8.5,ls:1});}}
+  if(kind==="kin"){g+=circ(470,290,100,{fill:PAPER,w:2.2})+circ(470,290,88,{w:.8})+text(470,286,"RECHARGEABLE",{size:11,ls:2})+text(470,305,"CELL",{size:11,ls:2});
+    g+=plate(arm([[360,220],[470,180],[580,220]],18))+screw(360,220,10,20)+screw(580,220,10,70);
+    // generator: a magnet rotor spun fast by the weight's gear train, beside its coil
+    g+=circ(650,300,52,{fill:PAPER,w:1.6})+[0,60,120,180,240,300].map(function(a){var p=P(650,300,32,a);return circ(p[0],p[1],8,{fill:PAPER,w:.9});}).join("")+jewel(650,300,9)+text(650,372,"GENERATOR",{size:10,ls:2});
+    g+=path("M700,250 L770,250 L770,290 L700,290 Z",{fill:PAPER,w:1.2});for(var c2=0;c2<12;c2++)g+=line(704+c2*5.4,253,704+c2*5.4,287,.5);
+    g+=wheel(580,360,22,28,{arms:4});
+    // the oscillating weight over the left of the movement
+    var rd="M"+P(500,500,360,195).map(f).join(",")+" A360,360 0 0,1 "+P(500,500,360,335).map(f).join(",")+" L"+P(500,500,70,335).map(f).join(",")+" A70,70 0 0,0 "+P(500,500,70,195).map(f).join(",")+" Z";
+    g+=path(rd,{fill:PAPER,w:4.2})+path(rd,{stroke:PAPER,w:1.6});
+    for(var q=1;q<9;q++){var rr=70+q*33;g+=path("M"+P(500,500,rr,200).map(f).join(",")+" A"+rr+","+rr+" 0 0,1 "+P(500,500,rr,330).map(f).join(","),{w:.5});}
+    g+=circ(500,500,40,{fill:PAPER,w:1.6})+circ(500,500,28,{w:.9})+[0,120,240].map(function(a){var p=P(500,500,34,a);return screw(p[0],p[1],5.5,a);}).join("")+jewel(500,500,9);
+    g+=text(240,500,"OSCILLATING WEIGHT",{size:13,ls:3,rot:-90});}
+  [[250,330,14,20],[780,330,13,60],[200,560,13,0],[700,420,10,30]].forEach(function(x){g+=screw(x[0],x[1],x[2],x[3]);});
+  g+=arcText("mvq"+kind,500,500,350,kind==="kin"?100:140,kind==="kin"?170:220,kind==="batt"?"QUARTZ · BATTERY-POWERED":kind==="solar"?"QUARTZ · SOLAR-POWERED":"QUARTZ · MOTION-CHARGED",13)+(kind==="kin"?"":text(255,445,"MDR Q1",{size:22,weight:500,ls:5}));
+  return g;}
+return function mvArt(kind){var fn=DRAW[kind];return fn?fn():"";};
+})();
+
+function ccMove(kind){ return '<g class="cc-mv">'+MVART(kind)+'</g>'; }
 
 /* ---------- the assembled / exploded watch (Watch view) ---------- */
 var CC_PARTS=[ // card id · draw · slot when apart (x,y,scale) · label — listed bottom layer first, as a watch is built
