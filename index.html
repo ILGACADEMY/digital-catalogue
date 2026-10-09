@@ -730,6 +730,21 @@ body.hasbar .totop{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 .mstage.zoom .zhead{display:flex;align-items:center;justify-content:space-between;padding:4px 2px 6px}
 .mstage.zoom .zt{font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
 .mstage.zoom .zt em{font-style:normal;color:var(--gold);margin-left:8px}
+.mwatch .bezel{fill:#FBFAF7;stroke:#1E1C18;stroke-width:.9}.mwatch .mcoin{stroke:#1E1C18;stroke-width:.35}
+.mwatch .mcasel path,.mwatch .mcasel circle{stroke-width:4}
+.mwatch .mdialc{fill:#FBFAF7;stroke:#1E1C18;stroke-width:1}.mwatch .mring{fill:none;stroke:#1E1C18;stroke-width:.4}
+.mwatch .tk{stroke:#1E1C18;stroke-width:.55}.mwatch .tkb{stroke:#1E1C18;stroke-width:2}
+.mwatch .subface{fill:#FBFAF7;stroke:#1E1C18;stroke-width:.8}.mwatch .stk{stroke:#1E1C18;stroke-width:.5}
+.mwatch .slab{fill:#3A362F}.mwatch .sname{fill:#6B6458}.mwatch .brandtxt{fill:#1E1C18}
+.mwatch .hsub{stroke:#1E1C18}.mwatch .hsub.chr{stroke:#A8392B}
+.mwatch .hmain{fill:#FBFAF7;stroke:#1E1C18;stroke-width:.9;stroke-linejoin:round}.mwatch .hsec{stroke:#1E1C18;stroke-width:.9}.mwatch .pin{fill:#1E1C18}
+.mwatch .btn,.mwatch .crownk{fill:#FBFAF7;stroke:#1E1C18;stroke-width:.9}.mwatch .stem{fill:#FBFAF7;stroke:#1E1C18;stroke-width:.8}
+.mwatch .knurl{stroke:#1E1C18;stroke-width:.6}.mwatch .ctl.act .knurl{stroke:#1E1C18}
+.mwatch .datewin{fill:#fff;stroke:#1E1C18;stroke-width:.8}.mwatch .datetxt{fill:#1E1C18}
+.mwatch .ctl.act .btn,.mwatch .ctl.act .crownk{fill:#E8D49A}
+.mwatch .push{transition:transform .07s cubic-bezier(.3,0,.2,1)}.mwatch .push.down{transform:translateX(-6px)}
+.mwatch .hand.hl .hmain{fill:#E8D49A}.mwatch .hand.hl .hsec{stroke:#C08A2B;stroke-width:2}
+.mwatch .hl .subface,.mwatch .hl .btn,.mwatch .hl .crownk{stroke:#C08A2B;stroke-width:2}
 .mstage.zoom .mwatch{width:min(98vw,62vh,600px)}
 .mstage.zoom .mstatus .read{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0 6px}
 .mstage.zoom .mstatus .read>span{border:1px solid var(--line);background:var(--surface);padding:7px 4px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1.3}
@@ -967,7 +982,7 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
 .hl-f1{position:absolute;bottom:2px;width:84px;height:24px;transform:translateX(-50%)}.f1b{fill:#1E1C18}.f1w{fill:#1E1C18}.f1h{fill:#B8B0A2}.f1halo{fill:none;stroke:#1E1C18;stroke-width:2}
 .hl-bar{height:8px;border:1px solid var(--line);max-width:260px;margin:4px auto}.hl-bar i{display:block;height:100%;background:#A33A2E}
 .hl-beatn{font-size:14px;color:var(--ink);line-height:1.45;max-width:420px;margin:4px auto}
-.hl-storm{display:flex;align-items:center;justify-content:center;gap:12px;min-height:44px}.hl-bolt{font-size:34px}.hl-storm.flash{background:#FFF6D8}.hl-boom{font-weight:700;letter-spacing:.12em;color:#A33A2E}
+.hl-storm{display:flex;align-items:center;justify-content:center;gap:12px;min-height:44px}.hl-bolt{font-size:34px}.hl-storm{border-radius:10px;transition:background .08s}.hl-storm.flash{background:#FFF1B8;box-shadow:0 0 0 2px #E9C75A inset}.hl-storm.boom{animation:hl-shake .18s linear 6}@keyframes hl-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}.hl-boom{font-weight:700;letter-spacing:.12em;color:#A33A2E}
 .hl-sun line{stroke:#C9A84C;stroke-width:5;stroke-linecap:round}.hl-sun circle{fill:#E8C25A;stroke:#8A6B32;stroke-width:3}.hl-sunt{font:700 24px/1 Arial;letter-spacing:3px;fill:#8A6B32;text-anchor:middle}
 @media(max-width:899px){
  .hl-watch{position:static;box-shadow:none}
@@ -2026,6 +2041,11 @@ MANUALS.VD38 = {
 };
 
 var M = null;
+/* the manual watches share the Lab's look: white case, wide-set lugs, coin-edge bezel, ink line work, MDR mark */
+function mCaseArt(cx,cy){ var o='<g class="ha-case mcasel" transform="translate('+(cx-125)+' '+(cy-125)+') scale(.25)">'+hlLugs()+'<circle cx="500" cy="500" r="480"/><circle cx="500" cy="500" r="462"/></g>';
+  o+='<circle cx="'+cx+'" cy="'+cy+'" r="111" class="bezel"/>'; for(var i=0;i<120;i++){ var a=i*Math.PI/60; o+='<line x1="'+(cx+108*Math.sin(a)).toFixed(1)+'" y1="'+(cy-108*Math.cos(a)).toFixed(1)+'" x2="'+(cx+111*Math.sin(a)).toFixed(1)+'" y2="'+(cy-111*Math.cos(a)).toFixed(1)+'" class="mcoin"/>'; }
+  return o+'<circle cx="'+cx+'" cy="'+cy+'" r="104" class="mdialc"/><circle cx="'+cx+'" cy="'+cy+'" r="90" class="mring"/>'; }
+function mLogo(x,y){ return '<image href="data:image/png;base64,'+HL_MDR+'" x="'+(x-12)+'" y="'+(y-11)+'" width="24" height="22" filter="url(#hl-ink)" class="mlogo"/>'; }
 function manualModel(man){
   var cx=140, cy=150;
   var st={crown:0, localOff:0, dualOff:0, mis:0, mis24:0, frozen:null, zero:false, zeroPos:0, zero24:0, hl:null, msg:""};
@@ -2042,12 +2062,12 @@ function manualModel(man){
     s+='<g class="hand" id="mh-'+id+'" style="transform-origin:'+x+'px '+y+'px"><line x1="'+x+'" y1="'+(y+4)+'" x2="'+x+'" y2="'+(y-r+5)+'" class="hsub"/></g><circle cx="'+x+'" cy="'+y+'" r="2" class="pin"/></g>';
     return s;
   }
-  var svg='<svg viewBox="0 24 300 252" class="mwatch" aria-label="Interactive '+man.code+' watch">'+
+  var svg='<svg viewBox="0 12 300 276" class="mwatch" aria-label="Interactive '+man.code+' watch">'+hlArtDefs()+
     '<defs><radialGradient id="mdial" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#23385e"/><stop offset="1" stop-color="#101a2e"/></radialGradient>'+
     '<linearGradient id="mcase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8d8a84"/><stop offset=".5" stop-color="#3b3935"/><stop offset="1" stop-color="#6d6a64"/></linearGradient></defs>'+
-    '<circle cx="'+cx+'" cy="'+cy+'" r="120" fill="url(#mcase)"/><circle cx="'+cx+'" cy="'+cy+'" r="110" class="bezel"/><circle cx="'+cx+'" cy="'+cy+'" r="103" fill="url(#mdial)"/>'+
-    '<g class="ctl" data-act="A" data-part="btnA" id="m-btnA" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(-30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><g class="push"><rect x="250" y="142" width="20" height="16" rx="3" class="btn"/><text x="286" y="154" class="blab" transform="rotate(30 286 150)">A</text></g></g>'+
-    '<g class="ctl" data-act="B" data-part="btnB" id="m-btnB" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><g class="push"><rect x="250" y="142" width="20" height="16" rx="3" class="btn"/><text x="286" y="154" class="blab" transform="rotate(-30 286 150)">B</text></g></g>'+
+    mCaseArt(cx,cy)+
+    '<g class="ctl" data-act="A" data-part="btnA" id="m-btnA" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(-30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><rect x="257" y="145.5" width="10" height="9" class="stem"/><g class="push"><rect x="265" y="141.5" width="8" height="17" rx="2" class="btn"/><line x1="267.5" y1="144" x2="267.5" y2="156" class="knurl"/><text x="286" y="154" class="blab" transform="rotate(30 286 150)">A</text></g></g>'+
+    '<g class="ctl" data-act="B" data-part="btnB" id="m-btnB" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><rect x="257" y="145.5" width="10" height="9" class="stem"/><g class="push"><rect x="265" y="141.5" width="8" height="17" rx="2" class="btn"/><line x1="267.5" y1="144" x2="267.5" y2="156" class="knurl"/><text x="286" y="154" class="blab" transform="rotate(-30 286 150)">B</text></g></g>'+
     '<g class="ctl" data-act="crown" data-part="crown" id="m-crownwrap"><rect x="238" y="104" width="62" height="92" class="hit"/>'+
       '<g id="m-crown"><rect x="252" y="138" width="10" height="24" rx="2" class="stem"/><rect x="253" y="128" width="26" height="44" rx="9" class="halo"/><rect x="258" y="134" width="16" height="32" rx="4" class="crownk"/>'+
       '<clipPath id="m-kclip"><rect x="258" y="134" width="16" height="32" rx="4"/></clipPath><g clip-path="url(#m-kclip)"><g id="m-knurl">'+
@@ -2055,7 +2075,7 @@ function manualModel(man){
       '<g class="hint"><path d="M260 124 l6 -7 l6 7 Z"/><path d="M260 176 l6 7 l6 -7 Z"/></g>'+
       '<g class="phint"><path d="M280 146 l7 4 l-7 4 Z"/></g></g></g>';
   for(var i=0;i<60;i++){ var a=i*Math.PI/30, big=i%5===0; svg+='<line x1="'+(cx+(big?92:97)*Math.sin(a)).toFixed(1)+'" y1="'+(cy-(big?92:97)*Math.cos(a)).toFixed(1)+'" x2="'+(cx+101*Math.sin(a)).toFixed(1)+'" y2="'+(cy-101*Math.cos(a)).toFixed(1)+'" class="'+(big?'tkb':'tk')+'"/>'; }
-  svg+= man.dual24 ? '<text x="'+(cx+58)+'" y="'+(cy+3)+'" class="brandtxt">'+man.code+'</text>' : '<text x="'+cx+'" y="'+(cy-62)+'" class="brandtxt">'+man.code+'</text>';
+  svg+= man.dual24 ? mLogo(cx+58,cy) : mLogo(cx,cy-64);
   svg+=sub(cx-50,cy,26,12,{0:"12",3:"3",9:"9"},"DUAL H","d12");
   svg+= man.dual24 ? sub(cx,cy-50,26,24,{0:"24",6:"6",18:"18"},"DUAL 24","d24") : sub(cx+50,cy,26,24,{0:"24",6:"6",18:"18"},"24 H","h24");
   svg+=sub(cx,cy+50,26,12,{0:"0",3:"15",9:"45"},"DUAL M","d60");
@@ -2096,7 +2116,7 @@ function manualModel(man){
         (st.msg?'<span class="msg">'+st.msg+'</span>':''); }
     var pb=document.getElementById("m-pull"); if(pb){ var pt=(st.crown?"Push crown in":"Pull crown out")+'<small>'+(st.crown?"now at first click":"now pushed in")+'</small>'; if(pb.dataset.lab!==pt){ pb.dataset.lab=pt; pb.innerHTML=pt; } }
   }
-  function press(which){ var el=document.querySelector("#m-btn"+which+" .push"); if(el){ el.classList.add("down"); setTimeout(function(){el.classList.remove("down");},140); } flash("m-btn"+which,'[data-m="'+which+'"]'); fx("press"); }
+  function press(which){ var el=document.querySelector("#m-btn"+which+" .push"); if(el){ el.classList.add("down"); setTimeout(function(){ if(!holding["m-btn"+which]) el.classList.remove("down"); },160); } flash("m-btn"+which,'[data-m="'+which+'"]'); fx("press"); }
   var kn=0;
   function spinKnurl(dir){ kn+=dir*2; var k=document.getElementById("m-knurl"); if(k){ k.style.transition="transform .1s linear"; k.style.transform="translateY("+(((kn%8)+8)%8-4)+"px)"; } }
   var api={
@@ -2308,6 +2328,7 @@ function holdStart(a,padEl){ holdStop(); stopRun();
   var repeat=manualAct(a); if(!repeat) return;
   var n=0; mHold=setTimeout(function rep(){ manualAct(a); n++; mHold=setTimeout(rep, n>10?60:120); },380); }
 function holdStop(){ if(mHold){ clearTimeout(mHold); mHold=null; }
+  var dn=document.querySelectorAll(".mwatch .push.down"); if(dn.length&&holdStart.id&&/btn/.test(holdStart.id)){ fx("tick"); } holding["m-btnA"]=holding["m-btnB"]=false; dn.forEach(function(p){ setTimeout(function(){ p.classList.remove("down"); },40); });
   var id=holdStart.id; if(id){ holding[id]=false; flash(id,null,350); holdStart.id=null; }
   var p=holdStart.pad; if(p){ delete p.dataset.held; setTimeout(function(){ p.classList.remove("pressed"); },200); holdStart.pad=null; } }
 
@@ -2447,22 +2468,22 @@ function chronoModel(man){
     return s;
   }
   var ctl=
-    '<g class="ctl" data-act="A" data-part="btnA" id="m-btnA" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(-30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><g class="push"><rect x="250" y="142" width="20" height="16" rx="3" class="btn"/><text x="286" y="154" class="blab" transform="rotate(30 286 150)">A</text></g></g>'+
-    '<g class="ctl" data-act="B" data-part="btnB" id="m-btnB" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><g class="push"><rect x="250" y="142" width="20" height="16" rx="3" class="btn"/><text x="286" y="154" class="blab" transform="rotate(-30 286 150)">B</text></g></g>'+
+    '<g class="ctl" data-act="A" data-part="btnA" id="m-btnA" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(-30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><rect x="257" y="145.5" width="10" height="9" class="stem"/><g class="push"><rect x="265" y="141.5" width="8" height="17" rx="2" class="btn"/><line x1="267.5" y1="144" x2="267.5" y2="156" class="knurl"/><text x="286" y="154" class="blab" transform="rotate(30 286 150)">A</text></g></g>'+
+    '<g class="ctl" data-act="B" data-part="btnB" id="m-btnB" style="transform-origin:'+cx+'px '+cy+'px;transform:rotate(30deg)"><rect x="236" y="124" width="66" height="52" class="hit"/><rect x="244" y="136" width="32" height="28" rx="8" class="halo"/><rect x="257" y="145.5" width="10" height="9" class="stem"/><g class="push"><rect x="265" y="141.5" width="8" height="17" rx="2" class="btn"/><line x1="267.5" y1="144" x2="267.5" y2="156" class="knurl"/><text x="286" y="154" class="blab" transform="rotate(-30 286 150)">B</text></g></g>'+
     '<g class="ctl" data-act="crown" data-part="crown" id="m-crownwrap"><rect x="238" y="104" width="62" height="92" class="hit"/>'+
       '<g id="m-crown"><rect x="250" y="138" width="12" height="24" rx="2" class="stem"/><rect x="253" y="128" width="26" height="44" rx="9" class="halo"/><rect x="258" y="134" width="16" height="32" rx="4" class="crownk"/>'+
       '<clipPath id="m-kclip"><rect x="258" y="134" width="16" height="32" rx="4"/></clipPath><g clip-path="url(#m-kclip)"><g id="m-knurl">'+
       (function(){ var k=""; for(var y=126;y<=174;y+=4) k+='<line x1="259" y1="'+y+'" x2="273" y2="'+y+'" class="knurl"/>'; return k; })()+'</g></g>'+
       '<g class="hint"><path d="M260 124 l6 -7 l6 7 Z"/><path d="M260 176 l6 7 l6 -7 Z"/></g>'+
       '<g class="phint"><path d="M280 146 l7 4 l-7 4 Z"/></g></g></g>';
-  var svg='<svg viewBox="0 24 300 252" class="mwatch" aria-label="Interactive '+man.code+' watch">'+
+  var svg='<svg viewBox="0 12 300 276" class="mwatch" aria-label="Interactive '+man.code+' watch">'+hlArtDefs()+
     '<defs><radialGradient id="mdial" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#2b2b2b"/><stop offset="1" stop-color="#121212"/></radialGradient>'+
     '<linearGradient id="mcase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8d8a84"/><stop offset=".5" stop-color="#3b3935"/><stop offset="1" stop-color="#6d6a64"/></linearGradient></defs>'+
-    '<circle cx="'+cx+'" cy="'+cy+'" r="120" fill="url(#mcase)"/><circle cx="'+cx+'" cy="'+cy+'" r="110" class="bezel"/><circle cx="'+cx+'" cy="'+cy+'" r="103" fill="url(#mdial)"/>'+ctl;
+    mCaseArt(cx,cy)+ctl;
   for(var i=0;i<60;i++){ var a=i*Math.PI/30, big=i%5===0; if(i===15) continue; svg+='<line x1="'+(cx+(big?92:97)*Math.sin(a)).toFixed(1)+'" y1="'+(cy-(big?92:97)*Math.cos(a)).toFixed(1)+'" x2="'+(cx+101*Math.sin(a)).toFixed(1)+'" y2="'+(cy-101*Math.cos(a)).toFixed(1)+'" class="'+(big?'tkb':'tk')+'"/>'; }
   svg+=sub(cx,cy-50,27,{0:"60",15:"15",45:"45"},"SEC.","cs");
   svg+=sub(cx,cy+50,27,{0:"60",15:"15",45:"45"},"MIN.","cm");
-  svg+='<text x="'+(cx-62)+'" y="'+(cy+3)+'" class="brandtxt">'+man.code+'</text>';
+  svg+=mLogo(cx-60,cy);
   svg+='<g data-part="date" class="dategrp"><rect x="'+(cx+58)+'" y="'+(cy-8)+'" width="24" height="16" class="datewin"/><text id="m-date" x="'+(cx+70)+'" y="'+(cy+4)+'" class="datetxt"></text></g>';
   svg+='<g class="hand" data-part="hm" id="mh-hour" style="transform-origin:'+cx+'px '+cy+'px"><path d="M'+(cx-4)+' '+(cy+10)+' L'+cx+' '+(cy-56)+' L'+(cx+4)+' '+(cy+10)+' Z" class="hmain"/></g>'+
     '<g class="hand" data-part="hm" id="mh-min" style="transform-origin:'+cx+'px '+cy+'px"><path d="M'+(cx-3)+' '+(cy+12)+' L'+cx+' '+(cy-88)+' L'+(cx+3)+' '+(cy+12)+' Z" class="hmain"/></g>'+
@@ -2502,7 +2523,7 @@ function chronoModel(man){
     var pp=document.querySelector('[data-m="pushc"]'); if(pp) pp.classList.toggle("dim",!st.crown);
     ['A','B'].forEach(function(k){ var x=document.querySelector('[data-m="'+k+'"]'); if(x) x.classList.toggle("dim",st.crown===1); });
   }
-  function press(which){ var el=document.querySelector("#m-btn"+which+" .push"); if(el){ el.classList.add("down"); setTimeout(function(){el.classList.remove("down");},140); } flash("m-btn"+which,'[data-m="'+which+'"]'); fx("press"); }
+  function press(which){ var el=document.querySelector("#m-btn"+which+" .push"); if(el){ el.classList.add("down"); setTimeout(function(){ if(!holding["m-btn"+which]) el.classList.remove("down"); },160); } flash("m-btn"+which,'[data-m="'+which+'"]'); fx("press"); }
   var kn=0; function spinKnurl(dir){ kn+=dir*2; var k=document.getElementById("m-knurl"); if(k){ k.style.transition="transform .1s linear"; k.style.transform="translateY("+(((kn%8)+8)%8-4)+"px)"; } }
   function resetHands(){ var cs=last["mh-cs"]||0, cm=last["mh-cm"]||0; baseS=Math.ceil((cs-st.misS*6)/360)*360; baseM=Math.ceil((cm-st.misM*6)/360)*360; }
   var api={
@@ -3467,8 +3488,8 @@ var LAB_MODS={
   scale:{kind:"tachy",asset:"HORO-TACH-001"},
   guided:[
    {t:"A tachymeter turns a time into a speed, when you know the distance. The usual base distance is 1 kilometre (or 1 mile).",wait:null},
-   {t:"A car is about to cover 1 km. Press Start exactly as it passes the start line.",wait:"running"},
-   {t:"Press Stop as it crosses the finish line.",wait:"stopped"},
+   {t:"The car is waiting on the start line. Press Start (or the top pusher): the car sets off as the chronograph starts.",wait:"running"},
+   {t:"Press Stop the moment the car crosses the 1 KM line.",wait:"stopped"},
    {t:"Read the tachymeter number under the chronograph hand. That is the average speed in km/h, because the scale is printed as 3600 ÷ seconds.",wait:null},
    {t:"The scale only works for times under 60 seconds (speeds above 60 units per hour), and gives an average, not the speed at any one moment.",wait:null}],
   levels:["Easy","Medium","Hard"]},
@@ -3609,15 +3630,16 @@ var HL_MDR="iVBORw0KGgoAAAANSUhEUgAAAIMAAAB4CAYAAADRyEG8AAAa8UlEQVR42u2deZTkVXXH
    MDR mark. Generic sword hands. No third-party brand, logo or signature design. */
 var HL_INK="#1E1C18", HL_PAPER="#FBFAF7";
 function hlArtDefs(){ return '<defs><filter id="hl-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12  0 0 0 0 0.11  0 0 0 0 0.09  0 0 0 1 0"/></filter></defs>'; }
+function hlLugs(){ var o=""; [[1,1],[-1,1],[1,-1],[-1,-1]].forEach(function(f){ var X=function(x){ return 500+(x-500)*f[0]; }, Y=function(y){ return 500+(y-500)*f[1]; };
+    o+='<path d="M'+X(200)+','+Y(150)+' L'+X(194)+','+Y(-10)+' Q'+X(245)+','+Y(-26)+' '+X(296)+','+Y(-10)+' L'+X(290)+','+Y(92)+' Z"/>'; }); return o; }
 function hlCaseArt(chrono){
   var o='<g class="ha-case">';
-  [[318,72,298,-14,368,-14,384,40],[682,72,702,-14,632,-14,616,40],[318,928,298,1014,368,1014,384,960],[682,928,702,1014,632,1014,616,960]].forEach(function(p){
-    o+='<path d="M'+p[0]+','+p[1]+' L'+p[2]+','+p[3]+' Q'+((p[2]+p[4])/2)+','+(p[3]+(p[3]<0?-10:10))+' '+p[4]+','+p[5]+' L'+p[6]+','+p[7]+' Z"/>'; });
+  o+=hlLugs();
   o+='<circle cx="500" cy="500" r="480"/>';
-  if(chrono){ var nowp=performance.now(); [[60,"a"],[120,"b"]].forEach(function(pp){ var pr=nowp-HL_PUSH[pp[1]]<200; if(pr&&HL.s) HL.s._dirty=1; var y=pr?10:0;
-      o+='<g transform="rotate('+pp[0]+' 500 500)"><rect x="482" y="'+(-6+y)+'" width="36" height="36" rx="4"/><rect x="470" y="'+(-30+y)+'" width="60" height="28" rx="7" class="'+(pr?'ha-press':'')+'"/>'+
-        '<rect x="440" y="-70" width="120" height="110" fill="transparent" stroke="none" data-hlpush="'+pp[1]+'" style="cursor:pointer"/></g>';
-      var lp=hlPolar(500,500,580,pp[0]); o+='<text x="'+lp[0].toFixed(0)+'" y="'+(lp[1]+8).toFixed(0)+'" class="ha-plab">'+(pp[1]==="a"?"START · STOP":"RESET")+'</text>'; }); }
+  if(chrono){ [[60,"a"],[120,"b"]].forEach(function(pp){ var dp=hlPushDepth(pp[1]), pr=dp>0; if(pr&&HL.s) HL.s._dirty=1; var y=dp*18;
+      o+='<g transform="rotate('+pp[0]+' 500 500)"><rect x="484" y="-8" width="32" height="40" rx="3"/><rect x="470" y="'+(-34+y)+'" width="60" height="30" rx="7" class="'+(dp>.5?'ha-press':'')+'"/><line x1="476" y1="'+(-26+y)+'" x2="524" y2="'+(-26+y)+'"/>'+
+        '<rect x="440" y="-70" width="120" height="110" data-hlpush="'+pp[1]+'" style="fill:transparent;stroke:none;cursor:pointer"/></g>';
+      var lp=hlPolar(500,500,600,pp[0]===60?42:138); o+='<text x="'+lp[0].toFixed(0)+'" y="'+(lp[1]+8).toFixed(0)+'" class="ha-plab">'+(pp[1]==="a"?"START · STOP":"RESET")+'</text>'; }); }
   o+='<path d="M968,452 Q992,452 996,470 L996,530 Q992,548 968,548"/>';
   o+='<rect x="992" y="466" width="22" height="68" rx="6"/>'; for(var k=0;k<7;k++) o+='<line x1="996" y1="'+(472+k*9)+'" x2="1012" y2="'+(472+k*9)+'"/>';
   return o+'</g>';
@@ -3758,8 +3780,16 @@ function hlGmtWireZones(p){ p.querySelectorAll("[data-hlz]").forEach(function(se
   p.querySelectorAll("[data-hlp]").forEach(function(b){ b.onclick=function(){ var pr=HL_PRESETS[+b.getAttribute("data-hlp")]; hlGmtSetZones([pr[1],pr[2],pr[3]]); hlPanel(); }; }); }
 
 /* ---------- pushers on the case, racing car, helpers ---------- */
-var HL_PUSH={a:0,b:0};
-function hlPush(k){ HL_PUSH[k]=performance.now(); var s=HL.s; var id=k==="a"?(s.running?"hl-stopb":"hl-start"):"hl-reset"; var b=document.getElementById(id); if(b) b.click(); hlTickSound(); s._dirty=1; }
+var HL_PUSH={a:-1e9,b:-1e9}, HL_PUSHDN={a:0,b:0};
+/* how far a pusher is pressed in (0–1): held down = fully in; a tap goes in and springs back */
+function hlPushDepth(k){ if(HL_PUSHDN[k]) return 1; var t=performance.now()-HL_PUSH[k]; return t<0||t>230?0:t<70?t/70:Math.max(0,1-(t-70)/160); }
+/* a firm mechanical click: a short noise burst through a band-pass filter (release is softer) */
+function hlPushSound(rel){ try{ if(navigator.vibrate) navigator.vibrate(rel?6:16); }catch(e){} try{ hlAC=hlAC||new (window.AudioContext||window.webkitAudioContext)(); if(hlAC.state==="suspended") hlAC.resume(); var c=hlAC,len=rel?.02:.04,buf=c.createBuffer(1,Math.ceil(c.sampleRate*len),c.sampleRate),d=buf.getChannelData(0); for(var i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+  var src=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain(); src.buffer=buf; f.type="bandpass"; f.frequency.value=rel?2600:1700; f.Q.value=2.2; g.gain.value=rel?.25:.7; src.connect(f); f.connect(g); g.connect(c.destination); src.start(); }catch(e){} }
+function hlPushAnim(k){ HL_PUSH[k]=performance.now(); if(HL.s) HL.s._dirty=1; }
+function hlPush(k){ HL_PUSHDN[k]=1; HL_PUSH[k]=performance.now(); var s=HL.s; var id=k==="a"?(s.running?"hl-stopb":"hl-start"):"hl-reset"; hlPush.silent=1; var b=document.getElementById(id); if(b) b.click(); hlPush.silent=0; hlPushSound(false); s._dirty=1; }
+function hlPushUp(){ ["a","b"].forEach(function(k){ if(HL_PUSHDN[k]){ HL_PUSHDN[k]=0; HL_PUSH[k]=performance.now()-70; hlPushSound(true); if(HL.s) HL.s._dirty=1; } }); }
+window.addEventListener("pointerup",hlPushUp); window.addEventListener("pointercancel",hlPushUp);
 function hlF1(left){ return '<svg class="hl-f1" viewBox="0 0 120 34" style="left:'+left+'%" aria-hidden="true"><g transform="translate(120,0) scale(-1,1)"><path d="M4,24 L4,19 L14,19 L18,16 L44,15 L52,9 L60,8 L66,13 L70,14 L98,15 L104,11 L116,11 L116,15 L110,16 L112,24 Z" class="f1b"/><rect x="104" y="5" width="13" height="4" class="f1b"/><rect x="1" y="23" width="19" height="3" class="f1b"/><path d="M50,12 Q58,3 67,12" class="f1halo"/><circle cx="26" cy="25" r="8" class="f1w"/><circle cx="96" cy="25" r="9" class="f1w"/><circle cx="26" cy="25" r="3" class="f1h"/><circle cx="96" cy="25" r="3.5" class="f1h"/></g></svg>'; }
 
 /* =====================================================================
@@ -3859,8 +3889,7 @@ function ccDay(sim){ return ccNow(sim).getDate(); }
 
 /* ---------- parts drawn separately, so the watch can come apart ---------- */
 function ccPartCase(){ var o='<g class="ha-case">';
-  [[318,72,298,-14,368,-14,384,40],[682,72,702,-14,632,-14,616,40],[318,928,298,1014,368,1014,384,960],[682,928,702,1014,632,1014,616,960]].forEach(function(p){
-    o+='<path d="M'+p[0]+','+p[1]+' L'+p[2]+','+p[3]+' Q'+((p[2]+p[4])/2)+','+(p[3]+(p[3]<0?-10:10))+' '+p[4]+','+p[5]+' L'+p[6]+','+p[7]+' Z"/>'; });
+  o+=hlLugs();
   o+='<path fill-rule="evenodd" d="M20,500 a480,480 0 1,0 960,0 a480,480 0 1,0 -960,0 Z M100,500 a400,400 0 1,0 800,0 a400,400 0 1,0 -800,0 Z"/><path d="M968,452 Q992,452 996,470 L996,530 Q992,548 968,548"/>';
   return o+'</g>'; }
 function ccPartCrown(pos,screwed,hit){ var x=(pos||0)*36, ph=(CR.spin||0)%3*4, o='<g class="ha-case cc-crownart">';
@@ -3872,8 +3901,8 @@ function ccPartCrown(pos,screwed,hit){ var x=(pos||0)*36, ph=(CR.spin||0)%3*4, o
 function ccPartCrystal(){ return '<g><circle cx="500" cy="500" r="404" class="cc-glass"/><path d="M300,210 Q500,130 700,210" class="cc-glint"/><path d="M330,260 Q500,200 670,260" class="cc-glint2"/></g>'; }
 function ccPartGasket(){ return '<g><circle cx="500" cy="500" r="420" class="cc-gasket"/></g>'; }
 function ccPartStrap(kind){ var o='<g class="ha-case">';
-  if(kind==="bracelet"){ for(var i=0;i<4;i++){ o+='<rect x="'+(332)+'" y="'+(-150-i*120)+'" width="336" height="108" rx="10"/><line x1="444" y1="'+(-150-i*120)+'" x2="444" y2="'+(-42-i*120)+'"/><line x1="556" y1="'+(-150-i*120)+'" x2="556" y2="'+(-42-i*120)+'"/>'; o+='<rect x="332" y="'+(1042+i*120)+'" width="336" height="108" rx="10"/><line x1="444" y1="'+(1042+i*120)+'" x2="444" y2="'+(1150+i*120)+'"/><line x1="556" y1="'+(1042+i*120)+'" x2="556" y2="'+(1150+i*120)+'"/>'; } }
-  else { o+='<path d="M340,-20 L340,-560 Q500,-590 660,-560 L660,-20 Z"/><path d="M340,1020 L340,1560 Q500,1590 660,1560 L660,1020 Z"/><path d="M362,-30 L362,-540 M638,-30 L638,-540 M362,1030 L362,1540 M638,1030 L638,1540" class="cc-stitch"/><rect x="455" y="1270" width="90" height="22" rx="6"/><rect x="455" y="1340" width="90" height="22" rx="6"/>'; }
+  if(kind==="bracelet"){ for(var i=0;i<4;i++){ o+='<rect x="300" y="'+(-150-i*120)+'" width="400" height="108" rx="10"/><line x1="433" y1="'+(-150-i*120)+'" x2="433" y2="'+(-42-i*120)+'"/><line x1="567" y1="'+(-150-i*120)+'" x2="567" y2="'+(-42-i*120)+'"/>'; o+='<rect x="300" y="'+(1042+i*120)+'" width="400" height="108" rx="10"/><line x1="433" y1="'+(1042+i*120)+'" x2="433" y2="'+(1150+i*120)+'"/><line x1="567" y1="'+(1042+i*120)+'" x2="567" y2="'+(1150+i*120)+'"/>'; } }
+  else { o+='<path d="M298,70 L298,-560 Q500,-594 702,-560 L702,70 Z"/><path d="M298,930 L298,1560 Q500,1594 702,1560 L702,930 Z"/><path d="M320,-20 L320,-540 M680,-20 L680,-540 M320,1020 L320,1540 M680,1020 L680,1540" class="cc-stitch"/><rect x="455" y="1270" width="90" height="22" rx="6"/><rect x="455" y="1340" width="90" height="22" rx="6"/>'; }
   return o+'</g>'; }
 function ccPartCaseback(kind){ var o='<g class="ha-case"><circle cx="500" cy="500" r="470"/><circle cx="500" cy="500" r="430"/>';
   for(var i=0;i<6;i++){ var p=hlPolar(500,500,450,i*60+30); o+='<rect x="'+(p[0]-14).toFixed(1)+'" y="'+(p[1]-7).toFixed(1)+'" width="28" height="14" transform="rotate('+(i*60+30)+' '+p[0].toFixed(1)+' '+p[1].toFixed(1)+')"/>'; }
@@ -3931,7 +3960,7 @@ function ccArt(k,sim){
   if(k==="bezel") hl='<circle cx="500" cy="500" r="436" class="cc-hl cc-band"/>';
   if(k==="dial") hl='<circle cx="500" cy="500" r="384" class="cc-hl cc-fill"/>';
   if(k==="hands") hl='<g class="cc-hands cc-livehands" data-sim="0">'+ccHands(false)+'</g>';
-  if(k==="lugs") hl='<path d="M384,-40 L616,-40 M384,-62 L384,-18 M616,-62 L616,-18" class="cc-hl cc-dim"/><text x="500" y="-54" class="cc-lab">LUG WIDTH</text>'+[[340,30],[660,30],[340,970],[660,970]].map(function(c){ return '<circle cx="'+c[0]+'" cy="'+c[1]+'" r="56" class="cc-hl"/>'; }).join("");
+  if(k==="lugs") hl='<path d="M296,-52 L704,-52 M296,-74 L296,-30 M704,-74 L704,-30" class="cc-hl cc-dim"/><text x="500" y="-66" class="cc-lab">LUG WIDTH</text>'+[[245,40],[755,40],[245,960],[755,960]].map(function(c){ return '<circle cx="'+c[0]+'" cy="'+c[1]+'" r="56" class="cc-hl"/>'; }).join("");
   if(k==="case") hl='<circle cx="500" cy="500" r="482" class="cc-hl"/>';
   if(k==="wr") hl='<circle cx="500" cy="500" r="422" class="cc-hl cc-dash"/><rect x="994" y="414" width="70" height="172" rx="16" class="cc-hl"/><text x="500" y="1060" class="cc-lab">GASKETS SEAL CROWN, CRYSTAL &amp; CASEBACK</text>';
   return wrap(watch(0)+hl);
@@ -4148,7 +4177,7 @@ function hlTick(){ cancelAnimationFrame(hlRAF);
   var loop=function(now){ if(!HL.m||!document.getElementById("hl-stage")) return;
     var s=HL.s,m=HL.m;
     if(m.type==="chrono"&&s.running){ s.el=(performance.now()-s.t0)/1000; }
-    if(m.type==="chrono"&&s.scen&&s.scen.kind==="drive"){ s.scen.pos=Math.max(0,Math.min(1.25,(performance.now()-s.scen.start)/1000/s.scen.dur)); }
+    if(m.type==="chrono"&&s.scen&&s.scen.kind==="drive"&&s.scen.start!=null){ s.scen.pos=Math.max(0,Math.min(1.25,(performance.now()-s.scen.start)/1000/s.scen.dur)); }
     if(m.id==="pulsometer"&&s.scen){ var b=Math.floor((performance.now()-s.scen.start)/1000*s.scen.bpm/60); if(b!==s.beat){ s.beat=b; } }
     /* redraw every frame only while something moves; otherwise 4 times a second (running seconds) */
     if(s.running||s.scen||!hlTick.last||now-hlTick.last>250||s._dirty){ hlTick.last=now; s._dirty=0; hlDraw(); hlScene(); }
@@ -4190,9 +4219,12 @@ function hlControls(){
     (m.watch.dir==="ccw"?'<div class="hl-grp"><span>Bezel</span>'+b("hl-hold","⟲ Turn","","Turn the bezel anticlockwise, one click (press and hold to keep turning)")+'</div>':'<div class="hl-grp"><span>Bezel</span>'+b("hl-rg-","⟲","dxghost","Turn bezel anticlockwise")+b("hl-rg+","⟳","dxghost","Turn bezel clockwise")+'</div>')+
     (m.id==="dive-bezel"?'<div class="hl-grp"><span>Time</span>'+b("hl-t+1","+1 min","dxghost")+b("hl-t+5","+5 min","dxghost")+'</div>':'<div class="hl-grp"><span>Set watch</span>'+b("hl-wh-","−1 h","dxghost","Set the watch one hour back")+b("hl-wh+","+1 h","dxghost","Set the watch one hour forward")+'</div>')+b("hl-reset","Reset","dxghost");
   var on=function(id,f){ var e=document.getElementById(id); if(e) e.onclick=function(){ f(); HL.s._dirty=1; }; }, s=HL.s;
-  on("hl-start",function(){ if(!s.running){ s.running=true; s.t0=performance.now()-s.el*1000; s.events.running=1; if(s.scen&&s.scen.kind==="beat") s.scen.b0=s.beat; } });
-  on("hl-stopb",function(){ if(s.running){ s.running=false; s.events.stopped=1; if(s.el>60) s.events.over60=1; } });
-  on("hl-reset",function(){ var old=s; HL.s=hlNewState(m); HL.s.quiz=old.quiz; HL.s.step=old.step; HL.s.scen=old.scen; HL.s.events.reset=1; if(m.id==="compass-bezel") HL.s.sun=old.sun; s=HL.s; hlControls(); }); /* reset clears the watch, never the lesson */
+  var pz=function(k){ if(!hlPush.silent){ hlPushAnim(k); hlPushSound(false); setTimeout(function(){ hlPushSound(true); },110); } };
+  on("hl-start",function(){ pz("a"); if(s.scen&&s.scen.kind==="storm"&&!s.running&&s.el===0&&(performance.now()<s.scen.start)){ s.scen.early=performance.now(); return; }
+    if(s.scen&&s.scen.kind==="drive"&&s.scen.start==null&&!s.running&&s.el===0) s.scen.start=performance.now();
+    if(!s.running){ s.running=true; s.t0=performance.now()-s.el*1000; s.events.running=1; if(s.scen&&s.scen.kind==="beat") s.scen.b0=s.beat; } });
+  on("hl-stopb",function(){ pz("a"); if(s.running){ s.running=false; s.events.stopped=1; if(s.el>60) s.events.over60=1; } });
+  on("hl-reset",function(){ pz("b"); var old=s; HL.s=hlNewState(m); HL.s.quiz=old.quiz; HL.s.step=old.step; HL.s.scen=old.scen; HL.s.events.reset=1; if(m.id==="compass-bezel") HL.s.sun=old.sun; s=HL.s; hlControls(); }); /* reset clears the watch, never the lesson */
   on("hl-scen",function(){ hlNewScenario(); });
   if(m.type==="gmt") hlGmtWire();
   /* dive bezel: one firm click per press; press and hold keeps clicking */
@@ -4231,20 +4263,26 @@ function hlWireDrag(){
 /* ---------- scenes shown beside the watch: the car run, the heartbeat, the event ---------- */
 function hlScene(){
   var p=document.getElementById("hl-scene"); if(!p) return; var s=HL.s,sc=s.scen; if(!sc){ p.innerHTML=""; return; }
-  if(sc.kind==="drive"){ p.innerHTML='<div class="hl-track"><span class="hl-flag" style="left:10%">START</span><span class="hl-flag" style="left:90%">1 KM</span>'+hlF1(10+Math.min(1.1,sc.pos)*80)+'</div><p class="hl-beatn">'+(performance.now()<sc.start?"Get ready…":sc.pos<1?"Car running":"Car has passed 1 km")+'</p>'; }
+  if(sc.kind==="drive"){ p.innerHTML='<div class="hl-track"><span class="hl-flag" style="left:10%">START</span><span class="hl-flag" style="left:90%">1 KM</span>'+hlF1(10+Math.min(1.1,sc.pos)*80)+'</div><p class="hl-beatn">'+(sc.start==null?"<b>The car is on the start line.</b> Press Start: the car sets off and the chronograph starts together.":sc.pos<1?"Car running — press Stop the moment it crosses <b>1 KM</b>.":(s.running?"It has crossed 1 km — press Stop!":"Stopped. Read the speed under the red hand."))+'</p>'; }
   if(sc.kind==="beat"){ var t=(performance.now()-sc.start)/1000, ph=(t*sc.bpm/60)%1, nb=HL.m.scale.beats, since=s.running?Math.max(0,s.beat-sc.b0):0, msg;
     if(!s.running&&s.el===0) msg='<b>How to measure:</b> 1 · Watch the heart. 2 · When it flashes red, press Start (that beat counts as zero). 3 · Count the flashes and press Stop on beat '+nb+'.';
     else if(s.running) msg='<b>Counting: '+since+' of '+nb+' beats</b>'+(since>=nb-1?' — press Stop on the next flash!':'');
     else msg='<b>Stopped.</b> Now read the number under the red hand on the scale: that is the pulse in beats per minute.';
     p.innerHTML='<div class="hl-heart '+(ph<0.18?"on":"")+'" aria-hidden="true">♥</div><div class="hl-bar"><i style="width:'+Math.min(100,since/nb*100)+'%"></i></div><p class="hl-beatn">'+msg+'</p>'; }
-  if(sc.kind==="storm"){ var ts=(performance.now()-sc.start)/1000, fl=ts>=0&&ts<0.3, th=ts>=sc.delay&&ts<sc.delay+1.6;
-    p.innerHTML='<div class="hl-storm '+(fl?"flash":"")+'"><span class="hl-bolt">'+(fl?"⚡":"☁")+'</span><span class="hl-boom">'+(th?"BOOM — thunder!":"")+'</span></div><p class="hl-beatn">'+(ts<0?"Watch the sky… press Start the moment you see the lightning.":ts<sc.delay?"Flash! The thunder is on its way — press Stop when you hear it.":"Thunder heard. Read the distance under the red hand.")+'</p>'; }
+  if(sc.kind==="storm"){ var ts=(performance.now()-sc.start)/1000, fl=(ts>=0&&ts<0.16)||(ts>=0.26&&ts<0.5), th=ts>=sc.delay&&ts<sc.delay+1.8;
+    if(ts>=sc.delay&&!sc.boomed){ sc.boomed=1; hlThunder(); }
+    var early=sc.early&&performance.now()-sc.early<1600;
+    p.innerHTML='<div class="hl-storm '+(fl?"flash":"")+(th?" boom":"")+'"><span class="hl-bolt">'+(fl?"⚡":"☁")+'</span><span class="hl-boom">'+(fl?"LIGHTNING!":th?"BOOM — thunder!":"")+'</span></div><p class="hl-beatn">'+(early?"<b>Wait for the lightning first.</b> Start the chronograph when you see the flash.":ts<0?"Watch the sky… the lightning comes first. Press Start the moment you see it.":ts<sc.delay?(s.running?"Flash seen, chronograph running. Listen — press Stop the moment you <b>hear</b> the thunder.":"Flash! Press Start now."):(s.running?"Thunder! Press Stop now.":"Read the distance under the red hand."))+'</p>'; }
   if(sc.kind==="event"){ var tt=(performance.now()-sc.start)/1000, on=tt>=sc.from&&tt<=sc.from+sc.dur; p.innerHTML='<div class="hl-event '+(on?"on":"")+'">'+(tt<sc.from?"Get ready…":on?"EVENT RUNNING":"Event finished")+'</div>'; }
 }
+/* thunder: a low rumble, so the trainee stops on the sound, as in real life */
+function hlThunder(){ try{ if(navigator.vibrate) navigator.vibrate([60,40,120]); }catch(e){} try{ hlAC=hlAC||new (window.AudioContext||window.webkitAudioContext)(); if(hlAC.state==="suspended") hlAC.resume(); var c=hlAC,len=2.2,buf=c.createBuffer(1,Math.ceil(c.sampleRate*len),c.sampleRate),d=buf.getChannelData(0),last=0;
+  for(var i=0;i<d.length;i++){ var t=i/c.sampleRate; last=last*.985+(Math.random()*2-1)*.015; var env=t<.05?t/.05:Math.exp(-(t-.05)*1.6)*(1+.5*Math.sin(t*9)); d[i]=last*env*14; }
+  var src=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain(); src.buffer=buf; f.type="lowpass"; f.frequency.value=260; g.gain.value=1.4; src.connect(f); f.connect(g); g.connect(c.destination); src.start(); }catch(e){} }
 function hlNewScenario(kind){
   var m=HL.m,s=HL.s,lv=HL.diff;
-  if(m.id==="tachymeter"){ var sp=[[72,120,90],[60,150,100,140],[65,80,110,170,200]][lv]; var v=sp[Math.floor(Math.random()*sp.length)]; s.scen={kind:"drive",dur:3600/v,start:performance.now()+2000,pos:0,speed:v}; }
-  if(m.id==="telemeter"){ var kmz=[[1.7,3.4,5.1],[2,4.1,6.8],[2.7,8.5,13.6]][lv]; var km=kmz[Math.floor(Math.random()*kmz.length)]; s.scen={kind:"storm",start:performance.now()+2000,delay:km/0.34,km:km}; }
+  if(m.id==="tachymeter"){ var sp=[[72,120,90],[60,150,100,140],[65,80,110,170,200]][lv]; var v=sp[Math.floor(Math.random()*sp.length)]; s.scen={kind:"drive",dur:3600/v,start:null,pos:0,speed:v}; }
+  if(m.id==="telemeter"){ var kmz=[[1.7,3.4,5.1],[2,4.1,6.8],[2.7,8.5,13.6]][lv]; var km=kmz[Math.floor(Math.random()*kmz.length)]; s.scen={kind:"storm",start:performance.now()+2200+Math.random()*1800,delay:km/0.34,km:km}; }
   if(m.id==="pulsometer"){ var bp=[[60,75,90],[66,84,102],[58,78,96,112]][lv]; s.scen={kind:"beat",bpm:bp[Math.floor(Math.random()*bp.length)],start:performance.now(),b0:0}; }
   if(m.id==="chronograph"){ var du=[[8,12,15],[25,40,52],[65,95,130]][lv]; s.scen={kind:"event",from:2,dur:du[Math.floor(Math.random()*du.length)],start:performance.now()}; }
   var sc=document.getElementById("hl-scene"); if(!sc){ var r=document.getElementById("hl-read"); if(r) r.insertAdjacentHTML("afterend",'<div class="hl-scene" id="hl-scene"></div>'); }
@@ -4350,7 +4388,7 @@ function hlChoices(right,wrongs){ var seen={}; seen[right]=1; var o=[right].conc
 function hlMakeQ(m,lv,n){
   var operate=n%2===0;
   if(m.id==="tachymeter"){
-    if(operate) return {kind:"number",unit:"km/h",prompt:"A car is about to cover 1 km. Start the chronograph as it passes START, stop it at 1 KM, then enter the speed you read on the tachymeter.",hint:"The scale shows 3600 ÷ seconds. Read the number under the chronograph hand.",
+    if(operate) return {kind:"number",unit:"km/h",prompt:"Press Start to send the car off, stop the chronograph as it crosses 1 KM, then enter the speed you read on the tachymeter.",hint:"The scale shows 3600 ÷ seconds. Read the number under the chronograph hand.",
       setup:function(s){ s.scen=null; hlNewScenario(); },
       check:function(s,v){ if(s.el<1) return {ok:false,msg:"Start and stop the chronograph first."}; var right=hlTachy(s.el); return {ok:Math.abs(v-right)<=Math.max(4,right*0.05),msg:"Your timing gives "+Math.round(right)+" km/h on the scale."}; },
       explain:function(s){ return "You measured "+s.el.toFixed(1)+" s. 3600 ÷ "+s.el.toFixed(1)+" ≈ "+Math.round(hlTachy(s.el))+" km/h — the average speed over the kilometre. The car’s true speed was "+(s.scen?s.scen.speed:"—")+" km/h; any gap comes from start/stop reaction time."; }};
