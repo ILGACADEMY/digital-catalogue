@@ -37,12 +37,38 @@ async function readBody(req) {
   return JSON.parse(Buffer.concat(parts).toString('utf8') || '{}');
 }
 
-// pulls the JSON object out of Claude's answer (tolerates ```json fences)
+// pulls the JSON object out of Claude's answer: tolerates ```json fences and words before or after it
 function parseJson(text) {
   const t = String(text || '').replace(/```(?:json)?/gi, '');
-  const a = t.indexOf('{'), b = t.lastIndexOf('}');
-  if (a < 0 || b <= a) return null;
-  try { const v = JSON.parse(t.slice(a, b + 1)); return v && typeof v === 'object' ? v : null; } catch (e) { return null; }
+  for (let a = t.indexOf('{'); a >= 0; a = t.indexOf('{', a + 1)) {
+    let depth = 0, inStr = false, esc = false, end = -1;
+    for (let i = a; i < t.length && end < 0; i++) {
+      const c = t[i];
+      if (inStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') inStr = false; continue; }
+      if (c === '"') inStr = true; else if (c === '{') depth++; else if (c === '}' && --depth === 0) end = i;
+    }
+    if (end < 0) return null;   // never closed: the answer was cut off, so no inner piece is taken as the answer
+    try { const v = JSON.parse(t.slice(a, end + 1)); if (v && typeof v === 'object') return v; } catch (e) {}
+  }
+  return null;
+}
+
+// an answer cut off at the length limit: keep every list item that was finished, drop the unfinished one
+function salvageJson(text) {
+  let t = String(text || '').replace(/```(?:json)?/gi, '');
+  const a = t.indexOf('{'); if (a < 0) return null; t = t.slice(a);
+  for (let cut = t.lastIndexOf('}'); cut > 0; cut = t.lastIndexOf('}', cut - 1)) {
+    const head = t.slice(0, cut + 1);
+    const stack = []; let inStr = false, esc = false;
+    for (const c of head) {
+      if (inStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') inStr = false; continue; }
+      if (c === '"') inStr = true; else if (c === '{' || c === '[') stack.push(c); else if (c === '}' || c === ']') stack.pop();
+    }
+    if (inStr) continue;
+    const close = stack.reverse().map(c => (c === '{' ? '}' : ']')).join('');
+    try { const v = JSON.parse(head + close); if (v && typeof v === 'object') return v; } catch (e) {}
+  }
+  return null;
 }
 
 module.exports = async function handler(req, res) {
@@ -77,7 +103,7 @@ module.exports = async function handler(req, res) {
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
       body: JSON.stringify({
-        model: MODEL, max_tokens: 4096,
+        model: MODEL, max_tokens: 8000,
         system: 'You check photos of retail watch displays for a training tool. Follow the instructions in the message exactly. When asked for JSON, reply with the JSON object only.',
         messages: [{ role: 'user', content }]
       })
@@ -93,10 +119,12 @@ module.exports = async function handler(req, res) {
     return send(res, 502, { error: map[r.status] || 'CHECKER ERROR ' + r.status });
   }
   const text = ((j && j.content) || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
+  const cutOff = j && j.stop_reason === 'max_tokens';
+  console.log('vm-check: answer', j && j.stop_reason, j && j.usage && j.usage.output_tokens, 'tokens');   // length only, never the content
   if (body.json) {
-    const v = parseJson(text);
-    if (!v) return send(res, 502, { error: 'ANSWER NOT READABLE — TRY AGAIN' });
-    return send(res, 200, { json: v });
+    const v = parseJson(text) || (cutOff ? salvageJson(text) : null);
+    if (!v) return send(res, 502, { error: cutOff ? 'ANSWER TOO LONG — TRY FEWER PAGES' : 'ANSWER NOT READABLE — TRY AGAIN' });
+    return send(res, 200, { json: v, cutOff: cutOff || undefined });
   }
   return send(res, 200, { text });
 };
