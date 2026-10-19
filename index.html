@@ -1102,7 +1102,7 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
 #s-atlas,#s-atlas.active,#s-atlas .atwrap{background:#F6F3EE!important}#s-atlas .subhead{background:#F6F3EE!important;border-bottom:1px solid #E1DBD0!important}#s-atlas .subhead .crumb{color:#8A6B32!important}#s-atlas .subhead .iconbtn{border-color:#E1DBD0!important;color:#16140F!important}#s-atlas .subhead .iconbtn svg{color:#16140F!important}.atload{background:#F6F3EE!important;color:#16140F!important}.atload .mdrmark{background:#8A6B32!important}.atload b{color:#1F3A6B!important}.atload i{color:#6B655B!important}
 
 /* ---------- Compass Lab (replaces the former compass-bezel lesson) ---------- */
-.cp-chaps{display:flex;gap:0;border:1px solid var(--line);margin:10px 0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cp-chaps{scroll-margin-top:84px;display:flex;gap:0;border:1px solid var(--line);margin:10px 0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .cp-chaps::-webkit-scrollbar{display:none}
 .cp-chaps button{flex:0 0 auto;display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:0;border-right:1px solid var(--line);background:none;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);cursor:pointer;white-space:nowrap}
 .cp-chaps button:last-child{border-right:0}
@@ -1147,7 +1147,7 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
 .cp-ground{fill:#F1ECE1}.cp-horizon{fill:none;stroke:#D8CFBD;stroke-width:3;stroke-dasharray:14 10}
 .cp-tick{stroke:#2F6B3A;stroke-width:3}.cp-true{font:700 46px Georgia,serif;fill:#2F6B3A;text-anchor:middle}.cp-truel{font:700 18px Arial;letter-spacing:3px;fill:#2F6B3A;text-anchor:middle}
 .cp-truearrow{stroke:#2F6B3A;stroke-width:8;stroke-linecap:round;stroke-dasharray:2 16}
-.cp-cloud ellipse{fill:#D9DADC;stroke:#A9ABAF;stroke-width:3}.cp-cloud text,.cp-night{font:700 22px Arial;letter-spacing:2px;fill:#5B5E63;text-anchor:middle}
+.cp-cloud ellipse{fill:#D9DADC;stroke:#A9ABAF;stroke-width:3}.cp-cloud text{font:700 22px Arial;letter-spacing:2px;fill:#5B5E63;text-anchor:middle}.cp-night{font:700 34px Arial;letter-spacing:2px;fill:#5B5E63;text-anchor:middle}
 .cp-sunline{stroke:#D9A83A;stroke-width:4;stroke-dasharray:6 14;stroke-linecap:round;opacity:.8}
 .cp-sun line{stroke:#D9A83A;stroke-width:7;stroke-linecap:round}.cp-halo{fill:#F2C553;opacity:.28}
 .cp-aim circle{fill:none;stroke:#C9A84C;stroke-width:8;opacity:.9}
@@ -1161,6 +1161,9 @@ details.hl-notice{padding:6px 12px;margin:0 0 8px}details.hl-notice summary{curs
 .cp-stage{outline:none}.cp-stage:focus-visible{outline:2px solid #C9A84C;outline-offset:4px}
 @media(max-width:899px){.cp-accnum{grid-template-columns:1fr}.cp-accnum div{border-right:0;border-bottom:1px solid var(--line)}.cp-chaps button{font-size:10.5px;padding:0 10px}}
 @media(prefers-reduced-motion:reduce){.cp-mod .hl-sunhalo,.cp-mod .hl-sunrays{animation:none}}
+.cp-livebtn{min-height:44px;margin:0}.cp-livebtn[aria-pressed="true"]{background:#2F6B3A!important;border-color:#2F6B3A!important;color:#fff!important}
+.cp-r-live{border-color:#2F6B3A!important}.cp-r-live span{color:#2F6B3A!important}
+.cp-livebox{border:1px solid var(--line);background:var(--surface);padding:10px 12px;margin:10px 0;font-size:14px;line-height:1.45}.cp-livebox p{margin:0 0 6px}.cp-livebox .dxghost{margin-top:4px;min-height:42px}
 </style>
 </head>
 <body>
@@ -4611,7 +4614,9 @@ function renderLab(){
    midpoint rule -> estimated directions; bezel -> reference marks only.
    ===================================================================== */
 var CP=null, cpRAF=0;
-var CP_PLACES={N:{n:"Northern Hemisphere",city:"Dubai",lat:25.2,min:10,max:60},S:{n:"Southern Hemisphere",city:"Sydney",lat:-33.9,min:-50,max:-10},E:{n:"Near the equator",city:"Singapore",lat:1.3,min:-8,max:8}};
+var CP_PLACES={N:{n:"Northern Hemisphere",city:"Dubai",lat:25.2,lon:55.27,min:10,max:60},S:{n:"Southern Hemisphere",city:"Sydney",lat:-33.9,lon:151.21,min:-50,max:-10},E:{n:"Near the equator",city:"Singapore",lat:1.3,lon:103.82,min:-8,max:8}};
+/* chapters where the watch may run on the device clock; demonstrations, accuracy, warnings, scenarios and the quiz need fixed times */
+var CP_LIVE_CH={meet:1,sim:1,bezel:1,fixed:1,card:1,mag:1};
 var CP_DATES=[["today","Today"],[80,"21 Mar"],[172,"21 Jun"],[266,"23 Sep"],[355,"21 Dec"]];
 var CP_CH=[
  {k:"meet",n:"Meet the watch compass"},{k:"north",n:"Northern Hemisphere"},{k:"south",n:"Southern Hemisphere"},
@@ -4632,23 +4637,24 @@ function cpSun(lat,doy,solarMin){
   return {az:hlMod(az,360),alt:90-Math.acos(cz)*180/Math.PI,dec:dec*180/Math.PI};
 }
 function cpNew(){
-  return {ch:0,place:"N",lat:25.2,date:"today",h:9,m:30,rot:0,ring:0,bezel:"rot",view:"face",showTrue:false,showMid:false,showEst:false,
+  return {ch:0,place:"N",lat:25.2,lon:55.27,live:false,liveWanted:true,geo:null,s:0,date:"today",h:9,m:30,rot:0,ring:0,bezel:"rot",view:"face",showTrue:false,showMid:false,showEst:false,
     dst:false,tz:0,eot:false,cloud:false,sunMode:"model",sunMan:120,snap:true,align:false,
     d:{rot:0,ring:0,sun:120,mid:0},demo:null,act:null,scen:null,quiz:null,sel:null,decl:6,_dirty:1};
 }
 /* ---------- the model: every visual reads from these ---------- */
-function cpSolarMin(c){ var w=c.h*60+c.m; return w-(c.dst?60:0)-c.tz+(c.eot?cpEoT(cpDoyOf(c)):0); }
-function cpDoyOf(c){ return c.date==="today"?cpDoy():c.date; }
+function cpSolarMin(c){ if(c.live){ var n=new Date(), u=n.getUTCHours()*60+n.getUTCMinutes()+n.getUTCSeconds()/60; return hlMod(u+c.lon*4+cpEoT(cpDoy(n)),1440); }
+  var w=c.h*60+c.m; return w-(c.dst?60:0)-c.tz+(c.eot?cpEoT(cpDoyOf(c)):0); }
+function cpDoyOf(c){ return c.live||c.date==="today"?cpDoy():c.date; }
 function cpModel(c){
   var sun=cpSun(c.lat,cpDoyOf(c),cpSolarMin(c)); if(c.sunMode==="manual") sun={az:c.sunMan,alt:45,dec:sun.dec,manual:true};
-  var hourW=hlMod((c.h%12+c.m/60)*30,360), d=hourW; if(d>180) d-=360;   /* signed angle from 12 to the hour hand, smaller side */
+  var hourW=hlMod((c.h%12+c.m/60+(c.live?c.s/3600:0))*30,360), d=hourW; if(d>180) d-=360;   /* signed angle from 12 to the hour hand, smaller side */
   var midW=d/2, midWorld=hlMod(c.rot+midW,360);
   var rule=c.place==="S"?"S":"N";                                          /* near the equator neither rule is reliable; the drawing shows the northern rule greyed */
   var estNorth=rule==="N"?hlMod(midWorld+180,360):midWorld;
   var aimW=rule==="N"?hlMod(c.rot+hourW,360):hlMod(c.rot,360);            /* hour hand (north) or 12 (south) in the world */
   var aimErr=cpDiff(aimW,sun.az);
   var ringMark=rule==="N"?hlMod(c.ring+180,360):hlMod(c.ring,360);          /* bezel S (north) or N (south), watch frame */
-  return {sun:sun,hourW:hourW,minW:c.m*6,d:d,midW:midW,midWorld:midWorld,rule:rule,estNorth:estNorth,aimW:aimW,aimErr:aimErr,
+  return {sun:sun,hourW:hourW,minW:c.m*6+(c.live?c.s/10:0),secW:c.s*6,d:d,midW:midW,midWorld:midWorld,rule:rule,estNorth:estNorth,aimW:aimW,aimErr:aimErr,
     aligned:Math.abs(aimErr)<=6&&sun.alt>0,bezelErr:cpDiff(ringMark,midW),bezelSet:Math.abs(cpDiff(ringMark,midW))<=5,
     err:cpDiff(estNorth,0),night:sun.alt<=0};
 }
@@ -4683,7 +4689,7 @@ function cpSVG(c){
     if(D.mid>=1){ var mp=hlPolar(500,500,452,mo.midW); w.push('<line x1="500" y1="500" x2="'+mp[0].toFixed(1)+'" y2="'+mp[1].toFixed(1)+'" class="cp-mid'+(c.place==="E"?" cp-grey":"")+'"/>'); } }
   /* fixed bezel: mental marks on the dial (no rotating ring) */
   if(c.bezel==="fixed"&&c.showEst){ var nW=mo.rule==="N"?mo.midW+180:mo.midW; [["N",0],["E",90],["S",180],["W",270]].forEach(function(x){ var p=hlPolar(500,500,250,nW+x[1]); w.push(cpLbl(p[0],p[1],x[0],"cp-mental",30)); }); }
-  w.push(hlHandArt("hour",mo.hourW),hlHandArt("min",mo.minW),'<circle cx="500" cy="500" r="9" class="hl-cap"/></g>');
+  w.push(hlHandArt("hour",mo.hourW),hlHandArt("min",mo.minW));if(c.live) w.push(hlHandArt("sec",mo.secW));w.push('<circle cx="500" cy="500" r="9" class="hl-cap"/></g>');
   o.push(w.join(""));
   /* estimated directions around the watch — derived from the midpoint rule, never drawn on their own */
   if(c.showEst&&c.place!=="E"){ [["N",0],["E",90],["S",180],["W",270]].forEach(function(x){ var p=hlPolar(500,500,over?560:532,mo.estNorth+x[1]); o.push(cpLbl(p[0],p[1],x[0],"cp-est"+(x[0]===(mo.rule==="N"?"S":"N")?" cp-key":""),over?34:30)); }); }
@@ -4700,6 +4706,7 @@ function cpEase(cur,tgt,k,ang){ var df=ang?cpDiff(tgt,cur):tgt-cur; if(Math.abs(
 function cpLoop(){ cancelAnimationFrame(cpRAF); var last=performance.now();
   var f=function(now){ var st=document.getElementById("cp-stage"); if(!st||!CP) return; var dt=Math.min(.05,(now-last)/1000); last=now; var c=CP;
     var mo=cpModel(c), k=cpReduce?1:Math.min(1,dt*7), moved=false;
+    if(c.live){ var nw=new Date(); if(nw.getSeconds()!==c.s||nw.getMinutes()!==c.m||nw.getHours()!==c.h){ c.h=nw.getHours(); c.m=nw.getMinutes(); c.s=nw.getSeconds(); c._dirty=1; mo=cpModel(c); if(nw.getSeconds()===0) cpPanelLive(); } }
     if(c.align&&!mo.night&&!c.cloud) c.rot=cpAlignRot(c,mo);
     [["rot",c.rot,1],["ring",c.ring,1],["sun",mo.sun.az,1]].forEach(function(x){ var n=cpEase(c.d[x[0]],x[1],x[0]==="ring"?Math.min(1,k*2.2):k,x[2]); if(n!==c.d[x[0]]){ c.d[x[0]]=n; moved=true; } });
     var mt=c.showMid?1:0; if(c.d.mid!==mt){ c.d.mid=cpReduce?mt:Math.max(0,Math.min(1,c.d.mid+(mt>c.d.mid?dt*1.4:-dt*3))); moved=true; }
@@ -4709,7 +4716,7 @@ function cpLoop(){ cancelAnimationFrame(cpRAF); var last=performance.now();
     cpRAF=requestAnimationFrame(f); };
   cpRAF=requestAnimationFrame(f); }
 function cpRead(mo){ var r=document.getElementById("cp-read"); if(!r) return; var c=CP, P=CP_PLACES[c.place];
-  var o='<div><span>Watch time</span><b>'+hlPad(c.h)+':'+hlPad(c.m)+'</b></div><div><span>Place</span><b>'+P.city+' '+Math.abs(c.lat).toFixed(0)+'°'+(c.lat>=0?"N":"S")+'</b></div>';
+  var o='<div class="'+(c.live?"cp-r-live":"")+'"><span>'+(c.live?"Live · this device":"Watch time")+'</span><b>'+hlPad(c.h)+':'+hlPad(c.m)+(c.live?':'+hlPad(c.s):'')+'</b></div><div><span>Place</span><b>'+(c.geo&&c.live?"Your location":P.city)+' '+Math.abs(c.lat).toFixed(0)+'°'+(c.lat>=0?"N":"S")+'</b></div>';
   o+='<div><span>Sun height</span><b>'+(c.cloud?"hidden":mo.sun.manual?"set by hand":(mo.night?"below horizon":Math.round(mo.sun.alt)+"°"))+'</b></div>';
   if(c.view==="over"||c.showTrue){ o+='<div><span>Sun bearing</span><b>'+(c.cloud?"—":Math.round(mo.sun.az)+"° "+cpCard(mo.sun.az))+'</b></div>';
     o+='<div class="'+(c.place==="E"?"cp-r-warn":"")+'"><span>Estimate vs model</span><b>'+(c.cloud||mo.night||!c.showEst?"—":(c.place==="E"?"unreliable":(Math.abs(Math.round(mo.err))+"° off")))+'</b></div>'; }
@@ -4740,7 +4747,15 @@ function cpChaps(){ var lp=labP(), done=((lp.mods["compass-bezel"]||{}).cp||{}).
 }
 function cpSaveDone(i){ var lp=labP(), st=lp.mods["compass-bezel"]||(lp.mods["compass-bezel"]={}); st.cp=st.cp||{done:{}}; st.cp.done=st.cp.done||{}; if(i!=null) st.cp.done[i]=1; st.cp.last=CP.ch; labSave(lp); }
 /* each chapter starts from a defined state, so what the learner sees always matches the words */
-function cpPreset(c,o){ var keep={ch:c.ch,quiz:c.quiz,d:c.d,view:c.view,snap:c.snap}; var n=cpNew(); for(var k in n) c[k]=n[k]; for(var k2 in keep) c[k2]=keep[k2]; for(var k3 in o) c[k3]=o[k3]; if(o.place&&o.lat==null) c.lat=CP_PLACES[o.place].lat; c._dirty=1; }
+function cpPreset(c,o){ var keep={ch:c.ch,quiz:c.quiz,d:c.d,view:c.view,snap:c.snap,liveWanted:c.liveWanted,geo:c.geo}; var n=cpNew(); for(var k in n) c[k]=n[k]; for(var k2 in keep) c[k2]=keep[k2]; for(var k3 in o) c[k3]=o[k3]; if(o.place&&o.lat==null) c.lat=CP_PLACES[o.place].lat; if(o.place) c.lon=CP_PLACES[o.place].lon; c._dirty=1; }
+/* live mode: the watch shows this device's time; the Sun is computed for that real moment and place */
+function cpApplyLive(c,on){ c.live=!!on; if(c.live){ c.date="today"; c.simPlay=false; var n=new Date(); c.h=n.getHours(); c.m=n.getMinutes(); c.s=n.getSeconds();
+  if(c.geo){ c.lat=c.geo.lat; c.lon=c.geo.lon; c.place=c.geo.lat>8?"N":c.geo.lat<-8?"S":"E"; } } else c.s=0; c._dirty=1; }
+function cpGeo(){ var c=CP, msg=document.getElementById("cp-geomsg"), say=function(t){ if(msg) msg.textContent=t; };
+  if(!navigator.geolocation){ say("This browser cannot share a location. The Sun is shown for "+CP_PLACES[c.place].city+"."); return; }
+  say("Asking this device for its location…");
+  navigator.geolocation.getCurrentPosition(function(p){ c.geo={lat:Math.round(p.coords.latitude*10)/10,lon:Math.round(p.coords.longitude*10)/10}; c.liveWanted=true; cpApplyLive(c,true); c.align=CP_CH[c.ch].k==="sim"; cpCtl(); cpPanel(); var m=document.getElementById("cp-geomsg"); if(m) m.textContent="Using your location (rounded): "+Math.abs(c.geo.lat)+"°"+(c.geo.lat>=0?"N":"S")+", "+Math.abs(c.geo.lon)+"°"+(c.geo.lon>=0?"E":"W")+". It stays on this device."; },
+    function(){ say("Location not shared. The Sun is shown for "+CP_PLACES[c.place].city+"."); },{timeout:10000,maximumAge:600000}); }
 function cpEnter(i,first){
   if(!first) cpSaveDone(CP.ch);
   CP.ch=i; cpSaveDone(null); var k=CP_CH[i].k;
@@ -4758,8 +4773,9 @@ function cpEnter(i,first){
   if(k==="quiz") cpPreset(CP,{place:"N",h:10,m:0,align:true,showMid:true,showEst:true});
   if(k==="north"||k==="south") cpDemoStart(k);
   if(k!=="sim"&&CP.view==="over"&&k!=="acc") CP.view="face";
+  cpApplyLive(CP,CP_LIVE_CH[k]&&CP.liveWanted);
   cpChaps(); cpCtl(); cpPanel();
-  var p=document.getElementById("cp-panel"); if(p&&!first) try{ document.getElementById("cp-watch").scrollIntoView({block:"start",behavior:cpReduce?"auto":"smooth"}); }catch(e){}
+  var p=document.getElementById("cp-panel"); if(p&&!first) try{ var ch=document.getElementById("cp-chaps"), y=ch.getBoundingClientRect().top; if(y<0||y>window.innerHeight*0.6) ch.scrollIntoView({block:"start",behavior:cpReduce?"auto":"smooth"}); }catch(e){}
 }
 
 /* ---------- guided demonstrations (northern / southern / bezel) ---------- */
@@ -4788,7 +4804,8 @@ function cpDemoGo(i){ var c=CP, dm=c.demo; if(!dm) return; dm.i=i; dm.t=0; var m
 
 /* ---------- controls under the watch ---------- */
 function cpCtl(){ var c=CP, b=function(id,t,cls,lbl){ return '<button class="dxbtn hl-b '+(cls||"dxghost")+'" id="'+id+'"'+(lbl?' aria-label="'+hlEsc(lbl)+'"':'')+'>'+t+'</button>'; };
-  var h='<div class="hl-grp"><span>Watch</span>'+b("cp-w-","⟲","","Turn the watch anticlockwise 5°")+b("cp-w+","⟳","","Turn the watch clockwise 5°")+'</div>';
+  var lv=CP_LIVE_CH[CP_CH[c.ch].k];
+  var h=(lv?'<button class="dxbtn hl-b cp-livebtn'+(c.live?"":" dxghost")+'" id="cp-live-t" aria-pressed="'+c.live+'">'+(c.live?"● Live: system time":"○ Live: system time")+'</button>':'')+'<div class="hl-grp"><span>Watch</span>'+b("cp-w-","⟲","","Turn the watch anticlockwise 5°")+b("cp-w+","⟳","","Turn the watch clockwise 5°")+'</div>';
   if(c.bezel==="rot") h+='<div class="hl-grp"><span>Bezel</span>'+b("cp-b-","⟲","","Turn the bezel anticlockwise one click")+b("cp-b+","⟳","","Turn the bezel clockwise one click")+'</div>';
   h+='<div class="hl-grp"><span>Time</span>'+b("cp-t-60","−1 h","","Set the watch one hour back")+b("cp-t-10","−10′","","Ten minutes back")+b("cp-t+10","+10′","","Ten minutes forward")+b("cp-t+60","+1 h","","One hour forward")+'</div>';
   h+='<div class="hl-seg hl-seg2 cp-view"><button id="cp-v-face" class="'+(c.view==="face"?"on":"")+'">Watch face</button><button id="cp-v-over" class="'+(c.view==="over"?"on":"")+'">Directional overview</button></div>';
@@ -4796,7 +4813,8 @@ function cpCtl(){ var c=CP, b=function(id,t,cls,lbl){ return '<button class="dxb
   var on=function(id,f){ var e=document.getElementById(id); if(e) e.onclick=function(){ f(); c._dirty=1; cpPanelLive(); }; };
   on("cp-w-",function(){ c.align=false; c.rot=hlMod(c.rot-5,360); }); on("cp-w+",function(){ c.align=false; c.rot=hlMod(c.rot+5,360); });
   on("cp-b-",function(){ cpBezel(-1); }); on("cp-b+",function(){ cpBezel(1); });
-  [["cp-t-60",-60],["cp-t-10",-10],["cp-t+10",10],["cp-t+60",60]].forEach(function(x){ on(x[0],function(){ var t=hlMod(c.h*60+c.m+x[1],1440); c.h=Math.floor(t/60); c.m=t%60; }); });
+  [["cp-t-60",-60],["cp-t-10",-10],["cp-t+10",10],["cp-t+60",60]].forEach(function(x){ on(x[0],function(){ if(c.live){ c.liveWanted=false; cpApplyLive(c,false); cpCtl(); cpRead(cpModel(c)); } var t=hlMod(c.h*60+c.m+x[1],1440); c.h=Math.floor(t/60); c.m=t%60; }); });
+  on("cp-live-t",function(){ c.liveWanted=!c.live; cpApplyLive(c,c.liveWanted); cpCtl(); cpPanel(); });
   on("cp-v-face",function(){ c.view="face"; cpCtl(); }); on("cp-v-over",function(){ c.view="over"; cpCtl(); });
 }
 function cpBezel(dir){ var c=CP, st=cpStep(); c.ring=hlMod(Math.round(c.ring/st)*st+dir*st,360); try{ if(navigator.vibrate&&c.snap) navigator.vibrate(6); }catch(e){} }
@@ -4840,7 +4858,7 @@ function cpLiveHTML(){ var c=CP, mo=cpModel(c), k=CP_CH[c.ch].k, o="";
 function cpPanel(){ var p=document.getElementById("cp-panel"); if(!p) return; var c=CP, k=CP_CH[c.ch].k, h='<p class="hl-step">Chapter '+(c.ch+1)+' of '+CP_CH.length+'</p><h2 class="cp-h2">'+hlEsc(CP_CH[c.ch].n)+'</h2>';
   if(k==="meet") h+='<p class="hl-text">An ordinary analogue watch can act as a <b>rough</b> direction finder when you know the correct local time and can see the Sun.</p>'+
     '<ul class="cp-list"><li><b>Hour hand</b> — tracks the Sun’s daily movement, at twice the speed.</li><li><b>12 o’clock marker</b> — the reference point of the rule.</li><li><b>Rotating compass bezel</b> — N, E, S and W letters you can turn. It is a <b>marker</b>, not a magnetic compass.</li><li><b>Sun</b> — on the horizon around the watch. <b>Gold letters</b> appear later for the estimated directions.</li></ul>'+
-    '<p class="hl-sub2">Try it: drag inside the watch to turn it, drag the outer ring to turn the bezel, or use the buttons. Turn the watch until the hour hand points at the Sun.</p><div id="cp-live">'+cpLiveHTML()+'</div>';
+    '<p class="hl-sub2">Try it: drag inside the watch to turn it, drag the outer ring to turn the bezel, or use the buttons. Turn the watch until the hour hand points at the Sun.</p><div id="cp-live">'+cpLiveHTML()+'</div>'+cpLiveBox();
   if(k==="north"||k==="south") h+=cpDemoHTML()+'<p class="hl-sub2">'+(k==="north"?"Demonstration: Dubai, local solar time. Civil time, daylight saving and time-zone boundaries shift the clock against the Sun — chapter 8 shows by how much.":"Demonstration: Sydney, local solar time. Compare with the Northern Hemisphere: the watch, the Sun and the labels all change together.")+'</p>';
   if(k==="sim") h+='<p class="hl-text">Change the place, date and time. The watch stays aligned with the rule for the chosen hemisphere; the overview compares the estimate with true north from the solar model.</p>'+
     '<label class="cp-lab">Hemisphere</label>'+cpSeg("cp-hem",[["N","Northern"],["S","Southern"],["E","Near equator"]],c.place)+
@@ -4850,7 +4868,7 @@ function cpPanel(){ var p=document.getElementById("cp-panel"); if(!p) return; va
     '<label class="cp-chk"><input type="checkbox" id="cp-align" '+(c.align?"checked":"")+'> Keep the watch aligned with the Sun automatically</label>'+
     '<div class="cp-play"><button class="dxbtn" id="cp-sp">'+(c.simPlay?"Pause the day":"Play the day")+'</button><button class="dxghost" id="cp-sr">Reset</button></div>'+
     (c.place==="E"?'<div class="cp-warnbox"><b>Near the equator the simple rule is not reliable.</b> The Sun can pass almost overhead, and depending on the season it can stand in the northern or the southern sky. The midpoint (grey) is shown, but no direction is claimed. Use sunrise/sunset for a rough east–west line, or a compass or GPS.</div>':'')+
-    (c.sunMode==="manual"?'<p class="hl-sub2">Hand-set Sun: an illustration only — it no longer follows the time and place.</p>':'')+'<div id="cp-live">'+cpLiveHTML()+'</div>';
+    (c.sunMode==="manual"?'<p class="hl-sub2">Hand-set Sun: an illustration only — it no longer follows the time and place.</p>':'')+'<div id="cp-live">'+cpLiveHTML()+'</div>'+cpLiveBox();
   if(k==="bezel") h+='<p class="hl-text">A rotating bezel lets you <b>mark</b> the direction you found, so you can keep reading it.</p>'+
     cpSeg("cp-hem2",[["N","Northern Hemisphere"],["S","Southern Hemisphere"]],c.place)+
     '<ol class="cp-steps">'+(c.place==="N"?'<li>Find approximate south: hour hand at the Sun, midpoint to 12.</li><li>Turn the bezel until <b>S</b> sits on the midpoint line.</li><li>Keep the watch still. N, E, S and W on the bezel now show approximate directions.</li>':'<li>Find approximate north: 12 o’clock at the Sun, midpoint to the hour hand.</li><li>Turn the bezel until <b>N</b> sits on the midpoint line.</li><li>Keep the watch still and read the other directions.</li>')+'</ol>'+
@@ -4871,17 +4889,20 @@ function cpPanel(){ var p=document.getElementById("cp-panel"); if(!p) return; va
   if(k==="quiz") h+=cpQuizHTML();
   h+=cpNav(); p.innerHTML=h; cpWirePanel(k);
 }
+function cpLiveBox(){ var c=CP; return '<div class="cp-livebox"><p><b>'+(c.live?"Live: the watch runs on this device’s clock.":"Live mode is off — the watch shows a practice time.")+'</b> '+(c.live?"The Sun is calculated for this exact moment"+(c.geo?" at your location.":" in "+CP_PLACES[c.place].city+". Your clock follows your time zone, so the estimate includes the real difference between clock time and the Sun."):"Turn on “Live: system time” under the watch to use the real time.")+'</p>'+
+  (c.live?'<button class="dxghost" id="cp-geo">Use my location</button><p class="hl-sub2" id="cp-geomsg">'+(c.geo?"Using your location (rounded). It stays on this device.":"Optional. Your location is only used on this device to place the Sun.")+'</p>':'')+(c.live&&cpModel(c).night?'<p class="cp-st no">It is night here now, so the method cannot be used. Turn Live off to practise with a daytime time.</p>':'')+'</div>'; }
 function cpDialPos(w){ var hr=Math.round(hlMod(w,360)/30)%12; return (hr||12)+" o’clock"; }
 function cpWirePanel(k){ var c=CP, g=function(id,f){ var e=document.getElementById(id); if(e) e.onclick=f; }, seg=function(id,f){ var e=document.getElementById(id); if(e) e.querySelectorAll("[data-v]").forEach(function(b){ b.onclick=function(){ f(b.getAttribute("data-v")); c._dirty=1; cpPanel(); }; }); };
-  g("cp-prev",function(){ cpEnter(Math.max(0,c.ch-1)); }); g("cp-next",function(){ cpEnter(c.ch<CP_CH.length-1?c.ch+1:0); });
+  g("cp-prev",function(){ cpEnter(Math.max(0,c.ch-1)); }); g("cp-geo",cpGeo); g("cp-next",function(){ cpEnter(c.ch<CP_CH.length-1?c.ch+1:0); });
   cpWireDemo();
-  seg("cp-hem",function(v){ c.place=v; c.lat=CP_PLACES[v].lat; c.align=true; c.showEst=true; c.showMid=true; });
-  seg("cp-hem2",function(v){ c.place=v; c.lat=CP_PLACES[v].lat; c.align=true; c.ring=0; });
-  seg("cp-date",function(v){ c.date=v==="today"?"today":+v; });
+  seg("cp-hem",function(v){ c.place=v; c.lat=CP_PLACES[v].lat; c.lon=CP_PLACES[v].lon; c.geo=null; c.align=true; c.showEst=true; c.showMid=true; });
+  seg("cp-hem2",function(v){ c.place=v; c.lat=CP_PLACES[v].lat; c.lon=CP_PLACES[v].lon; c.geo=null; c.align=true; c.ring=0; });
+  seg("cp-date",function(v){ if(c.live&&v!=="today"){ c.liveWanted=false; cpApplyLive(c,false); cpCtl(); } c.date=v==="today"?"today":+v; });
   seg("cp-sunm",function(v){ c.sunMode=v; if(v==="manual") c.sunMan=cpModel(c).sun.az; });
   var lat=document.getElementById("cp-lat"); if(lat) lat.oninput=function(){ c.lat=+lat.value; c._dirty=1; var l=lat.previousElementSibling; if(l) l.textContent="Latitude: "+Math.abs(c.lat)+"°"+(c.lat>=0?"N":"S"); cpPanelLive(); cpAccLive(); };
   var al=document.getElementById("cp-align"); if(al) al.onchange=function(){ c.align=al.checked; c._dirty=1; };
-  g("cp-sp",function(){ c.simPlay=!c.simPlay; cpPanel(); }); g("cp-sr",function(){ c.simPlay=false; cpEnter(c.ch); });
+  g("cp-sp",function(){ if(c.live){ c.liveWanted=false; cpApplyLive(c,false); cpCtl(); } c.simPlay=!c.simPlay; cpPanel(); });
+  g("cp-geo",cpGeo); g("cp-sr",function(){ c.simPlay=false; cpEnter(c.ch); });
   var sn=document.getElementById("cp-snap"); if(sn) sn.onchange=function(){ c.snap=sn.checked; };
   g("cp-bdemo",function(){ c.ring=cpBezelTarget(cpModel(c)); c.ring=Math.round(c.ring/5)*5; c._dirty=1; cpPanelLive(); });
   g("cp-breset",function(){ c.ring=0; c._dirty=1; cpPanelLive(); });
