@@ -2504,6 +2504,7 @@ const ROLE = H.has("remote") ? "remote" : H.has("presenter") ? "presenter" : "de
 const PEER_PARAM = new URLSearchParams(location.search).get("peer") || H.get("peer") || "";
 const PEERCFG = (() => { if (!PEER_PARAM) return { debug: 0 }; const [host, port] = PEER_PARAM.split(":"); return { host, port: +port || 443, path: "/", secure: !/^(localhost|127\.|192\.168\.|10\.)/.test(host) && +port !== 9000, debug: 0 }; })();
 const CH_NAME = "mdr-anatomy-deck";
+const DECK_VERSION = "v3 · 23 Oct · relay";
 const toastEl = document.createElement("div"); toastEl.className = "toast"; document.body.appendChild(toastEl);
 let toastT = 0; const toast = (t) => { toastEl.textContent = t; toastEl.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("on"), 2600); };
 
@@ -2786,7 +2787,7 @@ function openOverview() {
 }
 function openHelp() {
   const o = $("#ovl"); o.hidden = false;
-  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>How to use this deck</h3>
+  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>How to use this deck <small style="font-family:var(--sans);font-size:12px;letter-spacing:.12em;color:var(--mute)">${DECK_VERSION}</small></h3>
   <div class="row"><div style="flex:1;min-width:260px"><p class="glab">Mouse or touch</p><p><b>Control bar</b> at the bottom: Home, Contents, back and next, full screen, phone remote, presenter view and Exit. Move the mouse or tap the screen to show it.</p><p><b>Next</b> first plays the slide's next step (take it apart, turn it over, unscrew the crown…), then goes to the next slide. The step button in the slide footer shows what comes next.</p><p><b>3D:</b> drag to turn, pinch or + − to zoom, tap the watch to take it apart, tap a part to open its slide.</p><p><b>Touch screens:</b> swipe left or right on the text side to change slides.</p></div>
   <div style="flex:1;min-width:240px"><p class="glab">Keyboard and clicker</p><div class="keys" style="font-size:14px;gap:6px 12px"><kbd>→ / PgDn / Space</kbd><span>Next step, then next slide</span><kbd>← / PgUp</kbd><span>Previous slide</span><kbd>↓</kbd><span>Skip the steps</span><kbd>Home / End</kbd><span>First / last slide</span><kbd>B</kbd><span>Black screen</span><kbd>F</kbd><span>Full screen</span><kbd>O</kbd><span>Contents</span><kbd>P</kbd><span>Presenter view</span><kbd>R</kbd><span>Phone remote</span><kbd>Esc</kbd><span>Close this panel</span></div></div></div></div>`;
   o.onclick = (e) => { if (e.target.closest("[data-x]") || e.target === o) closeOvl(); };
@@ -2928,7 +2929,7 @@ function renderRemotePanel() {
     else if (directDown && relayDown) body = `<p><b>This network blocks both phone links.</b> Use a presenter clicker or the presenter view on this computer — or connect the laptop to a phone hotspot and press R again.</p>${links}`;
     else body = `<p>Starting the phone link…</p>${links}`;
   }
-  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>Caliber Remote</h3>${body}<p style="margin-top:14px"><button class="x" style="float:none" data-pres>Open presenter view on this computer</button></p></div>`;
+  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>Caliber Remote <small style="font-family:var(--sans);font-size:12px;letter-spacing:.12em;color:var(--mute)">${DECK_VERSION}</small></h3>${body}<p style="margin-top:14px"><button class="x" style="float:none" data-pres>Open presenter view on this computer</button></p></div>`;
 }
 
 /* ---------------- QR ---------------- */
@@ -2976,7 +2977,7 @@ function remoteApp(mode) {
   function draw() {
     if (dragging) { pendingDraw = true; return; }   /* never rebuild under a finger mid-drag */
     if (mode === "remote" && !(H.get("remote")) && !S && !ok && status === "Connecting…") { status = ""; }
-    const head = `<div class="r-head"><span>${mode === "presenter" ? "Presenter view" : "Caliber Remote"} · MDR Anatomy</span><span class="st ${ok ? "ok" : ""}" ${!ok && mode === "remote" ? "data-retry" : ""}>${esc(status || "")}</span></div>`;
+    const head = `<div class="r-head"><span>${mode === "presenter" ? "Presenter view" : "Caliber Remote"} · MDR Anatomy · <b style="font-weight:500">${DECK_VERSION}</b></span><span class="st ${ok ? "ok" : ""}" ${!ok && mode === "remote" ? "data-retry" : ""}>${esc(status || "")}</span></div>`;
     if (!S) {
       R.innerHTML = head + (mode === "remote" && !H.get("remote") ? `<form class="r-pair"><p class="r-title">Enter the code</p><p class="r-sub">Shown on the deck after pressing R</p><input maxlength="12" autocomplete="off" autocapitalize="characters" placeholder="ABC123"><button>Connect</button></form>` : `<p class="r-title">Waiting for the deck…</p><p class="r-sub">${mode === "presenter" ? "Keep the deck open in the other window." : "Keep the deck open on the big screen."}</p>`);
       return;
