@@ -8,6 +8,7 @@ Static site: no server code, no database, no logins, no downloads.
 | `anatomy-deck.html` | Training deck: Interactive Watch Anatomy |
 | `eyewear-lens-deck.html` | Training deck: Eyewear Lens Technology (generated — see below) |
 | `eyewear-src/` | Source parts for the eyewear deck |
+| `eyewear-101-lab.html` | Eyewear 101 Lab (3D frame, materials, polarized, lens studio, care) with the Lens Technology deck as chapter 06. Self-contained (works offline) and controllable by Deckora through postMessage |
 | `vercel.json` | Security headers (blocks outside scripts, framing, tracking) |
 | `manifest.webmanifest` + icons | "Add to Home Screen" name and icon |
 | `robots.txt` | Keeps the site out of Google |
