@@ -128,8 +128,8 @@ const LENS_I18N = { en: {
     { s: "Polarisation makes every screen unreadable.", m: true, e: "Some LCDs dim at certain angles; many newer screens compensate. It depends on the device.", ref: "aavlcd" },
     { s: "Polarised lenses are scratch-proof.", m: true, e: "Polarisation is about light. Scratch resistance comes from the material and hard coat — and no lens is scratch-proof.", ref: "svcoat" },
     { s: "Polarised lenses need no special care.", m: true, e: "They need the same care as any coated lens: rinse grit off, clean gently, keep them out of heat and in a case.", ref: "aavcraze" },
-    { s: "A light, pale lens can be polarised.", m: false, e: "Fact. Polarisation does not depend on darkness; light polarised lenses exist." },
-    { s: "Some screens can look darker through polarised lenses at certain angles.", m: false, e: "Fact. Many LCDs send out polarised light, so turning the screen or your head changes what you see.", ref: "aavlcd" },
+    { s: "A light, pale lens can be polarised.", m: false, e: "Polarisation does not depend on darkness; light polarised lenses exist." },
+    { s: "Some screens can look darker through polarised lenses at certain angles.", m: false, e: "Many LCDs send out polarised light, so turning the screen or your head changes what you see.", ref: "aavlcd" },
   ],
 
   /* ============ MODULE B · TECHNOLOGIES ============ */
