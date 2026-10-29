@@ -160,6 +160,11 @@ const API = {
     panes.forEach((p) => p.classList.toggle("show", p.dataset.pane === t)); $$("[data-tab]", s).forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === t))); if (!quiet) sendState(); },
 };
 
+/* ---------------- light / dark (T, the ◐ button, or the phone) ---------------- */
+const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === "dark" : !!(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches); };
+function setTheme(t) { document.documentElement.dataset.theme = t; try { localStorage.setItem("ilg-lens-theme", t); } catch (e) {} const b = $('#ctrl [data-k="theme"] span'); if (b) b.textContent = t === "dark" ? "Light" : "Dark"; sendState(); }
+const toggleTheme = () => setTheme(isDark() ? "light" : "dark");
+
 /* ---------------- keys (keyboard and presenter clickers) ---------------- */
 let digits = "";
 function key(e) {
@@ -183,6 +188,7 @@ function key(e) {
   else if (k === "r" || k === "R") openRemotePanel();
   else if (k === "o" || k === "O") openOverview();
   else if (k === "s" || k === "S") openSources();
+  else if (k === "t" || k === "T") toggleTheme();
   else if (["h", "H", "?"].includes(k)) openHelp();
   else return;
   e.preventDefault();
@@ -209,7 +215,7 @@ function openHelp() {
   const o = $("#ovl"); o.hidden = false; o.dataset.kind = "sheet";
   o.innerHTML = `<div class="sheet" role="dialog" aria-label="Help"><button class="x" data-x>Close</button><h3>How to use this deck <small style="font-family:var(--sans);font-size:12px;letter-spacing:.12em;color:var(--mute)">${DECK_VERSION}</small></h3>
   <div class="row"><div style="flex:1;min-width:260px"><p class="glab">Mouse or touch</p><p><b>Control bar</b> at the bottom: Home, Contents, back and next, full screen, phone remote, presenter view and Exit. Move the mouse or tap to show it.</p><p><b>Next</b> first plays the slide's next step (a demonstration, a tab), then goes to the next slide. The footer button shows what comes next.</p><p><b>Simulations:</b> every button and slider under a figure works, and the same controls appear on the phone remote. Drag the divider or the glasses where the slide says so.</p><p><b>Touch screens:</b> swipe left or right on the text side to change slides.</p></div>
-  <div style="flex:1;min-width:240px"><p class="glab">Keyboard and clicker</p><div class="keys" style="font-size:14px;gap:6px 12px"><kbd>→ / PgDn / Space</kbd><span>Next step, then next slide</span><kbd>← / PgUp</kbd><span>Previous slide</span><kbd>↓</kbd><span>Skip the steps</span><kbd>Tab</kbd><span>Move between controls on a slide</span><kbd>Home / End</kbd><span>First / last slide</span><kbd>B</kbd><span>Black screen</span><kbd>F</kbd><span>Full screen</span><kbd>O</kbd><span>Contents</span><kbd>S</kbd><span>Sources</span><kbd>P</kbd><span>Presenter view</span><kbd>R</kbd><span>Phone remote</span><kbd>Esc</kbd><span>Close this panel</span></div></div></div>${modRow()}</div>`;
+  <div style="flex:1;min-width:240px"><p class="glab">Keyboard and clicker</p><div class="keys" style="font-size:14px;gap:6px 12px"><kbd>→ / PgDn / Space</kbd><span>Next step, then next slide</span><kbd>← / PgUp</kbd><span>Previous slide</span><kbd>↓</kbd><span>Skip the steps</span><kbd>Tab</kbd><span>Move between controls on a slide</span><kbd>Home / End</kbd><span>First / last slide</span><kbd>B</kbd><span>Black screen</span><kbd>F</kbd><span>Full screen</span><kbd>O</kbd><span>Contents</span><kbd>S</kbd><span>Sources</span><kbd>T</kbd><span>Light / dark</span><kbd>P</kbd><span>Presenter view</span><kbd>R</kbd><span>Phone remote</span><kbd>Esc</kbd><span>Close this panel</span></div></div></div>${modRow()}</div>`;
   o.onclick = (e) => { if (e.target.closest("[data-x]") || e.target === o) closeOvl(); };
 }
 const titleOf = (s) => { if (s.t) return s.t; const el = document.createElement("div"); el.innerHTML = s.html(); const h = el.querySelector("h1,h2"); return h ? h.textContent.trim() : s.id; };
@@ -223,7 +229,7 @@ function snapshot() {
   const S = SLIDES[cur]; if (!S) return null;
   let acts = []; try { acts = simInst ? simInst.acts() || [] : []; } catch (e) { acts = []; }
   const panes = $$("[data-tab]", slideEl(cur)).map((b) => ["tab:" + b.dataset.tab, b.textContent, b.getAttribute("aria-selected") === "true"]);
-  return { i: cur, n: N, id: S.id, sec: S.sec, title: titleOf(S), notes: S.notes || "", steps: (S.steps || []).map((x) => x.l), step, black, next: cur < N - 1 ? titleOf(SLIDES[cur + 1]) : "", acts: [...acts, ...panes], fig: "" };
+  return { i: cur, n: N, id: S.id, sec: S.sec, title: titleOf(S), notes: S.notes || "", steps: (S.steps || []).map((x) => x.l), step, black, dark: isDark(), next: cur < N - 1 ? titleOf(SLIDES[cur + 1]) : "", acts: [...acts, ...panes], fig: "" };
 }
 let stTimer = 0;
 function sendState() { if (ROLE !== "deck") return; clearTimeout(stTimer); stTimer = setTimeout(() => { const st = snapshot(); if (!st) return;
@@ -233,7 +239,7 @@ function onCmd(m) {
   if (!m || !m.cmd) return;
   const c = m.cmd;
   if (c === "next") next(); else if (c === "prev") prev(); else if (c === "skip") go(cur + 1); else if (c === "goto") go(+m.n);
-  else if (c === "black") setBlack(!black); else if (c === "step") runTo(+m.k + 1);
+  else if (c === "black") setBlack(!black); else if (c === "theme") toggleTheme(); else if (c === "step") runTo(+m.k + 1);
   else if (c === "hello") sendState();
   else if (c === "act") { const a = String(m.a || ""); if (a.startsWith("tab:")) API.tab(a.slice(4)); else API.act(a); setTimeout(sendState, 120); }
 }
@@ -373,7 +379,8 @@ function remoteApp(mode) {
     const steps = S.steps.length ? `<p class="r-lab">Steps</p><div class="r-acts">${S.steps.map((l, k) => `<button class="${k < S.step ? "gold" : ""}" data-c="step" data-k="${k}">${k < S.step ? "✓ " : ""}${esc(l)}</button>`).join("")}<button data-c="skip">Skip to next slide</button></div>` : "";
     const acts = S.acts.length ? `<p class="r-lab">On screen</p><div class="r-acts">${S.acts.map(([a, t, on]) => `<button data-c="act" data-a="${esc(a)}" ${on ? 'aria-pressed="true"' : ""}>${esc(t)}</button>`).join("")}</div>` : "";
     const notes = S.notes ? `<p class="r-lab">Trainer notes</p><div class="r-notes">${esc(S.notes)}</div>` : "";
-    const blk = `<div class="r-acts"><button data-c="black" ${S.black ? 'aria-pressed="true"' : ""}>${S.black ? "Show the screen" : "Black screen"}</button></div>`;
+    if (S.dark != null) document.documentElement.dataset.theme = S.dark ? "dark" : "light";
+    const blk = `<div class="r-acts"><button data-c="black" ${S.black ? 'aria-pressed="true"' : ""}>${S.black ? "Show the screen" : "Black screen"}</button><button data-c="theme">${S.dark ? "Light mode" : "Dark mode"}</button></div>`;
     if (mode === "presenter") R.innerHTML = `<div class="r-col">${head}${info}<div class="timer" data-timer title="Tap to restart">0:00</div><p class="r-next">Next: <b>${esc(S.next || "End of deck")}</b></p>${nav}${steps}${blk}</div><div class="r-col">${notes}${acts}</div>`;
     else R.innerHTML = head + info + nav + acts + steps + notes + blk;
     wire();
@@ -388,18 +395,18 @@ function remoteApp(mode) {
 
 /* ---------------- on-screen control bar (mouse and touch) ---------------- */
 const ICON = { home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>', menu: '<path d="M4 6h16M4 12h16M4 18h16"/>', prev: '<path d="M15 5l-7 7 7 7"/>', next: '<path d="M9 5l7 7-7 7"/>',
-  full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', phone: '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>', pres: '<rect x="3" y="4" width="21" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>', help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17h.01"/>', exit: '<path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5M10 16l-4-4 4-4M6 12h10"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>' };
+  full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', phone: '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>', pres: '<rect x="3" y="4" width="21" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>', help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17h.01"/>', exit: '<path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5M10 16l-4-4 4-4M6 12h10"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>', theme: '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/>' };
 const ico = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 function buildCtrl() {
   const n = document.createElement("nav"); n.id = "ctrl"; n.className = "ctrl"; n.setAttribute("aria-label", "Deck controls");
   n.innerHTML = `<button data-k="home" title="Back to the first slide (Home)">${ico("home")}<span>Home</span></button><button data-k="menu" title="Contents: all slides and modules (O)">${ico("menu")}<span>Contents</span></button><i class="sep"></i>
     <button data-k="prev" title="Previous slide (←)" class="nav" aria-label="Previous">${ico("prev")}</button><span class="cnt" data-cnt></span><button data-k="next" title="Next step or slide (→)" class="nav go" aria-label="Next">${ico("next")}</button><i class="sep"></i>
-    <button data-k="full" title="Full screen (F)">${ico("full")}<span>Full screen</span></button><button data-k="phone" title="Phone remote: scan a QR code (R)">${ico("phone")}<span>Phone</span></button><button data-k="pres" title="Presenter view with notes (P)">${ico("pres")}<span>Presenter</span></button><button data-k="src" title="Sources (S)">${ico("book")}<span>Sources</span></button><button data-k="help" title="How to use this deck (?)">${ico("help")}<span>Help</span></button><i class="sep"></i>
+    <button data-k="full" title="Full screen (F)">${ico("full")}<span>Full screen</span></button><button data-k="phone" title="Phone remote: scan a QR code (R)">${ico("phone")}<span>Phone</span></button><button data-k="pres" title="Presenter view with notes (P)">${ico("pres")}<span>Presenter</span></button><button data-k="src" title="Sources (S)">${ico("book")}<span>Sources</span></button><button data-k="theme" title="Light or dark (T)">${ico("theme")}<span>${isDark() ? "Light" : "Dark"}</span></button><button data-k="help" title="How to use this deck (?)">${ico("help")}<span>Help</span></button><i class="sep"></i>
     <a data-k="exit" href="${CALIBRE_URL}" title="Leave the deck and go back to Calibre">${ico("exit")}<span>Exit</span></a>`;
   document.body.appendChild(n);
   n.addEventListener("click", (e) => { const b = e.target.closest("[data-k]"); if (!b) return;
     const k = b.dataset.k; if (k === "exit") return;
-    ({ home: () => go(0), menu: openOverview, prev, next, full: fullscreen, phone: openRemotePanel, pres: openPresenter, src: openSources, help: openHelp })[k](); showCtrl(); });
+    ({ home: () => go(0), menu: openOverview, prev, next, full: fullscreen, phone: openRemotePanel, pres: openPresenter, src: openSources, theme: toggleTheme, help: openHelp })[k](); showCtrl(); });
   let t = 0;
   const app = $("#app");
   function showCtrl() { n.classList.add("on"); app.classList.remove("idle"); clearTimeout(t); t = setTimeout(() => { if (!n.matches(":hover") && !n.contains(document.activeElement)) { n.classList.remove("on"); app.classList.add("idle"); } }, 3200); }

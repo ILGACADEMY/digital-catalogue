@@ -1,0 +1,120 @@
+/* =====================================================================
+   "Eyewear 101 Lab" look for the Lens Technology deck:
+   one soft tone, neumorphic (raised / pressed) controls, Plus Jakarta
+   Sans throughout, and a light / dark switch (T key, the ◐ button,
+   or the phone remote). Loaded after deck-base.css and deck-lens.css,
+   so it only re-skins: layout and behaviour are unchanged.
+   ===================================================================== */
+:root{
+  --bg:#E3E8ED;--hi:#FFFFFF;--lo:#B9C2CB;
+  --paper:var(--bg);--surface:var(--bg);--raise:#D9E0E6;--note:#D9E0E6;
+  --ink:#16202A;--text:#2E3A45;--mute:#5A6774;--faint:#8A96A1;--line:#CCD4DB;
+  --gold:#94702F;--gold2:#B8913F;--on-ink:#F4F7F9;
+  --green:#21825A;--red:#C6432A;--blue:#1C7491;
+  --cv-bg:#E3E8ED;--cv-card:#F4F7F9;--cv-ink:#16202A;--cv-text:#2E3A45;--cv-mute:#5A6774;--cv-line:#CCD4DB;
+  --serif:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;--sans:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --neu:.32cqw .32cqw .7cqw var(--lo),-.32cqw -.32cqw .7cqw var(--hi);
+  --neu-lg:.6cqw .6cqw 1.3cqw var(--lo),-.6cqw -.6cqw 1.3cqw var(--hi);
+  --neu-in:inset .25cqw .25cqw .5cqw var(--lo),inset -.25cqw -.25cqw .5cqw var(--hi);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D2228;--hi:#283039;--lo:#121519;--raise:#232A31;--note:#232A31;
+  --ink:#E9EEF1;--text:#C9D2D9;--mute:#98A4AF;--faint:#6F7B86;--line:#2F3842;
+  --gold:#D4B074;--gold2:#E0C08A;--on-ink:#16202A;--green:#4FC490;--red:#F0745B;--blue:#52BAD6;
+  --cv-bg:#1D2228;--cv-card:#262D35;--cv-ink:#E9EEF1;--cv-text:#C9D2D9;--cv-mute:#98A4AF;--cv-line:#38424D;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D2228;--hi:#283039;--lo:#121519;--raise:#232A31;--note:#232A31;
+  --ink:#E9EEF1;--text:#C9D2D9;--mute:#98A4AF;--faint:#6F7B86;--line:#2F3842;
+  --gold:#D4B074;--gold2:#E0C08A;--on-ink:#16202A;--green:#4FC490;--red:#F0745B;--blue:#52BAD6;
+  --cv-bg:#1D2228;--cv-card:#262D35;--cv-ink:#E9EEF1;--cv-text:#C9D2D9;--cv-mute:#98A4AF;--cv-line:#38424D;color-scheme:dark}
+
+html,body{background:var(--bg)}
+.app{background:var(--bg)}
+.deck{background:var(--bg);box-shadow:none;border-radius:1.4cqw}
+h1,h2{font-family:var(--sans);font-weight:600;letter-spacing:-.02em}
+h1{font-size:4.6cqw}h2{font-size:2.9cqw}.side h2{font-size:2.45cqw}
+.big{font-family:var(--sans);font-weight:700;letter-spacing:-.03em;color:var(--gold)}
+.say,.brief,.wdg h3,.uv-col h4,.myth .ms,.cmp-table thead th,.mods b,.jumps b,.agenda b,.opt b,.care-steps b,.ring b,.big-s,.timer,.r-title,.sheet h3{font-family:var(--sans);font-style:normal;letter-spacing:-.01em}
+.say{font-weight:500;color:var(--gold)}
+.top{color:var(--gold)}.top .wm{font-family:var(--sans);font-weight:700;font-size:.95cqw;letter-spacing:.24em}
+.bar{background:var(--gold);border-radius:0 .2cqw .2cqw 0}
+.foot .dot.on{background:var(--green)}
+
+/* raised cards */
+.fig{border:0;border-radius:1.6cqw;background:var(--bg);box-shadow:var(--neu-lg);overflow:hidden}
+.fig.plain{box-shadow:none}
+.wdg{background:var(--bg)}
+.sim-ui{background:var(--bg);border-top:0;padding:.75cqw 1cqw;gap:.55cqw 1.2cqw}
+.sim-lab{background:rgba(0,0,0,.42);border-radius:.4cqw}
+.anat .concept{background:var(--raise);color:var(--text);border-radius:0}
+
+/* every button: raised; pressed / selected: inset + gold */
+.seg button,.sbtn,.panel button,.ttabs button,.cmp-pre button,.cmp-chips button,.cs-tabs button,.qchip,.mt-i,.mt-p,.opt,.care-steps button,.mtile,.tgrid .jump,.dz-path li,.grid button,.sheet .x,.sheet .modrow a,.sheet .modrow span,.steps button,.fstep button,.keys kbd,.r-nav button,.r-acts button,.r-pair button{
+  border:0!important;background:var(--bg);color:var(--ink);border-radius:.7cqw;box-shadow:var(--neu);transition:box-shadow .15s,color .15s}
+.seg button:active,.sbtn:active,.opt:active,.qchip:active,.mtile:active{box-shadow:var(--neu-in)}
+.seg button[aria-pressed="true"],.sbtn.ink,.ttabs button[aria-selected="true"],.cmp-pre button[aria-pressed="true"],.cmp-chips button[aria-pressed="true"],.cs-tabs button[aria-pressed="true"],.qchip.on,.mt-i.held,.care-steps .on button,.mtile.on,.panel button[aria-pressed="true"]{
+  background:var(--bg);color:var(--gold);box-shadow:var(--neu-in)}
+.seg button,.sbtn{font-weight:600;border-radius:.6cqw;padding:.42cqw .7cqw}
+.sbtn.ghost{color:var(--mute)}
+.ttabs button{font-weight:600;color:var(--mute)}
+.care-steps .on b{color:var(--gold)}
+.care-steps .done button{box-shadow:var(--neu);color:var(--mute)}
+.opt.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.opt.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}.opt.mid{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--gold2)}
+.qchip.good.on{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--green)}.qchip.off.on{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--red)}
+.mt-p.ok{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--green)}.mt-p.no{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--red)}
+.mt-k{border:0;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu-in)}
+.as-xs{border:0;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu-in)}
+.qpic{border:0;border-radius:1cqw}
+.as-prog,.prog{background:var(--bg);box-shadow:var(--neu-in);border-radius:.3cqw;height:.45cqw}.as-prog i{border-radius:.3cqw}
+.ring{box-shadow:var(--neu-lg);background:conic-gradient(var(--gold) calc(var(--p)*1%),var(--raise) 0)}.ring::before{background:var(--bg);box-shadow:var(--neu-in)}
+
+/* inset panels */
+.dz-card,.uv-col,.tf,.myth,.fb,.mods a,.mods div,.mods .here,.cs-scene,.qr,.uv-rule{border:0!important;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu)}
+.dz-card{box-shadow:var(--neu-lg)}
+.dz-card.stop{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--red)}.dz-card.refer{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--blue)}.dz-card.good{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--green)}
+.dz-path li{padding:.45cqw .8cqw;border-radius:.6cqw}.dz-path li.cur{box-shadow:var(--neu-in);color:var(--gold)}.dz-path li.todo{box-shadow:none;color:var(--faint)}
+.myth.done.ok,.tf.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.myth.done.no,.tf.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}
+.fb{box-shadow:var(--neu-in)}.fb.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.fb.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}.fb.mid{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--gold2)}
+.uv-rule{color:var(--ink);box-shadow:var(--neu-in)}.uv-rule a.ref{color:var(--gold)}
+.mods .here{box-shadow:var(--neu-in)}.mods .here em{color:var(--gold)}
+.qr{background:#fff;padding:1cqw}
+.cs-scene{padding:0}
+.cmp-table th,.cmp-table td,.tops li,table.cat th,table.cat td,.agenda div,.jumps .jump,.kv{border-color:var(--line)}
+table.cat tr.on td{background:transparent;color:var(--gold);font-weight:700}
+.cmp-table thead th{font-weight:600}
+.jumps .jump{border-radius:.6cqw}
+.jumps .jump:hover,.jumps .jump:focus-visible,.agenda .jump:hover{background:var(--bg);box-shadow:var(--neu)}
+.tgrid .jump:hover{box-shadow:var(--neu-in)}
+.cta{background:var(--bg);color:var(--gold);box-shadow:var(--neu);border-radius:.8cqw;font-weight:700}
+.kchip{border-radius:.3cqw}
+.tag{border-radius:.3cqw}
+.xsec text{fill:currentColor}.xsec,.care-art,.spec,.mtile svg,.ico{color:var(--ink)}
+.art-t{fill:var(--mute)}
+input[type=range]{-webkit-appearance:none;appearance:none;height:.8cqw;border-radius:.5cqw;background:var(--bg);box-shadow:var(--neu-in);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:1.7cqw;height:1.7cqw;border-radius:50%;background:var(--bg);box-shadow:.2cqw .2cqw .4cqw var(--lo),-.2cqw -.2cqw .4cqw var(--hi),inset 0 0 0 .32cqw var(--gold);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:1.7cqw;height:1.7cqw;border:0;border-radius:50%;background:var(--bg);box-shadow:.2cqw .2cqw .4cqw var(--lo),-.2cqw -.2cqw .4cqw var(--hi),inset 0 0 0 .32cqw var(--gold);cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* control bar, overlays, toast */
+.ctrl{background:var(--bg);color:var(--ink);border-radius:18px;box-shadow:8px 8px 18px var(--lo),-8px -8px 18px var(--hi);padding:8px}
+.ctrl button,.ctrl a{border-radius:12px;color:var(--ink)}
+.ctrl button:hover,.ctrl a:hover,.ctrl button:focus-visible,.ctrl a:focus-visible{background:var(--bg);box-shadow:inset 3px 3px 6px var(--lo),inset -3px -3px 6px var(--hi)}
+.ctrl .nav.go{background:var(--bg);color:var(--gold);box-shadow:4px 4px 9px var(--lo),-4px -4px 9px var(--hi)}.ctrl .nav.go:hover{background:var(--bg)}
+.ctrl .sep{background:var(--line)}
+.ovl{background:rgba(10,14,18,.45)}
+.sheet{background:var(--bg);border:0;border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.sheet .x{border-radius:10px}
+.grid button.on,.sheet .modrow .here{background:var(--bg);color:var(--gold);box-shadow:inset 3px 3px 6px var(--lo),inset -3px -3px 6px var(--hi)}
+.sheet code{background:var(--raise);border-radius:6px}
+.toast{background:var(--bg);color:var(--ink);border-radius:12px;box-shadow:6px 6px 14px var(--lo),-6px -6px 14px var(--hi)}
+.black{background:#000}
+
+/* phone remote and presenter view */
+.rmt{background:var(--bg)}
+.r-nav button,.r-acts button,.r-pair button{border-radius:14px;box-shadow:5px 5px 10px var(--lo),-5px -5px 10px var(--hi)}
+.r-nav button.go,.r-pair button{color:var(--gold);background:var(--bg)}
+.r-acts button[aria-pressed="true"],.r-acts button.ink{background:var(--bg);color:var(--gold);box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-acts button.gold{color:var(--gold)}
+.r-notes{background:var(--bg);border:0;border-radius:14px;box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-pair input{border:0;border-radius:14px;background:var(--bg);color:var(--ink);box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-head .st.ok{color:var(--green)}

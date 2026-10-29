@@ -12,6 +12,7 @@ the generated file:
   app.js        the deck engine (slides, keys, remote, presenter)
   deck-base.css the shared Calibre deck theme (copied from anatomy-deck.html)
   deck-lens.css styles for this module
+  deck-lab.css  the "Eyewear 101 Lab" skin: neumorphic, Plus Jakarta Sans, light/dark
   vendor-peer-qr.js  PeerJS + qrcode (copied from anatomy-deck.html)
 """
 import pathlib
@@ -24,7 +25,7 @@ def put(key, text):
     assert out.count(token) == 1, key
     assert "</script" not in text.lower() or key == "CSS", key + " contains a closing script tag"
     out = out.replace(token, text)
-put("CSS", rd("deck-base.css") + "\n" + rd("deck-lens.css"))
+put("CSS", rd("deck-base.css") + "\n" + rd("deck-lens.css") + "\n" + rd("deck-lab.css"))
 put("VENDOR", rd("vendor-peer-qr.js"))
 put("CONTENT", rd("content.js"))
 put("ASSESS", rd("assess.js"))

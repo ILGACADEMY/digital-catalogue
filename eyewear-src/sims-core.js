@@ -15,9 +15,14 @@ const SIMS = {};
 const KIT = (function () {
   "use strict";
   const RM = (() => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
-  const P = { ink: "#16140F", text: "#3B362F", mute: "#7A7366", faint: "#A59E91", line: "#E1DBD0", paper: "#F6F3EE", surface: "#FBFAF7", raise: "#EFEBE4",
-    gold: "#8A6B32", gold2: "#C9A24E", red: "#A9472F", green: "#3E7A4A", blue: "#2F6B8F", glare: "#FFFFFF" };
-  const FONT = 'Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif', SERIF = '"Cormorant Garamond",Garamond,serif';
+  /* palette: fixed accents + theme colours read live from the CSS (light / dark switch) */
+  const P = { gold: "#8A6B32", gold2: "#C9A24E", red: "#B5492F", green: "#2E7D52", blue: "#1C7491", glare: "#FFFFFF", faint: "#8A96A1" };
+  let themeAt = -1, TH = {};
+  const theme = () => { const now = performance.now(); if (now - themeAt > 250) { themeAt = now; const cs = getComputedStyle(document.documentElement), v = (k, d) => (cs.getPropertyValue(k).trim() || d);
+    TH = { ink: v("--cv-ink", "#16202A"), text: v("--cv-text", "#2E3A45"), mute: v("--cv-mute", "#5A6774"), line: v("--cv-line", "#CCD4DB"), bg: v("--cv-bg", "#E3E8ED"), card: v("--cv-card", "#F4F7F9") }; } return TH; };
+  ["ink", "text", "mute", "line", "bg", "card"].forEach((k) => Object.defineProperty(P, k, { get: () => theme()[k], enumerable: true }));
+  Object.defineProperty(P, "paper", { get: () => theme().bg }); Object.defineProperty(P, "surface", { get: () => theme().card });
+  const FONT = '"Plus Jakarta Sans","Segoe UI",system-ui,Arial,sans-serif', SERIF = FONT;
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const lerp = (a, b, k) => a + (b - a) * k;

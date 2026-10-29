@@ -39,7 +39,7 @@ SIMS.glare = (host, ctx, opt = {}) => {
   };
   /* side-view inset: the physics of the current step */
   function inset(g, W, H, t) {
-    const x0 = W - 452, y0 = 44, w = 434, hh = 262; g.save(); rr(g, x0, y0, w, hh, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); g.strokeStyle = P.line; g.lineWidth = 1.5; g.stroke();
+    const x0 = W - 452, y0 = 44, w = 434, hh = 262; g.save(); rr(g, x0, y0, w, hh, 6); g.fillStyle = P.card; g.fill(); g.strokeStyle = P.line; g.lineWidth = 1.5; g.stroke();
     text(g, "SIDE VIEW", x0 + 16, y0 + 26, { size: 12, color: P.gold, w: 700 });
     const sun = [x0 + 52, y0 + 62], hit = [x0 + 200, y0 + 196], eye = [x0 + 392, y0 + 92], lens = [x0 + 336, y0 + 116];
     g.fillStyle = "#D8A93A"; g.beginPath(); g.arc(...sun, 20, 0, 7); g.fill();
@@ -82,7 +82,7 @@ SIMS.filter = (host, ctx) => {
   const parts = Array.from({ length: 30 }, (_, i) => ({ k: i / 30, a: Math.random() * Math.PI, hz: Math.random() < H_FR }));
   S.draw = (g, W, H, t) => {
     rot = lerp(rot, rotT, .15);
-    g.fillStyle = "#EEF4F6"; g.fillRect(0, 0, W, H * .7); const wy = H * .72; const wg = g.createLinearGradient(0, wy, 0, H); wg.addColorStop(0, "#3F7F96"); wg.addColorStop(1, "#1E5468"); g.fillStyle = wg; g.fillRect(0, wy, W, H - wy);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H * .7); const wy = H * .72; const wg = g.createLinearGradient(0, wy, 0, H); wg.addColorStop(0, "#3F7F96"); wg.addColorStop(1, "#1E5468"); g.fillStyle = wg; g.fillRect(0, wy, W, H - wy);
     const sun = [W * .1, H * .14], hit = [W * .34, wy], lens = [W * .7, H * .4], eye = [W * .92, H * .33];
     g.fillStyle = "#E3B24A"; g.beginPath(); g.arc(...sun, 46, 0, 7); g.fill(); text(g, "Sun", sun[0] - 18, sun[1] + 76, { size: 18, color: P.mute });
     g.strokeStyle = "rgba(227,178,74,.45)"; g.lineWidth = 26; g.lineCap = "round"; g.beginPath(); g.moveTo(...sun); g.lineTo(...hit); g.stroke();
@@ -150,7 +150,7 @@ SIMS.polsim = (host, ctx) => {
     g.restore();
     /* readout */
     const rp = st.lens === "pol" ? ratio(th, st.tilt) : 1;
-    g.save(); rr(g, 18, 18, 360, 132, 6); g.fillStyle = "rgba(251,250,247,.94)"; g.fill();
+    g.save(); rr(g, 18, 18, 360, 132, 6); g.fillStyle = P.card; g.fill();
     text(g, "GLARE THROUGH THE LENS", 34, 46, { size: 12, color: P.gold, w: 700 });
     text(g, "vs. a non-polarised lens of the same darkness", 34, 66, { size: 13, color: P.mute });
     rr(g, 34, 82, 240, 20, 10); g.fillStyle = "rgba(22,20,15,.1)"; g.fill(); rr(g, 34, 82, Math.max(20, 240 * rp), 20, 10); g.fillStyle = rp < .5 ? P.green : rp < .85 ? P.gold2 : P.red; g.fill();
@@ -207,7 +207,7 @@ SIMS.trade = (host, ctx) => {
     live(ctx, `<p class="sec">${esc(x.n)} <span class="tag">${esc(x.level)}</span></p><p class="txt">${esc(x.why)} ${refLink(x.ref)}</p><p class="sec">Depends on</p><p class="txt">${esc(x.dep)}</p>`); ctx.changed(); }
   S.draw = (g, W, H, t) => {
     const x = L.tradeoffs.find((y) => y.id === cur);
-    g.fillStyle = "#F1EDE6"; g.fillRect(0, 0, W, H);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     if (cur === "pilot") cockpit(g, W, H, t); else if (cur === "hud") hud(g, W, H, t); else if (cur === "phone") phone(g, W, H, t);
     else if (cur === "ski") { paintScene(g, W, H, t, { kind: "snow", glare: 1, cut: pol ? 1 : 0, hy: .3 }); if (pol) tintRect(g, 0, 0, W, H, [110, 96, 80], .3); pill(g, pol ? "Icy patch: shine reduced — harder to spot" : "Icy patch: the shine warns you", W * .56, H * .3 + (H * .7) * .58 - 90, { align: "center", size: 18, bg: pol ? "rgba(169,71,47,.92)" : "rgba(62,122,74,.92)" }); }
     else if (cur === "work") work(g, W, H);
@@ -224,17 +224,17 @@ SIMS.trade = (host, ctx) => {
     [[W * .2, "SPD", "128"], [W * .5, "ALT", "4 500"], [W * .8, "HDG", "275"]].forEach(([x, l, v]) => { rr(g, x - 140, H * .5, 280, 200, 10); g.fillStyle = "#0B0D0F"; g.fill();
       g.globalAlpha = .12 + .88 * lv; rr(g, x - 126, H * .5 + 14, 252, 172, 6); g.fillStyle = "#102A3A"; g.fill(); text(g, l, x, H * .5 + 60, { size: 22, color: "#7FD3FF", align: "center", w: 700 }); text(g, v, x, H * .5 + 130, { size: 56, color: "#E6F7FF", align: "center", w: 700 }); g.globalAlpha = 1; });
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .35);
-    pill(g, pol ? `LCD brightness through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: displays unaffected", W / 2, H * .5 - 24, { align: "center", size: 17, bg: "rgba(251,250,247,.95)", fg: P.ink });
+    pill(g, pol ? `LCD brightness through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: displays unaffected", W / 2, H * .5 - 24, { align: "center", size: 17, bg: P.card, fg: P.ink });
   }
   function hud(g, W, H, t) { paintScene(g, W, H, t, { kind: "road", glare: .6, cut: pol ? 1 : 0, hy: .38 }); g.fillStyle = "#1F2226"; g.beginPath(); g.moveTo(0, H * .78); g.quadraticCurveTo(W / 2, H * .7, W, H * .78); g.lineTo(W, H); g.lineTo(0, H); g.fill();
     const lv = pol ? .08 + .92 * Math.sin(ang * D2R) ** 2 : 1; g.globalAlpha = lv; text(g, "88", W * .5, H * .62, { size: 88, color: "#7CF0C8", align: "center", w: 700 }); text(g, "km/h", W * .5, H * .67, { size: 20, color: "#7CF0C8", align: "center" }); arrow(g, W * .62, H * .6, W * .7, H * .52, { color: "#7CF0C8", w: 6, head: 22 }); g.globalAlpha = 1;
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .35);
     pill(g, pol ? `Head-up display: ${Math.round(lv * 100)}% visible` : "Head-up display fully visible", W * .5, H * .1, { align: "center", size: 17 }); }
-  function phone(g, W, H, t) { const lv = lcdLevel(0); g.fillStyle = "#E4DCCD"; g.fillRect(0, 0, W, H);
+  function phone(g, W, H, t) { const lv = lcdLevel(0); g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     g.save(); g.translate(W * .5, H * .48); g.rotate(-ang * D2R); g.fillStyle = "#111"; rr(g, -130, -250, 260, 500, 34); g.fill(); g.globalAlpha = .06 + .94 * lv; g.fillStyle = "#F7F7F7"; rr(g, -116, -232, 232, 464, 22); g.fill(); g.fillStyle = "#2F6B8F"; g.fillRect(-90, -190, 180, 90); g.fillStyle = "#9AA6AF"; for (let i = 0; i < 7; i++) g.fillRect(-90, -80 + i * 34, 120 + (i * 37) % 60, 12); g.globalAlpha = 1; g.restore();
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .3);
     pill(g, pol ? `Screen through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: screen unaffected", W * .5, 36, { align: "center", size: 17 }); }
-  function work(g, W, H) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H);
+  function work(g, W, H) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     const draw = (x, y, safety) => { g.save(); g.translate(x, y); g.strokeStyle = P.ink; g.lineWidth = 10; g.fillStyle = safety ? "rgba(180,200,215,.5)" : "rgba(60,56,50,.75)";
       if (safety) { rr(g, -230, -70, 460, 150, 50); g.fill(); g.stroke(); g.lineWidth = 6; g.beginPath(); g.moveTo(-230, -20); g.lineTo(-290, -10); g.lineTo(-290, 60); g.lineTo(-230, 70); g.stroke(); g.beginPath(); g.moveTo(230, -20); g.lineTo(290, -10); g.lineTo(290, 60); g.lineTo(230, 70); g.stroke(); }
       else { g.beginPath(); lensPath(g, -110, 0, 100, 72); lensPath(g, 110, 0, 100, 72); g.fill(); g.stroke(); }
@@ -242,7 +242,7 @@ SIMS.trade = (host, ctx) => {
     draw(W * .3, H * .38, false); draw(W * .7, H * .38, true);
     text(g, "Fashion sunglasses", W * .3, H * .62, { size: 24, align: "center", w: 700 }); text(g, "Not protective equipment", W * .3, H * .67, { size: 18, align: "center", color: P.red });
     text(g, "Certified protective eyewear", W * .7, H * .62, { size: 24, align: "center", w: 700 }); text(g, "Marked to the relevant safety standard", W * .7, H * .67, { size: 18, align: "center", color: P.green }); }
-  function rxDemo(g, W, H) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); const cx = W * .32, cy = H * .44;
+  function rxDemo(g, W, H) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); const cx = W * .32, cy = H * .44;
     g.save(); g.beginPath(); lensPath(g, cx, cy, 220, 170); g.clip(); g.fillStyle = "rgba(110,96,78,.45)"; g.fillRect(cx - 240, cy - 190, 480, 380);
     g.fillStyle = "rgba(255,255,255,.45)"; g.fillRect(cx - 240, cy - 190, 480, 160); g.fillStyle = "rgba(255,255,255,.3)"; g.beginPath(); g.moveTo(cx - 30, cy - 30); g.lineTo(cx + 30, cy - 30); g.lineTo(cx + 60, cy + 190); g.lineTo(cx - 60, cy + 190); g.fill();
     g.strokeStyle = "rgba(22,20,15,.25)"; g.lineWidth = 3; for (let x = cx - 240; x < cx + 240; x += 18) { g.beginPath(); g.moveTo(x, cy - 190); g.lineTo(x, cy + 190); g.stroke(); } g.restore();
@@ -300,7 +300,7 @@ SIMS.ident = (host, ctx) => {
   function move(e) { const [x, y] = S.pt(e); lp = [clamp(x / S.W, .15, .85), clamp(y / S.H, .2, .85)]; }
   S.draw = (g, W, H, t) => {
     rot = lerp(rot, rotT, .15);
-    g.fillStyle = "#E8E1D4"; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(0,0,0,.03)"; for (let y = 0; y < H; y += 28) g.fillRect(0, y, W, 2);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(0,0,0,.03)"; for (let y = 0; y < H; y += 28) g.fillRect(0, y, W, 2);
     const tint = pair.tint, k = pair.dark;
     if (meth === "card") {
       const cw = 860, ch = 470, cx = W / 2 - cw / 2, cy = H / 2 - ch / 2 - 20;
@@ -347,9 +347,9 @@ SIMS.uvq = (host, ctx) => {
   const U = L.uv; const res = {};
   const wrap = h(`<div class="wdg uvq"></div>`); host.appendChild(wrap);
   const specSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Spectrum: UV below 400 nanometres is blocked by a UV400 lens; visible light passes."><defs><linearGradient id="vis" x1="0" x2="1"><stop offset="0" stop-color="#7B3FBF"/><stop offset=".2" stop-color="#3355DD"/><stop offset=".4" stop-color="#22AA88"/><stop offset=".6" stop-color="#E6D23A"/><stop offset=".8" stop-color="#EE8833"/><stop offset="1" stop-color="#CC2222"/></linearGradient><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#E9E2D6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#A59E91" stroke-width="3"/></pattern></defs>
-    <rect x="10" y="20" width="110" height="40" fill="url(#hatch)"/><rect x="120" y="20" width="270" height="40" fill="url(#vis)"/><line x1="120" y1="10" x2="120" y2="72" stroke="#16140F" stroke-width="2.5"/>
-    <text x="65" y="88" font-size="13" text-anchor="middle" fill="#16140F" font-family="Inter" font-weight="600">UV (invisible)</text><text x="255" y="88" font-size="13" text-anchor="middle" fill="#16140F" font-family="Inter" font-weight="600">Visible light</text><text x="120" y="104" font-size="12" text-anchor="middle" fill="#7A7366" font-family="Inter">400 nm</text></svg>`;
-  const polSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Glare vibrating horizontally is stopped by the vertical slots of the polarising film; vertical vibration passes."><rect x="160" y="10" width="80" height="90" rx="10" fill="#E9E2D6" stroke="#16140F" stroke-width="2.5"/>${[0, 1, 2, 3, 4].map((i) => `<line x1="${172 + i * 14}" y1="16" x2="${172 + i * 14}" y2="94" stroke="#16140F" stroke-width="2"/>`).join("")}
+    <rect x="10" y="20" width="110" height="40" fill="url(#hatch)"/><rect x="120" y="20" width="270" height="40" fill="url(#vis)"/><line x1="120" y1="10" x2="120" y2="72" stroke="currentColor" stroke-width="2.5"/>
+    <text x="65" y="88" font-size="13" text-anchor="middle" fill="currentColor" font-family="Inter" font-weight="600">UV (invisible)</text><text x="255" y="88" font-size="13" text-anchor="middle" fill="currentColor" font-family="Inter" font-weight="600">Visible light</text><text x="120" y="104" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity=".62" font-family="Inter">400 nm</text></svg>`;
+  const polSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Glare vibrating horizontally is stopped by the vertical slots of the polarising film; vertical vibration passes."><rect x="160" y="10" width="80" height="90" rx="10" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="2.5"/>${[0, 1, 2, 3, 4].map((i) => `<line x1="${172 + i * 14}" y1="16" x2="${172 + i * 14}" y2="94" stroke="currentColor" stroke-width="2"/>`).join("")}
     <g stroke="#A9472F" stroke-width="4" stroke-linecap="round"><line x1="40" y1="40" x2="110" y2="40"/></g><g stroke="#3E7A4A" stroke-width="4" stroke-linecap="round"><line x1="75" y1="58" x2="75" y2="92"/><line x1="320" y1="58" x2="320" y2="92"/></g>
     <text x="75" y="28" font-size="13" text-anchor="middle" fill="#A9472F" font-family="Inter" font-weight="600">glare ↔</text><text x="320" y="44" font-size="13" text-anchor="middle" fill="#3E7A4A" font-family="Inter" font-weight="600">passes ↕</text></svg>`;
   function render() {

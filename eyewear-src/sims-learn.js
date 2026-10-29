@@ -22,18 +22,18 @@ function xsecSVG(on, sel, o = {}) {
   if (has("hard")) add("hard", 24, "back"); if (has("ar")) add("ar", 30, "back"); if (has("top")) add("top", 16, "back");
   const X0 = 330, X1 = 640, LX = 690;
   const col = { top: "#E7D6A8", mirror: "url(#mir)", ar: "url(#arG)", hard: "#C9A24E" };
-  const bandSvg = bands.map((b) => `<g class="lay${sel === b.id ? " sel" : ""}" data-l="${b.id}" tabindex="0" role="button" aria-label="${esc(L.layers.find((x) => x.id === b.id).n)}"><rect x="${X0}" y="${b.y}" width="${X1 - X0}" height="${b.h}" fill="${col[b.id]}" stroke="#16140F" stroke-width="1"/></g>`).join("");
-  const subSvg = `<g class="lay${sel === "sub" ? " sel" : ""}" data-l="sub" tabindex="0" role="button" aria-label="Lens substrate"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH}" fill="#C8D9E3" stroke="#16140F" stroke-width="1"/></g>
+  const bandSvg = bands.map((b) => `<g class="lay${sel === b.id ? " sel" : ""}" data-l="${b.id}" tabindex="0" role="button" aria-label="${esc(L.layers.find((x) => x.id === b.id).n)}"><rect x="${X0}" y="${b.y}" width="${X1 - X0}" height="${b.h}" fill="${col[b.id]}" stroke="currentColor" stroke-width="1"/></g>`).join("");
+  const subSvg = `<g class="lay${sel === "sub" ? " sel" : ""}" data-l="sub" tabindex="0" role="button" aria-label="Lens substrate"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH}" fill="#C8D9E3" stroke="currentColor" stroke-width="1"/></g>
     ${has("tint") ? `<g class="lay${sel === "tint" ? " sel" : ""}" data-l="tint" tabindex="0" role="button" aria-label="Tint or photochromic dye"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH * .45}" fill="rgba(110,82,54,.42)"/></g>` : ""}
     ${has("uv") ? `<g class="lay${sel === "uv" ? " sel" : ""}" data-l="uv" tabindex="0" role="button" aria-label="UV absorber"><rect x="${X0}" y="${subY + subH * .55}" width="${X1 - X0}" height="${subH * .45}" fill="url(#uvP)"/></g>` : ""}
-    ${has("pol") ? `<g class="lay${sel === "pol" ? " sel" : ""}" data-l="pol" tabindex="0" role="button" aria-label="Polarising film"><rect x="${X0}" y="${subY + subH * .45}" width="${X1 - X0}" height="${subH * .1}" fill="url(#polP)" stroke="#16140F" stroke-width="1"/></g>` : ""}`;
+    ${has("pol") ? `<g class="lay${sel === "pol" ? " sel" : ""}" data-l="pol" tabindex="0" role="button" aria-label="Polarising film"><rect x="${X0}" y="${subY + subH * .45}" width="${X1 - X0}" height="${subH * .1}" fill="url(#polP)" stroke="currentColor" stroke-width="1"/></g>` : ""}`;
   /* labels with leader lines */
   const labs = []; const seen = new Set();
   bands.forEach((b) => { if (seen.has(b.id + b.side)) return; seen.add(b.id + b.side); labs.push({ id: b.id, y: b.y + b.h / 2, t: (L.layers.find((x) => x.id === b.id).s || L.layers.find((x) => x.id === b.id).n) + (b.side === "back" ? " (back)" : "") }); });
   labs.push({ id: "sub", y: subY + subH * .8, t: "Lens substrate" }); if (has("tint")) labs.push({ id: "tint", y: subY + subH * .22, t: "Tint / photochromic" }); if (has("pol")) labs.push({ id: "pol", y: subY + subH * .5, t: "Polarising film" }); if (has("uv")) labs.push({ id: "uv", y: subY + subH * .68, t: "UV absorber" });
   labs.sort((a, b) => a.y - b.y); let ly = 40; labs.forEach((l) => { l.ly = Math.max(ly, l.y); ly = l.ly + 34; });
   const k0 = (id) => KCOL[(L.layers.find((x) => x.id === id) || {}).kind] || "#999";
-  const labSvg = o.noLabels ? "" : labs.map((l) => `<g class="lab${sel === l.id ? " sel" : ""}" data-l="${l.id}"><path d="M${X1},${l.y} L${LX - 12},${l.ly}" stroke="#7A7366" stroke-width="1" fill="none"/><circle cx="${LX}" cy="${l.ly}" r="6" fill="${k0(l.id)}"/><text x="${LX + 14}" y="${l.ly + 6}" font-size="19" font-family="Inter" font-weight="${sel === l.id ? 700 : 500}" fill="#16140F">${esc(l.t)}</text></g>`).join("");
+  const labSvg = o.noLabels ? "" : labs.map((l) => `<g class="lab${sel === l.id ? " sel" : ""}" data-l="${l.id}"><path d="M${X1},${l.y} L${LX - 12},${l.ly}" stroke="currentColor" stroke-opacity=".55" stroke-width="1" fill="none"/><circle cx="${LX}" cy="${l.ly}" r="6" fill="${k0(l.id)}"/><text x="${LX + 14}" y="${l.ly + 6}" font-size="19" font-family="Inter" font-weight="${sel === l.id ? 700 : 500}" fill="currentColor">${esc(l.t)}</text></g>`).join("");
   const H = Math.max(y + 60, ly + 20);
   return `<svg viewBox="0 0 1000 ${H}" class="xsec" role="group" aria-label="Conceptual lens cross-section"><defs>
     <linearGradient id="mir" x1="0" x2="1"><stop offset="0" stop-color="#9CC7F4"/><stop offset=".5" stop-color="#E8F2FC"/><stop offset="1" stop-color="#2C5FA8"/></linearGradient>
@@ -41,9 +41,9 @@ function xsecSVG(on, sel, o = {}) {
     <pattern id="polP" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#3A4048"/><line x1="5" y1="0" x2="5" y2="10" stroke="#9AA6AF" stroke-width="2"/></pattern>
     <pattern id="uvP" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2.4" fill="#7B3FBF" opacity=".55"/></pattern></defs>
     <text x="40" y="34" font-size="15" font-family="Inter" font-weight="700" letter-spacing="2" fill="#8A6B32">CONCEPTUAL · NOT TO SCALE</text>
-    <g transform="translate(40,90)"><path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="${has("tint") ? "rgba(110,82,54,.4)" : "#DCE7EE"}" stroke="#16140F" stroke-width="5"/>${has("mirror") ? `<path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="url(#mir)" opacity=".55"/>` : ""}<rect x="150" y="80" width="40" height="60" fill="none" stroke="#8A6B32" stroke-width="3"/></g>
+    <g transform="translate(40,90)"><path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="${has("tint") ? "rgba(110,82,54,.4)" : "#DCE7EE"}" stroke="currentColor" stroke-width="5"/>${has("mirror") ? `<path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="url(#mir)" opacity=".55"/>` : ""}<rect x="150" y="80" width="40" height="60" fill="none" stroke="#8A6B32" stroke-width="3"/></g>
     <path d="M230,170 L${X0},70 M230,230 L${X0},${y}" stroke="#8A6B32" stroke-width="1.5" stroke-dasharray="5 5" fill="none"/>
-    <text x="${X0}" y="58" font-size="14" font-family="Inter" fill="#7A7366">front (outside)</text><text x="${X0}" y="${y + 24}" font-size="14" font-family="Inter" fill="#7A7366">back (eye side)</text>
+    <text x="${X0}" y="58" font-size="14" font-family="Inter" fill="currentColor" fill-opacity=".62">front (outside)</text><text x="${X0}" y="${y + 24}" font-size="14" font-family="Inter" fill="currentColor" fill-opacity=".62">back (eye side)</text>
     ${subSvg}${bandSvg}${labSvg}</svg>`;
 }
 SIMS._xsec = xsecSVG;
@@ -75,14 +75,14 @@ const ICON = {
   tint: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#7A6450"/>`,
   uv: `<rect x="6" y="20" width="22" height="16" fill="#C9B6E6"/><rect x="28" y="20" width="46" height="16" fill="#E6D23A"/><path d="M8,16 L26,40 M26,16 L8,40" stroke="#A9472F" stroke-width="3"/>`,
   mirror: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#5B8FD6"/><path d="M20,18 L54,12" stroke="#fff" stroke-width="5" opacity=".8"/>`,
-  ar: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE" stroke="#16140F" stroke-width="2"/><ellipse cx="34" cy="22" rx="10" ry="4" fill="#9BE3B0" opacity=".7"/>`,
-  fog: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#E6EDF1" stroke="#16140F" stroke-width="2"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle cx="${24 + (i % 3) * 14}" cy="${18 + Math.floor(i / 3) * 16}" r="4" fill="#fff" stroke="#A59E91"/>`).join("")}`,
+  ar: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE" stroke="currentColor" stroke-width="2"/><ellipse cx="34" cy="22" rx="10" ry="4" fill="#9BE3B0" opacity=".7"/>`,
+  fog: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#E6EDF1" stroke="currentColor" stroke-width="2"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle cx="${24 + (i % 3) * 14}" cy="${18 + Math.floor(i / 3) * 16}" r="4" fill="#fff" stroke="#A59E91"/>`).join("")}`,
   hydro: `<rect x="8" y="38" width="64" height="8" fill="#9AA6AF"/><circle cx="40" cy="26" r="12" fill="#5A9BD5"/>`,
   oleo: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE"/>${[4, 8, 12].map((r) => `<ellipse cx="40" cy="28" rx="${r}" ry="${r + 3}" fill="none" stroke="#8C7860" stroke-width="2"/>`).join("")}`,
   blue: `<path d="M6,44 L22,44 L30,30 L42,22 L74,20" fill="none" stroke="#2F6B8F" stroke-width="3"/><rect x="22" y="48" width="52" height="5" fill="#3355DD"/>`,
   photo: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE"/><path d="M40,6 L66,6 Q66,6 66,20 L66,36 Q66,50 52,50 L40,50Z" fill="#6E6152"/><circle cx="12" cy="10" r="6" fill="#E3B24A"/>`,
   hard: `<path d="M40,6 L64,14 L62,34 Q56,46 40,52 Q24,46 18,34 L16,14Z" fill="#C9A24E"/>`,
-  rx: `<path d="M20,8 Q40,22 60,8 L60,48 Q40,34 20,48Z" fill="#C8D9E3" stroke="#16140F" stroke-width="2"/>`,
+  rx: `<path d="M20,8 Q40,22 60,8 L60,48 Q40,34 20,48Z" fill="#C8D9E3" stroke="currentColor" stroke-width="2"/>`,
 };
 const icon = (k) => `<svg viewBox="0 0 80 56" class="ico" aria-hidden="true">${ICON[k] || ""}</svg>`;
 SIMS._icon = icon;
@@ -105,12 +105,12 @@ SIMS.compare = (host, ctx) => {
 };
 
 /* ---------- E · care: illustrated sequence, mistakes, scenarios ---------- */
-const GL = (x, y, s, o = "") => `<g transform="translate(${x},${y}) scale(${s})" ${o}><path d="M-150,-40 Q-150,-62 -128,-62 L-36,-62 Q-14,-62 -14,-40 L-14,10 Q-14,46 -54,46 L-110,46 Q-150,46 -150,10Z M14,-40 Q14,-62 36,-62 L128,-62 Q150,-62 150,-40 L150,10 Q150,46 110,46 L54,46 Q14,46 14,10Z" fill="rgba(200,220,232,.7)" stroke="#16140F" stroke-width="8"/><path d="M-14,-36 Q0,-50 14,-36" fill="none" stroke="#16140F" stroke-width="8"/></g>`;
+const GL = (x, y, s, o = "") => `<g transform="translate(${x},${y}) scale(${s})" ${o}><path d="M-150,-40 Q-150,-62 -128,-62 L-36,-62 Q-14,-62 -14,-40 L-14,10 Q-14,46 -54,46 L-110,46 Q-150,46 -150,10Z M14,-40 Q14,-62 36,-62 L128,-62 Q150,-62 150,-40 L150,10 Q150,46 110,46 L54,46 Q14,46 14,10Z" fill="rgba(200,220,232,.7)" stroke="currentColor" stroke-width="8"/><path d="M-14,-36 Q0,-50 14,-36" fill="none" stroke="currentColor" stroke-width="8"/></g>`;
 const CARE_ART = [
-  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="#7A7366" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="#7A7366"/>${[0, 1, 2, 3, 4].map((i) => `<circle class="drip" style="animation-delay:${i * .25}s" cx="${226 + (i % 3) * 8}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">lukewarm water lifts the grit</text>`,
-  `<rect x="70" y="120" width="70" height="140" rx="12" fill="#C9A24E"/><rect x="88" y="90" width="34" height="34" fill="#7A7366"/><path d="M122,98 L160,92" stroke="#7A7366" stroke-width="10"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle class="mist" style="animation-delay:${i * .15}s" cx="${190 + i * 12}" cy="${92 + (i % 3) * 8}" r="4" fill="#9CC7F4"/>`).join("")}${GL(330, 260, .9)}<text x="240" y="400" text-anchor="middle" class="art-t">lens spray or mild lotion-free soap</text>`,
+  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="currentColor" fill-opacity=".62"/>${[0, 1, 2, 3, 4].map((i) => `<circle class="drip" style="animation-delay:${i * .25}s" cx="${226 + (i % 3) * 8}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">lukewarm water lifts the grit</text>`,
+  `<rect x="70" y="120" width="70" height="140" rx="12" fill="#C9A24E"/><rect x="88" y="90" width="34" height="34" fill="currentColor" fill-opacity=".62"/><path d="M122,98 L160,92" stroke="currentColor" stroke-opacity=".55" stroke-width="10"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle class="mist" style="animation-delay:${i * .15}s" cx="${190 + i * 12}" cy="${92 + (i % 3) * 8}" r="4" fill="#9CC7F4"/>`).join("")}${GL(330, 260, .9)}<text x="240" y="400" text-anchor="middle" class="art-t">lens spray or mild lotion-free soap</text>`,
   `${GL(240, 220, 1.3)}<circle class="spin" cx="160" cy="220" r="46" fill="rgba(201,162,78,.35)" stroke="#8A6B32" stroke-width="3" stroke-dasharray="10 8"/><text x="240" y="400" text-anchor="middle" class="art-t">clean microfibre, light circles, both sides</text>`,
-  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="#7A7366" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="#7A7366"/>${[0, 1, 2].map((i) => `<circle class="drip" style="animation-delay:${i * .3}s" cx="${230 + i * 6}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">rinse if the cleaner's instructions say so</text>`,
+  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="currentColor" fill-opacity=".62"/>${[0, 1, 2].map((i) => `<circle class="drip" style="animation-delay:${i * .3}s" cx="${230 + i * 6}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">rinse if the cleaner's instructions say so</text>`,
   `${GL(240, 220, 1.3)}<rect class="pat" x="120" y="150" width="120" height="90" rx="14" fill="rgba(201,162,78,.55)"/><text x="240" y="400" text-anchor="middle" class="art-t">pat dry with a clean, dry microfibre</text>`,
   `<path d="M90,250 Q240,330 390,250 L390,210 Q240,280 90,210Z" fill="#2B2A28"/><path d="M90,210 Q240,140 390,210" fill="none" stroke="#2B2A28" stroke-width="10"/>${GL(240, 205, .8)}<text x="240" y="400" text-anchor="middle" class="art-t">in the case — out of heat, never lens-down</text>`,
 ];
@@ -128,11 +128,11 @@ SIMS.care = (host, ctx) => {
 const MIS_ART = {
   dry: `${GL(60, 46, .28)}<circle cx="40" cy="44" r="3" fill="#8C6E3A"/><circle cx="70" cy="40" r="3" fill="#8C6E3A"/><path d="M20,70 L100,70" stroke="#A9472F" stroke-width="4"/>`,
   shirt: `<path d="M30,20 L50,12 Q60,22 70,12 L90,20 L100,40 L86,46 L86,90 L34,90 L34,46 L20,40Z" fill="#9AA6AF"/>`,
-  glass: `<rect x="40" y="34" width="40" height="60" rx="8" fill="#5A9BD5"/><rect x="50" y="18" width="20" height="18" fill="#7A7366"/><text x="60" y="72" text-anchor="middle" font-size="14" fill="#fff" font-family="Inter" font-weight="700">NH₃</text>`,
+  glass: `<rect x="40" y="34" width="40" height="60" rx="8" fill="#5A9BD5"/><rect x="50" y="18" width="20" height="18" fill="currentColor" fill-opacity=".62"/><text x="60" y="72" text-anchor="middle" font-size="14" fill="#fff" font-family="Inter" font-weight="700">NH₃</text>`,
   car: `<rect x="14" y="50" width="92" height="30" rx="10" fill="#9C2F25"/><path d="M30,50 L44,30 L80,30 L94,50Z" fill="#9C2F25"/><circle cx="96" cy="16" r="10" fill="#E3B24A"/><circle cx="34" cy="82" r="8" fill="#222"/><circle cx="88" cy="82" r="8" fill="#222"/>`,
   down: `<rect x="10" y="74" width="100" height="10" fill="#B9A27A"/>${GL(60, 62, .3)}`,
   abr: `<rect x="24" y="40" width="72" height="40" rx="8" fill="#5E8A4E"/><rect x="24" y="40" width="72" height="14" fill="#E3C14A"/>`,
-  chem: `<path d="M44,20 L76,20 L76,34 L92,90 L28,90 L44,34Z" fill="#B9CCD8" stroke="#16140F" stroke-width="3"/><path d="M40,60 L80,60" stroke="#A9472F" stroke-width="4"/>`,
+  chem: `<path d="M44,20 L76,20 L76,34 L92,90 L28,90 L44,34Z" fill="#B9CCD8" stroke="currentColor" stroke-width="3"/><path d="M40,60 L80,60" stroke="#A9472F" stroke-width="4"/>`,
 };
 SIMS.mistakes = (host, ctx) => {
   let sel = null; const seen = new Set();

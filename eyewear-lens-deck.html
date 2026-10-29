@@ -8,7 +8,9 @@
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("ilg-lens-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 
 /* Calibre theme: paper, ink, gold · Cormorant Garamond + Inter */
@@ -365,6 +367,127 @@ table.cat{border-collapse:collapse;font-size:.88cqw;width:100%;margin-top:.2cqw}
 .decide .dz-card{padding:2cqw 2.2cqw}.decide .dz-card h3{font-size:2.8cqw}.decide .dz-btns .sbtn{font-size:1.1cqw;padding:.8cqw 1.8cqw}
 .decide .dz-path li{font-size:1cqw;padding:.45cqw 0}
 .L-title>div:nth-child(2){padding-right:3cqw}
+
+/* =====================================================================
+   "Eyewear 101 Lab" look for the Lens Technology deck:
+   one soft tone, neumorphic (raised / pressed) controls, Plus Jakarta
+   Sans throughout, and a light / dark switch (T key, the ◐ button,
+   or the phone remote). Loaded after deck-base.css and deck-lens.css,
+   so it only re-skins: layout and behaviour are unchanged.
+   ===================================================================== */
+:root{
+  --bg:#E3E8ED;--hi:#FFFFFF;--lo:#B9C2CB;
+  --paper:var(--bg);--surface:var(--bg);--raise:#D9E0E6;--note:#D9E0E6;
+  --ink:#16202A;--text:#2E3A45;--mute:#5A6774;--faint:#8A96A1;--line:#CCD4DB;
+  --gold:#94702F;--gold2:#B8913F;--on-ink:#F4F7F9;
+  --green:#21825A;--red:#C6432A;--blue:#1C7491;
+  --cv-bg:#E3E8ED;--cv-card:#F4F7F9;--cv-ink:#16202A;--cv-text:#2E3A45;--cv-mute:#5A6774;--cv-line:#CCD4DB;
+  --serif:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;--sans:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --neu:.32cqw .32cqw .7cqw var(--lo),-.32cqw -.32cqw .7cqw var(--hi);
+  --neu-lg:.6cqw .6cqw 1.3cqw var(--lo),-.6cqw -.6cqw 1.3cqw var(--hi);
+  --neu-in:inset .25cqw .25cqw .5cqw var(--lo),inset -.25cqw -.25cqw .5cqw var(--hi);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D2228;--hi:#283039;--lo:#121519;--raise:#232A31;--note:#232A31;
+  --ink:#E9EEF1;--text:#C9D2D9;--mute:#98A4AF;--faint:#6F7B86;--line:#2F3842;
+  --gold:#D4B074;--gold2:#E0C08A;--on-ink:#16202A;--green:#4FC490;--red:#F0745B;--blue:#52BAD6;
+  --cv-bg:#1D2228;--cv-card:#262D35;--cv-ink:#E9EEF1;--cv-text:#C9D2D9;--cv-mute:#98A4AF;--cv-line:#38424D;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D2228;--hi:#283039;--lo:#121519;--raise:#232A31;--note:#232A31;
+  --ink:#E9EEF1;--text:#C9D2D9;--mute:#98A4AF;--faint:#6F7B86;--line:#2F3842;
+  --gold:#D4B074;--gold2:#E0C08A;--on-ink:#16202A;--green:#4FC490;--red:#F0745B;--blue:#52BAD6;
+  --cv-bg:#1D2228;--cv-card:#262D35;--cv-ink:#E9EEF1;--cv-text:#C9D2D9;--cv-mute:#98A4AF;--cv-line:#38424D;color-scheme:dark}
+
+html,body{background:var(--bg)}
+.app{background:var(--bg)}
+.deck{background:var(--bg);box-shadow:none;border-radius:1.4cqw}
+h1,h2{font-family:var(--sans);font-weight:600;letter-spacing:-.02em}
+h1{font-size:4.6cqw}h2{font-size:2.9cqw}.side h2{font-size:2.45cqw}
+.big{font-family:var(--sans);font-weight:700;letter-spacing:-.03em;color:var(--gold)}
+.say,.brief,.wdg h3,.uv-col h4,.myth .ms,.cmp-table thead th,.mods b,.jumps b,.agenda b,.opt b,.care-steps b,.ring b,.big-s,.timer,.r-title,.sheet h3{font-family:var(--sans);font-style:normal;letter-spacing:-.01em}
+.say{font-weight:500;color:var(--gold)}
+.top{color:var(--gold)}.top .wm{font-family:var(--sans);font-weight:700;font-size:.95cqw;letter-spacing:.24em}
+.bar{background:var(--gold);border-radius:0 .2cqw .2cqw 0}
+.foot .dot.on{background:var(--green)}
+
+/* raised cards */
+.fig{border:0;border-radius:1.6cqw;background:var(--bg);box-shadow:var(--neu-lg);overflow:hidden}
+.fig.plain{box-shadow:none}
+.wdg{background:var(--bg)}
+.sim-ui{background:var(--bg);border-top:0;padding:.75cqw 1cqw;gap:.55cqw 1.2cqw}
+.sim-lab{background:rgba(0,0,0,.42);border-radius:.4cqw}
+.anat .concept{background:var(--raise);color:var(--text);border-radius:0}
+
+/* every button: raised; pressed / selected: inset + gold */
+.seg button,.sbtn,.panel button,.ttabs button,.cmp-pre button,.cmp-chips button,.cs-tabs button,.qchip,.mt-i,.mt-p,.opt,.care-steps button,.mtile,.tgrid .jump,.dz-path li,.grid button,.sheet .x,.sheet .modrow a,.sheet .modrow span,.steps button,.fstep button,.keys kbd,.r-nav button,.r-acts button,.r-pair button{
+  border:0!important;background:var(--bg);color:var(--ink);border-radius:.7cqw;box-shadow:var(--neu);transition:box-shadow .15s,color .15s}
+.seg button:active,.sbtn:active,.opt:active,.qchip:active,.mtile:active{box-shadow:var(--neu-in)}
+.seg button[aria-pressed="true"],.sbtn.ink,.ttabs button[aria-selected="true"],.cmp-pre button[aria-pressed="true"],.cmp-chips button[aria-pressed="true"],.cs-tabs button[aria-pressed="true"],.qchip.on,.mt-i.held,.care-steps .on button,.mtile.on,.panel button[aria-pressed="true"]{
+  background:var(--bg);color:var(--gold);box-shadow:var(--neu-in)}
+.seg button,.sbtn{font-weight:600;border-radius:.6cqw;padding:.42cqw .7cqw}
+.sbtn.ghost{color:var(--mute)}
+.ttabs button{font-weight:600;color:var(--mute)}
+.care-steps .on b{color:var(--gold)}
+.care-steps .done button{box-shadow:var(--neu);color:var(--mute)}
+.opt.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.opt.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}.opt.mid{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--gold2)}
+.qchip.good.on{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--green)}.qchip.off.on{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--red)}
+.mt-p.ok{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--green)}.mt-p.no{box-shadow:var(--neu-in),inset 0 -.2cqw 0 var(--red)}
+.mt-k{border:0;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu-in)}
+.as-xs{border:0;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu-in)}
+.qpic{border:0;border-radius:1cqw}
+.as-prog,.prog{background:var(--bg);box-shadow:var(--neu-in);border-radius:.3cqw;height:.45cqw}.as-prog i{border-radius:.3cqw}
+.ring{box-shadow:var(--neu-lg);background:conic-gradient(var(--gold) calc(var(--p)*1%),var(--raise) 0)}.ring::before{background:var(--bg);box-shadow:var(--neu-in)}
+
+/* inset panels */
+.dz-card,.uv-col,.tf,.myth,.fb,.mods a,.mods div,.mods .here,.cs-scene,.qr,.uv-rule{border:0!important;border-radius:1cqw;background:var(--bg);box-shadow:var(--neu)}
+.dz-card{box-shadow:var(--neu-lg)}
+.dz-card.stop{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--red)}.dz-card.refer{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--blue)}.dz-card.good{box-shadow:var(--neu-lg),inset .3cqw 0 0 var(--green)}
+.dz-path li{padding:.45cqw .8cqw;border-radius:.6cqw}.dz-path li.cur{box-shadow:var(--neu-in);color:var(--gold)}.dz-path li.todo{box-shadow:none;color:var(--faint)}
+.myth.done.ok,.tf.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.myth.done.no,.tf.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}
+.fb{box-shadow:var(--neu-in)}.fb.ok{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--green)}.fb.no{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--red)}.fb.mid{box-shadow:var(--neu-in),inset .25cqw 0 0 var(--gold2)}
+.uv-rule{color:var(--ink);box-shadow:var(--neu-in)}.uv-rule a.ref{color:var(--gold)}
+.mods .here{box-shadow:var(--neu-in)}.mods .here em{color:var(--gold)}
+.qr{background:#fff;padding:1cqw}
+.cs-scene{padding:0}
+.cmp-table th,.cmp-table td,.tops li,table.cat th,table.cat td,.agenda div,.jumps .jump,.kv{border-color:var(--line)}
+table.cat tr.on td{background:transparent;color:var(--gold);font-weight:700}
+.cmp-table thead th{font-weight:600}
+.jumps .jump{border-radius:.6cqw}
+.jumps .jump:hover,.jumps .jump:focus-visible,.agenda .jump:hover{background:var(--bg);box-shadow:var(--neu)}
+.tgrid .jump:hover{box-shadow:var(--neu-in)}
+.cta{background:var(--bg);color:var(--gold);box-shadow:var(--neu);border-radius:.8cqw;font-weight:700}
+.kchip{border-radius:.3cqw}
+.tag{border-radius:.3cqw}
+.xsec text{fill:currentColor}.xsec,.care-art,.spec,.mtile svg,.ico{color:var(--ink)}
+.art-t{fill:var(--mute)}
+input[type=range]{-webkit-appearance:none;appearance:none;height:.8cqw;border-radius:.5cqw;background:var(--bg);box-shadow:var(--neu-in);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:1.7cqw;height:1.7cqw;border-radius:50%;background:var(--bg);box-shadow:.2cqw .2cqw .4cqw var(--lo),-.2cqw -.2cqw .4cqw var(--hi),inset 0 0 0 .32cqw var(--gold);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:1.7cqw;height:1.7cqw;border:0;border-radius:50%;background:var(--bg);box-shadow:.2cqw .2cqw .4cqw var(--lo),-.2cqw -.2cqw .4cqw var(--hi),inset 0 0 0 .32cqw var(--gold);cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* control bar, overlays, toast */
+.ctrl{background:var(--bg);color:var(--ink);border-radius:18px;box-shadow:8px 8px 18px var(--lo),-8px -8px 18px var(--hi);padding:8px}
+.ctrl button,.ctrl a{border-radius:12px;color:var(--ink)}
+.ctrl button:hover,.ctrl a:hover,.ctrl button:focus-visible,.ctrl a:focus-visible{background:var(--bg);box-shadow:inset 3px 3px 6px var(--lo),inset -3px -3px 6px var(--hi)}
+.ctrl .nav.go{background:var(--bg);color:var(--gold);box-shadow:4px 4px 9px var(--lo),-4px -4px 9px var(--hi)}.ctrl .nav.go:hover{background:var(--bg)}
+.ctrl .sep{background:var(--line)}
+.ovl{background:rgba(10,14,18,.45)}
+.sheet{background:var(--bg);border:0;border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.sheet .x{border-radius:10px}
+.grid button.on,.sheet .modrow .here{background:var(--bg);color:var(--gold);box-shadow:inset 3px 3px 6px var(--lo),inset -3px -3px 6px var(--hi)}
+.sheet code{background:var(--raise);border-radius:6px}
+.toast{background:var(--bg);color:var(--ink);border-radius:12px;box-shadow:6px 6px 14px var(--lo),-6px -6px 14px var(--hi)}
+.black{background:#000}
+
+/* phone remote and presenter view */
+.rmt{background:var(--bg)}
+.r-nav button,.r-acts button,.r-pair button{border-radius:14px;box-shadow:5px 5px 10px var(--lo),-5px -5px 10px var(--hi)}
+.r-nav button.go,.r-pair button{color:var(--gold);background:var(--bg)}
+.r-acts button[aria-pressed="true"],.r-acts button.ink{background:var(--bg);color:var(--gold);box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-acts button.gold{color:var(--gold)}
+.r-notes{background:var(--bg);border:0;border-radius:14px;box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-pair input{border:0;border-radius:14px;background:var(--bg);color:var(--ink);box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
+.r-head .st.ok{color:var(--green)}
 
 </style>
 </head>
@@ -3211,9 +3334,14 @@ const SIMS = {};
 const KIT = (function () {
   "use strict";
   const RM = (() => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
-  const P = { ink: "#16140F", text: "#3B362F", mute: "#7A7366", faint: "#A59E91", line: "#E1DBD0", paper: "#F6F3EE", surface: "#FBFAF7", raise: "#EFEBE4",
-    gold: "#8A6B32", gold2: "#C9A24E", red: "#A9472F", green: "#3E7A4A", blue: "#2F6B8F", glare: "#FFFFFF" };
-  const FONT = 'Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif', SERIF = '"Cormorant Garamond",Garamond,serif';
+  /* palette: fixed accents + theme colours read live from the CSS (light / dark switch) */
+  const P = { gold: "#8A6B32", gold2: "#C9A24E", red: "#B5492F", green: "#2E7D52", blue: "#1C7491", glare: "#FFFFFF", faint: "#8A96A1" };
+  let themeAt = -1, TH = {};
+  const theme = () => { const now = performance.now(); if (now - themeAt > 250) { themeAt = now; const cs = getComputedStyle(document.documentElement), v = (k, d) => (cs.getPropertyValue(k).trim() || d);
+    TH = { ink: v("--cv-ink", "#16202A"), text: v("--cv-text", "#2E3A45"), mute: v("--cv-mute", "#5A6774"), line: v("--cv-line", "#CCD4DB"), bg: v("--cv-bg", "#E3E8ED"), card: v("--cv-card", "#F4F7F9") }; } return TH; };
+  ["ink", "text", "mute", "line", "bg", "card"].forEach((k) => Object.defineProperty(P, k, { get: () => theme()[k], enumerable: true }));
+  Object.defineProperty(P, "paper", { get: () => theme().bg }); Object.defineProperty(P, "surface", { get: () => theme().card });
+  const FONT = '"Plus Jakarta Sans","Segoe UI",system-ui,Arial,sans-serif', SERIF = FONT;
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const lerp = (a, b, k) => a + (b - a) * k;
@@ -3454,7 +3582,7 @@ SIMS.glare = (host, ctx, opt = {}) => {
   };
   /* side-view inset: the physics of the current step */
   function inset(g, W, H, t) {
-    const x0 = W - 452, y0 = 44, w = 434, hh = 262; g.save(); rr(g, x0, y0, w, hh, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); g.strokeStyle = P.line; g.lineWidth = 1.5; g.stroke();
+    const x0 = W - 452, y0 = 44, w = 434, hh = 262; g.save(); rr(g, x0, y0, w, hh, 6); g.fillStyle = P.card; g.fill(); g.strokeStyle = P.line; g.lineWidth = 1.5; g.stroke();
     text(g, "SIDE VIEW", x0 + 16, y0 + 26, { size: 12, color: P.gold, w: 700 });
     const sun = [x0 + 52, y0 + 62], hit = [x0 + 200, y0 + 196], eye = [x0 + 392, y0 + 92], lens = [x0 + 336, y0 + 116];
     g.fillStyle = "#D8A93A"; g.beginPath(); g.arc(...sun, 20, 0, 7); g.fill();
@@ -3497,7 +3625,7 @@ SIMS.filter = (host, ctx) => {
   const parts = Array.from({ length: 30 }, (_, i) => ({ k: i / 30, a: Math.random() * Math.PI, hz: Math.random() < H_FR }));
   S.draw = (g, W, H, t) => {
     rot = lerp(rot, rotT, .15);
-    g.fillStyle = "#EEF4F6"; g.fillRect(0, 0, W, H * .7); const wy = H * .72; const wg = g.createLinearGradient(0, wy, 0, H); wg.addColorStop(0, "#3F7F96"); wg.addColorStop(1, "#1E5468"); g.fillStyle = wg; g.fillRect(0, wy, W, H - wy);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H * .7); const wy = H * .72; const wg = g.createLinearGradient(0, wy, 0, H); wg.addColorStop(0, "#3F7F96"); wg.addColorStop(1, "#1E5468"); g.fillStyle = wg; g.fillRect(0, wy, W, H - wy);
     const sun = [W * .1, H * .14], hit = [W * .34, wy], lens = [W * .7, H * .4], eye = [W * .92, H * .33];
     g.fillStyle = "#E3B24A"; g.beginPath(); g.arc(...sun, 46, 0, 7); g.fill(); text(g, "Sun", sun[0] - 18, sun[1] + 76, { size: 18, color: P.mute });
     g.strokeStyle = "rgba(227,178,74,.45)"; g.lineWidth = 26; g.lineCap = "round"; g.beginPath(); g.moveTo(...sun); g.lineTo(...hit); g.stroke();
@@ -3565,7 +3693,7 @@ SIMS.polsim = (host, ctx) => {
     g.restore();
     /* readout */
     const rp = st.lens === "pol" ? ratio(th, st.tilt) : 1;
-    g.save(); rr(g, 18, 18, 360, 132, 6); g.fillStyle = "rgba(251,250,247,.94)"; g.fill();
+    g.save(); rr(g, 18, 18, 360, 132, 6); g.fillStyle = P.card; g.fill();
     text(g, "GLARE THROUGH THE LENS", 34, 46, { size: 12, color: P.gold, w: 700 });
     text(g, "vs. a non-polarised lens of the same darkness", 34, 66, { size: 13, color: P.mute });
     rr(g, 34, 82, 240, 20, 10); g.fillStyle = "rgba(22,20,15,.1)"; g.fill(); rr(g, 34, 82, Math.max(20, 240 * rp), 20, 10); g.fillStyle = rp < .5 ? P.green : rp < .85 ? P.gold2 : P.red; g.fill();
@@ -3622,7 +3750,7 @@ SIMS.trade = (host, ctx) => {
     live(ctx, `<p class="sec">${esc(x.n)} <span class="tag">${esc(x.level)}</span></p><p class="txt">${esc(x.why)} ${refLink(x.ref)}</p><p class="sec">Depends on</p><p class="txt">${esc(x.dep)}</p>`); ctx.changed(); }
   S.draw = (g, W, H, t) => {
     const x = L.tradeoffs.find((y) => y.id === cur);
-    g.fillStyle = "#F1EDE6"; g.fillRect(0, 0, W, H);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     if (cur === "pilot") cockpit(g, W, H, t); else if (cur === "hud") hud(g, W, H, t); else if (cur === "phone") phone(g, W, H, t);
     else if (cur === "ski") { paintScene(g, W, H, t, { kind: "snow", glare: 1, cut: pol ? 1 : 0, hy: .3 }); if (pol) tintRect(g, 0, 0, W, H, [110, 96, 80], .3); pill(g, pol ? "Icy patch: shine reduced — harder to spot" : "Icy patch: the shine warns you", W * .56, H * .3 + (H * .7) * .58 - 90, { align: "center", size: 18, bg: pol ? "rgba(169,71,47,.92)" : "rgba(62,122,74,.92)" }); }
     else if (cur === "work") work(g, W, H);
@@ -3639,17 +3767,17 @@ SIMS.trade = (host, ctx) => {
     [[W * .2, "SPD", "128"], [W * .5, "ALT", "4 500"], [W * .8, "HDG", "275"]].forEach(([x, l, v]) => { rr(g, x - 140, H * .5, 280, 200, 10); g.fillStyle = "#0B0D0F"; g.fill();
       g.globalAlpha = .12 + .88 * lv; rr(g, x - 126, H * .5 + 14, 252, 172, 6); g.fillStyle = "#102A3A"; g.fill(); text(g, l, x, H * .5 + 60, { size: 22, color: "#7FD3FF", align: "center", w: 700 }); text(g, v, x, H * .5 + 130, { size: 56, color: "#E6F7FF", align: "center", w: 700 }); g.globalAlpha = 1; });
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .35);
-    pill(g, pol ? `LCD brightness through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: displays unaffected", W / 2, H * .5 - 24, { align: "center", size: 17, bg: "rgba(251,250,247,.95)", fg: P.ink });
+    pill(g, pol ? `LCD brightness through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: displays unaffected", W / 2, H * .5 - 24, { align: "center", size: 17, bg: P.card, fg: P.ink });
   }
   function hud(g, W, H, t) { paintScene(g, W, H, t, { kind: "road", glare: .6, cut: pol ? 1 : 0, hy: .38 }); g.fillStyle = "#1F2226"; g.beginPath(); g.moveTo(0, H * .78); g.quadraticCurveTo(W / 2, H * .7, W, H * .78); g.lineTo(W, H); g.lineTo(0, H); g.fill();
     const lv = pol ? .08 + .92 * Math.sin(ang * D2R) ** 2 : 1; g.globalAlpha = lv; text(g, "88", W * .5, H * .62, { size: 88, color: "#7CF0C8", align: "center", w: 700 }); text(g, "km/h", W * .5, H * .67, { size: 20, color: "#7CF0C8", align: "center" }); arrow(g, W * .62, H * .6, W * .7, H * .52, { color: "#7CF0C8", w: 6, head: 22 }); g.globalAlpha = 1;
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .35);
     pill(g, pol ? `Head-up display: ${Math.round(lv * 100)}% visible` : "Head-up display fully visible", W * .5, H * .1, { align: "center", size: 17 }); }
-  function phone(g, W, H, t) { const lv = lcdLevel(0); g.fillStyle = "#E4DCCD"; g.fillRect(0, 0, W, H);
+  function phone(g, W, H, t) { const lv = lcdLevel(0); g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     g.save(); g.translate(W * .5, H * .48); g.rotate(-ang * D2R); g.fillStyle = "#111"; rr(g, -130, -250, 260, 500, 34); g.fill(); g.globalAlpha = .06 + .94 * lv; g.fillStyle = "#F7F7F7"; rr(g, -116, -232, 232, 464, 22); g.fill(); g.fillStyle = "#2F6B8F"; g.fillRect(-90, -190, 180, 90); g.fillStyle = "#9AA6AF"; for (let i = 0; i < 7; i++) g.fillRect(-90, -80 + i * 34, 120 + (i * 37) % 60, 12); g.globalAlpha = 1; g.restore();
     if (pol) tintRect(g, 0, 0, W, H, [100, 96, 90], .3);
     pill(g, pol ? `Screen through the lens: ${Math.round(lv * 100)}%` : "Non-polarised: screen unaffected", W * .5, 36, { align: "center", size: 17 }); }
-  function work(g, W, H) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H);
+  function work(g, W, H) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
     const draw = (x, y, safety) => { g.save(); g.translate(x, y); g.strokeStyle = P.ink; g.lineWidth = 10; g.fillStyle = safety ? "rgba(180,200,215,.5)" : "rgba(60,56,50,.75)";
       if (safety) { rr(g, -230, -70, 460, 150, 50); g.fill(); g.stroke(); g.lineWidth = 6; g.beginPath(); g.moveTo(-230, -20); g.lineTo(-290, -10); g.lineTo(-290, 60); g.lineTo(-230, 70); g.stroke(); g.beginPath(); g.moveTo(230, -20); g.lineTo(290, -10); g.lineTo(290, 60); g.lineTo(230, 70); g.stroke(); }
       else { g.beginPath(); lensPath(g, -110, 0, 100, 72); lensPath(g, 110, 0, 100, 72); g.fill(); g.stroke(); }
@@ -3657,7 +3785,7 @@ SIMS.trade = (host, ctx) => {
     draw(W * .3, H * .38, false); draw(W * .7, H * .38, true);
     text(g, "Fashion sunglasses", W * .3, H * .62, { size: 24, align: "center", w: 700 }); text(g, "Not protective equipment", W * .3, H * .67, { size: 18, align: "center", color: P.red });
     text(g, "Certified protective eyewear", W * .7, H * .62, { size: 24, align: "center", w: 700 }); text(g, "Marked to the relevant safety standard", W * .7, H * .67, { size: 18, align: "center", color: P.green }); }
-  function rxDemo(g, W, H) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); const cx = W * .32, cy = H * .44;
+  function rxDemo(g, W, H) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); const cx = W * .32, cy = H * .44;
     g.save(); g.beginPath(); lensPath(g, cx, cy, 220, 170); g.clip(); g.fillStyle = "rgba(110,96,78,.45)"; g.fillRect(cx - 240, cy - 190, 480, 380);
     g.fillStyle = "rgba(255,255,255,.45)"; g.fillRect(cx - 240, cy - 190, 480, 160); g.fillStyle = "rgba(255,255,255,.3)"; g.beginPath(); g.moveTo(cx - 30, cy - 30); g.lineTo(cx + 30, cy - 30); g.lineTo(cx + 60, cy + 190); g.lineTo(cx - 60, cy + 190); g.fill();
     g.strokeStyle = "rgba(22,20,15,.25)"; g.lineWidth = 3; for (let x = cx - 240; x < cx + 240; x += 18) { g.beginPath(); g.moveTo(x, cy - 190); g.lineTo(x, cy + 190); g.stroke(); } g.restore();
@@ -3715,7 +3843,7 @@ SIMS.ident = (host, ctx) => {
   function move(e) { const [x, y] = S.pt(e); lp = [clamp(x / S.W, .15, .85), clamp(y / S.H, .2, .85)]; }
   S.draw = (g, W, H, t) => {
     rot = lerp(rot, rotT, .15);
-    g.fillStyle = "#E8E1D4"; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(0,0,0,.03)"; for (let y = 0; y < H; y += 28) g.fillRect(0, y, W, 2);
+    g.fillStyle = P.bg; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(0,0,0,.03)"; for (let y = 0; y < H; y += 28) g.fillRect(0, y, W, 2);
     const tint = pair.tint, k = pair.dark;
     if (meth === "card") {
       const cw = 860, ch = 470, cx = W / 2 - cw / 2, cy = H / 2 - ch / 2 - 20;
@@ -3762,9 +3890,9 @@ SIMS.uvq = (host, ctx) => {
   const U = L.uv; const res = {};
   const wrap = h(`<div class="wdg uvq"></div>`); host.appendChild(wrap);
   const specSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Spectrum: UV below 400 nanometres is blocked by a UV400 lens; visible light passes."><defs><linearGradient id="vis" x1="0" x2="1"><stop offset="0" stop-color="#7B3FBF"/><stop offset=".2" stop-color="#3355DD"/><stop offset=".4" stop-color="#22AA88"/><stop offset=".6" stop-color="#E6D23A"/><stop offset=".8" stop-color="#EE8833"/><stop offset="1" stop-color="#CC2222"/></linearGradient><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#E9E2D6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#A59E91" stroke-width="3"/></pattern></defs>
-    <rect x="10" y="20" width="110" height="40" fill="url(#hatch)"/><rect x="120" y="20" width="270" height="40" fill="url(#vis)"/><line x1="120" y1="10" x2="120" y2="72" stroke="#16140F" stroke-width="2.5"/>
-    <text x="65" y="88" font-size="13" text-anchor="middle" fill="#16140F" font-family="Inter" font-weight="600">UV (invisible)</text><text x="255" y="88" font-size="13" text-anchor="middle" fill="#16140F" font-family="Inter" font-weight="600">Visible light</text><text x="120" y="104" font-size="12" text-anchor="middle" fill="#7A7366" font-family="Inter">400 nm</text></svg>`;
-  const polSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Glare vibrating horizontally is stopped by the vertical slots of the polarising film; vertical vibration passes."><rect x="160" y="10" width="80" height="90" rx="10" fill="#E9E2D6" stroke="#16140F" stroke-width="2.5"/>${[0, 1, 2, 3, 4].map((i) => `<line x1="${172 + i * 14}" y1="16" x2="${172 + i * 14}" y2="94" stroke="#16140F" stroke-width="2"/>`).join("")}
+    <rect x="10" y="20" width="110" height="40" fill="url(#hatch)"/><rect x="120" y="20" width="270" height="40" fill="url(#vis)"/><line x1="120" y1="10" x2="120" y2="72" stroke="currentColor" stroke-width="2.5"/>
+    <text x="65" y="88" font-size="13" text-anchor="middle" fill="currentColor" font-family="Inter" font-weight="600">UV (invisible)</text><text x="255" y="88" font-size="13" text-anchor="middle" fill="currentColor" font-family="Inter" font-weight="600">Visible light</text><text x="120" y="104" font-size="12" text-anchor="middle" fill="currentColor" fill-opacity=".62" font-family="Inter">400 nm</text></svg>`;
+  const polSvg = `<svg viewBox="0 0 400 110" class="spec" role="img" aria-label="Glare vibrating horizontally is stopped by the vertical slots of the polarising film; vertical vibration passes."><rect x="160" y="10" width="80" height="90" rx="10" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="2.5"/>${[0, 1, 2, 3, 4].map((i) => `<line x1="${172 + i * 14}" y1="16" x2="${172 + i * 14}" y2="94" stroke="currentColor" stroke-width="2"/>`).join("")}
     <g stroke="#A9472F" stroke-width="4" stroke-linecap="round"><line x1="40" y1="40" x2="110" y2="40"/></g><g stroke="#3E7A4A" stroke-width="4" stroke-linecap="round"><line x1="75" y1="58" x2="75" y2="92"/><line x1="320" y1="58" x2="320" y2="92"/></g>
     <text x="75" y="28" font-size="13" text-anchor="middle" fill="#A9472F" font-family="Inter" font-weight="600">glare ↔</text><text x="320" y="44" font-size="13" text-anchor="middle" fill="#3E7A4A" font-family="Inter" font-weight="600">passes ↕</text></svg>`;
   function render() {
@@ -3819,7 +3947,7 @@ function face(g, cx, cy, sp) { const W = 1140, H = 1400; const sk = g.createRadi
   g.fillStyle = "#3B2B21"; g.beginPath(); g.moveTo(0, 0); g.lineTo(W, 0); g.lineTo(W, cy - 210); g.quadraticCurveTo(cx, cy - 300, 0, cy - 200); g.closePath(); g.fill();
   g.strokeStyle = "rgba(150,105,80,.35)"; g.lineWidth = 10; g.lineCap = "round"; g.beginPath(); g.moveTo(cx - 22, cy + 40); g.quadraticCurveTo(cx - 34, cy + 190, cx - 6, cy + 250); g.stroke();
   [-1, 1].forEach((s) => { g.fillStyle = "#fff"; g.beginPath(); g.ellipse(cx + s * sp, cy, 48, 22, 0, 0, 7); g.fill(); g.fillStyle = "#4A3426"; g.beginPath(); g.arc(cx + s * sp, cy, 16, 0, 7); g.fill(); g.fillStyle = "#111"; g.beginPath(); g.arc(cx + s * sp, cy, 7, 0, 7); g.fill(); g.strokeStyle = "#5A3E2E"; g.lineWidth = 6; g.beginPath(); g.moveTo(cx + s * sp - 50, cy - 50); g.quadraticCurveTo(cx + s * sp, cy - 70, cx + s * sp + 50, cy - 52); g.stroke(); }); }
-function panel(g, x, y, w, hh, title) { rr(g, x, y, w, hh, 8); g.fillStyle = "#FBFAF7"; g.fill(); g.strokeStyle = P.line; g.lineWidth = 2; g.stroke(); text(g, title, x + w / 2, y + 34, { size: 20, w: 700, align: "center" }); }
+function panel(g, x, y, w, hh, title) { rr(g, x, y, w, hh, 8); g.fillStyle = P.card; g.fill(); g.strokeStyle = P.line; g.lineWidth = 2; g.stroke(); text(g, title, x + w / 2, y + 34, { size: 20, w: 700, align: "center" }); }
 
 const MODES = {};
 
@@ -3835,7 +3963,7 @@ MODES.ar = (S, ctx) => {
       if (v === "cmp") { pill(g, "No AR", cx - 210, cy + 190, { align: "center", size: 18 }); pill(g, "With AR", cx + 210, cy + 190, { align: "center", size: 18, bg: "rgba(138,107,50,.94)" }); }
       else pill(g, v === "on" ? "With AR: faint residual colour" : "No AR: reflections of the lights", cx, cy + 190, { align: "center", size: 18 });
       /* light-path inset */
-      const x0 = 26, y0 = H - 196; rr(g, x0, y0, 330, 170, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); text(g, "LIGHT AT THE SURFACE", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
+      const x0 = 26, y0 = H - 196; rr(g, x0, y0, 330, 170, 6); g.fillStyle = P.card; g.fill(); text(g, "LIGHT AT THE SURFACE", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
       g.fillStyle = "#C9D8E2"; g.fillRect(x0 + 170, y0 + 40, 30, 116); if (v !== "off") { g.fillStyle = P.gold2; g.fillRect(x0 + 166, y0 + 40, 4, 116); }
       arrow(g, x0 + 30, y0 + 70, x0 + 164, y0 + 100, { color: "#D8A93A", w: 4 }); arrow(g, x0 + 200, y0 + 100, x0 + 316, y0 + 130, { color: "#D8A93A", w: 4 });
       const on = v !== "off"; arrow(g, x0 + 164, y0 + 104, x0 + 40, y0 + 140, { color: on ? "rgba(62,122,74,.6)" : P.red, w: on ? 1.6 : 4 }); text(g, on ? "less reflected" : "reflected", x0 + 34, y0 + 162, { size: 13, color: on ? P.green : P.red, w: 600 }); },
@@ -3850,9 +3978,9 @@ MODES.hard = (S, ctx) => {
   S.ui.append(sc, bg, bw, br, bx);
   function doWipe() { wipe = performance.now(); if (grit) { const n = coat ? 3 : 11; for (let i = 0; i < n; i++) { const y = 140 + R() * 300, x = 80 + R() * 200; scr.push([x, y, 120 + R() * 220, (R() - .5) * .5, coat ? .25 : .7, coat ? 1.2 : 2.4]); } } ctx.changed(); }
   return { draw(g, W, H, t) {
-      g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H);
+      g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
       /* top view of the lens */
-      const cx = W * .3, cy = H * .5; g.save(); g.beginPath(); g.arc(cx, cy, 230, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(0, 0, W, H);
+      const cx = W * .3, cy = H * .5; g.save(); g.beginPath(); g.arc(cx, cy, 230, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(0, 0, W, H);
       scr.forEach(([x, y, l, a, al, w]) => { g.save(); g.translate(cx - 230 + x, cy - 230 + y); g.rotate(a); g.strokeStyle = `rgba(255,255,255,${al})`; g.lineWidth = w; g.beginPath(); g.moveTo(0, 0); g.lineTo(l, 0); g.stroke(); g.strokeStyle = `rgba(90,100,110,${al * .5})`; g.lineWidth = 1; g.beginPath(); g.moveTo(0, w); g.lineTo(l, w); g.stroke(); g.restore(); });
       if (grit) { const r2 = rng(9); for (let i = 0; i < 90; i++) { g.fillStyle = `rgba(${150 + r2() * 60},${120 + r2() * 40},${70 + r2() * 30},.95)`; g.beginPath(); g.arc(cx - 200 + r2() * 400, cy - 200 + r2() * 400, 2 + r2() * 4, 0, 7); g.fill(); } }
       const k = wipe > 0 ? (performance.now() - wipe) / 900 : 2; if (k < 1) { g.fillStyle = "rgba(180,170,155,.85)"; rr(g, cx - 260 + k * 420, cy - 260, 140, 520, 30); g.fill(); }
@@ -3862,7 +3990,7 @@ MODES.hard = (S, ctx) => {
       const x0 = W * .58, y0 = H * .22, w = W * .36; text(g, "CROSS-SECTION (not to scale)", x0, y0 - 20, { size: 13, color: P.gold, w: 700 });
       if (coat) { g.fillStyle = P.gold2; g.fillRect(x0, y0, w, 24); }
       g.fillStyle = "#B9CCD8"; g.fillRect(x0, y0 + (coat ? 24 : 0), w, 180);
-      text(g, "lens material (substrate)", x0 + w / 2, y0 + 120, { size: 18, align: "center", w: 600 }); if (coat) text(g, "hard coat", x0 + w / 2, y0 + 18, { size: 15, align: "center", w: 700, color: "#fff" });
+      text(g, "lens material (substrate)", x0 + w / 2, y0 + 120, { size: 18, align: "center", w: 600, color: "#16202A" }); if (coat) text(g, "hard coat", x0 + w / 2, y0 + 18, { size: 15, align: "center", w: 700, color: "#fff" });
       const lines = coat ? ["Resists fine everyday abrasion", "Sand still scratches if wiped dry", "Scratch-resistant ≠ scratch-proof"] : ["Softer plastic surface", "Scuffs more easily", "Most lenses today carry a hard coat"];
       lines.forEach((l, i) => text(g, "• " + l, x0, y0 + 250 + i * 32, { size: 18 }));
       pill(g, "Illustration only — never test on customer merchandise", 22, 34, { size: 15 }); },
@@ -3871,7 +3999,7 @@ MODES.hard = (S, ctx) => {
 };
 
 /* B3 hydrophobic / B4 oleophobic / B5 anti-static share a two-panel layout */
-function twoPanels(g, W, H, titles) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); panel(g, 20, 20, W / 2 - 30, H - 40, titles[0]); panel(g, W / 2 + 10, 20, W / 2 - 30, H - 40, titles[1]); return [[W / 4, H * .55], [W * 3 / 4, H * .55]]; }
+function twoPanels(g, W, H, titles) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); panel(g, 20, 20, W / 2 - 30, H - 40, titles[0]); panel(g, W / 2 + 10, 20, W / 2 - 30, H - 40, titles[1]); return [[W / 4, H * .55], [W * 3 / 4, H * .55]]; }
 MODES.hydro = (S, ctx) => {
   let drops = [], tilt = 0, t0 = 0; const R = rng(3);
   const b1 = btn("Splash water", () => splash()), b2 = btn("Tilt the lens", () => { tilt = 1; t0 = performance.now(); ctx.changed(); }), b3 = btn("Reset", () => { drops = []; tilt = 0; ctx.changed(); });
@@ -3887,7 +4015,7 @@ MODES.hydro = (S, ctx) => {
         g.fillStyle = "rgba(70,140,200,.75)"; g.beginPath(); if (side) { g.arc(cx, py + 6, 34, Math.PI * .85, Math.PI * .15 + 2 * Math.PI); } else { g.ellipse(cx, py + 40, 90, 18, 0, Math.PI, 2 * Math.PI); } g.closePath(); g.fill();
         text(g, side ? "high contact angle: a round bead" : "low contact angle: a flat film", cx, py + 84, { size: 15, color: P.mute, align: "center" });
         /* top view */
-        const ly = cy + 50; g.save(); g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(cx - 200, ly - 200, 400, 400);
+        const ly = cy + 50; g.save(); g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(cx - 200, ly - 200, 400, 400);
         drops.forEach((d) => { if (side) { const yy = ly + d.y * .7 + k * 500 * (.5 + d.r / 30); const rr2 = d.r * .8; const gg = g.createRadialGradient(cx + d.x * .5 - rr2 * .3, yy - rr2 * .3, 1, cx + d.x * .5, yy, rr2); gg.addColorStop(0, "rgba(255,255,255,.95)"); gg.addColorStop(1, "rgba(60,120,180,.55)"); g.fillStyle = gg; g.beginPath(); g.arc(cx + d.x * .5, yy, rr2, 0, 7); g.fill(); }
           else { g.fillStyle = "rgba(90,150,200,.22)"; g.beginPath(); g.ellipse(cx + d.x * .5, ly + d.y * .7 + k * 40, d.r * 2.4 + k * 10, d.r * 1.6 + k * 26, 0, 0, 7); g.fill(); } });
         g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.stroke();
@@ -3902,7 +4030,7 @@ MODES.oleo = (S, ctx) => {
   const print = (g, cx, cy, a, smear) => { g.save(); g.globalAlpha = a; g.strokeStyle = "rgba(120,100,80,.9)"; g.lineWidth = 3; for (let i = 0; i < 12; i++) { g.beginPath(); g.ellipse(cx + smear * i * 2, cy, 12 + i * 8 + smear * 20, 16 + i * 10, .3, 0, 6); g.stroke(); } g.restore(); };
   return { draw(g, W, H, t) {
       const c = twoPanels(g, W, H, ["Untreated", "Oleophobic top coat"]);
-      c.forEach(([cx, cy], side) => { g.save(); g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(cx - 200, cy - 200, 400, 400); print(g, cx, cy, sm[side], side ? 0 : n * .6); if (!side && n) { g.fillStyle = `rgba(200,190,170,${.25 * sm[0]})`; g.fillRect(cx - 200, cy - 200, 400, 400); } g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.stroke();
+      c.forEach(([cx, cy], side) => { g.save(); g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(cx - 200, cy - 200, 400, 400); print(g, cx, cy, sm[side], side ? 0 : n * .6); if (!side && n) { g.fillStyle = `rgba(200,190,170,${.25 * sm[0]})`; g.fillRect(cx - 200, cy - 200, 400, 400); } g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.stroke();
         text(g, Math.round(sm[side] * 100) + "% smudge left", cx, cy + 240, { size: 20, align: "center", w: 700, color: sm[side] < .1 ? P.green : P.ink }); });
       text(g, "Wipes: " + n, W / 2, H - 40, { size: 18, align: "center", color: P.mute }); },
     acts: () => [["wipe", "Wipe once"], ["new", "New fingerprint"]], act(a) { if (a === "wipe") wipe(); else { sm = [1, 1]; n = 0; } } };
@@ -3914,7 +4042,7 @@ MODES.stat = (S, ctx) => {
       const c = twoPanels(g, W, H, ["Untreated", "Anti-static treatment"]);
       const age = ch ? (performance.now() - t0) / 1000 : 99, q = ch ? Math.exp(-age / 14) : 0;
       c.forEach(([cx, cy], side) => { const charge = q * (side ? .12 : 1);
-        g.fillStyle = "#DCE7EE"; g.beginPath(); g.arc(cx, cy, 170, 0, 7); g.fill(); g.strokeStyle = P.ink; g.lineWidth = 5; g.stroke();
+        g.fillStyle = "rgba(150,185,210,.38)"; g.beginPath(); g.arc(cx, cy, 170, 0, 7); g.fill(); g.strokeStyle = P.ink; g.lineWidth = 5; g.stroke();
         if (charge > .2) { g.strokeStyle = `rgba(201,162,78,${charge * .7})`; g.lineWidth = 2; for (let i = 0; i < 8; i++) { const a = i / 8 * 6.28 + t / 2000; g.beginPath(); g.moveTo(cx + Math.cos(a) * 180, cy + Math.sin(a) * 180); g.lineTo(cx + Math.cos(a) * 205, cy + Math.sin(a) * 205); g.stroke(); } }
         dust.forEach((d, i) => { if ((i % 2) !== side && i % 3) return; let x = cx - 240 + d.x * 480 + Math.sin(t / 1500 + i) * 14, y = 80 + d.y * (H - 160) + Math.cos(t / 1700 + i) * 10;
           if (!d.stuck[side] && charge > .15 && d.s < charge * .8 && Math.hypot(x - cx, y - cy) < 260) d.stuck[side] = true;
@@ -3933,10 +4061,10 @@ MODES.blue = (S, ctx) => {
   sync();
   const curve = { clear: (nm) => nm < 400 ? 0 : nm < 455 ? .82 + .1 * (nm - 400) / 55 : .95, yellow: (nm) => nm < 400 ? 0 : nm < 500 ? .18 + .72 * ((nm - 400) / 100) ** 1.6 : .9 };
   return { draw(g, W, H, t) {
-      g.fillStyle = "#FBFAF7"; g.fillRect(0, 0, W, H);
+      g.fillStyle = P.card; g.fillRect(0, 0, W, H);
       const x0 = 90, x1 = W - 40, y0 = 70, y1 = H - 150, nm2x = (nm) => x0 + (nm - 280) / 500 * (x1 - x0);
       /* bands */
-      g.fillStyle = "#EDE5F5"; g.fillRect(nm2x(280), y0, nm2x(400) - nm2x(280), y1 - y0); text(g, "UVB", nm2x(297), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 }); text(g, "UVA", nm2x(357), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 });
+      g.fillStyle = "rgba(123,63,191,.12)"; g.fillRect(nm2x(280), y0, nm2x(400) - nm2x(280), y1 - y0); text(g, "UVB", nm2x(297), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 }); text(g, "UVA", nm2x(357), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 });
       g.fillStyle = "rgba(51,85,221,.08)"; g.fillRect(nm2x(380), y0, nm2x(500) - nm2x(380), y1 - y0); text(g, "blue light ≈380–500 nm", nm2x(440), y0 + 50, { size: 15, align: "center", color: "#3355DD", w: 700 });
       const sp = g.createLinearGradient(nm2x(380), 0, nm2x(780), 0); [["#7B3FBF", 0], ["#3355DD", .2], ["#22AA88", .38], ["#E6D23A", .55], ["#EE8833", .72], ["#CC2222", 1]].forEach(([c, k]) => sp.addColorStop(k, c)); g.fillStyle = sp; g.fillRect(nm2x(380), y1 + 14, nm2x(780) - nm2x(380), 22);
       g.fillStyle = "#C9C2B4"; g.fillRect(nm2x(280), y1 + 14, nm2x(380) - nm2x(280), 22);
@@ -3965,7 +4093,7 @@ MODES.photo = (S, ctx) => {
       if (env === "in") { room(g, W, H); } else { paintScene(g, W, H, t, { kind: env === "car" ? "road" : "beach", glare: .5, cut: 0, hy: .45 }); if (env === "car") { g.fillStyle = "#1F2226"; g.fillRect(0, 0, W, 60); g.beginPath(); g.moveTo(0, H * .78); g.quadraticCurveTo(W / 2, H * .7, W, H * .78); g.lineTo(W, H); g.lineTo(0, H); g.fill(); g.fillStyle = "rgba(170,190,200,.15)"; g.fillRect(0, 60, W, H * .7); text(g, "windscreen blocks most UV", W - 30, 44, { size: 16, color: "#fff", align: "right", w: 600 }); } }
       glasses(g, S, W / 2, H * .5, 200, 145, 54, () => tintRect(g, 0, 0, W, H, [92, 84, 74], d), { lw: 12 });
       /* meter + history */
-      const x0 = 24, y0 = 24; rr(g, x0, y0, 330, 120, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); text(g, "LENS DARKNESS (illustrative)", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
+      const x0 = 24, y0 = 24; rr(g, x0, y0, 330, 120, 6); g.fillStyle = P.card; g.fill(); text(g, "LENS DARKNESS (illustrative)", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
       g.strokeStyle = P.ink; g.lineWidth = 3; g.beginPath(); hist.forEach((v, i) => { const x = x0 + 14 + i * (300 / 360), y = y0 + 106 - v * 70; i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke();
       pill(g, env === "in" ? "Indoors: little UV — clears" : env === "car" ? "Behind a windscreen: standard lenses darken little" : hot ? "Hot day: darkens less" : "Cool and sunny: darkens fully", W / 2, H - 36, { align: "center", size: 17 }); },
     acts: () => [["e:in", "Indoors", env === "in"], ["e:out", "Outdoors", env === "out"], ["e:car", "In a car", env === "car"], ["t:0", "Cool", !hot], ["t:1", "Hot", hot]], act(a) { const [k, v] = a.split(":"); if (k === "e") { env = v; se.set(v); } else { hot = v === "1"; stp.set(v); } } };
@@ -3979,7 +4107,7 @@ MODES.mirror = (S, ctx) => {
   const sv = seg("View", [["out", "Others see"], ["in", "Wearer sees"]], view, (x) => { view = x; ctx.changed(); });
   S.ui.append(sf, sv);
   return { draw(g, W, H, t) { const c = F.find((x) => x[0] === f)[2];
-      if (view === "out") { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); face(g, W / 2, H * .46, 200);
+      if (view === "out") { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); face(g, W / 2, H * .46, 200);
         glasses(g, S, W / 2, H * .46, 200, 150, 46, () => { const gg = g.createLinearGradient(0, H * .2, 0, H * .7); gg.addColorStop(0, c[0]); gg.addColorStop(.45, c[1]); gg.addColorStop(.55, c[0]); gg.addColorStop(1, c[1]); g.fillStyle = gg; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(255,255,255,.45)"; g.beginPath(); g.ellipse(W * .36, H * .34, 120, 18, -.2, 0, 7); g.fill(); g.beginPath(); g.ellipse(W * .62, H * .34, 120, 18, -.2, 0, 7); g.fill(); }, { lw: 10 });
         pill(g, "The mirror is the finish — UV and polarisation are separate", W / 2, H - 40, { align: "center", size: 16 }); }
       else { paintScene(g, W, H, t, { kind: "beach", glare: .9, cut: 0, hy: .42 }); glasses(g, S, W / 2, H * .55, 210, 150, 54, () => { paintScene(g, W, H, t, { kind: "beach", glare: .55, cut: 0, hy: .42 }); tintRect(g, 0, 0, W, H, [96, 96, 98], .6); }, { lw: 12 });
@@ -4035,7 +4163,7 @@ MODES.grad = (S, ctx) => {
 MODES.uv = (S, ctx) => {
   let lens = "clear";
   const s = seg("Lens", [["clear", "Clear + UV400"], ["darkno", "Dark, no UV filter"], ["darkuv", "Dark + UV400"]], lens, (x) => { lens = x; ctx.changed(); }); S.ui.append(s);
-  return { draw(g, W, H, t) { g.fillStyle = "#FBFAF7"; g.fillRect(0, 0, W, H);
+  return { draw(g, W, H, t) { g.fillStyle = P.card; g.fillRect(0, 0, W, H);
       const sun = [120, H * .38], lx = W * .55, ey = [W * .86, H * .38];
       g.fillStyle = "#E3B24A"; g.beginPath(); g.arc(...sun, 56, 0, 7); g.fill();
       const dark = lens !== "clear", uvBlock = lens !== "darkno";
@@ -4054,9 +4182,9 @@ MODES.uv = (S, ctx) => {
 MODES.rx = (S, ctx) => {
   let tab = "sv"; const s = seg("Show", L.rxTabs.map((x) => [x.id, x.n]), tab, (x) => { tab = x; side(); ctx.changed(); }); s.classList.add("wrap"); S.ui.append(s);
   function side() { const x = L.rxTabs.find((y) => y.id === tab); live(ctx, `<p class="sec">${esc(x.n)}</p><p class="txt">${esc(x.d)}</p>`); }
-  return { draw(g, W, H, t) { g.fillStyle = "#F1EDE6"; g.fillRect(0, 0, W, H); const cx = W / 2, cy = H * .48;
+  return { draw(g, W, H, t) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); const cx = W / 2, cy = H * .48;
       if (tab === "sv" || tab === "prog" || tab === "rxsun") {
-        g.save(); g.beginPath(); lensPath(g, cx, cy, 300, 220); g.clip(); g.fillStyle = tab === "rxsun" ? "rgba(84,72,58,.75)" : "#DCE7EE"; g.fillRect(0, 0, W, H);
+        g.save(); g.beginPath(); lensPath(g, cx, cy, 300, 220); g.clip(); g.fillStyle = tab === "rxsun" ? "rgba(84,72,58,.75)" : "rgba(150,185,210,.38)"; g.fillRect(0, 0, W, H);
         if (tab === "prog") { g.fillStyle = "rgba(62,122,74,.28)"; g.fillRect(cx - 320, cy - 230, 640, 190); g.fillStyle = "rgba(201,162,78,.38)"; g.beginPath(); g.moveTo(cx - 30, cy - 40); g.lineTo(cx + 30, cy - 40); g.lineTo(cx + 50, cy + 60); g.lineTo(cx - 50, cy + 60); g.fill(); g.fillStyle = "rgba(47,107,143,.3)"; g.beginPath(); g.ellipse(cx, cy + 150, 130, 70, 0, 0, 7); g.fill(); g.fillStyle = "rgba(169,71,47,.13)"; g.fillRect(cx - 320, cy - 40, 220, 280); g.fillRect(cx + 100, cy - 40, 220, 280); }
         g.restore(); g.strokeStyle = P.ink; g.lineWidth = 10; g.beginPath(); lensPath(g, cx, cy, 300, 220); g.stroke();
         if (tab === "sv") text(g, "one power across the whole lens", cx, cy + 8, { size: 22, align: "center", w: 700 });
@@ -4104,18 +4232,18 @@ function xsecSVG(on, sel, o = {}) {
   if (has("hard")) add("hard", 24, "back"); if (has("ar")) add("ar", 30, "back"); if (has("top")) add("top", 16, "back");
   const X0 = 330, X1 = 640, LX = 690;
   const col = { top: "#E7D6A8", mirror: "url(#mir)", ar: "url(#arG)", hard: "#C9A24E" };
-  const bandSvg = bands.map((b) => `<g class="lay${sel === b.id ? " sel" : ""}" data-l="${b.id}" tabindex="0" role="button" aria-label="${esc(L.layers.find((x) => x.id === b.id).n)}"><rect x="${X0}" y="${b.y}" width="${X1 - X0}" height="${b.h}" fill="${col[b.id]}" stroke="#16140F" stroke-width="1"/></g>`).join("");
-  const subSvg = `<g class="lay${sel === "sub" ? " sel" : ""}" data-l="sub" tabindex="0" role="button" aria-label="Lens substrate"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH}" fill="#C8D9E3" stroke="#16140F" stroke-width="1"/></g>
+  const bandSvg = bands.map((b) => `<g class="lay${sel === b.id ? " sel" : ""}" data-l="${b.id}" tabindex="0" role="button" aria-label="${esc(L.layers.find((x) => x.id === b.id).n)}"><rect x="${X0}" y="${b.y}" width="${X1 - X0}" height="${b.h}" fill="${col[b.id]}" stroke="currentColor" stroke-width="1"/></g>`).join("");
+  const subSvg = `<g class="lay${sel === "sub" ? " sel" : ""}" data-l="sub" tabindex="0" role="button" aria-label="Lens substrate"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH}" fill="#C8D9E3" stroke="currentColor" stroke-width="1"/></g>
     ${has("tint") ? `<g class="lay${sel === "tint" ? " sel" : ""}" data-l="tint" tabindex="0" role="button" aria-label="Tint or photochromic dye"><rect x="${X0}" y="${subY}" width="${X1 - X0}" height="${subH * .45}" fill="rgba(110,82,54,.42)"/></g>` : ""}
     ${has("uv") ? `<g class="lay${sel === "uv" ? " sel" : ""}" data-l="uv" tabindex="0" role="button" aria-label="UV absorber"><rect x="${X0}" y="${subY + subH * .55}" width="${X1 - X0}" height="${subH * .45}" fill="url(#uvP)"/></g>` : ""}
-    ${has("pol") ? `<g class="lay${sel === "pol" ? " sel" : ""}" data-l="pol" tabindex="0" role="button" aria-label="Polarising film"><rect x="${X0}" y="${subY + subH * .45}" width="${X1 - X0}" height="${subH * .1}" fill="url(#polP)" stroke="#16140F" stroke-width="1"/></g>` : ""}`;
+    ${has("pol") ? `<g class="lay${sel === "pol" ? " sel" : ""}" data-l="pol" tabindex="0" role="button" aria-label="Polarising film"><rect x="${X0}" y="${subY + subH * .45}" width="${X1 - X0}" height="${subH * .1}" fill="url(#polP)" stroke="currentColor" stroke-width="1"/></g>` : ""}`;
   /* labels with leader lines */
   const labs = []; const seen = new Set();
   bands.forEach((b) => { if (seen.has(b.id + b.side)) return; seen.add(b.id + b.side); labs.push({ id: b.id, y: b.y + b.h / 2, t: (L.layers.find((x) => x.id === b.id).s || L.layers.find((x) => x.id === b.id).n) + (b.side === "back" ? " (back)" : "") }); });
   labs.push({ id: "sub", y: subY + subH * .8, t: "Lens substrate" }); if (has("tint")) labs.push({ id: "tint", y: subY + subH * .22, t: "Tint / photochromic" }); if (has("pol")) labs.push({ id: "pol", y: subY + subH * .5, t: "Polarising film" }); if (has("uv")) labs.push({ id: "uv", y: subY + subH * .68, t: "UV absorber" });
   labs.sort((a, b) => a.y - b.y); let ly = 40; labs.forEach((l) => { l.ly = Math.max(ly, l.y); ly = l.ly + 34; });
   const k0 = (id) => KCOL[(L.layers.find((x) => x.id === id) || {}).kind] || "#999";
-  const labSvg = o.noLabels ? "" : labs.map((l) => `<g class="lab${sel === l.id ? " sel" : ""}" data-l="${l.id}"><path d="M${X1},${l.y} L${LX - 12},${l.ly}" stroke="#7A7366" stroke-width="1" fill="none"/><circle cx="${LX}" cy="${l.ly}" r="6" fill="${k0(l.id)}"/><text x="${LX + 14}" y="${l.ly + 6}" font-size="19" font-family="Inter" font-weight="${sel === l.id ? 700 : 500}" fill="#16140F">${esc(l.t)}</text></g>`).join("");
+  const labSvg = o.noLabels ? "" : labs.map((l) => `<g class="lab${sel === l.id ? " sel" : ""}" data-l="${l.id}"><path d="M${X1},${l.y} L${LX - 12},${l.ly}" stroke="currentColor" stroke-opacity=".55" stroke-width="1" fill="none"/><circle cx="${LX}" cy="${l.ly}" r="6" fill="${k0(l.id)}"/><text x="${LX + 14}" y="${l.ly + 6}" font-size="19" font-family="Inter" font-weight="${sel === l.id ? 700 : 500}" fill="currentColor">${esc(l.t)}</text></g>`).join("");
   const H = Math.max(y + 60, ly + 20);
   return `<svg viewBox="0 0 1000 ${H}" class="xsec" role="group" aria-label="Conceptual lens cross-section"><defs>
     <linearGradient id="mir" x1="0" x2="1"><stop offset="0" stop-color="#9CC7F4"/><stop offset=".5" stop-color="#E8F2FC"/><stop offset="1" stop-color="#2C5FA8"/></linearGradient>
@@ -4123,9 +4251,9 @@ function xsecSVG(on, sel, o = {}) {
     <pattern id="polP" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#3A4048"/><line x1="5" y1="0" x2="5" y2="10" stroke="#9AA6AF" stroke-width="2"/></pattern>
     <pattern id="uvP" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="2.4" fill="#7B3FBF" opacity=".55"/></pattern></defs>
     <text x="40" y="34" font-size="15" font-family="Inter" font-weight="700" letter-spacing="2" fill="#8A6B32">CONCEPTUAL · NOT TO SCALE</text>
-    <g transform="translate(40,90)"><path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="${has("tint") ? "rgba(110,82,54,.4)" : "#DCE7EE"}" stroke="#16140F" stroke-width="5"/>${has("mirror") ? `<path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="url(#mir)" opacity=".55"/>` : ""}<rect x="150" y="80" width="40" height="60" fill="none" stroke="#8A6B32" stroke-width="3"/></g>
+    <g transform="translate(40,90)"><path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="${has("tint") ? "rgba(110,82,54,.4)" : "#DCE7EE"}" stroke="currentColor" stroke-width="5"/>${has("mirror") ? `<path d="M10,0 Q120,-24 230,0 Q246,110 230,220 Q120,244 10,220 Q-6,110 10,0Z" fill="url(#mir)" opacity=".55"/>` : ""}<rect x="150" y="80" width="40" height="60" fill="none" stroke="#8A6B32" stroke-width="3"/></g>
     <path d="M230,170 L${X0},70 M230,230 L${X0},${y}" stroke="#8A6B32" stroke-width="1.5" stroke-dasharray="5 5" fill="none"/>
-    <text x="${X0}" y="58" font-size="14" font-family="Inter" fill="#7A7366">front (outside)</text><text x="${X0}" y="${y + 24}" font-size="14" font-family="Inter" fill="#7A7366">back (eye side)</text>
+    <text x="${X0}" y="58" font-size="14" font-family="Inter" fill="currentColor" fill-opacity=".62">front (outside)</text><text x="${X0}" y="${y + 24}" font-size="14" font-family="Inter" fill="currentColor" fill-opacity=".62">back (eye side)</text>
     ${subSvg}${bandSvg}${labSvg}</svg>`;
 }
 SIMS._xsec = xsecSVG;
@@ -4157,14 +4285,14 @@ const ICON = {
   tint: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#7A6450"/>`,
   uv: `<rect x="6" y="20" width="22" height="16" fill="#C9B6E6"/><rect x="28" y="20" width="46" height="16" fill="#E6D23A"/><path d="M8,16 L26,40 M26,16 L8,40" stroke="#A9472F" stroke-width="3"/>`,
   mirror: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#5B8FD6"/><path d="M20,18 L54,12" stroke="#fff" stroke-width="5" opacity=".8"/>`,
-  ar: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE" stroke="#16140F" stroke-width="2"/><ellipse cx="34" cy="22" rx="10" ry="4" fill="#9BE3B0" opacity=".7"/>`,
-  fog: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#E6EDF1" stroke="#16140F" stroke-width="2"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle cx="${24 + (i % 3) * 14}" cy="${18 + Math.floor(i / 3) * 16}" r="4" fill="#fff" stroke="#A59E91"/>`).join("")}`,
+  ar: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE" stroke="currentColor" stroke-width="2"/><ellipse cx="34" cy="22" rx="10" ry="4" fill="#9BE3B0" opacity=".7"/>`,
+  fog: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#E6EDF1" stroke="currentColor" stroke-width="2"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle cx="${24 + (i % 3) * 14}" cy="${18 + Math.floor(i / 3) * 16}" r="4" fill="#fff" stroke="#A59E91"/>`).join("")}`,
   hydro: `<rect x="8" y="38" width="64" height="8" fill="#9AA6AF"/><circle cx="40" cy="26" r="12" fill="#5A9BD5"/>`,
   oleo: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE"/>${[4, 8, 12].map((r) => `<ellipse cx="40" cy="28" rx="${r}" ry="${r + 3}" fill="none" stroke="#8C7860" stroke-width="2"/>`).join("")}`,
   blue: `<path d="M6,44 L22,44 L30,30 L42,22 L74,20" fill="none" stroke="#2F6B8F" stroke-width="3"/><rect x="22" y="48" width="52" height="5" fill="#3355DD"/>`,
   photo: `<rect x="14" y="6" width="52" height="44" rx="14" fill="#DCE7EE"/><path d="M40,6 L66,6 Q66,6 66,20 L66,36 Q66,50 52,50 L40,50Z" fill="#6E6152"/><circle cx="12" cy="10" r="6" fill="#E3B24A"/>`,
   hard: `<path d="M40,6 L64,14 L62,34 Q56,46 40,52 Q24,46 18,34 L16,14Z" fill="#C9A24E"/>`,
-  rx: `<path d="M20,8 Q40,22 60,8 L60,48 Q40,34 20,48Z" fill="#C8D9E3" stroke="#16140F" stroke-width="2"/>`,
+  rx: `<path d="M20,8 Q40,22 60,8 L60,48 Q40,34 20,48Z" fill="#C8D9E3" stroke="currentColor" stroke-width="2"/>`,
 };
 const icon = (k) => `<svg viewBox="0 0 80 56" class="ico" aria-hidden="true">${ICON[k] || ""}</svg>`;
 SIMS._icon = icon;
@@ -4187,12 +4315,12 @@ SIMS.compare = (host, ctx) => {
 };
 
 /* ---------- E · care: illustrated sequence, mistakes, scenarios ---------- */
-const GL = (x, y, s, o = "") => `<g transform="translate(${x},${y}) scale(${s})" ${o}><path d="M-150,-40 Q-150,-62 -128,-62 L-36,-62 Q-14,-62 -14,-40 L-14,10 Q-14,46 -54,46 L-110,46 Q-150,46 -150,10Z M14,-40 Q14,-62 36,-62 L128,-62 Q150,-62 150,-40 L150,10 Q150,46 110,46 L54,46 Q14,46 14,10Z" fill="rgba(200,220,232,.7)" stroke="#16140F" stroke-width="8"/><path d="M-14,-36 Q0,-50 14,-36" fill="none" stroke="#16140F" stroke-width="8"/></g>`;
+const GL = (x, y, s, o = "") => `<g transform="translate(${x},${y}) scale(${s})" ${o}><path d="M-150,-40 Q-150,-62 -128,-62 L-36,-62 Q-14,-62 -14,-40 L-14,10 Q-14,46 -54,46 L-110,46 Q-150,46 -150,10Z M14,-40 Q14,-62 36,-62 L128,-62 Q150,-62 150,-40 L150,10 Q150,46 110,46 L54,46 Q14,46 14,10Z" fill="rgba(200,220,232,.7)" stroke="currentColor" stroke-width="8"/><path d="M-14,-36 Q0,-50 14,-36" fill="none" stroke="currentColor" stroke-width="8"/></g>`;
 const CARE_ART = [
-  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="#7A7366" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="#7A7366"/>${[0, 1, 2, 3, 4].map((i) => `<circle class="drip" style="animation-delay:${i * .25}s" cx="${226 + (i % 3) * 8}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">lukewarm water lifts the grit</text>`,
-  `<rect x="70" y="120" width="70" height="140" rx="12" fill="#C9A24E"/><rect x="88" y="90" width="34" height="34" fill="#7A7366"/><path d="M122,98 L160,92" stroke="#7A7366" stroke-width="10"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle class="mist" style="animation-delay:${i * .15}s" cx="${190 + i * 12}" cy="${92 + (i % 3) * 8}" r="4" fill="#9CC7F4"/>`).join("")}${GL(330, 260, .9)}<text x="240" y="400" text-anchor="middle" class="art-t">lens spray or mild lotion-free soap</text>`,
+  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="currentColor" fill-opacity=".62"/>${[0, 1, 2, 3, 4].map((i) => `<circle class="drip" style="animation-delay:${i * .25}s" cx="${226 + (i % 3) * 8}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">lukewarm water lifts the grit</text>`,
+  `<rect x="70" y="120" width="70" height="140" rx="12" fill="#C9A24E"/><rect x="88" y="90" width="34" height="34" fill="currentColor" fill-opacity=".62"/><path d="M122,98 L160,92" stroke="currentColor" stroke-opacity=".55" stroke-width="10"/>${[0, 1, 2, 3, 4, 5].map((i) => `<circle class="mist" style="animation-delay:${i * .15}s" cx="${190 + i * 12}" cy="${92 + (i % 3) * 8}" r="4" fill="#9CC7F4"/>`).join("")}${GL(330, 260, .9)}<text x="240" y="400" text-anchor="middle" class="art-t">lens spray or mild lotion-free soap</text>`,
   `${GL(240, 220, 1.3)}<circle class="spin" cx="160" cy="220" r="46" fill="rgba(201,162,78,.35)" stroke="#8A6B32" stroke-width="3" stroke-dasharray="10 8"/><text x="240" y="400" text-anchor="middle" class="art-t">clean microfibre, light circles, both sides</text>`,
-  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="#7A7366" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="#7A7366"/>${[0, 1, 2].map((i) => `<circle class="drip" style="animation-delay:${i * .3}s" cx="${230 + i * 6}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">rinse if the cleaner's instructions say so</text>`,
+  `<path d="M150,40 L150,90 Q150,110 170,110 L230,110" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="18" stroke-linecap="round"/><rect x="216" y="100" width="40" height="22" rx="4" fill="currentColor" fill-opacity=".62"/>${[0, 1, 2].map((i) => `<circle class="drip" style="animation-delay:${i * .3}s" cx="${230 + i * 6}" cy="140" r="6" fill="#5A9BD5"/>`).join("")}${GL(240, 300, 1.1)}<text x="240" y="400" text-anchor="middle" class="art-t">rinse if the cleaner's instructions say so</text>`,
   `${GL(240, 220, 1.3)}<rect class="pat" x="120" y="150" width="120" height="90" rx="14" fill="rgba(201,162,78,.55)"/><text x="240" y="400" text-anchor="middle" class="art-t">pat dry with a clean, dry microfibre</text>`,
   `<path d="M90,250 Q240,330 390,250 L390,210 Q240,280 90,210Z" fill="#2B2A28"/><path d="M90,210 Q240,140 390,210" fill="none" stroke="#2B2A28" stroke-width="10"/>${GL(240, 205, .8)}<text x="240" y="400" text-anchor="middle" class="art-t">in the case — out of heat, never lens-down</text>`,
 ];
@@ -4210,11 +4338,11 @@ SIMS.care = (host, ctx) => {
 const MIS_ART = {
   dry: `${GL(60, 46, .28)}<circle cx="40" cy="44" r="3" fill="#8C6E3A"/><circle cx="70" cy="40" r="3" fill="#8C6E3A"/><path d="M20,70 L100,70" stroke="#A9472F" stroke-width="4"/>`,
   shirt: `<path d="M30,20 L50,12 Q60,22 70,12 L90,20 L100,40 L86,46 L86,90 L34,90 L34,46 L20,40Z" fill="#9AA6AF"/>`,
-  glass: `<rect x="40" y="34" width="40" height="60" rx="8" fill="#5A9BD5"/><rect x="50" y="18" width="20" height="18" fill="#7A7366"/><text x="60" y="72" text-anchor="middle" font-size="14" fill="#fff" font-family="Inter" font-weight="700">NH₃</text>`,
+  glass: `<rect x="40" y="34" width="40" height="60" rx="8" fill="#5A9BD5"/><rect x="50" y="18" width="20" height="18" fill="currentColor" fill-opacity=".62"/><text x="60" y="72" text-anchor="middle" font-size="14" fill="#fff" font-family="Inter" font-weight="700">NH₃</text>`,
   car: `<rect x="14" y="50" width="92" height="30" rx="10" fill="#9C2F25"/><path d="M30,50 L44,30 L80,30 L94,50Z" fill="#9C2F25"/><circle cx="96" cy="16" r="10" fill="#E3B24A"/><circle cx="34" cy="82" r="8" fill="#222"/><circle cx="88" cy="82" r="8" fill="#222"/>`,
   down: `<rect x="10" y="74" width="100" height="10" fill="#B9A27A"/>${GL(60, 62, .3)}`,
   abr: `<rect x="24" y="40" width="72" height="40" rx="8" fill="#5E8A4E"/><rect x="24" y="40" width="72" height="14" fill="#E3C14A"/>`,
-  chem: `<path d="M44,20 L76,20 L76,34 L92,90 L28,90 L44,34Z" fill="#B9CCD8" stroke="#16140F" stroke-width="3"/><path d="M40,60 L80,60" stroke="#A9472F" stroke-width="4"/>`,
+  chem: `<path d="M44,20 L76,20 L76,34 L92,90 L28,90 L44,34Z" fill="#B9CCD8" stroke="currentColor" stroke-width="3"/><path d="M40,60 L80,60" stroke="#A9472F" stroke-width="4"/>`,
 };
 SIMS.mistakes = (host, ctx) => {
   let sel = null; const seen = new Set();
@@ -4499,6 +4627,11 @@ const API = {
     panes.forEach((p) => p.classList.toggle("show", p.dataset.pane === t)); $$("[data-tab]", s).forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === t))); if (!quiet) sendState(); },
 };
 
+/* ---------------- light / dark (T, the ◐ button, or the phone) ---------------- */
+const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === "dark" : !!(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches); };
+function setTheme(t) { document.documentElement.dataset.theme = t; try { localStorage.setItem("ilg-lens-theme", t); } catch (e) {} const b = $('#ctrl [data-k="theme"] span'); if (b) b.textContent = t === "dark" ? "Light" : "Dark"; sendState(); }
+const toggleTheme = () => setTheme(isDark() ? "light" : "dark");
+
 /* ---------------- keys (keyboard and presenter clickers) ---------------- */
 let digits = "";
 function key(e) {
@@ -4522,6 +4655,7 @@ function key(e) {
   else if (k === "r" || k === "R") openRemotePanel();
   else if (k === "o" || k === "O") openOverview();
   else if (k === "s" || k === "S") openSources();
+  else if (k === "t" || k === "T") toggleTheme();
   else if (["h", "H", "?"].includes(k)) openHelp();
   else return;
   e.preventDefault();
@@ -4548,7 +4682,7 @@ function openHelp() {
   const o = $("#ovl"); o.hidden = false; o.dataset.kind = "sheet";
   o.innerHTML = `<div class="sheet" role="dialog" aria-label="Help"><button class="x" data-x>Close</button><h3>How to use this deck <small style="font-family:var(--sans);font-size:12px;letter-spacing:.12em;color:var(--mute)">${DECK_VERSION}</small></h3>
   <div class="row"><div style="flex:1;min-width:260px"><p class="glab">Mouse or touch</p><p><b>Control bar</b> at the bottom: Home, Contents, back and next, full screen, phone remote, presenter view and Exit. Move the mouse or tap to show it.</p><p><b>Next</b> first plays the slide's next step (a demonstration, a tab), then goes to the next slide. The footer button shows what comes next.</p><p><b>Simulations:</b> every button and slider under a figure works, and the same controls appear on the phone remote. Drag the divider or the glasses where the slide says so.</p><p><b>Touch screens:</b> swipe left or right on the text side to change slides.</p></div>
-  <div style="flex:1;min-width:240px"><p class="glab">Keyboard and clicker</p><div class="keys" style="font-size:14px;gap:6px 12px"><kbd>→ / PgDn / Space</kbd><span>Next step, then next slide</span><kbd>← / PgUp</kbd><span>Previous slide</span><kbd>↓</kbd><span>Skip the steps</span><kbd>Tab</kbd><span>Move between controls on a slide</span><kbd>Home / End</kbd><span>First / last slide</span><kbd>B</kbd><span>Black screen</span><kbd>F</kbd><span>Full screen</span><kbd>O</kbd><span>Contents</span><kbd>S</kbd><span>Sources</span><kbd>P</kbd><span>Presenter view</span><kbd>R</kbd><span>Phone remote</span><kbd>Esc</kbd><span>Close this panel</span></div></div></div>${modRow()}</div>`;
+  <div style="flex:1;min-width:240px"><p class="glab">Keyboard and clicker</p><div class="keys" style="font-size:14px;gap:6px 12px"><kbd>→ / PgDn / Space</kbd><span>Next step, then next slide</span><kbd>← / PgUp</kbd><span>Previous slide</span><kbd>↓</kbd><span>Skip the steps</span><kbd>Tab</kbd><span>Move between controls on a slide</span><kbd>Home / End</kbd><span>First / last slide</span><kbd>B</kbd><span>Black screen</span><kbd>F</kbd><span>Full screen</span><kbd>O</kbd><span>Contents</span><kbd>S</kbd><span>Sources</span><kbd>T</kbd><span>Light / dark</span><kbd>P</kbd><span>Presenter view</span><kbd>R</kbd><span>Phone remote</span><kbd>Esc</kbd><span>Close this panel</span></div></div></div>${modRow()}</div>`;
   o.onclick = (e) => { if (e.target.closest("[data-x]") || e.target === o) closeOvl(); };
 }
 const titleOf = (s) => { if (s.t) return s.t; const el = document.createElement("div"); el.innerHTML = s.html(); const h = el.querySelector("h1,h2"); return h ? h.textContent.trim() : s.id; };
@@ -4562,7 +4696,7 @@ function snapshot() {
   const S = SLIDES[cur]; if (!S) return null;
   let acts = []; try { acts = simInst ? simInst.acts() || [] : []; } catch (e) { acts = []; }
   const panes = $$("[data-tab]", slideEl(cur)).map((b) => ["tab:" + b.dataset.tab, b.textContent, b.getAttribute("aria-selected") === "true"]);
-  return { i: cur, n: N, id: S.id, sec: S.sec, title: titleOf(S), notes: S.notes || "", steps: (S.steps || []).map((x) => x.l), step, black, next: cur < N - 1 ? titleOf(SLIDES[cur + 1]) : "", acts: [...acts, ...panes], fig: "" };
+  return { i: cur, n: N, id: S.id, sec: S.sec, title: titleOf(S), notes: S.notes || "", steps: (S.steps || []).map((x) => x.l), step, black, dark: isDark(), next: cur < N - 1 ? titleOf(SLIDES[cur + 1]) : "", acts: [...acts, ...panes], fig: "" };
 }
 let stTimer = 0;
 function sendState() { if (ROLE !== "deck") return; clearTimeout(stTimer); stTimer = setTimeout(() => { const st = snapshot(); if (!st) return;
@@ -4572,7 +4706,7 @@ function onCmd(m) {
   if (!m || !m.cmd) return;
   const c = m.cmd;
   if (c === "next") next(); else if (c === "prev") prev(); else if (c === "skip") go(cur + 1); else if (c === "goto") go(+m.n);
-  else if (c === "black") setBlack(!black); else if (c === "step") runTo(+m.k + 1);
+  else if (c === "black") setBlack(!black); else if (c === "theme") toggleTheme(); else if (c === "step") runTo(+m.k + 1);
   else if (c === "hello") sendState();
   else if (c === "act") { const a = String(m.a || ""); if (a.startsWith("tab:")) API.tab(a.slice(4)); else API.act(a); setTimeout(sendState, 120); }
 }
@@ -4712,7 +4846,8 @@ function remoteApp(mode) {
     const steps = S.steps.length ? `<p class="r-lab">Steps</p><div class="r-acts">${S.steps.map((l, k) => `<button class="${k < S.step ? "gold" : ""}" data-c="step" data-k="${k}">${k < S.step ? "✓ " : ""}${esc(l)}</button>`).join("")}<button data-c="skip">Skip to next slide</button></div>` : "";
     const acts = S.acts.length ? `<p class="r-lab">On screen</p><div class="r-acts">${S.acts.map(([a, t, on]) => `<button data-c="act" data-a="${esc(a)}" ${on ? 'aria-pressed="true"' : ""}>${esc(t)}</button>`).join("")}</div>` : "";
     const notes = S.notes ? `<p class="r-lab">Trainer notes</p><div class="r-notes">${esc(S.notes)}</div>` : "";
-    const blk = `<div class="r-acts"><button data-c="black" ${S.black ? 'aria-pressed="true"' : ""}>${S.black ? "Show the screen" : "Black screen"}</button></div>`;
+    if (S.dark != null) document.documentElement.dataset.theme = S.dark ? "dark" : "light";
+    const blk = `<div class="r-acts"><button data-c="black" ${S.black ? 'aria-pressed="true"' : ""}>${S.black ? "Show the screen" : "Black screen"}</button><button data-c="theme">${S.dark ? "Light mode" : "Dark mode"}</button></div>`;
     if (mode === "presenter") R.innerHTML = `<div class="r-col">${head}${info}<div class="timer" data-timer title="Tap to restart">0:00</div><p class="r-next">Next: <b>${esc(S.next || "End of deck")}</b></p>${nav}${steps}${blk}</div><div class="r-col">${notes}${acts}</div>`;
     else R.innerHTML = head + info + nav + acts + steps + notes + blk;
     wire();
@@ -4727,18 +4862,18 @@ function remoteApp(mode) {
 
 /* ---------------- on-screen control bar (mouse and touch) ---------------- */
 const ICON = { home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>', menu: '<path d="M4 6h16M4 12h16M4 18h16"/>', prev: '<path d="M15 5l-7 7 7 7"/>', next: '<path d="M9 5l7 7-7 7"/>',
-  full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', phone: '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>', pres: '<rect x="3" y="4" width="21" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>', help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17h.01"/>', exit: '<path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5M10 16l-4-4 4-4M6 12h10"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>' };
+  full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', phone: '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>', pres: '<rect x="3" y="4" width="21" height="12" rx="1"/><path d="M8 20h8M12 16v4"/>', help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17h.01"/>', exit: '<path d="M14 4h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5M10 16l-4-4 4-4M6 12h10"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>', theme: '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/>' };
 const ico = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 function buildCtrl() {
   const n = document.createElement("nav"); n.id = "ctrl"; n.className = "ctrl"; n.setAttribute("aria-label", "Deck controls");
   n.innerHTML = `<button data-k="home" title="Back to the first slide (Home)">${ico("home")}<span>Home</span></button><button data-k="menu" title="Contents: all slides and modules (O)">${ico("menu")}<span>Contents</span></button><i class="sep"></i>
     <button data-k="prev" title="Previous slide (←)" class="nav" aria-label="Previous">${ico("prev")}</button><span class="cnt" data-cnt></span><button data-k="next" title="Next step or slide (→)" class="nav go" aria-label="Next">${ico("next")}</button><i class="sep"></i>
-    <button data-k="full" title="Full screen (F)">${ico("full")}<span>Full screen</span></button><button data-k="phone" title="Phone remote: scan a QR code (R)">${ico("phone")}<span>Phone</span></button><button data-k="pres" title="Presenter view with notes (P)">${ico("pres")}<span>Presenter</span></button><button data-k="src" title="Sources (S)">${ico("book")}<span>Sources</span></button><button data-k="help" title="How to use this deck (?)">${ico("help")}<span>Help</span></button><i class="sep"></i>
+    <button data-k="full" title="Full screen (F)">${ico("full")}<span>Full screen</span></button><button data-k="phone" title="Phone remote: scan a QR code (R)">${ico("phone")}<span>Phone</span></button><button data-k="pres" title="Presenter view with notes (P)">${ico("pres")}<span>Presenter</span></button><button data-k="src" title="Sources (S)">${ico("book")}<span>Sources</span></button><button data-k="theme" title="Light or dark (T)">${ico("theme")}<span>${isDark() ? "Light" : "Dark"}</span></button><button data-k="help" title="How to use this deck (?)">${ico("help")}<span>Help</span></button><i class="sep"></i>
     <a data-k="exit" href="${CALIBRE_URL}" title="Leave the deck and go back to Calibre">${ico("exit")}<span>Exit</span></a>`;
   document.body.appendChild(n);
   n.addEventListener("click", (e) => { const b = e.target.closest("[data-k]"); if (!b) return;
     const k = b.dataset.k; if (k === "exit") return;
-    ({ home: () => go(0), menu: openOverview, prev, next, full: fullscreen, phone: openRemotePanel, pres: openPresenter, src: openSources, help: openHelp })[k](); showCtrl(); });
+    ({ home: () => go(0), menu: openOverview, prev, next, full: fullscreen, phone: openRemotePanel, pres: openPresenter, src: openSources, theme: toggleTheme, help: openHelp })[k](); showCtrl(); });
   let t = 0;
   const app = $("#app");
   function showCtrl() { n.classList.add("on"); app.classList.remove("idle"); clearTimeout(t); t = setTimeout(() => { if (!n.matches(":hover") && !n.contains(document.activeElement)) { n.classList.remove("on"); app.classList.add("idle"); } }, 3200); }

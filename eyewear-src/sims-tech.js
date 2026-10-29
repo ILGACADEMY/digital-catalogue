@@ -19,7 +19,7 @@ function face(g, cx, cy, sp) { const W = 1140, H = 1400; const sk = g.createRadi
   g.fillStyle = "#3B2B21"; g.beginPath(); g.moveTo(0, 0); g.lineTo(W, 0); g.lineTo(W, cy - 210); g.quadraticCurveTo(cx, cy - 300, 0, cy - 200); g.closePath(); g.fill();
   g.strokeStyle = "rgba(150,105,80,.35)"; g.lineWidth = 10; g.lineCap = "round"; g.beginPath(); g.moveTo(cx - 22, cy + 40); g.quadraticCurveTo(cx - 34, cy + 190, cx - 6, cy + 250); g.stroke();
   [-1, 1].forEach((s) => { g.fillStyle = "#fff"; g.beginPath(); g.ellipse(cx + s * sp, cy, 48, 22, 0, 0, 7); g.fill(); g.fillStyle = "#4A3426"; g.beginPath(); g.arc(cx + s * sp, cy, 16, 0, 7); g.fill(); g.fillStyle = "#111"; g.beginPath(); g.arc(cx + s * sp, cy, 7, 0, 7); g.fill(); g.strokeStyle = "#5A3E2E"; g.lineWidth = 6; g.beginPath(); g.moveTo(cx + s * sp - 50, cy - 50); g.quadraticCurveTo(cx + s * sp, cy - 70, cx + s * sp + 50, cy - 52); g.stroke(); }); }
-function panel(g, x, y, w, hh, title) { rr(g, x, y, w, hh, 8); g.fillStyle = "#FBFAF7"; g.fill(); g.strokeStyle = P.line; g.lineWidth = 2; g.stroke(); text(g, title, x + w / 2, y + 34, { size: 20, w: 700, align: "center" }); }
+function panel(g, x, y, w, hh, title) { rr(g, x, y, w, hh, 8); g.fillStyle = P.card; g.fill(); g.strokeStyle = P.line; g.lineWidth = 2; g.stroke(); text(g, title, x + w / 2, y + 34, { size: 20, w: 700, align: "center" }); }
 
 const MODES = {};
 
@@ -35,7 +35,7 @@ MODES.ar = (S, ctx) => {
       if (v === "cmp") { pill(g, "No AR", cx - 210, cy + 190, { align: "center", size: 18 }); pill(g, "With AR", cx + 210, cy + 190, { align: "center", size: 18, bg: "rgba(138,107,50,.94)" }); }
       else pill(g, v === "on" ? "With AR: faint residual colour" : "No AR: reflections of the lights", cx, cy + 190, { align: "center", size: 18 });
       /* light-path inset */
-      const x0 = 26, y0 = H - 196; rr(g, x0, y0, 330, 170, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); text(g, "LIGHT AT THE SURFACE", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
+      const x0 = 26, y0 = H - 196; rr(g, x0, y0, 330, 170, 6); g.fillStyle = P.card; g.fill(); text(g, "LIGHT AT THE SURFACE", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
       g.fillStyle = "#C9D8E2"; g.fillRect(x0 + 170, y0 + 40, 30, 116); if (v !== "off") { g.fillStyle = P.gold2; g.fillRect(x0 + 166, y0 + 40, 4, 116); }
       arrow(g, x0 + 30, y0 + 70, x0 + 164, y0 + 100, { color: "#D8A93A", w: 4 }); arrow(g, x0 + 200, y0 + 100, x0 + 316, y0 + 130, { color: "#D8A93A", w: 4 });
       const on = v !== "off"; arrow(g, x0 + 164, y0 + 104, x0 + 40, y0 + 140, { color: on ? "rgba(62,122,74,.6)" : P.red, w: on ? 1.6 : 4 }); text(g, on ? "less reflected" : "reflected", x0 + 34, y0 + 162, { size: 13, color: on ? P.green : P.red, w: 600 }); },
@@ -50,9 +50,9 @@ MODES.hard = (S, ctx) => {
   S.ui.append(sc, bg, bw, br, bx);
   function doWipe() { wipe = performance.now(); if (grit) { const n = coat ? 3 : 11; for (let i = 0; i < n; i++) { const y = 140 + R() * 300, x = 80 + R() * 200; scr.push([x, y, 120 + R() * 220, (R() - .5) * .5, coat ? .25 : .7, coat ? 1.2 : 2.4]); } } ctx.changed(); }
   return { draw(g, W, H, t) {
-      g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H);
+      g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
       /* top view of the lens */
-      const cx = W * .3, cy = H * .5; g.save(); g.beginPath(); g.arc(cx, cy, 230, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(0, 0, W, H);
+      const cx = W * .3, cy = H * .5; g.save(); g.beginPath(); g.arc(cx, cy, 230, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(0, 0, W, H);
       scr.forEach(([x, y, l, a, al, w]) => { g.save(); g.translate(cx - 230 + x, cy - 230 + y); g.rotate(a); g.strokeStyle = `rgba(255,255,255,${al})`; g.lineWidth = w; g.beginPath(); g.moveTo(0, 0); g.lineTo(l, 0); g.stroke(); g.strokeStyle = `rgba(90,100,110,${al * .5})`; g.lineWidth = 1; g.beginPath(); g.moveTo(0, w); g.lineTo(l, w); g.stroke(); g.restore(); });
       if (grit) { const r2 = rng(9); for (let i = 0; i < 90; i++) { g.fillStyle = `rgba(${150 + r2() * 60},${120 + r2() * 40},${70 + r2() * 30},.95)`; g.beginPath(); g.arc(cx - 200 + r2() * 400, cy - 200 + r2() * 400, 2 + r2() * 4, 0, 7); g.fill(); } }
       const k = wipe > 0 ? (performance.now() - wipe) / 900 : 2; if (k < 1) { g.fillStyle = "rgba(180,170,155,.85)"; rr(g, cx - 260 + k * 420, cy - 260, 140, 520, 30); g.fill(); }
@@ -62,7 +62,7 @@ MODES.hard = (S, ctx) => {
       const x0 = W * .58, y0 = H * .22, w = W * .36; text(g, "CROSS-SECTION (not to scale)", x0, y0 - 20, { size: 13, color: P.gold, w: 700 });
       if (coat) { g.fillStyle = P.gold2; g.fillRect(x0, y0, w, 24); }
       g.fillStyle = "#B9CCD8"; g.fillRect(x0, y0 + (coat ? 24 : 0), w, 180);
-      text(g, "lens material (substrate)", x0 + w / 2, y0 + 120, { size: 18, align: "center", w: 600 }); if (coat) text(g, "hard coat", x0 + w / 2, y0 + 18, { size: 15, align: "center", w: 700, color: "#fff" });
+      text(g, "lens material (substrate)", x0 + w / 2, y0 + 120, { size: 18, align: "center", w: 600, color: "#16202A" }); if (coat) text(g, "hard coat", x0 + w / 2, y0 + 18, { size: 15, align: "center", w: 700, color: "#fff" });
       const lines = coat ? ["Resists fine everyday abrasion", "Sand still scratches if wiped dry", "Scratch-resistant ≠ scratch-proof"] : ["Softer plastic surface", "Scuffs more easily", "Most lenses today carry a hard coat"];
       lines.forEach((l, i) => text(g, "• " + l, x0, y0 + 250 + i * 32, { size: 18 }));
       pill(g, "Illustration only — never test on customer merchandise", 22, 34, { size: 15 }); },
@@ -71,7 +71,7 @@ MODES.hard = (S, ctx) => {
 };
 
 /* B3 hydrophobic / B4 oleophobic / B5 anti-static share a two-panel layout */
-function twoPanels(g, W, H, titles) { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); panel(g, 20, 20, W / 2 - 30, H - 40, titles[0]); panel(g, W / 2 + 10, 20, W / 2 - 30, H - 40, titles[1]); return [[W / 4, H * .55], [W * 3 / 4, H * .55]]; }
+function twoPanels(g, W, H, titles) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); panel(g, 20, 20, W / 2 - 30, H - 40, titles[0]); panel(g, W / 2 + 10, 20, W / 2 - 30, H - 40, titles[1]); return [[W / 4, H * .55], [W * 3 / 4, H * .55]]; }
 MODES.hydro = (S, ctx) => {
   let drops = [], tilt = 0, t0 = 0; const R = rng(3);
   const b1 = btn("Splash water", () => splash()), b2 = btn("Tilt the lens", () => { tilt = 1; t0 = performance.now(); ctx.changed(); }), b3 = btn("Reset", () => { drops = []; tilt = 0; ctx.changed(); });
@@ -87,7 +87,7 @@ MODES.hydro = (S, ctx) => {
         g.fillStyle = "rgba(70,140,200,.75)"; g.beginPath(); if (side) { g.arc(cx, py + 6, 34, Math.PI * .85, Math.PI * .15 + 2 * Math.PI); } else { g.ellipse(cx, py + 40, 90, 18, 0, Math.PI, 2 * Math.PI); } g.closePath(); g.fill();
         text(g, side ? "high contact angle: a round bead" : "low contact angle: a flat film", cx, py + 84, { size: 15, color: P.mute, align: "center" });
         /* top view */
-        const ly = cy + 50; g.save(); g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(cx - 200, ly - 200, 400, 400);
+        const ly = cy + 50; g.save(); g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(cx - 200, ly - 200, 400, 400);
         drops.forEach((d) => { if (side) { const yy = ly + d.y * .7 + k * 500 * (.5 + d.r / 30); const rr2 = d.r * .8; const gg = g.createRadialGradient(cx + d.x * .5 - rr2 * .3, yy - rr2 * .3, 1, cx + d.x * .5, yy, rr2); gg.addColorStop(0, "rgba(255,255,255,.95)"); gg.addColorStop(1, "rgba(60,120,180,.55)"); g.fillStyle = gg; g.beginPath(); g.arc(cx + d.x * .5, yy, rr2, 0, 7); g.fill(); }
           else { g.fillStyle = "rgba(90,150,200,.22)"; g.beginPath(); g.ellipse(cx + d.x * .5, ly + d.y * .7 + k * 40, d.r * 2.4 + k * 10, d.r * 1.6 + k * 26, 0, 0, 7); g.fill(); } });
         g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, ly, 170, 0, 7); g.stroke();
@@ -102,7 +102,7 @@ MODES.oleo = (S, ctx) => {
   const print = (g, cx, cy, a, smear) => { g.save(); g.globalAlpha = a; g.strokeStyle = "rgba(120,100,80,.9)"; g.lineWidth = 3; for (let i = 0; i < 12; i++) { g.beginPath(); g.ellipse(cx + smear * i * 2, cy, 12 + i * 8 + smear * 20, 16 + i * 10, .3, 0, 6); g.stroke(); } g.restore(); };
   return { draw(g, W, H, t) {
       const c = twoPanels(g, W, H, ["Untreated", "Oleophobic top coat"]);
-      c.forEach(([cx, cy], side) => { g.save(); g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.clip(); g.fillStyle = "#DCE7EE"; g.fillRect(cx - 200, cy - 200, 400, 400); print(g, cx, cy, sm[side], side ? 0 : n * .6); if (!side && n) { g.fillStyle = `rgba(200,190,170,${.25 * sm[0]})`; g.fillRect(cx - 200, cy - 200, 400, 400); } g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.stroke();
+      c.forEach(([cx, cy], side) => { g.save(); g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.clip(); g.fillStyle = "rgba(150,185,210,.38)"; g.fillRect(cx - 200, cy - 200, 400, 400); print(g, cx, cy, sm[side], side ? 0 : n * .6); if (!side && n) { g.fillStyle = `rgba(200,190,170,${.25 * sm[0]})`; g.fillRect(cx - 200, cy - 200, 400, 400); } g.restore(); g.strokeStyle = P.ink; g.lineWidth = 5; g.beginPath(); g.arc(cx, cy, 190, 0, 7); g.stroke();
         text(g, Math.round(sm[side] * 100) + "% smudge left", cx, cy + 240, { size: 20, align: "center", w: 700, color: sm[side] < .1 ? P.green : P.ink }); });
       text(g, "Wipes: " + n, W / 2, H - 40, { size: 18, align: "center", color: P.mute }); },
     acts: () => [["wipe", "Wipe once"], ["new", "New fingerprint"]], act(a) { if (a === "wipe") wipe(); else { sm = [1, 1]; n = 0; } } };
@@ -114,7 +114,7 @@ MODES.stat = (S, ctx) => {
       const c = twoPanels(g, W, H, ["Untreated", "Anti-static treatment"]);
       const age = ch ? (performance.now() - t0) / 1000 : 99, q = ch ? Math.exp(-age / 14) : 0;
       c.forEach(([cx, cy], side) => { const charge = q * (side ? .12 : 1);
-        g.fillStyle = "#DCE7EE"; g.beginPath(); g.arc(cx, cy, 170, 0, 7); g.fill(); g.strokeStyle = P.ink; g.lineWidth = 5; g.stroke();
+        g.fillStyle = "rgba(150,185,210,.38)"; g.beginPath(); g.arc(cx, cy, 170, 0, 7); g.fill(); g.strokeStyle = P.ink; g.lineWidth = 5; g.stroke();
         if (charge > .2) { g.strokeStyle = `rgba(201,162,78,${charge * .7})`; g.lineWidth = 2; for (let i = 0; i < 8; i++) { const a = i / 8 * 6.28 + t / 2000; g.beginPath(); g.moveTo(cx + Math.cos(a) * 180, cy + Math.sin(a) * 180); g.lineTo(cx + Math.cos(a) * 205, cy + Math.sin(a) * 205); g.stroke(); } }
         dust.forEach((d, i) => { if ((i % 2) !== side && i % 3) return; let x = cx - 240 + d.x * 480 + Math.sin(t / 1500 + i) * 14, y = 80 + d.y * (H - 160) + Math.cos(t / 1700 + i) * 10;
           if (!d.stuck[side] && charge > .15 && d.s < charge * .8 && Math.hypot(x - cx, y - cy) < 260) d.stuck[side] = true;
@@ -133,10 +133,10 @@ MODES.blue = (S, ctx) => {
   sync();
   const curve = { clear: (nm) => nm < 400 ? 0 : nm < 455 ? .82 + .1 * (nm - 400) / 55 : .95, yellow: (nm) => nm < 400 ? 0 : nm < 500 ? .18 + .72 * ((nm - 400) / 100) ** 1.6 : .9 };
   return { draw(g, W, H, t) {
-      g.fillStyle = "#FBFAF7"; g.fillRect(0, 0, W, H);
+      g.fillStyle = P.card; g.fillRect(0, 0, W, H);
       const x0 = 90, x1 = W - 40, y0 = 70, y1 = H - 150, nm2x = (nm) => x0 + (nm - 280) / 500 * (x1 - x0);
       /* bands */
-      g.fillStyle = "#EDE5F5"; g.fillRect(nm2x(280), y0, nm2x(400) - nm2x(280), y1 - y0); text(g, "UVB", nm2x(297), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 }); text(g, "UVA", nm2x(357), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 });
+      g.fillStyle = "rgba(123,63,191,.12)"; g.fillRect(nm2x(280), y0, nm2x(400) - nm2x(280), y1 - y0); text(g, "UVB", nm2x(297), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 }); text(g, "UVA", nm2x(357), y0 + 26, { size: 15, align: "center", color: P.mute, w: 700 });
       g.fillStyle = "rgba(51,85,221,.08)"; g.fillRect(nm2x(380), y0, nm2x(500) - nm2x(380), y1 - y0); text(g, "blue light ≈380–500 nm", nm2x(440), y0 + 50, { size: 15, align: "center", color: "#3355DD", w: 700 });
       const sp = g.createLinearGradient(nm2x(380), 0, nm2x(780), 0); [["#7B3FBF", 0], ["#3355DD", .2], ["#22AA88", .38], ["#E6D23A", .55], ["#EE8833", .72], ["#CC2222", 1]].forEach(([c, k]) => sp.addColorStop(k, c)); g.fillStyle = sp; g.fillRect(nm2x(380), y1 + 14, nm2x(780) - nm2x(380), 22);
       g.fillStyle = "#C9C2B4"; g.fillRect(nm2x(280), y1 + 14, nm2x(380) - nm2x(280), 22);
@@ -165,7 +165,7 @@ MODES.photo = (S, ctx) => {
       if (env === "in") { room(g, W, H); } else { paintScene(g, W, H, t, { kind: env === "car" ? "road" : "beach", glare: .5, cut: 0, hy: .45 }); if (env === "car") { g.fillStyle = "#1F2226"; g.fillRect(0, 0, W, 60); g.beginPath(); g.moveTo(0, H * .78); g.quadraticCurveTo(W / 2, H * .7, W, H * .78); g.lineTo(W, H); g.lineTo(0, H); g.fill(); g.fillStyle = "rgba(170,190,200,.15)"; g.fillRect(0, 60, W, H * .7); text(g, "windscreen blocks most UV", W - 30, 44, { size: 16, color: "#fff", align: "right", w: 600 }); } }
       glasses(g, S, W / 2, H * .5, 200, 145, 54, () => tintRect(g, 0, 0, W, H, [92, 84, 74], d), { lw: 12 });
       /* meter + history */
-      const x0 = 24, y0 = 24; rr(g, x0, y0, 330, 120, 6); g.fillStyle = "rgba(251,250,247,.95)"; g.fill(); text(g, "LENS DARKNESS (illustrative)", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
+      const x0 = 24, y0 = 24; rr(g, x0, y0, 330, 120, 6); g.fillStyle = P.card; g.fill(); text(g, "LENS DARKNESS (illustrative)", x0 + 14, y0 + 26, { size: 12, color: P.gold, w: 700 });
       g.strokeStyle = P.ink; g.lineWidth = 3; g.beginPath(); hist.forEach((v, i) => { const x = x0 + 14 + i * (300 / 360), y = y0 + 106 - v * 70; i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke();
       pill(g, env === "in" ? "Indoors: little UV — clears" : env === "car" ? "Behind a windscreen: standard lenses darken little" : hot ? "Hot day: darkens less" : "Cool and sunny: darkens fully", W / 2, H - 36, { align: "center", size: 17 }); },
     acts: () => [["e:in", "Indoors", env === "in"], ["e:out", "Outdoors", env === "out"], ["e:car", "In a car", env === "car"], ["t:0", "Cool", !hot], ["t:1", "Hot", hot]], act(a) { const [k, v] = a.split(":"); if (k === "e") { env = v; se.set(v); } else { hot = v === "1"; stp.set(v); } } };
@@ -179,7 +179,7 @@ MODES.mirror = (S, ctx) => {
   const sv = seg("View", [["out", "Others see"], ["in", "Wearer sees"]], view, (x) => { view = x; ctx.changed(); });
   S.ui.append(sf, sv);
   return { draw(g, W, H, t) { const c = F.find((x) => x[0] === f)[2];
-      if (view === "out") { g.fillStyle = "#EDE7DB"; g.fillRect(0, 0, W, H); face(g, W / 2, H * .46, 200);
+      if (view === "out") { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); face(g, W / 2, H * .46, 200);
         glasses(g, S, W / 2, H * .46, 200, 150, 46, () => { const gg = g.createLinearGradient(0, H * .2, 0, H * .7); gg.addColorStop(0, c[0]); gg.addColorStop(.45, c[1]); gg.addColorStop(.55, c[0]); gg.addColorStop(1, c[1]); g.fillStyle = gg; g.fillRect(0, 0, W, H); g.fillStyle = "rgba(255,255,255,.45)"; g.beginPath(); g.ellipse(W * .36, H * .34, 120, 18, -.2, 0, 7); g.fill(); g.beginPath(); g.ellipse(W * .62, H * .34, 120, 18, -.2, 0, 7); g.fill(); }, { lw: 10 });
         pill(g, "The mirror is the finish — UV and polarisation are separate", W / 2, H - 40, { align: "center", size: 16 }); }
       else { paintScene(g, W, H, t, { kind: "beach", glare: .9, cut: 0, hy: .42 }); glasses(g, S, W / 2, H * .55, 210, 150, 54, () => { paintScene(g, W, H, t, { kind: "beach", glare: .55, cut: 0, hy: .42 }); tintRect(g, 0, 0, W, H, [96, 96, 98], .6); }, { lw: 12 });
@@ -235,7 +235,7 @@ MODES.grad = (S, ctx) => {
 MODES.uv = (S, ctx) => {
   let lens = "clear";
   const s = seg("Lens", [["clear", "Clear + UV400"], ["darkno", "Dark, no UV filter"], ["darkuv", "Dark + UV400"]], lens, (x) => { lens = x; ctx.changed(); }); S.ui.append(s);
-  return { draw(g, W, H, t) { g.fillStyle = "#FBFAF7"; g.fillRect(0, 0, W, H);
+  return { draw(g, W, H, t) { g.fillStyle = P.card; g.fillRect(0, 0, W, H);
       const sun = [120, H * .38], lx = W * .55, ey = [W * .86, H * .38];
       g.fillStyle = "#E3B24A"; g.beginPath(); g.arc(...sun, 56, 0, 7); g.fill();
       const dark = lens !== "clear", uvBlock = lens !== "darkno";
@@ -254,9 +254,9 @@ MODES.uv = (S, ctx) => {
 MODES.rx = (S, ctx) => {
   let tab = "sv"; const s = seg("Show", L.rxTabs.map((x) => [x.id, x.n]), tab, (x) => { tab = x; side(); ctx.changed(); }); s.classList.add("wrap"); S.ui.append(s);
   function side() { const x = L.rxTabs.find((y) => y.id === tab); live(ctx, `<p class="sec">${esc(x.n)}</p><p class="txt">${esc(x.d)}</p>`); }
-  return { draw(g, W, H, t) { g.fillStyle = "#F1EDE6"; g.fillRect(0, 0, W, H); const cx = W / 2, cy = H * .48;
+  return { draw(g, W, H, t) { g.fillStyle = P.bg; g.fillRect(0, 0, W, H); const cx = W / 2, cy = H * .48;
       if (tab === "sv" || tab === "prog" || tab === "rxsun") {
-        g.save(); g.beginPath(); lensPath(g, cx, cy, 300, 220); g.clip(); g.fillStyle = tab === "rxsun" ? "rgba(84,72,58,.75)" : "#DCE7EE"; g.fillRect(0, 0, W, H);
+        g.save(); g.beginPath(); lensPath(g, cx, cy, 300, 220); g.clip(); g.fillStyle = tab === "rxsun" ? "rgba(84,72,58,.75)" : "rgba(150,185,210,.38)"; g.fillRect(0, 0, W, H);
         if (tab === "prog") { g.fillStyle = "rgba(62,122,74,.28)"; g.fillRect(cx - 320, cy - 230, 640, 190); g.fillStyle = "rgba(201,162,78,.38)"; g.beginPath(); g.moveTo(cx - 30, cy - 40); g.lineTo(cx + 30, cy - 40); g.lineTo(cx + 50, cy + 60); g.lineTo(cx - 50, cy + 60); g.fill(); g.fillStyle = "rgba(47,107,143,.3)"; g.beginPath(); g.ellipse(cx, cy + 150, 130, 70, 0, 0, 7); g.fill(); g.fillStyle = "rgba(169,71,47,.13)"; g.fillRect(cx - 320, cy - 40, 220, 280); g.fillRect(cx + 100, cy - 40, 220, 280); }
         g.restore(); g.strokeStyle = P.ink; g.lineWidth = 10; g.beginPath(); lensPath(g, cx, cy, 300, 220); g.stroke();
         if (tab === "sv") text(g, "one power across the whole lens", cx, cy + 8, { size: 22, align: "center", w: 700 });
