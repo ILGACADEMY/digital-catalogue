@@ -2782,7 +2782,7 @@ function openOverview() {
   const o = $("#ovl"); o.hidden = false;
   const groups = PARTS_OF.map(([name, ids, pre]) => { const list = SLIDES.map((x, i) => [x, i]).filter(([x]) => (ids ? ids.includes(x.id) : x.id.startsWith(pre) || x.id === (pre === "p-" ? "sec-out" : "sec-in")));
     return `<p class="glab">${esc(name)}</p><div class="grid">${list.map(([x, i]) => `<button class="${i === cur ? "on" : ""}" data-go="${i}"><small>${i + 1}</small>${esc(titleOf(x))}</button>`).join("")}</div>`; }).join("");
-  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>Contents</h3><p>Click any slide to go straight to it.</p>${groups}<div class="row" style="margin-top:16px;gap:10px"><button class="x" style="float:none" data-go="0">⌂ Back to the start</button><a class="x" style="float:none;text-decoration:none;color:inherit" href="${CALIBRE_URL}">Exit to Calibre</a></div></div>`;
+  o.innerHTML = `<div class="sheet"><button class="x" data-x>Close</button><h3>Contents</h3><p>Click any slide to go straight to it.</p>${groups}<div class="row" style="margin-top:16px;gap:10px"><button class="x" style="float:none" data-go="0">⌂ Back to the start</button><a class="x" style="float:none;text-decoration:none;color:inherit" href="${CALIBRE_URL}">Exit to Calibre</a><a class="x" style="float:none;text-decoration:none;color:inherit" href="eyewear-lens-deck.html" title="Open the Eyewear Lens Technology module">Next module: Eyewear Lens Technology ›</a></div></div>`;
   o.onclick = (e) => { if (e.target.closest("[data-x]") || e.target === o) closeOvl(); const g = e.target.closest("[data-go]"); if (g) { closeOvl(); go(+g.dataset.go); } };
 }
 function openHelp() {
