@@ -118,3 +118,7 @@ input[type=range]::-moz-range-thumb{width:1.7cqw;height:1.7cqw;border:0;border-r
 .r-notes{background:var(--bg);border:0;border-radius:14px;box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
 .r-pair input{border:0;border-radius:14px;background:var(--bg);color:var(--ink);box-shadow:inset 4px 4px 8px var(--lo),inset -4px -4px 8px var(--hi)}
 .r-head .st.ok{color:var(--green)}
+
+/* embedded inside the Eyewear 101 Lab: the lab provides navigation and the module links */
+html.embed .ctrl,html.embed .mods,html.embed .mods-h,html.embed .modrow,html.embed .sheet a.x{display:none!important}
+html.embed .deck{box-shadow:none}

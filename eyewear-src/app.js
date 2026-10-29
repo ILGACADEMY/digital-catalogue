@@ -42,7 +42,7 @@ add({ id: "title", sec: "ILG Academy · Lens technology", layout: "L-title", fig
 const PARTS = [["A", "Polarised lenses", "Glare, the filter, the simulator, who it suits, testing, myths", "glare"], ["B", "13 lens technologies", "Coatings, filters, tints and materials", "secB"], ["C", "Lens anatomy", "A conceptual cross-section", "anat"], ["D", "Comparison lab", "Any two or three, side by side", "comp"], ["E", "Lens care", "The safe sequence and common mistakes", "care"], ["F", "Consultation", "Six customers, needs-based", "cons"], ["G", "Assessment", "Applied questions with feedback", "assess"]];
 add({ id: "agenda", sec: "Start", layout: "L-list",
   html: () => `<div><p class="eyebrow">${esc(T.agenda.eyebrow)}</p><h2>${esc(T.agenda.h)}</h2><div class="jumps">${PARTS.map(([n, a, b, id]) => `<button type="button" class="jump" data-jump="${id}"><b>${n}</b><span>${esc(a)}<small>${esc(b)}</small></span></button>`).join("")}</div></div>
-    <div><p class="eyebrow">ILG Academy modules</p><div class="mods">${MODULES.map((m) => m.here ? `<div class="here"><em>You are here</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>` : m.href ? `<a href="${esc(m.href)}"><em>Open ›</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></a>` : `<div class="soon"><em>Coming</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>`).join("")}</div>
+    <div><p class="eyebrow mods-h">ILG Academy modules</p><div class="mods">${MODULES.map((m) => m.here ? `<div class="here"><em>You are here</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>` : m.href ? `<a href="${esc(m.href)}"><em>Open ›</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></a>` : `<div class="soon"><em>Coming</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>`).join("")}</div>
     <div class="keys" style="margin-top:1.6cqw;font-size:.95cqw"><kbd>→ / clicker</kbd><span>Next step, then next slide</span><kbd>R</kbd><span>Phone remote</span><kbd>O</kbd><span>Contents</span><kbd>P</kbd><span>Presenter view</span></div></div>`,
   notes: T.agenda.notes });
 
@@ -232,7 +232,7 @@ function snapshot() {
   return { i: cur, n: N, id: S.id, sec: S.sec, title: titleOf(S), notes: S.notes || "", steps: (S.steps || []).map((x) => x.l), step, black, dark: isDark(), next: cur < N - 1 ? titleOf(SLIDES[cur + 1]) : "", acts: [...acts, ...panes], fig: "" };
 }
 let stTimer = 0;
-function sendState() { if (ROLE !== "deck") return; clearTimeout(stTimer); stTimer = setTimeout(() => { const st = snapshot(); if (!st) return;
+var sendState = function () { if (ROLE !== "deck") return; clearTimeout(stTimer); stTimer = setTimeout(() => { const st = snapshot(); if (!st) return;
   const m = { state: st }; if (bc) bc.postMessage(m); conns.forEach((c) => { try { c.open && c.send(m); } catch (e) {} }); if (relayClients.size) relays.forEach((r) => r.ok && r.publish(relayTopic(peerId, "state"), m)); }, 40); }
 setInterval(() => { if (ROLE === "deck" && (remotes || bc)) sendState(); }, 2500);
 function onCmd(m) {
@@ -420,6 +420,18 @@ function ctrlUI() { const c = $("[data-cnt]"); if (c) c.textContent = (cur + 1) 
   document.addEventListener("touchend", (e) => { if (sx == null) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) dx < 0 ? next() : prev(); }, { passive: true }); })();
 
 /* ---------------- start ---------------- */
+/* ---------- embedded in another lab (e.g. Eyewear 101): the host drives it by postMessage ---------- */
+const EMBED = ROLE === "deck" && window.parent !== window;
+if (EMBED) {
+  document.documentElement.classList.add("embed");
+  const tell = () => { try { const S = SLIDES[cur]; window.parent.postMessage({ lensState: { i: cur, n: N, step, steps: (S.steps || []).length, title: titleOf(S), id: S.id } }, "*"); } catch (e) {} };
+  const sendOrig = sendState; sendState = function () { sendOrig(); clearTimeout(tell.t); tell.t = setTimeout(tell, 30); };
+  window.addEventListener("message", (e) => { const d = e.data; if (!d || typeof d !== "object" || !d.lens) return;
+    if (d.lens === "next") next(); else if (d.lens === "prev") prev(); else if (d.lens === "goto") go(+d.n);
+    else if (d.lens === "theme") { document.documentElement.dataset.theme = d.dark ? "dark" : "light"; } else if (d.lens === "hello") tell(); });
+  /* keys that belong to the host lab */
+  document.addEventListener("keydown", (e) => { if (["t", "T"].includes(e.key)) { e.stopImmediatePropagation(); e.preventDefault(); try { window.parent.postMessage({ lensAsk: "theme" }, "*"); } catch (x) {} } }, true);
+}
 if (ROLE === "deck") {
   buildSlides(); buildCtrl();
   document.addEventListener("keydown", key);
