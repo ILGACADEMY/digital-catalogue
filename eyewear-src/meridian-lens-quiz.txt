@@ -1,0 +1,109 @@
+Q: Reflected glare off a lake is mostly…
+A) Unpolarised, like direct sunlight
+B) Partly polarised, vibrating mostly horizontally
+C) Ultraviolet light
+D) Blue light
+Correct: B
+Explanation: Reflection from a flat surface is partly polarised, mainly horizontally. A vertical filter blocks much of it.
+Category: Eyewear Lens Technology
+Difficulty: Easy
+Topic: Polarisation basics
+
+Q: In the simulator, when does a polarised lens cut water glare the most?
+A) Looking straight down at the water
+B) Looking ahead and down at roughly Brewster's angle
+C) At night
+D) Always exactly the same
+Correct: B
+Explanation: Near Brewster's angle (about 53° from vertical for water) the reflection is most strongly polarised. The effect depends on the angle.
+Category: Eyewear Lens Technology
+Difficulty: Easy
+Topic: Polarisation basics
+
+Q: Two lenses, one in front of the other. One is turned 90°. The overlap went almost black. What does it show?
+A) Both lenses are polarised
+B) Both lenses block UV
+C) The lenses are category 4
+D) The lenses are photochromic
+Correct: A
+Explanation: Two polarisers crossed at 90° block most light. It proves polarisation — nothing about UV or category.
+Category: Eyewear Lens Technology
+Difficulty: Medium
+Topic: Identification
+
+Q: A customer is a private pilot. What is the safest advice?
+A) Polarised: less glare in the cockpit
+B) Follow aviation guidance: usually non-polarised, neutral grey
+C) Photochromic: adapts to altitude
+D) Category 4: the sun is brighter up there
+Correct: B
+Explanation: Aviation authorities advise against polarised (and photochromic) lenses for flying; instruments and operational rules come first.
+Category: Eyewear Lens Technology
+Difficulty: Medium
+Topic: Suitability
+
+Q: Hydrophobic vs oleophobic:
+A) Hydrophobic repels water; oleophobic repels oils
+B) They are the same thing
+C) Oleophobic stops scratches
+D) Hydrophobic stops fog
+Correct: A
+Explanation: Different jobs, often combined in one top coat.
+Category: Eyewear Lens Technology
+Difficulty: Medium
+Topic: Coatings
+
+Q: What can you honestly say about blue-light filtering lenses?
+A) They prevent eye damage from screens
+B) They cure digital eye strain
+C) Some people like them; evidence doesn't show they reduce eye strain or improve sleep
+D) They are the same as UV protection
+Correct: C
+Explanation: A 2023 Cochrane review found no clear short-term benefit for eye strain; sleep and eye-health effects are uncertain.
+Category: Eyewear Lens Technology
+Difficulty: Medium
+Topic: Coatings
+
+Q: Why might standard photochromic lenses stay light in a car?
+A) The car is too hot
+B) Most windscreens block the UV that activates them
+C) They only work on water
+D) Polarisation stops them
+Correct: B
+Explanation: Windscreens block most activating UV; some products are designed to darken behind a windscreen.
+Category: Eyewear Lens Technology
+Difficulty: Medium
+Topic: Coatings
+
+Q: Sand on the lens. First step?
+A) Wipe with microfibre
+B) Rinse under clean lukewarm water
+C) Use glass cleaner
+D) Blow on it and polish
+Correct: B
+Explanation: Rinse grit off first — wiping it is the classic scratch.
+Category: Eyewear Lens Technology
+Difficulty: Easy
+Topic: Lens care
+
+Q: A commuter has wet-road glare and a head-up display. Best approach?
+A) Category 4 mirror
+B) Polarised category 3 grey — and check the HUD through a demo pair
+C) Standard photochromic for the car
+D) Blue-light lenses
+Correct: B
+Explanation: Solves the glare and checks the display trade-off. Category 4 isn't for driving; standard photochromics darken little in cars.
+Category: Eyewear Lens Technology
+Difficulty: Hard
+Topic: Consultation
+
+Q: A premium buyer believes ‘the mirror makes them scratch-proof and UV-safe’. You…
+A) Agree — it's premium
+B) Explain each feature separately: mirror is the look; hard coat helps with wear; UV is on the spec
+C) Recommend the most expensive lens
+D) Say mirror lenses are polarised
+Correct: B
+Explanation: Needs-based, accurate claims. No lens is scratch-proof; mirror colour says nothing about UV.
+Category: Eyewear Lens Technology
+Difficulty: Hard
+Topic: Consultation
