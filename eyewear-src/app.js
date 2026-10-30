@@ -16,6 +16,9 @@ const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [..
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const H = new URLSearchParams(location.hash.slice(1));
 const ROLE = H.has("remote") ? "remote" : H.has("presenter") ? "presenter" : "deck";
+/* inside the Eyewear 101 Lab: skip what the lab already teaches (glare basics, tints, gradient, care) */
+const IN_LAB = ROLE === "deck" && window.parent !== window;
+const LAB_SKIP = ["title", "secA", "filter", "b-tint", "b-grad", "care", "mist", "careq", "next"];
 const PEER_PARAM = new URLSearchParams(location.search).get("peer") || H.get("peer") || "";
 const PEERCFG = (() => { if (!PEER_PARAM) return { debug: 0 };
   const [host, port] = PEER_PARAM.split(":"); return { host, port: +port || 443, path: "/", secure: !/^(localhost|127\.|192\.168\.|10\.)/.test(host) && +port !== 9000, debug: 0 }; })();
@@ -33,17 +36,18 @@ const KCOL = { coating: "#C9A24E", filter: "#2F6B8F", tint: "#8A5A36", material:
 const kchip = (k) => `<span class="kchip" style="--k:${KCOL[k]}">${esc(LENS.kinds[k].n)}</span>`;
 const SLIDES = [];
 const add = (s) => SLIDES.push(s);
-const splitSide = (k, body = "") => `<div class="side"><p class="eyebrow">${esc(T[k].eyebrow)}</p><h2>${esc(T[k].h)}</h2>${body}<div data-live></div></div>`;
+const splitSide = (k, body = "") => `<div class="side"><p class="eyebrow">${esc(T[k].eyebrow)}</p><h2>${esc(T[k].h)}</h2>${T[k].take ? `<p class="take">${esc(T[k].take)}</p>` : ""}${body}<div data-live></div></div>`;
 const figBox = (cls = "") => `<div class="fig ${cls}"><span data-fig></span></div>`;
 
 add({ id: "title", sec: "ILG Academy · Lens technology", layout: "L-title", fig: { sim: "glare", opt: { mini: true } },
   html: () => `<div><p class="eyebrow">${esc(T.title.eyebrow)}</p><h1>${esc(T.title.h)}</h1><p class="lead">${esc(T.title.lead)}</p><p class="cta">${esc(T.title.cta)}</p></div><div class="fig" style="height:62cqh"><span data-fig></span></div>`,
   notes: T.title.notes });
-const PARTS = [["A", "Polarised lenses", "Glare, the filter, the simulator, who it suits, testing, myths", "glare"], ["B", "13 lens technologies", "Coatings, filters, tints and materials", "secB"], ["C", "Lens anatomy", "A conceptual cross-section", "anat"], ["D", "Comparison lab", "Any two or three, side by side", "comp"], ["E", "Lens care", "The safe sequence and common mistakes", "care"], ["F", "Consultation", "Six customers, needs-based", "cons"], ["G", "Assessment", "Applied questions with feedback", "assess"]];
+const TECHS = LENS.techOrder.filter((k) => !(IN_LAB && LAB_SKIP.includes("b-" + k)));
+const PARTS = [["A", "Polarised lenses", "Simulator, who it suits, testing, UV, myths", IN_LAB ? "sim" : "glare"], ["B", TECHS.length + " lens technologies", "Coatings, filters, tints and materials", "secB"], ["C", "Lens anatomy", "A conceptual cross-section", "anat"], ["D", "Comparison lab", "Any two or three, side by side", "comp"], ["E", "Lens care", "The safe sequence and common mistakes", "care"], ["F", "Consultation", "Six customers, needs-based", "cons"], ["G", "Assessment", "Applied questions with feedback", "assess"]];
 add({ id: "agenda", sec: "Start", layout: "L-list",
-  html: () => `<div><p class="eyebrow">${esc(T.agenda.eyebrow)}</p><h2>${esc(T.agenda.h)}</h2><div class="jumps">${PARTS.map(([n, a, b, id]) => `<button type="button" class="jump" data-jump="${id}"><b>${n}</b><span>${esc(a)}<small>${esc(b)}</small></span></button>`).join("")}</div></div>
+  html: () => `<div><p class="eyebrow">${esc(T.agenda.eyebrow)}</p><h2>${esc(IN_LAB ? "Lens technology" : T.agenda.h)}</h2><div class="jumps">${PARTS.filter((p) => !(IN_LAB && p[0] === "E")).map(([n, a, b, id]) => `<button type="button" class="jump" data-jump="${id}"><b>${n}</b><span>${esc(a)}<small>${esc(b)}</small></span></button>`).join("")}</div></div>
     <div><p class="eyebrow mods-h">ILG Academy modules</p><div class="mods">${MODULES.map((m) => m.here ? `<div class="here"><em>You are here</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>` : m.href ? `<a href="${esc(m.href)}"><em>Open ›</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></a>` : `<div class="soon"><em>Coming</em><b>${esc(m.name)}</b><small>${esc(m.note)}</small></div>`).join("")}</div>
-    <div class="keys" style="margin-top:1.6cqw;font-size:.95cqw"><kbd>→ / clicker</kbd><span>Next step, then next slide</span><kbd>R</kbd><span>Phone remote</span><kbd>O</kbd><span>Contents</span><kbd>P</kbd><span>Presenter view</span></div></div>`,
+    <div class="keys agenda-keys" style="margin-top:1.6cqw;font-size:.95cqw"><kbd>→ / clicker</kbd><span>Next step, then next slide</span><kbd>R</kbd><span>Phone remote</span><kbd>O</kbd><span>Contents</span><kbd>P</kbd><span>Presenter view</span></div></div>`,
   notes: T.agenda.notes });
 
 /* ---- A · polarised ---- */
@@ -52,8 +56,7 @@ add({ id: "secA", t: "A · Polarised lenses", sec: "A · Polarised", layout: "L-
   html: () => `<div><p class="eyebrow">${esc(T.secA.eyebrow)}</p><p class="big">${esc(T.secA.big)}</p><h2>${esc(T.secA.h)}</h2><p class="lead">${esc(T.secA.lead)}</p></div><div class="jumps">${A_LESSONS.map(([n, a, id]) => `<button type="button" class="jump" data-jump="${id}"><b>${n}</b><span>${esc(a)}</span></button>`).join("")}</div>`,
   notes: T.secA.notes });
 const sim = (k, sm, opt, steps, extra = "", layout = "L-split") => add({ id: k, sec: "A · " + T[k].eyebrow.split(" · ")[1], layout, fig: { sim: sm, opt }, steps, html: () => figBox() + splitSide(k, extra), notes: T[k].notes });
-sim("glare", "glare", {}, [...LENS.glareStages.map((s, i) => ({ l: s.t, run: (a) => a.act("st:" + (i + 1)) })), { l: "Split view", run: (a) => a.act("v:split") }],
-  `<div class="caveats">${LENS.caveats.map((c) => `<p class="sec">${esc(c.t)}</p><p class="txt" style="font-size:1.05cqw">${esc(c.d)}${refLink(c.ref)}</p>`).join("")}</div>`);
+sim("glare", "glare", {}, [...LENS.glareStages.map((s, i) => ({ l: s.t, run: (a) => a.act("st:" + (i + 1)) })), { l: "Split view", run: (a) => a.act("v:split") }]);
 sim("filter", "filter", {}, [{ l: "Turn the lens 45°", run: (a) => a.act("r:45") }, { l: "Turn it 90°", run: (a) => a.act("r:90") }, { l: "Back upright", run: (a) => a.act("r:0") }]);
 sim("sim", "polsim", {}, [{ l: "Non-polarised lens", run: (a) => a.act("lens:non") }, { l: "Polarised lens", run: (a) => a.act("lens:pol") }, { l: "Look far ahead", run: (a) => a.act("look:8") }, { l: "Look straight down", run: (a) => a.act("look:65") }, { l: "Back to 37°, tilt the head", run: (a) => { a.act("look:37"); a.act("tilt:90"); } }, { l: "Head level, on a road", run: (a) => { a.act("tilt:0"); a.act("surf:road"); } }]);
 sim("who", "profiles", {}, LENS.profiles.slice(1).map((p) => ({ l: p.n, run: (a) => a.act("p:" + p.id) })));
@@ -64,9 +67,9 @@ sim("uv", "uvq", {}, [], "", "L-wide");
 sim("myths", "myths", {}, [], "", "L-wide");
 
 /* ---- B · technologies ---- */
-add({ id: "secB", t: "B · 13 lens technologies", sec: "B · Technologies", layout: "L-title",
-  html: () => `<div><p class="eyebrow">${esc(T.secB.eyebrow)}</p><p class="big">${esc(T.secB.big)}</p><h2>${esc(T.secB.h)}</h2><p class="lead">${esc(T.secB.lead)}</p><div class="kinds">${Object.entries(LENS.kinds).map(([k, v]) => `<p>${kchip(k)} ${esc(v.d)}</p>`).join("")}</div></div>
-    <div class="tgrid">${LENS.techOrder.map((k, i) => `<button type="button" class="jump" data-jump="b-${k}">${SIMS._icon(LENS.comp[{ ar: "ar", hard: "sres", hydro: "hydro", oleo: "oleo", stat: "ar", blue: "blue", photo: "photo", mirror: "mirror", fog: "fog", tint: "tintc", grad: "tintc", uv: "uv", rx: "mat" }[k]].vis)}<span>B${i + 1} · ${esc(TX[k].n)}<small>${kchip(TX[k].kind)}</small></span></button>`).join("")}</div>`,
+add({ id: "secB", t: "B · Lens technologies", sec: "B · Technologies", layout: "L-title",
+  html: () => `<div><p class="eyebrow">${esc(T.secB.eyebrow)}</p><p class="big">${TECHS.length}</p><h2>${esc(T.secB.h)}</h2><p class="lead">${esc(T.secB.lead)}</p><div class="kinds">${Object.entries(LENS.kinds).map(([k, v]) => `<p>${kchip(k)} ${esc(v.d)}</p>`).join("")}</div></div>
+    <div class="tgrid">${TECHS.map((k, i) => `<button type="button" class="jump" data-jump="b-${k}">${SIMS._icon(LENS.comp[{ ar: "ar", hard: "sres", hydro: "hydro", oleo: "oleo", stat: "ar", blue: "blue", photo: "photo", mirror: "mirror", fog: "fog", tint: "tintc", grad: "tintc", uv: "uv", rx: "mat" }[k]].vis)}<span>B${i + 1} · ${esc(TX[k].n)}<small>${kchip(TX[k].kind)}</small></span></button>`).join("")}</div>`,
   notes: T.secB.notes });
 const TECH_STEPS = {
   ar: [["With AR", "on"], ["Compare", "cmp"]],
@@ -76,18 +79,13 @@ const TECH_STEPS = {
   mirror: [["Gold finish", "f:gold"], ["The wearer's view", "v:in"]], fog: [["Walk into humid heat", "go"]], tint: [["Brown", "t:brown"], ["Category 4", "c:4"], ["Yellow, category 1", ["t:yellow", "c:1"]]],
   grad: [["Double gradient", "double"], ["Solid tint", "solid"]], uv: [["Dark, no UV filter", "darkno"], ["Dark + UV400", "darkuv"]], rx: [["Progressive", "t:prog"], ["High-index", "t:hi"], ["Polycarbonate", "t:pc"]],
 };
-LENS.techOrder.forEach((k, i) => { const x = TX[k];
+TECHS.forEach((k, i) => { const x = TX[k];
   const steps = (TECH_STEPS[k] || []).map(([l, a]) => ({ l, run: (api) => [].concat(a).forEach((id) => api.act(id)) }));
-  steps.push({ l: "Benefits", run: (a) => a.tab("ben") }, { l: "Limitations", run: (a) => a.tab("lim") }, { l: "Say it to a customer", run: (a) => a.tab("say") });
   add({ id: "b-" + k, t: "B" + (i + 1) + " · " + x.n, sec: "B · Technologies · B" + (i + 1), layout: "L-split", fig: { sim: "tech", opt: { k } }, steps,
-    html: () => `${figBox()}<div class="side"><p class="eyebrow">B${i + 1} · ${esc(LENS.kinds[x.kind].n)} ${kchip(x.kind)}</p><h2>${esc(x.n)}</h2><p class="lead2">${esc(x.short)}</p>
-      <div class="ttabs" role="tablist">${[["what", "What it is"], ["ben", "Benefits"], ["lim", "Limitations"], ["say", "Say it"]].map(([t, l], j) => `<button type="button" role="tab" data-tab="${t}" aria-selected="${j === 0}">${l}</button>`).join("")}</div>
-      <div class="tpane show" data-pane="what"><p class="txt">${esc(x.what)}${refLink(x.ref)}${refLink(x.ref2)}</p></div>
-      <div class="tpane" data-pane="ben"><ul>${x.ben.map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div>
-      <div class="tpane" data-pane="lim"><ul>${x.lim.map((b) => `<li>${esc(b)}</li>`).join("")}</ul></div>
-      <div class="tpane" data-pane="say"><p class="say">${esc(x.say)}</p><span class="tcare"><b>Care:</b> ${esc(x.care)}</span></div>
-      <div data-live></div></div>`,
-    notes: `${x.n} (${LENS.kinds[x.kind].n.toLowerCase()}). ${x.short}. Run the demo, then reveal Benefits, Limitations and the customer line. Key limitation: ${x.lim[0]}.` }); });
+    html: () => `${figBox()}<div class="side"><p class="eyebrow">B${i + 1} ${kchip(x.kind)}</p><h2>${esc(x.n)}</h2><p class="take">${esc(x.short)}</p>
+      <div class="pts"><p class="pt ok"><b>✓</b>${esc(x.ben[0])}</p><p class="pt no"><b>!</b>${esc(x.lim[0])}${refLink(x.ref)}</p></div>
+      <p class="say">${esc(x.say)}</p><div data-live></div></div>`,
+    notes: `${x.n} (${LENS.kinds[x.kind].n.toLowerCase()}). ${x.what} Benefits: ${x.ben.join("; ")}. Limitations: ${x.lim.join("; ")}. Care: ${x.care}` }); });
 
 /* ---- C–G ---- */
 const part = (id, sec, sm, steps, layout = "L-split") => add({ id, sec, layout, fig: { sim: sm, opt: {} }, steps, html: () => figBox() + splitSide(id), notes: T[id].notes });
@@ -109,6 +107,7 @@ add({ id: "next", t: "Keep learning", sec: "Finish", layout: "L-list",
   notes: T.next.notes + " " + T.quiz.notes });
 
 /* ---------------- deck state ---------------- */
+if (IN_LAB) for (let i = SLIDES.length - 1; i >= 0; i--) if (LAB_SKIP.includes(SLIDES[i].id)) SLIDES.splice(i, 1);
 const N = SLIDES.length;
 let cur = -1, step = 0, black = false, simInst = null;
 const deck = $("#deck");

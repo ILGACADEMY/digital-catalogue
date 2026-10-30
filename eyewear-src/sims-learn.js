@@ -61,7 +61,7 @@ SIMS.anat = (host, ctx) => {
   function render() { wrap.querySelector(".xs-host").innerHTML = xsecSVG(on, sel);
     tog.querySelectorAll("[data-t]").forEach((b) => b.setAttribute("aria-pressed", String(on.has(b.dataset.t))));
     const l = L.layers.find((x) => x.id === sel);
-    live(ctx, `<p class="sec">${esc(l.n)} ${kindChip(l.kind)}</p><p class="txt">${esc(l.d)}</p><dl class="kv"><dt>Where</dt><dd>${esc(l.where)}</dd><dt>Combines</dt><dd>${esc(l.with)}</dd></dl><p class="sec">Common combinations</p><ul class="combo">${L.combos.map(([a, b]) => `<li><b>${esc(a)}</b> — ${esc(b)}</li>`).join("")}</ul>`); }
+    live(ctx, `<p class="sec">${esc(l.n)} ${kindChip(l.kind)}</p><p class="txt">${esc(l.d)}</p><p class="note">${esc(l.where)} · ${esc(l.with)}</p>`); }
   wrap.addEventListener("click", (e) => { const g = e.target.closest("[data-l]"); if (g) select(g.dataset.l); });
   wrap.addEventListener("keydown", (e) => { const g = e.target.closest && e.target.closest("[data-l]"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); e.stopPropagation(); select(g.dataset.l); } });
   render();
@@ -95,7 +95,7 @@ SIMS.compare = (host, ctx) => {
     chipEl.innerHTML = `<span class="seg-l">Or pick 2–3</span>` + Object.entries(C).map(([k, x]) => `<button type="button" data-c="${k}" aria-pressed="${pick.includes(k)}">${esc(x.n)}</button>`).join("");
     const cols = pick.map((k) => C[k]);
     tabEl.innerHTML = `<table><thead><tr><th></th>${cols.map((c) => `<th>${icon(c.vis)}<span>${esc(c.n)}</span></th>`).join("")}</tr></thead><tbody>${L.compAttrs.map(([k, lab]) => `<tr><th>${esc(lab)}</th>${cols.map((c) => `<td>${k === "kind" ? kindChip(c.kind) : esc(c[k])}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
-    live(ctx, `<p class="sec">How to use it</p><p class="txt">Start with one of the nine comparisons, or pick any two or three technologies. Read across a row to explain the difference in one sentence.</p><p class="sec">Types</p><p class="txt">${Object.keys(L.kinds).map(kindChip).join(" ")}</p>`);
+    live(ctx, `<p class="txt">${Object.keys(L.kinds).map(kindChip).join(" ")}</p>`);
   }
   function setPreset(i) { preset = i; pick = L.compPresets[i][1].slice(); render(); ctx.changed(); }
   function toggle(k) { preset = -1; if (pick.includes(k)) { if (pick.length > 1) pick = pick.filter((x) => x !== k); } else { pick.push(k); if (pick.length > 3) pick.shift(); } render(); ctx.changed(); }
@@ -174,7 +174,7 @@ SIMS.consult = (host, ctx) => {
       if (choice != null) body += `<p class="sec">Say it like this</p><p class="say">${esc(c.say)}</p>`;
       body += `<div class="dz-btns"><button type="button" class="sbtn ghost" data-a="ask">‹ Questions</button>${choice != null && cur < CS.length - 1 ? `<button type="button" class="sbtn ink" data-a="next">Next customer ›</button>` : ""}</div>`; }
     main.innerHTML = body;
-    live(ctx, `<p class="sec">Needs-based selling</p><p class="txt">Ask before you recommend. Explain why the strongest option fits and be open about trade-offs. Never default to the most expensive lens.</p><p class="sec">Progress</p><p class="big-s">${done.size}<small>/${CS.length} customers</small></p>`);
+    live(ctx, `<p class="big-s">${done.size}<small>/${CS.length} customers done</small></p>`);
     requestAnimationFrame(scene);
   }
   function setCust(k) { cur = k; phase = "ask"; asked = new Set(); checked = false; choice = null; render(); ctx.changed(); }
@@ -213,7 +213,7 @@ SIMS.assess = (host, ctx) => {
     if (q.type === "layer") { const all = new Set(L.presets.sun.on); B.insertAdjacentHTML("beforeend", `<div class="as-xs">${SIMS._xsec(all, r ? q.a : null, { noLabels: !r })}</div>`); }
     if (q.type === "match") { B.insertAdjacentHTML("beforeend", `<div class="mt"><div class="mt-items">${q.items.filter(([lab]) => !match[lab]).map(([lab]) => `<button type="button" class="mt-i ${held === lab ? "held" : ""}" draggable="true" data-mi="${esc(lab)}">${esc(lab)}</button>`).join("")}</div><div class="mt-keys">${q.keys.map((k) => `<div class="mt-k" data-k="${k}" tabindex="0" role="button" aria-label="Drop on ${esc(L.kinds[k].n)}"><p>${kindChip(k)}</p>${Object.entries(match).filter(([, v]) => v === k).map(([lab]) => { const ok = r ? q.items.find((x) => x[0] === lab)[1] === k : null; return `<span class="mt-p ${ok == null ? "" : ok ? "ok" : "no"}" data-u="${esc(lab)}">${esc(lab)}</span>`; }).join("")}</div>`).join("")}</div>${!r ? `<p class="hint2">Drag each item onto its type — or tap an item, then tap the type.</p><div class="dz-btns"><button type="button" class="sbtn ink" data-check ${Object.keys(match).length < q.items.length ? "disabled" : ""}>Check</button></div>` : ""}</div>`); }
     if (r) B.insertAdjacentHTML("beforeend", `<p class="fb ${r.ok ? "ok" : r.score > 0 ? "mid" : "no"}">${r.ok ? "Correct." : r.score > 0 ? `Partly right (${Math.round(r.score * 100)}%).` : "Not quite."} ${esc(q.e)}</p><div class="dz-btns"><button type="button" class="sbtn ink" data-next>${S.i < S.bank.length - 1 ? "Next question ›" : "See results ›"}</button></div>`);
-    live(ctx, `<p class="sec">Assessment</p><p class="txt">${S.bank.length} questions, mixed types: pictures, true/false, drag-and-drop, the cross-section and customer scenarios. Immediate feedback after each answer.</p>${last ? `<p class="sec">Last attempt on this device</p><p class="txt">${Math.round(last.pct * 100)}% · ${esc(last.status)}</p>` : ""}`);
+    live(ctx, last ? `<p class="note">Last attempt on this device: ${Math.round(last.pct * 100)}% · ${esc(last.status)}</p>` : "");
   }
   function results() { const R = Assess.results(S), pct = Math.round(R.pct * 100);
     try { localStorage.setItem("ilg-lens-assess", JSON.stringify({ pct: R.pct, status: R.status, at: Date.now() })); } catch (e) {}

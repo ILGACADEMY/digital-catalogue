@@ -122,3 +122,30 @@ input[type=range]::-moz-range-thumb{width:1.7cqw;height:1.7cqw;border:0;border-r
 /* embedded inside the Eyewear 101 Lab: the lab provides navigation and the module links */
 html.embed .ctrl,html.embed .mods,html.embed .mods-h,html.embed .modrow,html.embed .sheet a.x{display:none!important}
 html.embed .deck{box-shadow:none}
+
+/* ===== refined layout: bigger figures, one takeaway, fewer words ===== */
+.L-split{grid-template-columns:64cqw 1fr;gap:2.2cqw}
+.L-wide{grid-template-columns:70cqw 1fr;gap:2cqw}
+.side{gap:0}
+.take{font-size:1.45cqw;line-height:1.38;color:var(--ink);font-weight:500;margin-top:.9cqw}
+.side .say{font-size:1.25cqw;line-height:1.4;margin-top:1cqw}
+.pts{display:grid;gap:.6cqw;margin-top:1.1cqw}
+.pt{display:grid;grid-template-columns:2cqw 1fr;gap:.6cqw;align-items:start;font-size:1.08cqw;line-height:1.4;color:var(--text);padding:.65cqw .8cqw;border-radius:.8cqw;background:var(--bg);box-shadow:var(--neu-in)}
+.pt b{display:grid;place-items:center;width:1.8cqw;height:1.8cqw;border-radius:50%;font-size:1cqw;color:#fff}
+.pt.ok b{background:var(--green)}.pt.no b{background:var(--red)}
+.side .note{border-top:0;padding-top:0;margin-top:.6cqw}
+.side .big-s{font-size:3cqw;margin-top:1cqw}
+.side .big-s small{display:block;margin:.3cqw 0 0;font-size:1cqw}
+
+/* inside the Eyewear 101 Lab: fill the frame, no second header or footer */
+html.embed .deck{width:100vw;height:100vh;border-radius:0}
+html.embed .top,html.embed .foot,html.embed .bar{display:none}
+html.embed .L-split{grid-template-columns:69cqw 1fr;padding:1cqw .4cqw}
+html.embed .L-wide{grid-template-columns:74cqw 1fr;padding:1cqw .4cqw}
+html.embed .L-list,html.embed .L-title,html.embed .L-center{padding:1.5cqw 1cqw}
+html.embed .side h2{font-size:2.1cqw}
+html.embed .take{font-size:1.3cqw}
+html.embed .agenda-keys{display:none}
+html.embed .L-list{grid-template-columns:1fr}
+html.embed .jumps span{font-size:1.5cqw}html.embed .jumps small{font-size:1cqw}html.embed .jumps b{font-size:2.2cqw}
+.cs-body{grid-template-columns:20cqw 1fr}.cs-scene{width:20cqw;height:24cqw}

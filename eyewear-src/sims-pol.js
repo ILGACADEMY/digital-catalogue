@@ -127,9 +127,8 @@ SIMS.polsim = (host, ctx) => {
   /* real surfaces ripple and real filters leak a little: average over ±8° and allow 3% leakage */
   const ratio = (th, tilt) => { let s = 0; for (let d = -8; d <= 8; d += 4) s += polRatio(clamp(th + d, 1, 89), n(), tilt); return .03 + .97 * s / 5; };
   function upd() {
-    const th = theta(), r = ratio(th, st.tilt), dp = polDegree(th, n()), b = brewster(n());
-    live(ctx, `<p class="sec">What's happening</p><p class="txt">Light meets the ${st.surf} at <b>${th}°</b> from vertical. There the reflection is about <b>${Math.round(dp * 100)}%</b> polarised (most at ${Math.round(b)}°).</p>
-      <p class="txt" style="margin-top:.5cqw">${st.lens === "pol" ? `This polarised lens lets through about <b>${Math.round(r * 100)}%</b> of the glare a non-polarised lens of the same darkness would.${st.tilt > 30 ? " Tilting the head turns the filter — glare returns." : ""}` : "A non-polarised lens dims the glare and the scene equally: the sheen is still there, just darker."}</p>`);
+    const th = theta(), r = ratio(th, st.tilt);
+    live(ctx, `<p class="big-s">${st.lens === "pol" ? Math.round(r * 100) + "%" : "100%"}<small> of the glare gets through</small></p><p class="note">${st.lens === "pol" ? "vs. a non-polarised lens of the same darkness" : "a non-polarised lens dims glare and scene equally"}${st.tilt > 30 ? " · tilting the head brings glare back" : ""}</p>`);
   }
   const vis = (th) => { const { Rs, Rp } = fresnel(th, n()); return .3 + .7 * clamp(((Rs + Rp) / 2) / .2, 0, 1); };
   S.draw = (g, W, H, t) => {
@@ -177,7 +176,7 @@ SIMS.profiles = (host, ctx) => {
   S.ui.append(tabs);
   function pick(id) { cur = id; tabs.set(id); auto = true; side(); ctx.changed(); }
   function side() { const p = L.profiles.find((x) => x.id === cur);
-    live(ctx, `<p class="sec">${esc(p.n)}</p><dl class="kv"><dt>Where</dt><dd>${esc(p.env)}</dd><dt>Glare from</dt><dd>${esc(p.src)}</dd><dt>Benefit</dt><dd>${esc(p.ben)}</dd><dt>Watch for</dt><dd>${esc(p.lim)}</dd></dl><p class="sec">Say it</p><p class="say" style="font-size:1.45cqw">${esc(p.say)}</p>`); }
+    live(ctx, `<p class="sec">${esc(p.n)}</p><div class="pts"><p class="pt ok"><b>✓</b>${esc(p.ben)}</p><p class="pt no"><b>!</b>${esc(p.lim)}</p></div><p class="say">${esc(p.say)}</p>`); }
   S.cv.addEventListener("pointerdown", (e) => { drag = true; auto = false; S.cv.setPointerCapture(e.pointerId); const [x, y] = S.pt(e); lx = x / S.W; ly = y / S.H; });
   S.cv.addEventListener("pointermove", (e) => { if (!drag) return; const [x, y] = S.pt(e); lx = clamp(x / S.W, .1, .9); ly = clamp(y / S.H, .25, .9); });
   S.cv.addEventListener("pointerup", () => (drag = false));
@@ -204,7 +203,7 @@ SIMS.trade = (host, ctx) => {
   const sl = slider("Turn head / device", 0, 90, 0, (v) => { ang = v; ctx.changed(); }, (v) => v + "°");
   S.ui.append(tabs, tog, sl);
   function pick(id) { cur = id; tabs.set(id); const x = L.tradeoffs.find((y) => y.id === id); sl.style.display = ["pilot", "hud", "phone"].includes(id) ? "" : "none"; tog.style.display = id === "work" ? "none" : "";
-    live(ctx, `<p class="sec">${esc(x.n)} <span class="tag">${esc(x.level)}</span></p><p class="txt">${esc(x.why)} ${refLink(x.ref)}</p><p class="sec">Depends on</p><p class="txt">${esc(x.dep)}</p>`); ctx.changed(); }
+    live(ctx, `<p class="sec">${esc(x.n)} <span class="tag">${esc(x.level)}</span></p><p class="take">${esc(x.s || x.why)}</p><p class="note">Depends on: ${esc(x.dep)} ${refLink(x.ref)}</p>`); ctx.changed(); }
   S.draw = (g, W, H, t) => {
     const x = L.tradeoffs.find((y) => y.id === cur);
     g.fillStyle = P.bg; g.fillRect(0, 0, W, H);
@@ -268,7 +267,7 @@ SIMS.decide = (host, ctx) => {
       const q = L.decide[i];
       wrap.innerHTML = `<div class="dz-card"><p class="eyebrow">Question ${i + 1} of ${L.decide.length}</p><h3>${esc(q.q)}</h3><div class="dz-btns"><button type="button" class="sbtn ink" data-a="1">Yes</button><button type="button" class="sbtn" data-a="0">No</button>${i ? `<button type="button" class="sbtn ghost" data-b>Back</button>` : ""}</div></div><ol class="dz-path">${crumbs}</ol>`;
     }
-    live(ctx, `<p class="sec">How to use it</p><p class="txt">Ask the customer each question. The guide ends with a recommendation and the reasons — use them as your words.</p>`);
+    live(ctx, "");
   }
   function ans(yes) { if (end) return; const q = L.decide[i], r = yes ? q.yes : q.no; path.push({ a: yes });
     if (r && r.end) { end = r; } else { if (r && r.note) notes.push(r); i++; if (i >= L.decide.length) end = Object.assign({ end: "good" }, L.decideGood); }
@@ -294,7 +293,7 @@ SIMS.ident = (host, ctx) => {
   function side() { const m = I.methods.find((x) => x.id === meth); vd.style.display = pair.id === "demo" ? "none" : "";
     const done = Object.keys(verdict).length, ok = Object.values(verdict).filter(Boolean).length;
     const fb = pair.id !== "demo" && pair.id in verdict ? `<p class="fb ${verdict[pair.id] ? "ok" : "no"}">${verdict[pair.id] ? "Correct" : "Not quite"} — ${esc(pair.n)} is ${pair.pol ? "" : "not "}polarised.${!pair.pol && pair.dark > .7 ? " Dark doesn't mean polarised." : ""}${pair.mirror ? " The mirror finish is a separate coating." : ""}</p>` : "";
-    live(ctx, `<p class="sec">${esc(m.n)}: how to</p><ol class="steps-ol">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol><p class="txt" style="font-size:1.02cqw;color:var(--mute)">${esc(m.note)} ${refLink(m.ref)}</p>${fb}<p class="sec">Mystery pairs · ${ok}/${I.mystery.length} correct${done < I.mystery.length ? ` · ${I.mystery.length - done} to test` : ""}</p><ul class="warn">${I.warnings.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>`); }
+    live(ctx, `<p class="sec">${esc(m.n)}: how to</p><ol class="steps-ol">${m.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol><p class="txt" style="font-size:1.02cqw;color:var(--mute)">${esc(m.note)} ${refLink(m.ref)}</p>${fb}<p class="sec">Mystery pairs · ${ok}/${I.mystery.length} correct</p><p class="note">Dark ≠ polarised · No test here checks UV · A demo is not verification</p>`); }
   S.cv.addEventListener("pointerdown", (e) => { drag = true; S.cv.setPointerCapture(e.pointerId); move(e); });
   S.cv.addEventListener("pointermove", (e) => drag && move(e)); S.cv.addEventListener("pointerup", () => (drag = false));
   function move(e) { const [x, y] = S.pt(e); lp = [clamp(x / S.W, .15, .85), clamp(y / S.H, .2, .85)]; }
@@ -357,7 +356,7 @@ SIMS.uvq = (host, ctx) => {
       <p class="uv-rule">${esc(U.rule)} ${refLink(U.ref)}</p>
       <div class="tfq">${U.quiz.map((q, k) => { const r = res[k]; return `<div class="tf ${r == null ? "" : r ? "ok" : "no"}"><p>${esc(q.q)}</p><div><button type="button" class="sbtn" data-k="${k}" data-v="1" ${r != null ? "disabled" : ""}>True</button><button type="button" class="sbtn" data-k="${k}" data-v="0" ${r != null ? "disabled" : ""}>False</button></div>${r != null ? `<p class="fb ${r ? "ok" : "no"}">${r ? "Correct." : "Not quite."} ${esc(q.e)}</p>` : ""}</div>`; }).join("")}</div>`;
     const n = Object.keys(res).length, ok = Object.values(res).filter(Boolean).length;
-    live(ctx, `<p class="sec">Quick check</p><p class="txt">${n < U.quiz.length ? `Answer the four statements — ${U.quiz.length - n} left.` : `<b>${ok} of ${U.quiz.length}</b> right.`}</p><p class="sec">The rule</p><p class="txt">${esc(U.rule)}</p>`);
+    live(ctx, `<p class="sec">Quick check</p><p class="txt">${n < U.quiz.length ? `Answer the four statements — ${U.quiz.length - n} left.` : `<b>${ok} of ${U.quiz.length}</b> right.`}</p>`);
   }
   function ans(k, v) { if (res[k] != null) return; res[k] = U.quiz[k].a === v; render(); ctx.changed(); }
   wrap.addEventListener("click", (e) => { const b = e.target.closest("button[data-k]"); if (b) ans(+b.dataset.k, b.dataset.v === "1"); });
