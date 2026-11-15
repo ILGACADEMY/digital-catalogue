@@ -4,6 +4,9 @@
 //   ANTHROPIC_API_KEY  your Claude API key (secret, never in the page)
 //   VM_ACCESS_CODE     a code you choose; the page must send it before any check runs
 //   VM_MODEL           optional, default claude-sonnet-5-5
+// OR, to use the owner's own Mac (M5) running Ollama behind its AI gateway instead of Claude (no cost):
+//   VM_AI=local, LOCAL_GATEWAY_URL, LOCAL_GATEWAY_KEY (secret), LOCAL_GATEWAY_MODEL (default qwen3.5:9b)
+//   VM_TIMEOUT_MS      optional, default 55000 (Vercel stops the function at 60 s; a local run may allow more)
 // Photos are passed straight to Claude and are not stored or logged here.
 'use strict';
 const crypto = require('crypto');
@@ -13,7 +16,42 @@ const TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_IMAGES = 6;                 // per check
 const MAX_BODY = 4300000;             // Vercel refuses request bodies above about 4.5 MB
 const MAX_PROMPT = 30000;             // characters
-const TIMEOUT_MS = 55000;
+const TIMEOUT_MS = Math.max(5000, +process.env.VM_TIMEOUT_MS || 55000);
+const LOCAL_SIDE = 1024;              // the gateway accepts photos up to 1024 px on the long side
+const isLocal = () => String(process.env.VM_AI || '').toLowerCase() === 'local';
+function gatewayUrl() { const b = String(process.env.LOCAL_GATEWAY_URL || '').replace(/\/+$/, ''); return /\/api\/chat$/.test(b) ? b : b + '/api/chat'; }
+const SYSTEM = 'You check photos of retail watch displays for a training tool. Follow the instructions in the message exactly. When asked for JSON, reply with the JSON object only.';
+
+// the owner's Mac (Ollama behind the gateway): returns {text, cutOff} or {error}
+async function askLocal(prompt, images, wantJson) {
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+  let r, j;
+  try {
+    r = await fetch(gatewayUrl(), {
+      method: 'POST', signal: ctl.signal,
+      headers: { 'content-type': 'application/json', authorization: 'Bearer ' + process.env.LOCAL_GATEWAY_KEY },
+      body: JSON.stringify({
+        model: process.env.LOCAL_GATEWAY_MODEL || 'qwen3.5:9b', stream: false, think: false,
+        ...(wantJson ? { format: 'json' } : {}),
+        messages: [{ role: 'system', content: SYSTEM }, { role: 'user', content: prompt, images: images.map(im => im.data) }],
+        options: { temperature: 0.2, num_ctx: 16384, num_predict: 4096 }
+      })
+    });
+    j = await r.json().catch(() => null);
+  } catch (e) {
+    return { error: e.name === 'AbortError' ? 'CHECK TOOK TOO LONG — TRY AGAIN' : 'LOCAL AI NOT REACHABLE — IS THE MAC AWAKE?' };
+  } finally { clearTimeout(timer); }
+  if (!r.ok) {
+    console.error('vm-check: local AI status', r.status);   // no photo or prompt is logged
+    const map = { 401: 'SERVER KEY NOT ACCEPTED', 403: 'SERVER KEY NOT ACCEPTED', 429: 'CHECKER BUSY — TRY AGAIN', 413: 'PHOTO TOO LARGE', 400: 'PHOTO NOT ACCEPTED',
+                  502: 'LOCAL AI NOT REACHABLE — IS THE MAC AWAKE?', 503: 'LOCAL AI NOT REACHABLE — IS THE MAC AWAKE?', 504: 'CHECK TOOK TOO LONG — TRY AGAIN' };
+    return { error: map[r.status] || 'CHECKER ERROR ' + r.status };
+  }
+  const text = String((j && j.message && j.message.content) || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+  const cutOff = !!(j && j.done_reason === 'length');
+  console.log('vm-check: local answer', j && j.done_reason, j && j.eval_count, 'tokens');   // length only, never the content
+  return { text, cutOff };
+}
 
 function send(res, status, obj) {
   res.statusCode = status;
@@ -72,14 +110,17 @@ function salvageJson(text) {
 }
 
 module.exports = async function handler(req, res) {
-  const key = process.env.ANTHROPIC_API_KEY, code = process.env.VM_ACCESS_CODE;
-  if (!key || !code) return send(res, 503, { error: 'SERVER NOT SET UP' });
+  const local = isLocal(), code = process.env.VM_ACCESS_CODE;
+  const key = local ? process.env.LOCAL_GATEWAY_KEY : process.env.ANTHROPIC_API_KEY;
+  if (!key || !code || (local && !process.env.LOCAL_GATEWAY_URL)) return send(res, 503, { error: 'SERVER NOT SET UP' });
 
   const given = String(req.headers['x-vm-code'] || '');
   if (!given) return send(res, 401, { error: 'ACCESS CODE NEEDED' });
   if (!sameCode(given, code)) { await new Promise(r => setTimeout(r, 400)); return send(res, 401, { error: 'WRONG ACCESS CODE' }); }
 
-  if (req.method === 'GET') return send(res, 200, { images: { maxCount: MAX_IMAGES, mediaTypes: TYPES } });
+  if (req.method === 'GET') return send(res, 200, local
+    ? { images: { maxCount: 1, maxSide: LOCAL_SIDE, mediaTypes: TYPES }, ai: 'local' }
+    : { images: { maxCount: MAX_IMAGES, mediaTypes: TYPES } });
   if (req.method !== 'POST') return send(res, 405, { error: 'NOT ALLOWED' });
 
   const len = +req.headers['content-length'] || 0;
@@ -89,11 +130,16 @@ module.exports = async function handler(req, res) {
 
   const prompt = body && body.prompt, images = (body && body.images) || [];
   if (typeof prompt !== 'string' || !prompt.trim() || prompt.length > MAX_PROMPT) return send(res, 400, { error: 'BAD REQUEST' });
-  if (!Array.isArray(images) || images.length > MAX_IMAGES) return send(res, 400, { error: 'TOO MANY PHOTOS' });
+  if (!Array.isArray(images) || images.length > (local ? 1 : MAX_IMAGES)) return send(res, 400, { error: 'TOO MANY PHOTOS' });
   for (const im of images) {
     if (!im || !TYPES.includes(im.media_type) || typeof im.data !== 'string' || !/^[A-Za-z0-9+/=]+$/.test(im.data)) return send(res, 400, { error: 'PHOTO NOT ACCEPTED' });
   }
 
+  if (local) {
+    const a = await askLocal(prompt, images, !!body.json);
+    if (a.error) return send(res, a.error.startsWith('CHECK TOOK') ? 504 : 502, { error: a.error });
+    return answer(res, a.text, a.cutOff, body.json);
+  }
   const content = images.map(im => ({ type: 'image', source: { type: 'base64', media_type: im.media_type, data: im.data } }));
   content.push({ type: 'text', text: prompt });
   const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
@@ -104,7 +150,7 @@ module.exports = async function handler(req, res) {
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
       body: JSON.stringify({
         model: MODEL, max_tokens: 8000,
-        system: 'You check photos of retail watch displays for a training tool. Follow the instructions in the message exactly. When asked for JSON, reply with the JSON object only.',
+        system: SYSTEM,
         messages: [{ role: 'user', content }]
       })
     });
@@ -121,10 +167,14 @@ module.exports = async function handler(req, res) {
   const text = ((j && j.content) || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
   const cutOff = j && j.stop_reason === 'max_tokens';
   console.log('vm-check: answer', j && j.stop_reason, j && j.usage && j.usage.output_tokens, 'tokens');   // length only, never the content
-  if (body.json) {
+  return answer(res, text, cutOff, body.json);
+};
+
+function answer(res, text, cutOff, json) {
+  if (json) {
     const v = parseJson(text) || (cutOff ? salvageJson(text) : null);
     if (!v) return send(res, 502, { error: cutOff ? 'ANSWER TOO LONG — TRY FEWER PAGES' : 'ANSWER NOT READABLE — TRY AGAIN' });
     return send(res, 200, { json: v, cutOff: cutOff || undefined });
   }
   return send(res, 200, { text });
-};
+}
