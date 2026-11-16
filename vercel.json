@@ -1,5 +1,5 @@
 {
   "functions": {
-    "api/vm-check.js": { "maxDuration": 60 }
+    "api/vm-check.js": { "maxDuration": 300 }
   }
 }
